@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <url>
+    <loc>https://ohhmax.github.io/</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/gallery/</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2026_greenery-courtyard-midnight-portrait.jpg</image:loc>
+      <image:title>Greenery Courtyard Midnight Portrait</image:title>
+      <image:caption>Night portrait against garden foliage with balanced flash lighting and crisp detail.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2026_fellowship-and-peer-collaboration-moment.jpg</image:loc>
+      <image:title>Fellowship &amp; Peer Collaboration Moment</image:title>
+      <image:caption>Heartwarming friendship and team spirit snapshot with postgraduate engineering peers.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2026_engineering-fellowship-candid-snapshot.jpg</image:loc>
+      <image:title>Engineering Fellowship Candid Snapshot</image:title>
+      <image:caption>Unfiltered candid smiles and celebratory joy after successful engineering project defense.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2026_campus-colleagues-celebratory-pose.jpg</image:loc>
+      <image:title>Campus Colleagues Celebratory Pose</image:title>
+      <image:caption>Group commemorative portrait celebrating collective academic achievement and career launch.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2026_autumn-evening-campus-ambience-portrait.jpg</image:loc>
+      <image:title>Autumn Evening Campus Ambience Portrait</image:title>
+      <image:caption>October nighttime portrait with rich atmospheric depth of field and soft streetlight glow.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/tech-lab/2026_sparks-to-ideas-official-software-internship-offer-letter.jpg</image:loc>
+      <image:title>Sparks to Ideas Official Software Internship Offer Letter</image:title>
+      <image:caption>Formal corporate internship offer letter from Sparks to Ideas acknowledging Mahendra's software engineering and systems development skills.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/tech-lab/2025_firefox-web-engineering-responsive-test.png</image:loc>
+      <image:title>Firefox Web Engineering Responsive Test</image:title>
+      <image:caption>Gecko rendering engine compliance test and modern web UI standards verification on Firefox.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2025_postgraduate-monsoon-morning-portrait.jpg</image:loc>
+      <image:title>Postgraduate Monsoon Morning Portrait</image:title>
+      <image:caption>Outdoor portrait during postgraduate MCA coursework surrounded by fresh monsoon greenery.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2025_morning-sunshine-campus-corridor-portrait.jpg</image:loc>
+      <image:title>Morning Sunshine Campus Corridor Portrait</image:title>
+      <image:caption>Golden morning sunshine framing the modern engineering institute academic corridors.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2025_campus-quadrangle-afternoon-pose.jpg</image:loc>
+      <image:title>Campus Quadrangle Afternoon Pose</image:title>
+      <image:caption>University quadrangle afternoon portrait on the NAAC A++ university grounds.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/tech-lab/2024_mobile-developer-workspace-home-screen.png</image:loc>
+      <image:title>Mobile Developer Workspace Home Screen</image:title>
+      <image:caption>Categorized developer tool dock and system metrics home screen layout on mobile device.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/tech-lab/2024_android-custom-launcher-dark-theme-setup.png</image:loc>
+      <image:title>Android Custom Launcher Dark Theme Setup</image:title>
+      <image:caption>Minimalist Android workstation configuration with customized application drawer architecture.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2024_extended-travel-and-landmark-reel.mp4</image:loc>
+      <image:title>Extended Travel &amp; Landmark Reel</image:title>
+      <image:caption>Extended cinematic travel documentary video chronicling scenic landmarks and journey stops.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2024_ultra-high-resolution-festival-portrait.jpg</image:loc>
+      <image:title>Ultra High Resolution Festival Portrait</image:title>
+      <image:caption>Extremely detailed 64MP high-resolution camera portrait celebrating cultural festival moments.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2024_cybernetic-matrix-green-surrealist-portrait.jpg</image:loc>
+      <image:title>Cybernetic Matrix Green Surrealist Portrait</image:title>
+      <image:caption>Sci-fi inspired digital matrix portrait blending green neon typography and cyber aesthetics.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2024_creative-xml-tuned-sensor-portrait.jpg</image:loc>
+      <image:title>Creative XML Tuned Sensor Portrait</image:title>
+      <image:caption>Fine-tuned computational photography portrait featuring custom color tone curves.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/tech-lab/2024_mahendra-mali-passionate-about-tech-portfolio-showcase-poster.jpg</image:loc>
+      <image:title>Mahendra Mali 'Passionate About Tech?' Portfolio Showcase Poster</image:title>
+      <image:caption>Graphic poster design showcasing smartphone application mockups, QR code, and official domain link 'mahendraplus.github.io'.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/tech-lab/2023_mobile-image-viewer-aspect-ratio-analysis.png</image:loc>
+      <image:title>Mobile Image Viewer Aspect Ratio Analysis</image:title>
+      <image:caption>High-density smartphone AMOLED panel aspect ratio and preview viewport benchmark.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/tech-lab/2023_linux-terminal-matrix-reflection-on-keyboard-setup.jpg</image:loc>
+      <image:title>Linux Terminal Matrix Reflection on Keyboard Setup</image:title>
+      <image:caption>Night developer setup with glowing green Matrix code cascade reflected across hands, laptop keyboard, and multi-window workspace.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/tech-lab/2023_handheld-hardware-controller-linux-shell-debugging.jpg</image:loc>
+      <image:title>Handheld Hardware Controller &amp; Linux Shell Debugging</image:title>
+      <image:caption>Testing a custom handheld tactile button matrix and keypad module connected directly to Linux development environment.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/tech-lab/2023_gallery-photo-editor-color-grading-session.png</image:loc>
+      <image:title>Gallery Photo Editor Color Grading Session</image:title>
+      <image:caption>Developer UI calibration and digital photo color grading tool suite analysis.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2023_student-life-and-study-break-reel.mp4</image:loc>
+      <image:title>Student Life &amp; Study Break Reel</image:title>
+      <image:caption>Informal study break session with classmates enjoying downtime during exams.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2024_short-dynamic-pacing-video-reel.mp4</image:loc>
+      <image:title>Short Dynamic Pacing Video Reel</image:title>
+      <image:caption>Snappy 9-second high-energy video reel showing fast edits and crisp motion.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2023_quick-mirror-style-check-video-reel.mp4</image:loc>
+      <image:title>Quick Mirror Style Check Video Reel</image:title>
+      <image:caption>Fast mirror selfie video capturing street fashion check and confident style pose.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2023_outdoor-evening-walkthrough-reel.mp4</image:loc>
+      <image:title>Outdoor Evening Walkthrough Reel</image:title>
+      <image:caption>Atmospheric evening outdoor stroll capturing street lighting and gentle twilight rhythm.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2023_mobile-creative-lifestyle-video-reel.mp4</image:loc>
+      <image:title>Mobile Creative Lifestyle Video Reel</image:title>
+      <image:caption>Creative vertical smartphone reel capturing student lifestyle and aesthetic campus highlights.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2023_friends-gathering-and-celebration-reel.mp4</image:loc>
+      <image:title>Friends Gathering &amp; Celebration Reel</image:title>
+      <image:caption>Memorable college friendship celebration with peers and colleagues captured on video.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2023_creative-indoor-ambience-video-reel.mp4</image:loc>
+      <image:title>Creative Indoor Ambience Video Reel</image:title>
+      <image:caption>Short creative reel exploring indoor lighting ambience, warmth, and close framing.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2023_college-friends-hangout-video-reel.mp4</image:loc>
+      <image:title>College Friends Hangout Video Reel</image:title>
+      <image:caption>Lively student conversation, camaraderie, and candid campus banter clip.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2023_city-exploration-and-transit-reel.mp4</image:loc>
+      <image:title>City Exploration &amp; Transit Reel</image:title>
+      <image:caption>City transit exploration reel capturing fast roads, landmarks, and urban movement.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2023_casual-campus-leisure-video-reel.mp4</image:loc>
+      <image:title>Casual Campus Leisure Video Reel</image:title>
+      <image:caption>Relaxed university campus exploration and casual walkthrough video clip.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2023_candid-creative-moment-video-reel.mp4</image:loc>
+      <image:title>Candid Creative Moment Video Reel</image:title>
+      <image:caption>Spontaneous artistic visual snapshot with smooth pacing and upbeat rhythm.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2023_winter-afternoon-candid-portrait.jpg</image:loc>
+      <image:title>Winter Afternoon Candid Portrait</image:title>
+      <image:caption>Natural daylight portrait captured on custom calibrated camera during quiet winter afternoon.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2023_warm-sepia-vintage-square-photo-art.jpg</image:loc>
+      <image:title>Warm Sepia Vintage Square Photo Art</image:title>
+      <image:caption>Warm sepia-toned vintage aesthetic edit with subtle analog film grain overlay.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2023_spring-afternoon-casual-style-portrait.jpg</image:loc>
+      <image:title>Spring Afternoon Casual Style Portrait</image:title>
+      <image:caption>Casual streetwear style portrait in bright spring sunshine between university lecture blocks.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2023_moody-forest-emerald-conceptual-edit.jpg</image:loc>
+      <image:title>Moody Forest Emerald Conceptual Edit</image:title>
+      <image:caption>Deep forest green tones with cinematic lighting and artistic vignette post-processing.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2023_monsoon-evening-moody-portrait-shot.jpg</image:loc>
+      <image:title>Monsoon Evening Moody Portrait Shot</image:title>
+      <image:caption>Artistic low-light portrait exploring deep contrasts, moody ambience, and introspective focus.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2023_late-night-focus-and-developer-portrait.jpg</image:loc>
+      <image:title>Late Night Focus &amp; Developer Portrait</image:title>
+      <image:caption>Introspective portrait taken during an intensive late-night coding and system optimization sprint.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2023_high-contrast-streetwear-fashion-graphic.jpg</image:loc>
+      <image:title>High Contrast Streetwear Fashion Graphic</image:title>
+      <image:caption>Edgy streetwear fashion graphic poster combining multi-frame layering and bold typography.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2023_cyberpunk-emerald-silhouette-graphic-art.jpg</image:loc>
+      <image:title>Cyberpunk Emerald Silhouette Graphic Art</image:title>
+      <image:caption>Stylized digital silhouette portrait with glowing emerald cyberpunk contours.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2023_cinematic-ambient-room-lighting-portrait.jpg</image:loc>
+      <image:title>Cinematic Ambient Room Lighting Portrait</image:title>
+      <image:caption>Widescreen indoor composition exploring gentle shadows, soft highlights, and quiet mood.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2022_summer-afternoon-outdoor-portrait.jpg</image:loc>
+      <image:title>Summer Afternoon Outdoor Portrait</image:title>
+      <image:caption>Relaxed outdoor portrait under soft natural daylight during undergraduate college summer.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2022_creative-neon-blue-duotone-art-portrait.jpg</image:loc>
+      <image:title>Creative Neon Blue Duotone Art Portrait</image:title>
+      <image:caption>Vibrant duotone artistic photo manipulation with saturated royal blue backlighting.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/tech-lab/2021_macbook-pro-retina-display-workstation-setup.jpg</image:loc>
+      <image:title>MacBook Pro Retina Display Workstation Setup</image:title>
+      <image:caption>Developer workstation with Apple MacBook Pro keyboard and vibrant high-resolution display showcasing personal branding visual.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2021_stylized-multi-angle-mirror-selfie-video-reel.mp4</image:loc>
+      <image:title>Stylized Multi-Angle Mirror Selfie Video Reel</image:title>
+      <image:caption>Vertical lifestyle aesthetic montage featuring animated video tiles of smartphone mirror poses and outfit details.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2021_relaxed-evening-bedroom-selfie-video-reel.mp4</image:loc>
+      <image:title>Relaxed Evening Bedroom Selfie Video Reel</image:title>
+      <image:caption>Casual evening smartphone video reel of Max in beige tee relaxing with glowing digital filter animation.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2021_morning-stroll-on-lush-green-lawn-video-reel.mp4</image:loc>
+      <image:title>Morning Stroll on Lush Green Lawn Video Reel</image:title>
+      <image:caption>Peaceful outdoor morning walk clip capturing sports sneakers gliding across dewy green grass.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2021_high-tech-corporate-office-audio-studio-tour-reel.mp4</image:loc>
+      <image:title>High-Tech Corporate Office &amp; Audio Studio Tour Reel</image:title>
+      <image:caption>Video reel panning through modern soundproofed acoustic recording suites and tech office with 'Max' logo emblazoned on wall.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2021_high-key-white-studio-photoshoot-video-reel.mp4</image:loc>
+      <image:title>High-Key White Studio Photoshoot Video Reel</image:title>
+      <image:caption>Vibrant fashion video reel of Max in yellow tee on balance ball in brightly illuminated studio with upbeat backing track.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2021_heavy-dumbbell-bicep-curl-fitness-workout-video-reel.mp4</image:loc>
+      <image:title>Heavy Dumbbell Bicep Curl Fitness Workout Video Reel</image:title>
+      <image:caption>Gym training video reel showing bicep curl repetitions and heavy dumbbell sets in front of mirror.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2021_fitness-training-post-workout-mirror-video-reel.mp4</image:loc>
+      <image:title>Fitness Training Post-Workout Mirror Video Reel</image:title>
+      <image:caption>Quick gym mirror video reel showing shoulder and bicep pump following workout session in the fitness club.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2021_fast-scrolling-green-matrix-code-terminal-reel.mp4</image:loc>
+      <image:title>Fast-Scrolling Green Matrix Code Terminal Reel</image:title>
+      <image:caption>Cyberpunk developer video reel capturing dynamic cascading green matrix terminal code scrolling on laptop display.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2021_electric-blue-neon-cube-silhouette-video-reel.mp4</image:loc>
+      <image:title>Electric Blue Neon Cube Silhouette Video Reel</image:title>
+      <image:caption>Moody artistic video reel with Max posing inside a glowing electric blue neon light cube installation with 'Like You Mean It' graphic.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2021_custom-electric-bicycle-campus-test-ride-video-reel.mp4</image:loc>
+      <image:title>Custom Electric Bicycle Campus Test Ride Video Reel</image:title>
+      <image:caption>Live field video clip of a student researcher test-riding a customized battery-powered electric bicycle along campus driveway.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2021_campus-scooter-ride-in-front-of-hostel-video-reel.mp4</image:loc>
+      <image:title>Campus Scooter Ride in Front of Hostel Video Reel</image:title>
+      <image:caption>Fun campus video reel of Max sitting on his white scooter in front of the multistory university hostel building.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2021_campus-cricket-match-action-shot-video-reel.mp4</image:loc>
+      <image:title>Campus Cricket Match Action Shot Video Reel</image:title>
+      <image:caption>Sunny afternoon video reel capturing university students playing cricket on the campus grounds with the college building in view.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_white-marble-heritage-temple-courtyard-collage.jpg</image:loc>
+      <image:title>White Marble Heritage Temple Courtyard Collage</image:title>
+      <image:caption>Max in grey sweatshirt visiting an ornate white marble temple complex adorned with golden Om and Swastika motifs.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_white-desert-salt-flat-outdoor-photoshoot-collage.jpg</image:loc>
+      <image:title>White Desert Salt Flat Outdoor Photoshoot Collage</image:title>
+      <image:caption>Striking 8-frame photo series of Max in denim shirt and grey trousers on open white salt desert terrain under bright sky.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_western-railway-gujarat-route-map-landmark-collage.jpg</image:loc>
+      <image:title>Western Railway Gujarat Route Map Landmark Collage</image:title>
+      <image:caption>Max in white hoodie posing before the giant passenger route map wall of Western Railway inside the station concourse.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_wedding-reception-celebration-in-lilac-purple-shirt.jpg</image:loc>
+      <image:title>Wedding Reception Celebration in Lilac Purple Shirt</image:title>
+      <image:caption>Six-frame portrait collage of Max dressed in a pastel lilac formal shirt enjoying wedding celebrations under fairy light curtains.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_violet-ambient-neon-backlit-wall-portrait.jpg</image:loc>
+      <image:title>Violet Ambient Neon Backlit Wall Portrait</image:title>
+      <image:caption>Max in black shirt and mask resting against a white tiled wall illuminated with rich violet neon hues.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_university-corridor-student-life-10-frame-collage.jpg</image:loc>
+      <image:title>University Corridor Student Life 10-Frame Collage</image:title>
+      <image:caption>Multi-tile photo collage of Max with backpack and university ID lanyard strolling through college academic corridors.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_triple-face-expression-conceptual-dark-edit.jpg</image:loc>
+      <image:title>Triple Face Expression Conceptual Dark Edit</image:title>
+      <image:caption>Surreal digital portrait edit displaying three synchronized profile face expressions against deep black backdrop.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_train-locomotive-shoot-with-dope-streetwear-tag.jpg</image:loc>
+      <image:title>Train Locomotive Shoot with 'DOPE' Streetwear Tag</image:title>
+      <image:caption>Stylized railway track portrait of Max standing before the diesel train engine with retro street aesthetic graphics.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_traditional-indian-celebration-in-pristine-white-kurta.jpg</image:loc>
+      <image:title>Traditional Indian Celebration in Pristine White Kurta</image:title>
+      <image:caption>Four-frame photo series of Max dressed in an elegant white Kurta Pajama celebrating a festive cultural day with friends.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_thoughtful-studio-portrait-with-chin-on-hand.jpg</image:loc>
+      <image:title>Thoughtful Studio Portrait with Chin on Hand</image:title>
+      <image:caption>Refined studio lighting portrait of Max in light brown tee resting his chin thoughtfully on his hand.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_sun-temple-heritage-monument-stone-architecture-walk.jpg</image:loc>
+      <image:title>Sun Temple Heritage Monument Stone Architecture Walk</image:title>
+      <image:caption>Max in black vest and trousers standing proudly before an ancient carved Hindu stone temple monument in Gujarat.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_stylized-life-goes-on-street-graffiti-comic-art-edit.jpg</image:loc>
+      <image:title>Stylized 'Life Goes On' Street Graffiti Comic Art Edit</image:title>
+      <image:caption>Creative pop-art illustrated edit depicting Max with an umbrella under rain beside vibrant multi-colored graffiti typography.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_rooftop-terrace-portrait-in-light-blue-formal-shirt.jpg</image:loc>
+      <image:title>Rooftop Terrace Portrait in Light Blue Formal Shirt</image:title>
+      <image:caption>Max in crisp light-blue formal shirt and trousers leaning against the white rooftop terrace parapet under clear blue skies.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_resort-paver-courtyard-stroll-in-grey-formal-shirt.jpg</image:loc>
+      <image:title>Resort Paver Courtyard Stroll in Grey Formal Shirt</image:title>
+      <image:caption>Full-body portrait series of Max standing in an elegant stone paver resort courtyard beside landscaped rockery.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_rainbow-vertical-neon-tubes-hallway-shoot.jpg</image:loc>
+      <image:title>Rainbow Vertical Neon Tubes Hallway Shoot</image:title>
+      <image:caption>Max in two-tone athletic tracksuit leaning back against a vibrant multi-colored spectrum of vertical neon tubes.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_railway-station-steel-overpass-footbridge-photoshoot.jpg</image:loc>
+      <image:title>Railway Station Steel Overpass Footbridge Photoshoot</image:title>
+      <image:caption>Collage of Max with white hoodie and backpack on the structural steel pedestrian overpass at the railway station.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_purple-lightning-bolt-aura-digital-art-edit.jpg</image:loc>
+      <image:title>Purple Lightning Bolt Aura Digital Art Edit</image:title>
+      <image:caption>Creative studio edit with purple neon lighting and digital electric lightning bolts arching across shoulders.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_pensive-window-light-silhouette-portrait.jpg</image:loc>
+      <image:title>Pensive Window Light Silhouette Portrait</image:title>
+      <image:caption>Atmospheric moody capture of Max gazing out the window during dusk with cool blue ambient tones.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_passenger-train-coach-transit-journey-collage.jpg</image:loc>
+      <image:title>Passenger Train Coach Transit Journey Collage</image:title>
+      <image:caption>Series of candid travel photos of Max with student backpack boarding the train coach and standing in transit corridor.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_night-city-market-street-walk-with-backpack.jpg</image:loc>
+      <image:title>Night City Market Street Walk with Backpack</image:title>
+      <image:caption>Atmospheric night market candid of Max with backpack walking through lit Asian urban market street with vintage film grain.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_natural-daylight-window-portrait-with-smartwatch.jpg</image:loc>
+      <image:title>Natural Daylight Window Portrait with Smartwatch</image:title>
+      <image:caption>Max running hand through hair beside sunlit apartment window with smartwatch on wrist with Korean caption edit.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_natural-daylight-close-up-face-portrait.jpg</image:loc>
+      <image:title>Natural Daylight Close-Up Face Portrait</image:title>
+      <image:caption>Crisp natural daylight selfie showing facial features of Mahendra Mali in grey crewneck sweatshirt.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_nadabet-indo-pak-border-seema-darshan-monument.jpg</image:loc>
+      <image:title>Nadabet Indo-Pak Border Seema Darshan Monument</image:title>
+      <image:caption>Max visiting the Nadabet Indo-Pak international border outpost monument with 'Life is an Open Road' typography.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_nadabet-border-flagpost-heritage-pillar-shoot.jpg</image:loc>
+      <image:title>Nadabet Border Flagpost &amp; Heritage Pillar Shoot</image:title>
+      <image:caption>Collage of Max in black hoodie standing before the Indian National Flag monument and historical brick arch at Nadabet border.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_mirror-selfie-collage-with-in-one-im-all-caption.jpg</image:loc>
+      <image:title>Mirror Selfie Collage with 'In One I'm All' Caption</image:title>
+      <image:caption>Multi-angle smartphone mirror selfie series of Max using his mint-green phone with artistic typography overlay.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_max-in-urban-streetwear-with-refuse-to-lose-badge.jpg</image:loc>
+      <image:title>Max in Urban Streetwear with 'Refuse to Lose' Badge</image:title>
+      <image:caption>Stylized urban portrait of Max wearing brown tee and black face mask with digital cyber graphics and motivational badge.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_lush-green-woodland-red-stone-staircase-walk.jpg</image:loc>
+      <image:title>Lush Green Woodland Red Stone Staircase Walk</image:title>
+      <image:caption>Max dressed in cyan blue tee and athletic pants pausing on a steep red brick forest staircase amidst dense trees.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_low-angle-outdoor-executive-look-in-white-formal-shirt.jpg</image:loc>
+      <image:title>Low-Angle Outdoor Executive Look in White Formal Shirt</image:title>
+      <image:caption>Dynamic low-angle perspective of Max dressed in a white button-down formal shirt and dark trousers against open cloudy skies.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_lounge-ambient-purple-neon-portrait.jpg</image:loc>
+      <image:title>Lounge Ambient Purple Neon Portrait</image:title>
+      <image:caption>Evening portrait of Max in dark apparel surrounded by moody violet and magenta neon lighting.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_indian-railways-diesel-locomotive-engine-track-shoot.jpg</image:loc>
+      <image:title>Indian Railways Diesel Locomotive Engine Track Shoot</image:title>
+      <image:caption>Max standing on railway tracks directly in front of the massive yellow and blue diesel locomotive engine of Indian Railways.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_hotel-suite-vanity-mirror-selfie.jpg</image:loc>
+      <image:title>Hotel Suite Vanity Mirror Selfie</image:title>
+      <image:caption>Mirror reflection selfie of Max in granite bathroom vanity with rolled turquoise towels during travel stay.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_highway-overpass-walkway-portrait-in-sunglasses.jpg</image:loc>
+      <image:title>Highway Overpass Walkway Portrait in Sunglasses</image:title>
+      <image:caption>Max standing confidently against the steel railings of an elevated highway overpass wearing sunglasses and mask.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_formal-indoor-portrait-with-sleek-eyeglasses.jpg</image:loc>
+      <image:title>Formal Indoor Portrait with Sleek Eyeglasses</image:title>
+      <image:caption>Indoor portrait of Max wearing a patterned grey button-up shirt and transparent spectacle frames.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_festive-wedding-look-in-sky-blue-nehru-waistcoat.jpg</image:loc>
+      <image:title>Festive Wedding Look in Sky-Blue Nehru Waistcoat</image:title>
+      <image:caption>Celebration photo collage of Max in sky-blue Nehru vest jacket paired over traditional white silk Kurta.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_festive-banquet-event-portrait-in-navy-turtleneck.jpg</image:loc>
+      <image:title>Festive Banquet Event Portrait in Navy Turtleneck</image:title>
+      <image:caption>Max in sleek navy blue turtleneck at a grand wedding reception banquet hall with draped golden decor in the background.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_executive-portrait-in-maroon-shirt-adjusting-smartwatch.jpg</image:loc>
+      <image:title>Executive Portrait in Maroon Shirt Adjusting Smartwatch</image:title>
+      <image:caption>Polished portrait of Mahendra Mali in maroon dress shirt adjusting his metallic smartwatch strap.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_evening-garden-cafe-lounge-under-fairy-lights.jpg</image:loc>
+      <image:title>Evening Garden Cafe Lounge Under Fairy Lights</image:title>
+      <image:caption>Max in black hoodie seated on orange chairs in an outdoor garden cafe illuminated with warm decorative string lights.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_dynamic-multi-pose-expressions-studio-collage.jpg</image:loc>
+      <image:title>Dynamic Multi-Pose Expressions Studio Collage</image:title>
+      <image:caption>Aesthetic 12-frame photo burst collage capturing various casual expressions of Max in a warm beige tee.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_dual-tone-blue-and-purple-neon-ambient-portrait.jpg</image:loc>
+      <image:title>Dual-Tone Blue and Purple Neon Ambient Portrait</image:title>
+      <image:caption>Max wearing a white tee and black mask illuminated with split teal and violet neon sidelights.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_diwali-festival-celebration-in-embroidered-olive-kurta.jpg</image:loc>
+      <image:title>Diwali Festival Celebration in Embroidered Olive Kurta</image:title>
+      <image:caption>Festive night collage of Max in traditional olive-green embroidered Kurta celebrating Diwali festival with family.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_dark-grunge-rim-light-portrait-with-backpack.jpg</image:loc>
+      <image:title>Dark Grunge Rim-Light Portrait with Backpack</image:title>
+      <image:caption>Artistic film-burned grunge edit of Max with student backpack silhouetted against glowing rim light.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_cyberpunk-neon-x-crossed-lighting-studio-shoot.jpg</image:loc>
+      <image:title>Cyberpunk Neon X-Crossed Lighting Studio Shoot</image:title>
+      <image:caption>Dramatic studio portrait of Max standing in front of crossed electric blue and magenta fluorescent light tubes.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_crimson-ambient-mood-shoot-with-promax-xt-watermark.jpg</image:loc>
+      <image:title>Crimson Ambient Mood Shoot with 'ProMax.XT' Watermark</image:title>
+      <image:caption>Artistic low-key portrait bathed in deep crimson studio lighting with playful devil-horn digital overlay.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_creative-dual-macos-window-graphic-portrait-collage.jpg</image:loc>
+      <image:title>Creative Dual macOS Window Graphic Portrait Collage</image:title>
+      <image:caption>Artistic collage showcasing two expressive portraits of Max arranged as floating minimalist macOS Safari browser window panes.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_college-campus-plaza-evening-walk-candid.jpg</image:loc>
+      <image:title>College Campus Plaza Evening Walk Candid</image:title>
+      <image:caption>Max in black t-shirt and grey sweatpants walking across university campus plaza with classmates in background.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_cinematic-blue-contour-studio-portrait.jpg</image:loc>
+      <image:title>Cinematic Blue Contour Studio Portrait</image:title>
+      <image:caption>Max wearing black t-shirt and face mask with dramatic blue neon edge lighting accentuating his silhouette.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_casual-purple-tee-selfie-with-korean-lettering-edit.jpg</image:loc>
+      <image:title>Casual Purple Tee Selfie with Korean Lettering Edit</image:title>
+      <image:caption>Casual relaxed portrait of Max in lilac purple crewneck tee with stylized Korean Hangul graphic artwork.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_bandana-face-mask-streetwear-selfie.jpg</image:loc>
+      <image:title>Bandana &amp; Face Mask Streetwear Selfie</image:title>
+      <image:caption>Close-up selfie of Max sporting a patterned forehead bandana and face mask with messy fringe hairstyle.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_athletic-navy-tracksuit-university-corridor-collage.jpg</image:loc>
+      <image:title>Athletic Navy Tracksuit University Corridor Collage</image:title>
+      <image:caption>Multi-shot collage of Max wearing a sporty navy tracksuit and turquoise student backpack in college hallway.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_ashoka-lion-capital-cultural-wall-pose.jpg</image:loc>
+      <image:title>Ashoka Lion Capital Cultural Wall Pose</image:title>
+      <image:caption>Max in sunglasses posing playfully beside the iconic Ashoka Lion Capital emblem wall mural with Japanese calligraphy.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_alan-walker-fan-tribute-portrait-in-signature-aw-mask.jpg</image:loc>
+      <image:title>Alan Walker Fan Tribute Portrait in Signature AW Mask</image:title>
+      <image:caption>Max in beige t-shirt and iconic Alan Walker 'AW' logo mask posing with hands behind neck.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2021_shot-in-the-max-neon-glow-heart-aesthetic-edit.jpg</image:loc>
+      <image:title>'Shot in the Max' Neon Glow Heart Aesthetic Edit</image:title>
+      <image:caption>Creative portrait of Max in black tee and mask framed by an illuminated neon heart wire and playful slogan.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/fitness/2021_gym-workout-mirror-selfie-with-photograph-ui-player.jpg</image:loc>
+      <image:title>Gym Workout Mirror Selfie with 'Photograph' UI Player</image:title>
+      <image:caption>Fitness training mirror selfie of Max in gym tee with music streaming player UI interface overlay.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/fitness/2021_gym-fitness-full-body-conditioning-pose.jpg</image:loc>
+      <image:title>Gym Fitness Full-Body Conditioning Pose</image:title>
+      <image:caption>Max in gold gym shirt and athletic sweatpants striking a confident full-body pose in the free-weights gym arena.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/fitness/2021_gym-core-training-on-blue-swiss-balance-ball.jpg</image:loc>
+      <image:title>Gym Core Training on Blue Swiss Balance Ball</image:title>
+      <image:caption>Max seated on a blue gym balance ball during workout session with motivational typography 'Madness is like gravity'.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/fitness/2021_free-weights-dumbbell-rack-fitness-mirror-check.jpg</image:loc>
+      <image:title>Free Weights Dumbbell Rack Fitness Mirror Check</image:title>
+      <image:caption>Gym mirror snapshot of Max in mustard gym shirt standing in front of heavy dumbbell racks checking workout progress.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2020_vintage-square-framing-portrait-study.jpg</image:loc>
+      <image:title>Vintage Square Framing Portrait Study</image:title>
+      <image:caption>Early collegiate square composition portrait study capturing serene reflection and clean aesthetic.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2020_minimalist-monochrome-aesthetic-portrait.jpg</image:loc>
+      <image:title>Minimalist Monochrome Aesthetic Portrait</image:title>
+      <image:caption>High-contrast minimalist portrait emphasizing crisp geometry, balanced lighting, and calm presence.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2019_tourists-exploring-heritage-timber-complex-under-clouds.jpg</image:loc>
+      <image:title>Tourists Exploring Heritage Timber Complex Under Clouds</image:title>
+      <image:caption>Visitors strolling across the green meadows of Purkhauti Muktangan with dramatic overcast skies framing the wooden towers.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2019_rustic-tribal-wooden-watchtower-monument-architecture.jpg</image:loc>
+      <image:title>Rustic Tribal Wooden Watchtower Monument Architecture</image:title>
+      <image:caption>Impressive traditional timber watchtower structure engineered from interlocking logs standing tall in the open museum grounds.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2019_resort-swimming-pool-palm-courtyard-leisure-stroll.jpg</image:loc>
+      <image:title>Resort Swimming Pool &amp; Palm Courtyard Leisure Stroll</image:title>
+      <image:caption>Serene courtyard swimming pool framed by concrete decks, lush green trees, and blue morning skies.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2019_playful-balanced-pose-on-decorative-garden-plinth.jpg</image:loc>
+      <image:title>Playful Balanced Pose on Decorative Garden Plinth</image:title>
+      <image:caption>Max playfully balancing atop an ornamental stone plinth between manicured evergreen arborvitae garden shrubs.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2019_national-science-exhibition-cultural-evening-auditorium-gathering.jpg</image:loc>
+      <image:title>National Science Exhibition Cultural Evening Auditorium Gathering</image:title>
+      <image:caption>Mahendra Mali with fellow state delegates wearing official exhibition badges during the national cultural evening in Raipur.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2019_mahendra-mali-on-valedictory-vip-stage-sofa.jpg</image:loc>
+      <image:title>Mahendra Mali on Valedictory VIP Stage Sofa</image:title>
+      <image:caption>Max in dark sweater relaxing on the white linen valedictory stage sofa beside award ceremony floral bouquets.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2019_exhibition-hall-farewell-selfie-with-participant-friend.jpg</image:loc>
+      <image:title>Exhibition Hall Farewell Selfie with Participant Friend</image:title>
+      <image:caption>Mahendra Mali and fellow state science participant taking a selfie inside the pavilion dome as the exhibition concluded.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/tech-lab/2019_academic-classroom-engineering-seminar-presentation.jpg</image:loc>
+      <image:title>Academic Classroom Engineering Seminar Presentation</image:title>
+      <image:caption>Mahendra Mali and peer standing before faculty evaluators during an academic technical defense session.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/hardware-iot/2019_tuning-multi-coil-inductive-wireless-roadway-track.jpg</image:loc>
+      <image:title>Tuning Multi-Coil Inductive Wireless Roadway Track</image:title>
+      <image:caption>Mahendra Mali in laboratory fine-tuning circular copper induction transmitter coils mounted along the prototype road track.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/honors/2019_official-ncert-national-merit-award-presentation-photo.jpg</image:loc>
+      <image:title>Official NCERT National Merit Award Presentation Photo</image:title>
+      <image:caption>Mahendra Mali (left) and teammate (right) standing formally at their booth holding their National Certificate of Merit and mementos.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2019_official-ncert-directory-featuring.mp4</image:loc>
+      <image:title>Official NCERT Directory Featuring 'शिवम वर्मा व महेन्द्र माली'</image:title>
+      <image:caption>Video clip panning across the official national science exhibition directory booklet spotlighting co-inventors Shivam Verma and Mahendra Mali.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2019_national-tv-broadcast-breaking-news-feature-on-max.mp4</image:loc>
+      <image:title>National TV Broadcast 'Breaking News' Feature on Max</image:title>
+      <image:caption>Official television news broadcast feature covering Mahendra Mali's wireless car at NCERT National Science Exhibition.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/honors/2019_national-media-interview-snapshot-at-exhibition-stall.jpg</image:loc>
+      <image:title>National Media Interview Snapshot at Exhibition Stall</image:title>
+      <image:caption>Live television broadcast screen capture of Mahendra Mali holding microphone explaining his wireless car project to news reporters.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/honors/2019_national-exhibition-lab-oscilloscope-bench-crowd-defense.jpg</image:loc>
+      <image:title>National Exhibition Lab: Oscilloscope Bench &amp; Crowd Defense</image:title>
+      <image:caption>Students and faculty crowded around the electronics testing instrument bench at 46th JNNSMEE verifying voltage waveforms.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/honors/2019_holding-official-ncert-national-science-merit-certificate.jpg</image:loc>
+      <image:title>Holding Official NCERT National Science Merit Certificate</image:title>
+      <image:caption>Mahendra Mali dressed in black blazer proudly presenting his Certificate of Merit in front of the wireless electric car exhibition stall in Raipur.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/honors/2019_gcert-gujarat-state-science-fair-gold-medal-stall-47-55.jpg</image:loc>
+      <image:title>GCERT Gujarat State Science Fair Gold Medal Stall #47-55</image:title>
+      <image:caption>Official winning exhibition stall '47-55 Batteryless Electric Car' at Gandhinagar: scale vehicle, solar collector, and mentors holding state certificates.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/videos/2019_doordarshan-dd-news-national-television-live-interview.mp4</image:loc>
+      <image:title>Doordarshan (DD News) National Television Live Interview</image:title>
+      <image:caption>Television news broadcast footage of Mahendra Mali holding the official DD News microphone explaining his wireless electric car invention.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/honors/2019_46th-jnnsmee-grand-valedictory-award-ceremony-stage.jpg</image:loc>
+      <image:title>46th JNNSMEE Grand Valedictory Award Ceremony Stage</image:title>
+      <image:caption>Official stage with banner 'बच्चों के लिए 46 वीं जवाहरलाल नेहरू राष्ट्रीय विज्ञान, गणित एवं पर्यावरण प्रदर्शनी - 2019' with scientists and dignitaries.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2018_mumbai-winter-morning-street-candid-in-blue-hoodie.jpg</image:loc>
+      <image:title>Mumbai Winter Morning Street Candid in Blue Hoodie</image:title>
+      <image:caption>Max in navy hoodie standing on sidewalk with national tricolor flag bunting along the street during his Mumbai technical visit.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2018_iit-bombay-powai-campus-forest-walkway-selfie.jpg</image:loc>
+      <image:title>IIT Bombay Powai Campus Forest Walkway Selfie</image:title>
+      <image:caption>Max in blue hoodie taking a selfie under the lush green banyan and palm canopy of the IIT Bombay Powai campus.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/portraits/2018_iit-bombay-open-cafeteria-lunch-with-teammate.jpg</image:loc>
+      <image:title>IIT Bombay Open Cafeteria Lunch with Teammate</image:title>
+      <image:caption>Max and teammate enjoying lunch together at the sunlit open-air cafeteria patio of IIT Bombay during Techfest 2018.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/hardware-iot/2018_ground-proximity-alignment-of-scale-electric-car-on-induction-track.jpg</image:loc>
+      <image:title>Ground Proximity Alignment of Scale Electric Car on Induction Track</image:title>
+      <image:caption>Team adjusting magnetic receiver coil spacing and vehicle suspension height over the roadway copper transmission coils.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/honors/2018_techfest-world-mun-banner-at-iit-bombay-main-arena.jpg</image:loc>
+      <image:title>Techfest World MUN Banner at IIT Bombay Main Arena</image:title>
+      <image:caption>Max standing proudly next to the official Techfest World MUN event banner inside the IIT Bombay technical arena.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/honors/2018_official-iit-gandhinagar-amalthea-18-certificate-of-participation.jpg</image:loc>
+      <image:title>Official IIT Gandhinagar Amalthea '18 Certificate of Participation</image:title>
+      <image:caption>Official Certificate of Participation awarded to Mahendra Mali by Indian Institute of Technology Gandhinagar signed by Prof. Jaichander Swaminathan.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/honors/2018_iit-gandhinagar-amalthea-technical-summit-robotics-demonstration.jpg</image:loc>
+      <image:title>IIT Gandhinagar Amalthea Technical Summit Robotics Demonstration</image:title>
+      <image:caption>Mahendra Mali demonstrating his autonomous wireless roadway track on the floor of the technical conclave hall at IIT Gandhinagar.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/honors/2018_iit-bombay-techfest-world-mun-landmark-photo.jpg</image:loc>
+      <image:title>IIT Bombay Techfest World MUN Landmark Photo</image:title>
+      <image:caption>Mahendra Mali standing proudly beside the official Techfest World MUN summit backdrop at Indian Institute of Technology Bombay.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/honors/2018_iit-bombay-main-gate-landmark-memorial-photo.jpg</image:loc>
+      <image:title>IIT Bombay Main Gate Landmark Memorial Photo</image:title>
+      <image:caption>Mahendra Mali standing proudly in front of the landmark sign 'भारतीय प्रौद्योगिकी संस्थान मुंबई / INDIAN INSTITUTE OF TECHNOLOGY BOMBAY'.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/honors/2018_district-science-fair-presenting-circuit-principles-to-judges.jpg</image:loc>
+      <image:title>District Science Fair: Presenting Circuit Principles to Judges</image:title>
+      <image:caption>Mahendra Mali in orange jersey presenting technical circuit schematics and power transmission metrics to judges with clipboards.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/gallery/honors/2018_district-science-fair-crowd-gathered-at-demonstration-booth.jpg</image:loc>
+      <image:title>District Science Fair: Crowd Gathered at Demonstration Booth</image:title>
+      <image:caption>Visiting school teachers, student teams, and evaluators observing the scale wireless vehicle track operating on the exhibition table.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/about/</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#about</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/projects/</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#projects</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/resume/</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#resume</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/testimonials/</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#testimonials</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/milestones/</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#milestones</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/contact/</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#contact</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#gallery</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/resume.json</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/llms.txt</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/llms-full.txt</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-maxai</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-celllock5g</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-homemax</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-cellwatchpro</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-amul-dairy-platform</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-maxfit</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-maxhive-osint</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-ipcai-studio</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-luci-cyber-theme</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-adb-on-wrt</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-go-port-proxy</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-maxter</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-qualcomm-custom-kernel</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-maxkit-android</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-sdx65-modem-pipeline</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-alcohol-safety-interlock</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-ultrasonic-profiler</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-developer-cheatsheets</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/#project-gsrtc-transit-platform</loc>
+    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+</urlset>

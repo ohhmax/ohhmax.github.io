@@ -1,0 +1,72 @@
+name: Portfolio Web Validation & Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths-ignore:
+      - 'portfolio-monitor/**'
+      - 'android/**'
+      - '.github/workflows/android-build.yml'
+  pull_request:
+    paths-ignore:
+      - 'portfolio-monitor/**'
+      - 'android/**'
+      - '.github/workflows/android-build.yml'
+  workflow_dispatch:
+
+jobs:
+  validate-and-deploy:
+    name: Verify Web Assets & Deploy Static Site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate JSON Data Structures
+        run: |
+          node -e '
+            const fs = require("fs");
+            const files = ["data/resume.json", "package.json"];
+            files.forEach(f => {
+              if (fs.existsSync(f)) {
+                JSON.parse(fs.readFileSync(f, "utf8"));
+                console.log("Valid JSON:", f);
+              }
+            });
+          '
+
+      - name: Verify Web Core Files
+        run: |
+          test -f index.html || exit 1
+          test -f robots.txt || exit 1
+          test -f sitemap.xml || exit 1
+          echo "Static portfolio core files verified."
+
+      - name: Upload Static Web Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+  deploy-pages:
+    name: Deploy to GitHub Pages
+    needs: validate-and-deploy
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

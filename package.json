@@ -1,0 +1,23 @@
+{
+  "name": "myportfolio-2026",
+  "version": "3.0.0",
+  "description": "Personal Portfolio & Engineering Dossier of Mahendra Mali (Max) - MCA Graduate & Full-Stack Systems Engineer",
+  "main": "index.html",
+  "scripts": {
+    "start": "node tools/vault-server.js",
+    "admin": "node tools/vault-server.js",
+    "test": "node tools/audit-portfolio-seo-and-quality.js",
+    "audit": "node tools/audit-portfolio-seo-and-quality.js"
+  },
+  "keywords": [
+    "portfolio",
+    "mahendra-mali",
+    "max",
+    "full-stack",
+    "android",
+    "iot",
+    "systems-engineering"
+  ],
+  "author": "Mahendra Mali <ohmaxgit@gmail.com>",
+  "license": "MIT"
+}

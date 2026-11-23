@@ -1,0 +1,57 @@
+name: Android Build & APK Package
+
+on:
+  push:
+    paths:
+      - 'portfolio-monitor/**'
+      - '.github/workflows/android-build.yml'
+  pull_request:
+    paths:
+      - 'portfolio-monitor/**'
+      - '.github/workflows/android-build.yml'
+  workflow_dispatch:
+
+jobs:
+  build-apk:
+    name: Build MaxHive Android Intelligence APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Java JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android Platform & Build Tools
+        run: |
+          yes | sdkmanager --licenses || true
+          sdkmanager "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Set Execution Permissions
+        run: chmod +x portfolio-monitor/build-apk.sh
+
+      - name: Compile and Package APK
+        env:
+          ANDROID_HOME: ${{ env.ANDROID_HOME }}
+        run: |
+          cd portfolio-monitor
+          ./build-apk.sh
+
+      - name: Verify APK Integrity
+        run: |
+          ls -lh portfolio-monitor/MaxHive-Intelligence.apk
+          sha256sum portfolio-monitor/MaxHive-Intelligence.apk
+
+      - name: Upload APK Release Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MaxHive-Intelligence-APK
+          path: portfolio-monitor/MaxHive-Intelligence.apk
+          retention-days: 30

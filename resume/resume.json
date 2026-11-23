@@ -1,0 +1,279 @@
+{
+  "personal": {
+    "name": "Mahendra Mali",
+    "nickname": "[MAX]",
+    "title": "Systems & Embedded Engineer | Cybersecurity & Reverse Engineer | Android & Full-Stack",
+    "tagline": "Autonomous Systems & Embedded Architect | Telecom Security Researcher | Linux Kernel & Edge AI",
+    "email": "ohmaxgit@gmail.com",
+    "phone": "+91 98245 84454",
+    "location": "Gujarat, India",
+    "github": "https://github.com/ohhmax/",
+    "githubDisplay": "github.com/ohhmax",
+    "portfolio": "https://ohhmax.github.io/",
+    "portfolioDisplay": "ohhmax.github.io",
+    "photo": "photo.jpg"
+  },
+  "summary": "Technical decision maker and systems architect (operating as a processor, not a hard drive) executing from bare metal to cloud. First-principles polymath engineer, Arch Linux specialist, and MCA scholar uniting applied physics, electrical engineering, low-level firmware, and autonomous AI agents. Language-agnostic polyglot capable of mastering any codebase or stack instantaneously. Architect of local-first autonomous AI runtimes, production AArch64 OpenWrt 6.18 firmware (Qualcomm IPQ9574), and the MaxHive threat intelligence platform. Lifelong hands-on hardware hacker with 100% free open-source contributions, unrevealed telecom zero-days (Jio AirFiber), Techfest Vision 2030 1st Prize Winner (Batteryless Electric Car lauded by Gujarat Education Minister & DD News), and NCERT National Science honors.",
+  "skills": {
+    "Firmware & Systems": [
+      "Arch Linux",
+      "OpenWrt Linux 6.18",
+      "Qualcomm IPQ9574 (AArch64)",
+      "C / C++",
+      "Kernel Drivers",
+      "RTL8812AU Frame Injection",
+      "Bash / Zsh",
+      "LuCI Dashboards"
+    ],
+    "Cybersecurity & RE": [
+      "Burp Suite Pro",
+      "Zero-Day Research",
+      "API Reverse Engineering",
+      "HAR Protocol Forensics",
+      "Packet Sniffing & Injection",
+      "V2Ray / Xray Edge Routing",
+      "Security Audits"
+    ],
+    "Autonomous AI & Mobile": [
+      "Local Autonomous AI Agents",
+      "LiteRT (TFLite) & GGUF",
+      "On-Device LLMs & GPU Accel",
+      "Android SDK (Kotlin / Java)",
+      "5G Dual-Band CA (n78+n28)",
+      "Cellular RF Telemetry"
+    ],
+    "Electronics & Hardware": [
+      "Electrical & Circuit Design",
+      "ESP32 / ESP8266EX (160 MHz)",
+      "400 kHz Fast I2C (PCF8575)",
+      "WiFi-RSSI RF Machine Learning",
+      "MQTT & Async WebSockets",
+      "Embedded PCB Prototyping"
+    ],
+    "Polyglot & Cloud": [
+      "Language-Agnostic Execution",
+      "Python / FastAPI",
+      "Node.js / Express",
+      "Go",
+      "REST APIs",
+      "Cloudflare Workers",
+      "Docker / Linux Servers"
+    ]
+  },
+  "languages": [
+    { "name": "Hindi & Technical Hinglish", "level": "Full Professional Fluency" },
+    { "name": "English", "level": "Technical Working Proficiency" },
+    { "name": "Gujarati", "level": "Native Proficiency" },
+    { "name": "Marwadi", "level": "Native Proficiency" }
+  ],
+  "competencies": [
+    "Systems Architecture & Decision Velocity",
+    "Linux Kernel, Driver & Network Hacking",
+    "Autonomous Local AI & GPU Runtimes",
+    "Hardware Prototyping & Fast I2C IoT",
+    "Telecom Zero-Day Research & Triage"
+  ],
+  "projects": [
+    {
+      "name": "MaxIDU: OpenWrt 6.18 Kernel Firmware",
+      "category": "Enterprise Systems",
+      "stars": "17+ Stars",
+      "link": "https://github.com/ohhmax/maxidu",
+      "tech": "C, OpenWrt 6.18, Qualcomm IPQ9574, AArch64, LuCI, Shell",
+      "points": [
+        "Architected high-performance 64-bit OpenWrt 6.18 Linux firmware for Jio AirFiber IDU (JIDU6811 / IPQ9574).",
+        "Unlocked dual-band Wi-Fi 6 at 30 dBm TX power, 5-port Gigabit switch, and USB 3.0 cellular tethering.",
+        "Engineered custom responsive LuCI web interface with GPU hardware acceleration."
+      ]
+    },
+    {
+      "name": "MaxHive: Dark-Web Breach Intelligence Platform",
+      "category": "Cyber Threat Intelligence",
+      "stars": "MCA Capstone",
+      "link": "https://github.com/ohhmax",
+      "tech": "Python, FastAPI, Breach Corpus Forensics, Secure OTP Auth, High-Concurrency",
+      "points": [
+        "Solo-architected cyber intelligence platform indexing dark-web breach corpuses affecting Indian citizen accounts.",
+        "Engineered secure OTP-authenticated lookup service alerting users to compromised passwords, Aadhaar, and email leaks.",
+        "Designed high-concurrency caching and rate-limiting pipelines to withstand viral public traffic loads."
+      ]
+    },
+    {
+      "name": "MaxAI & CellWatchPro: On-Device AI & 5G RF Suite",
+      "category": "Mobile & Edge AI",
+      "stars": "Core Suite",
+      "link": "https://github.com/ohhmax/maxai",
+      "tech": "Kotlin, C++, LiteRT LM, GGUF, 5G Dual-Band CA, RF Telemetry",
+      "points": [
+        "Built zero-latency on-device AI runtime for Android executing LiteRT and GGUF models on mobile GPU with tool calling and embedded REST API.",
+        "Developed native Android telecommunications utility enforcing Jio 5G Dual-Band Carrier Aggregation (n78+n28) locking with live tower telemetry."
+      ]
+    },
+    {
+      "name": "HomeMax & WiFi-RSSI RF Presence Guard",
+      "category": "IoT & Machine Learning",
+      "stars": "Featured IoT",
+      "link": "https://github.com/ohhmax/wifi-rssi-intrusion-guard",
+      "tech": "ESP8266EX, ESP32, C++, Fast I2C, RF ML, MQTT, WebSockets",
+      "points": [
+        "Engineered sub-millisecond home automation via ESP8266EX (160 MHz) and PCF8575 over 400 kHz Fast I2C with MQTT and async WebSockets.",
+        "Devised non-line-of-sight presence sensing by analyzing WiFi RSSI RF variance using on-device ML (zero camera or PIR required)."
+      ]
+    },
+    {
+      "name": "Amul AMCS ERP Reverse Engineering & Security Tools",
+      "category": "Reverse Engineering",
+      "stars": "69+ Stars",
+      "link": "https://github.com/ohhmax",
+      "tech": "Python, HAR Analysis, Cloudflare Workers, Burp Suite Pro, TypeScript",
+      "points": [
+        "Reverse-engineered closed enterprise dairy ERP APIs through session traffic forensics; developed resilient asynchronous Python client library.",
+        "Created B4Bomber (69 stars) network security suite, bmax Burp launcher, and MAXTER (23 stars) developer environment."
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Co-Founder and Lead Software Architect",
+      "company": "MaxFit Gym Platform",
+      "location": "Mehsana, Gujarat",
+      "period": "2023 to 2024",
+      "points": [
+        "Architected multi-tenant gym management ecosystem and native Android client solo in a 20-day sprint prior to modern AI tooling.",
+        "Integrated automated billing, member attendance tracking, secure session tokens, and administrative reporting."
+      ]
+    },
+    {
+      "role": "Server and Systems Administrator (Contract)",
+      "company": "Gujarat Sachivalay (Government of Gujarat)",
+      "location": "Gandhinagar, Gujarat",
+      "period": "2022 to 2023",
+      "points": [
+        "Maintained state government server infrastructure with 99.9% uptime for public service portals.",
+        "Enforced kernel security hardening (sysctl, iptables, SELinux), automated disaster backups, access management, and network telemetry."
+      ]
+    },
+    {
+      "role": "IT & Web Infrastructure Associate (Contract)",
+      "company": "RDSDE Gandhinagar (Central Government)",
+      "location": "Gandhinagar, Gujarat",
+      "period": "2020 to 2021",
+      "points": [
+        "Maintained central government IT infrastructure, web portal assets, and local networking equipment post-higher secondary.",
+        "Resolved network routing, hardware provisioning, and internal support tickets with rapid turnaround."
+      ]
+    }
+  ],
+  "securityResearch": [
+    {
+      "title": "Telecom & Hardware Zero-Days",
+      "detail": "Discovered undisclosed zero-day vulnerabilities in telecom CPE devices (Jio AirFiber); strictly upheld responsible disclosure."
+    },
+    {
+      "title": "Community Cyber Defense & Triage",
+      "detail": "Assisted dozens of teams in threat remediation, server hardening, and forensic packet audits; built B4Bomber and bmax security tools."
+    },
+    {
+      "title": "Wireless RF & Packet Injection",
+      "detail": "Conducted 802.11 monitor mode analysis, RTL8812AU frame injection, and embedded device attack surface audits."
+    },
+    {
+      "title": "Nocturnal Deep-Work Cadence",
+      "detail": "Operates on late-night deep-work blocks to leverage peak network bandwidth, minimal latency, and zero-distraction focus."
+    }
+  ],
+  "athleticsAndPassions": [
+    {
+      "title": "Javelin Throw (Track & Field)",
+      "detail": "1st Place Gold Medalist in multi-level athletics meets; trained in aerodynamic throw physics, velocity, and physical stamina."
+    },
+    {
+      "title": "Active Competitive Cricket",
+      "detail": "Dedicated on-field cricket player focused on team strategy and real match play (strictly on the field, not passive TV viewing)."
+    },
+    {
+      "title": "100% Free Open-Source Ethos",
+      "detail": "Lifelong builder across electronics and electrical tech; published 100% of projects and security tools freely to empower the engineering community."
+    },
+    {
+      "title": "Relentless First-Principles Mindset",
+      "detail": "Constantly innovating, never idle; pioneer of the Batteryless Wireless Electric Car using resonant induction; unites electronics, RF physics, and software."
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master of Computer Applications (MCA)",
+      "institution": "Sankalchand Patel College of Engineering (SPU)",
+      "location": "Visnagar, Gujarat",
+      "period": "2024 to 2026 (Ongoing)",
+      "score": "SGPA: 7.73 / 10 (Pass with Distinction)",
+      "focus": "Network Security, Distributed Systems, Cryptography, Advanced Linux"
+    },
+    {
+      "degree": "Bachelor of Computer Applications (BCA)",
+      "institution": "Sarvajanik College of BCA & PGDCA (HNGU)",
+      "location": "Mehsana, Gujarat",
+      "period": "2021 to 2024",
+      "score": "Graduated with 75.0% (First Class with Distinction)",
+      "focus": "Data Structures, Database Internals, Mobile Engineering, Networks"
+    },
+    {
+      "degree": "Higher Secondary (12th Science, Mathematics)",
+      "institution": "Sant Shri Asharamji Gurukul (GSEB)",
+      "location": "Gandhinagar, Gujarat",
+      "period": "2018 to 2021",
+      "score": "Science Stream (Mathematics & Physics, Grade A in Computer Practical)"
+    }
+  ],
+  "honors": [
+    {
+      "title": "1st Prize: Techfest Vision 2030 (SSAGI)",
+      "event": "National Techfest Vision 2030",
+      "year": "2019",
+      "desc": "Awarded 1st Place for 'Batteryless Wireless Electric Car'; personally lauded by Gujarat Education Minister; featured on DD News."
+    },
+    {
+      "title": "National Science Exhibition Finalist (NCERT)",
+      "event": "46th JNNSMEE, Raipur & WBEC",
+      "year": "2019",
+      "desc": "Nationally certified by NCERT Director Prof. Hrushikesh Senapaty for working 'Batteryless Electric Car' innovation."
+    },
+    {
+      "title": "ISRO / IPR Science Exhibition Award",
+      "event": "National Science Day, IPR Gandhinagar",
+      "year": "2019",
+      "desc": "Certified for applied energy & plasma physics exhibition by Director, Institute for Plasma Research (DAE)."
+    },
+    {
+      "title": "State Science Exhibition Winner (GCERT)",
+      "event": "45th Gujarat State Science Fair, Gandhinagar",
+      "year": "2018",
+      "desc": "Awarded 1st place in Sustainable Tech & Waste Body Conservation; state-level gold medal."
+    },
+    {
+      "title": "IIT Gandhinagar & SIES INSEF Honors",
+      "event": "Amalthea '18 (IIT-GN) & INSEF Mumbai",
+      "year": "2017 to 2018",
+      "desc": "IIT Gandhinagar ICON Conclave participant; Awarded Honourable Mention by Science Society of India (SIES)."
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Google Ads Apps Certification",
+      "issuer": "Google",
+      "id": "160428019",
+      "period": "2025 to 2026"
+    },
+    {
+      "name": "AICTE ATAL Cyber Security Infrastructure FDP",
+      "issuer": "Ganpat University / AICTE",
+      "period": "July 2025"
+    },
+    {
+      "name": "Certified Ethical Hacker Training",
+      "issuer": "Master of Project Academy",
+      "id": "cert_flsrrz62",
+      "period": "Verified"
+    }
+  ]
+}

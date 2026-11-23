@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# User Uploaded Dynamic Attachments & Private Keys
+data/attachments/
+out/data/attachments/
+data/keys/max_private_key.pem
+out/data/keys/max_private_key.pem
+
+# Temporary and Scratch Directories
+.playwright-mcp/
+scratch/
+*.log
+*.tmp
+
+# Android Intermediate Build Artifacts
+portfolio-monitor/build/compiled_res/
+portfolio-monitor/build/gen/
+portfolio-monitor/build/obj/
+android/build/compiled_res/
+android/build/gen/
+android/build/obj/
+
+# Legacy android folder (app migrated to portfolio-monitor)
+android/
+
+# System Files
+.DS_Store
+Thumbs.db

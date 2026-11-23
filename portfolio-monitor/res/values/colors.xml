@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Material 3 Light Mode Palette (Clean, Neutral, System-matching) -->
+    <color name="surface">#FDFDFD</color>
+    <color name="surface_container">#F3F4F6</color>
+    <color name="surface_container_high">#E5E7EB</color>
+    <color name="surface_container_highest">#D1D5DB</color>
+    <color name="outline">#E5E7EB</color>
+    <color name="card_bg">#F3F4F6</color>
+    <color name="card_border">#E5E7EB</color>
+
+    <color name="primary">#1F2937</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="accent">#2563EB</color>
+
+    <color name="text_primary">#111827</color>
+    <color name="text_secondary">#4B5563</color>
+    <color name="text_muted">#6B7280</color>
+
+    <color name="tab_active_bg">#111827</color>
+    <color name="tab_active_text">#FFFFFF</color>
+    <color name="tab_inactive_bg">#E5E7EB</color>
+    <color name="tab_inactive_text">#4B5563</color>
+
+    <color name="badge_bg">#E5E7EB</color>
+    <color name="badge_text">#1F2937</color>
+
+    <color name="status_dot">#10B981</color>
+    <color name="ios_switch_active">#34C759</color>
+    <color name="ios_switch_inactive">#E5E5EA</color>
+    <color name="ripple">#1A000000</color>
+    <color name="ripple_light">#1A000000</color>
+
+    <!-- Compatibility aliases -->
+    <color name="md_surface">#FDFDFD</color>
+    <color name="md_surface_container">#F3F4F6</color>
+    <color name="md_surface_container_high">#E5E7EB</color>
+    <color name="md_surface_container_highest">#D1D5DB</color>
+    <color name="md_primary">#1F2937</color>
+    <color name="primary_gold">#1F2937</color>
+    <color name="accent_emerald">#10B981</color>
+    <color name="accent_cyan">#2563EB</color>
+</resources>

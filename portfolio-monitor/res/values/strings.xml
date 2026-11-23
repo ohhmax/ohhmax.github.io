@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Portfolio</string>
+    <string name="status_connected">Active</string>
+    <string name="status_syncing">Syncing...</string>
+    <string name="tab_messages">Messages</string>
+    <string name="tab_visits">Visits</string>
+    <string name="btn_sync">Sync</string>
+    <string name="btn_settings">Settings</string>
+    <string name="empty_messages">No messages yet</string>
+    <string name="empty_visits">No visits yet</string>
+    <string name="settings_title">Settings</string>
+
+    <string name="pref_foreground_title">Foreground Service</string>
+    <string name="pref_foreground_summary">Keep service active in background</string>
+    <string name="pref_boot_title">Start on Boot</string>
+    <string name="pref_boot_summary">Launch service on device restart</string>
+    <string name="pref_notify_messages_title">Message Alerts</string>
+    <string name="pref_notify_messages_summary">Heads-up alert on new inquiries</string>
+    <string name="pref_notify_visits_title">Visit Alerts</string>
+    <string name="pref_notify_visits_summary">Notification on site traffic</string>
+
+    <string name="btn_reset_seen">Reset Seen History</string>
+</resources>
