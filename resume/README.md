@@ -18,7 +18,7 @@ Based on an exhaustive analysis of your GitHub repositories (`github.com/mahendr
    - `maxai`: On-device AI engine executing quantized LiteRT LM and GGUF models directly on mobile GPUs with zero cloud latency and built-in function calling.
 3. **Cybersecurity, Reverse Engineering & Protocol Forensics**:
    - Enterprise API Reverse Engineering: Deep traffic analysis and session reconstruction of closed enterprise ERP systems (`amuldairy` / Amul AMCS).
-   - Network Security & Pentesting: Burp Suite Pro workflow automation (`bmax`), wireless packet injection (`rtl8812au`), and high-star security tooling (`B4Bomber` with 69+ stars, `MAXTER` with 23+ stars).
+   - Network Security & Pentesting: Burp Suite Pro workflow automation (`bmax`), wireless packet injection (`rtl8812au`), and high-star security tooling (`CellLock 5G` with 69+ stars, `MAXTER` with 23+ stars).
 4. **National-Level Proven Innovation**:
    - **NCERT National Science Exhibition Finalist (JNNSMEE Raipur 2019)** for your *Batteryless Electric Car* exhibit.
    - **State Science Exhibition Winner (GCERT Gandhinagar 2018)**.

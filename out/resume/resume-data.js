@@ -140,7 +140,7 @@ window.RESUME_DATA = {
       "tech": "Python, HAR Analysis, Cloudflare Workers, Burp Suite Pro, TypeScript",
       "points": [
         "Reverse-engineered closed enterprise dairy ERP APIs through session traffic forensics; developed resilient asynchronous Python client library.",
-        "Created B4Bomber (69 stars) network security suite, bmax Burp launcher, and MAXTER (23 stars) developer environment."
+        "Created CellLock 5G network telemetry suite, bmax Burp launcher, and MAXTER (23 stars) developer environment."
       ]
     }
   ],
@@ -183,7 +183,7 @@ window.RESUME_DATA = {
     },
     {
       "title": "Community Cyber Defense & Triage",
-      "detail": "Assisted dozens of teams in threat remediation, server hardening, and forensic packet audits; built B4Bomber and bmax security tools."
+      "detail": "Assisted dozens of teams in threat remediation, server hardening, and forensic packet audits; built custom diagnostic and bmax security tools."
     },
     {
       "title": "Wireless RF & Packet Injection",
