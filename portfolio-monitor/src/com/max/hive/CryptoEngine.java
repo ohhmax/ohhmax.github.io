@@ -14,9 +14,6 @@ import java.util.zip.GZIPInputStream;
 
 public class CryptoEngine {
 
-    public static final String MASTER_DECRYPTION_KEY = "MaxPortfolio2026_MasterDecryptionKey_9824584454_02";
-    public static final String CLIENT_ENCRYPTION_KEY = "MaxPortfolio2026_ClientEncryptionKey_9824584454_01";
-
     public static String decryptPayload(String encryptedArmor, String keyStr) {
         if (encryptedArmor == null || keyStr == null || keyStr.trim().isEmpty()) {
             return null;
@@ -78,11 +75,7 @@ public class CryptoEngine {
                 System.arraycopy(raw, 12, cipherWithTag, 0, cipherWithTag.length);
 
                 String[] candidateKeys = new String[] {
-                    keyStr.trim(),
-                    CLIENT_ENCRYPTION_KEY,
-                    MASTER_DECRYPTION_KEY,
-                    "MaxPortfolio2026_ClientEncryptionKey_9824584454_01",
-                    "MaxPortfolio2026@SecureMasterKey!"
+                    keyStr.trim()
                 };
 
                 MessageDigest md = MessageDigest.getInstance("SHA-256");

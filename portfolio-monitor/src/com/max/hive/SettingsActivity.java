@@ -26,7 +26,6 @@ public class SettingsActivity extends Activity implements View.OnClickListener, 
 
     // Test credentials for quick 1-tap auto fill
     private static final String DEFAULT_TEST_SHEET = "https://docs.google.com/spreadsheets/d/1jv4I8aEYIFhp1-Qahe3KuqQJVNL6OW1EcQtEf9EGooc/gviz/tq?tqx=out:csv";
-    private static final String DEFAULT_TEST_KEY = CryptoEngine.MASTER_DECRYPTION_KEY;
 
     private SharedPreferences prefs;
     private EditText etSheetUrl;
@@ -100,8 +99,7 @@ public class SettingsActivity extends Activity implements View.OnClickListener, 
             saveConfiguration();
         } else if (id == R.id.btnPasteTestConfig) {
             etSheetUrl.setText(DEFAULT_TEST_SHEET);
-            etMasterKey.setText(DEFAULT_TEST_KEY);
-            Toast.makeText(this, "Test credentials loaded. Tap Save to connect.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sheet URL filled. Paste your RSA Private Key to connect.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.btnResetSeen) {
             resetSeenHistory();
         } else if (id == R.id.btnClearConfig) {

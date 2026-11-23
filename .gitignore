@@ -4,8 +4,11 @@ node_modules/
 # User Uploaded Dynamic Attachments & Private Keys
 data/attachments/
 out/data/attachments/
-data/keys/max_private_key.pem
-out/data/keys/max_private_key.pem
+*private_key*
+*.key
+*.pem
+!data/keys/max_public_key.pem
+!out/data/keys/max_public_key.pem
 
 # Temporary and Scratch Directories
 .playwright-mcp/
@@ -14,12 +17,8 @@ scratch/
 *.tmp
 
 # Android Intermediate Build Artifacts
-portfolio-monitor/build/compiled_res/
-portfolio-monitor/build/gen/
-portfolio-monitor/build/obj/
-android/build/compiled_res/
-android/build/gen/
-android/build/obj/
+portfolio-monitor/build/
+android/build/
 
 # Legacy android folder (app migrated to portfolio-monitor)
 android/

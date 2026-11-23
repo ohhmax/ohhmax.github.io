@@ -24,7 +24,7 @@
     formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSd3Wx27Aw9308pzORR2FZ_e6VKd--hs8gDbhlxMNIV-TNtyAA/formResponse',
     formEntryCipher: 'entry.1693006451',
     formEntryFallback: 'entry.132983276',
-    masterSecret: 'MaxPortfolio2026_ClientEncryptionKey_9824584454_01',
+    rsaPublicKey: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAp4egtdSXRoqStXrL/n0xfaNOFDblXNAY/87Q3tSBzJZrhywNdjoTYT73ubP+BWzVww233/keL2It7dZDmjT/z6iWCD3pCcP7W8tIjQRCHRYDK2I0srjFL2kL4/cEMs8OkqqJeAUgGqt7MJ3J3PcExWvwivfdUMDf8M5MR2roCAoJZzXF2YiTPdgJJHc1cTLr/3682bpi4Mwl3PeC6VmmkAfAF2jKlfbDMOyEHflZMyCwtiKJN3dkMuuAwCtQwh5vVsGN/YIu7OrhhRtzLRMsn9HF2PebzSZIm8a69sZnm44dxLMguCq0JSl3M3n6GQlDFf1Y+3RRZLCP4XhpWxbYswIDAQAB',
     cachePrefix: 'maxdb_cache_',
     cacheTtlMs: 5 * 60 * 1000, // 5 minutes cache
     pageSize: 30,
@@ -98,56 +98,76 @@
   // Cryptographic Subsystem (AES-GCM + PBKDF2 WebCrypto)
   // --------------------------------------------------------------------------
   const CryptoEngine = {
-    async deriveKey(passphrase, salt) {
-      const enc = new TextEncoder();
-      const keyMaterial = await crypto.subtle.importKey(
-        'raw',
-        enc.encode(passphrase),
-        'PBKDF2',
-        false,
-        ['deriveKey']
-      );
-      return crypto.subtle.deriveKey(
-        {
-          name: 'PBKDF2',
-          salt: salt,
-          iterations: 10000,
-          hash: 'SHA-256'
-        },
-        keyMaterial,
-        { name: 'AES-GCM', length: 256 },
-        false,
-        ['encrypt', 'decrypt']
-      );
-    },
-
-    async encrypt(plainText, secret = DB_CONFIG.masterSecret) {
+    async encrypt(plainText) {
       if (typeof crypto === 'undefined' || !crypto.subtle) {
         return 'PLAIN:' + btoa(unescape(encodeURIComponent(plainText)));
       }
       try {
         const enc = new TextEncoder();
-        const salt = crypto.getRandomValues(new Uint8Array(16));
-        const iv = crypto.getRandomValues(new Uint8Array(12));
-        const key = await this.deriveKey(secret, salt);
+        let payloadBytes;
+        if (typeof CompressionStream !== 'undefined') {
+          try {
+            const cs = new CompressionStream('gzip');
+            const writer = cs.writable.getWriter();
+            writer.write(enc.encode(plainText));
+            writer.close();
+            const compBuf = await new Response(cs.readable).arrayBuffer();
+            payloadBytes = new Uint8Array(compBuf);
+          } catch (e) {
+            payloadBytes = enc.encode(plainText);
+          }
+        } else {
+          payloadBytes = enc.encode(plainText);
+        }
 
-        const encrypted = await crypto.subtle.encrypt(
-          { name: 'AES-GCM', iv },
-          key,
-          enc.encode(plainText)
+        const pubB64 = DB_CONFIG.rsaPublicKey;
+        const pubDer = Uint8Array.from(atob(pubB64), c => c.charCodeAt(0));
+        const rsaKey = await crypto.subtle.importKey(
+          'spki',
+          pubDer.buffer,
+          { name: 'RSA-OAEP', hash: 'SHA-1' },
+          false,
+          ['encrypt']
         );
 
-        const saltB64 = btoa(String.fromCharCode(...salt));
-        const ivB64 = btoa(String.fromCharCode(...iv));
-        const dataB64 = btoa(String.fromCharCode(...new Uint8Array(encrypted)));
+        const aesKey = await crypto.subtle.generateKey(
+          { name: 'AES-GCM', length: 256 },
+          true,
+          ['encrypt']
+        );
+        const rawAesKey = await crypto.subtle.exportKey('raw', aesKey);
 
-        return `MAXENC1:${saltB64}:${ivB64}:${dataB64}`;
+        const encAesKeyBuf = await crypto.subtle.encrypt(
+          { name: 'RSA-OAEP' },
+          rsaKey,
+          rawAesKey
+        );
+
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+        const encryptedBuf = await crypto.subtle.encrypt(
+          { name: 'AES-GCM', iv: iv },
+          aesKey,
+          payloadBytes
+        );
+
+        const totalLen = encAesKeyBuf.byteLength + iv.byteLength + encryptedBuf.byteLength;
+        const combined = new Uint8Array(totalLen);
+        combined.set(new Uint8Array(encAesKeyBuf), 0);
+        combined.set(iv, encAesKeyBuf.byteLength);
+        combined.set(new Uint8Array(encryptedBuf), encAesKeyBuf.byteLength + iv.byteLength);
+
+        let binary = '';
+        const len = combined.byteLength;
+        for (let i = 0; i < len; i++) {
+          binary += String.fromCharCode(combined[i]);
+        }
+        return 'MAXASYM1:' + btoa(binary);
       } catch (err) {
         return 'PLAIN:' + btoa(unescape(encodeURIComponent(plainText)));
       }
     },
 
-    async decrypt(cipherStr, secret = DB_CONFIG.masterSecret) {
+    async decrypt(cipherStr) {
       if (!cipherStr) return null;
       if (cipherStr.startsWith('PLAIN:')) {
         try {
@@ -156,25 +176,7 @@
           return null;
         }
       }
-      if (!cipherStr.startsWith('MAXENC1:')) return null;
-      try {
-        const parts = cipherStr.split(':');
-        if (parts.length < 4) return null;
-
-        const salt = Uint8Array.from(atob(parts[1]), c => c.charCodeAt(0));
-        const iv = Uint8Array.from(atob(parts[2]), c => c.charCodeAt(0));
-        const data = Uint8Array.from(atob(parts[3]), c => c.charCodeAt(0));
-
-        const key = await this.deriveKey(secret, salt);
-        const decrypted = await crypto.subtle.decrypt(
-          { name: 'AES-GCM', iv },
-          key,
-          data
-        );
-        return new TextDecoder().decode(decrypted);
-      } catch (e) {
-        return null;
-      }
+      return null;
     }
   };
 

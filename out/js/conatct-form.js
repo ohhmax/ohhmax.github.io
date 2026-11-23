@@ -36,9 +36,7 @@
 const GOOGLE_PIPELINE_CONFIG = {
   formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSd3Wx27Aw9308pzORR2FZ_e6VKd--hs8gDbhlxMNIV-TNtyAA/formResponse',
   fieldEntry: 'entry.132983276',
-  masterSecret: 'MaxPortfolio2026_ClientEncryptionKey_9824584454_01',
-  clientEncryptionKey: 'MaxPortfolio2026_ClientEncryptionKey_9824584454_01',
-  masterDecryptionKey: 'MaxPortfolio2026_MasterDecryptionKey_9824584454_02'
+  rsaPublicKey: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAp4egtdSXRoqStXrL/n0xfaNOFDblXNAY/87Q3tSBzJZrhywNdjoTYT73ubP+BWzVww233/keL2It7dZDmjT/z6iWCD3pCcP7W8tIjQRCHRYDK2I0srjFL2kL4/cEMs8OkqqJeAUgGqt7MJ3J3PcExWvwivfdUMDf8M5MR2roCAoJZzXF2YiTPdgJJHc1cTLr/3682bpi4Mwl3PeC6VmmkAfAF2jKlfbDMOyEHflZMyCwtiKJN3dkMuuAwCtQwh5vVsGN/YIu7OrhhRtzLRMsn9HF2PebzSZIm8a69sZnm44dxLMguCq0JSl3M3n6GQlDFf1Y+3RRZLCP4XhpWxbYswIDAQAB'
 };
 
 function triggerHaptic(pattern = [10]) {
@@ -459,36 +457,53 @@ async function encryptAndCompressPayload(dataObj) {
       compressedBytes = enc.encode(jsonStr);
     }
 
-    // 2. Symmetric AES-256-GCM using 50-character Client Encryption Key
-    const keyBytes = await crypto.subtle.digest(
-      'SHA-256',
-      enc.encode(GOOGLE_PIPELINE_CONFIG.clientEncryptionKey)
-    );
-    const cryptoKey = await crypto.subtle.importKey(
-      'raw',
-      keyBytes,
-      { name: 'AES-GCM' },
+    // 2. Import Asymmetric RSA-OAEP Public Key (SPKI)
+    const pubB64 = GOOGLE_PIPELINE_CONFIG.rsaPublicKey;
+    const pubDer = Uint8Array.from(atob(pubB64), c => c.charCodeAt(0));
+    const rsaKey = await crypto.subtle.importKey(
+      'spki',
+      pubDer.buffer,
+      { name: 'RSA-OAEP', hash: 'SHA-1' },
       false,
       ['encrypt']
     );
 
+    // 3. Generate Ephemeral Symmetric AES-256-GCM Key
+    const aesKey = await crypto.subtle.generateKey(
+      { name: 'AES-GCM', length: 256 },
+      true,
+      ['encrypt']
+    );
+    const rawAesKey = await crypto.subtle.exportKey('raw', aesKey);
+
+    // 4. Encrypt Ephemeral AES Key with RSA-OAEP (Produces 256-byte ciphertext)
+    const encAesKeyBuf = await crypto.subtle.encrypt(
+      { name: 'RSA-OAEP' },
+      rsaKey,
+      rawAesKey
+    );
+
+    // 5. Encrypt Compressed Payload with Ephemeral AES-GCM
     const iv = crypto.getRandomValues(new Uint8Array(12));
     const encryptedBuf = await crypto.subtle.encrypt(
       { name: 'AES-GCM', iv: iv },
-      cryptoKey,
+      aesKey,
       compressedBytes
     );
 
-    const combined = new Uint8Array(iv.length + encryptedBuf.byteLength);
-    combined.set(iv, 0);
-    combined.set(new Uint8Array(encryptedBuf), iv.length);
+    // 6. Pack: EncryptedAesKey (256B) + IV (12B) + EncryptedDataWithTag
+    const totalLen = encAesKeyBuf.byteLength + iv.byteLength + encryptedBuf.byteLength;
+    const combined = new Uint8Array(totalLen);
+    combined.set(new Uint8Array(encAesKeyBuf), 0);
+    combined.set(iv, encAesKeyBuf.byteLength);
+    combined.set(new Uint8Array(encryptedBuf), encAesKeyBuf.byteLength + iv.byteLength);
 
     let binary = '';
     const len = combined.byteLength;
     for (let i = 0; i < len; i++) {
       binary += String.fromCharCode(combined[i]);
     }
-    return 'MAXENC1:' + btoa(binary);
+    return 'MAXASYM1:' + btoa(binary);
   } catch (err) {
     console.warn('[CryptoEngine] WebCrypto encryption notice:', err);
     return null;
