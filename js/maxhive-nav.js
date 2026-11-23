@@ -1837,91 +1837,6 @@
       });
     }
 
-    // Telemetry Popup Modal Handlers
-    function openTelemetryModal() {
-      const modal = document.getElementById('telemetryModal');
-      if (!modal) return;
-
-      const uidEl = document.getElementById('telemetryModalUid');
-      const countEl = document.getElementById('telemetryModalVisitCount');
-      const statusEl = document.getElementById('telemetryModalVisitStatus');
-      const numEl = document.getElementById('telemetryModalVisitorNum');
-      const locEl = document.getElementById('telemetryModalLocation');
-      const devEl = document.getElementById('telemetryModalDevice');
-      const expEl = document.getElementById('telemetryModalExplored');
-
-      const vId = localStorage.getItem('max_uid') || localStorage.getItem('max_visitor_id') || 'UID_CFAC66440A';
-      const vCount = parseInt(localStorage.getItem('max_visit_count') || '1', 10);
-      const vNumber = localStorage.getItem('max_assigned_visitor_num') || '#1114';
-
-      let country = 'India';
-      let city = 'Gujarat';
-      try {
-        const cached = JSON.parse(sessionStorage.getItem('max_cached_telemetry') || '{}');
-        country = cached.country || localStorage.getItem('max_geo_country') || 'India';
-        city = cached.city || localStorage.getItem('max_geo_city') || '';
-      } catch (e) {}
-
-      let explored = [];
-      try {
-        explored = JSON.parse(localStorage.getItem('max_explored_sections') || '[]');
-      } catch (e) {}
-      if (explored.length === 0) explored = ['About'];
-
-      if (uidEl) uidEl.textContent = vId;
-      if (countEl) countEl.textContent = `Visit #${vCount}`;
-      if (statusEl) statusEl.textContent = vCount === 1 ? 'First-time visitor (Welcome!)' : `Returning explorer (${vCount} visits)`;
-      if (numEl) numEl.textContent = vNumber;
-      if (locEl) locEl.textContent = city ? `${city}, ${country}` : country;
-
-      let dev = 'Desktop Browser';
-      if (/Android/i.test(navigator.userAgent)) dev = 'Android Mobile';
-      else if (/iPhone|iPad/i.test(navigator.userAgent)) dev = 'Apple iOS Device';
-      else if (/Linux/i.test(navigator.userAgent)) dev = 'Linux Workstation';
-      else if (/Windows/i.test(navigator.userAgent)) dev = 'Windows PC';
-      else if (/Macintosh/i.test(navigator.userAgent)) dev = 'macOS Desktop';
-      if (devEl) devEl.textContent = dev;
-
-      if (expEl) expEl.textContent = explored.join(', ');
-
-      modal.style.display = 'flex';
-      modal.setAttribute('aria-hidden', 'false');
-      setTimeout(() => {
-        modal.classList.add('active');
-      }, 10);
-    }
-
-    function closeTelemetryModal() {
-      const modal = document.getElementById('telemetryModal');
-      if (!modal) return;
-      modal.classList.remove('active');
-      modal.setAttribute('aria-hidden', 'true');
-      setTimeout(() => {
-        modal.style.display = 'none';
-      }, 250);
-    }
-
-    const telemetryCloseBtn = document.getElementById('telemetryCloseBtn');
-    const telemetryGotItBtn = document.getElementById('telemetryGotItBtn');
-    const telemetryBackdrop = document.getElementById('telemetryBackdrop');
-    const telemetryCopyUidBtn = document.getElementById('telemetryCopyUidBtn');
-
-    telemetryCloseBtn?.addEventListener('click', closeTelemetryModal);
-    telemetryGotItBtn?.addEventListener('click', closeTelemetryModal);
-    telemetryBackdrop?.addEventListener('click', closeTelemetryModal);
-
-    telemetryCopyUidBtn?.addEventListener('click', () => {
-      const uidEl = document.getElementById('telemetryModalUid');
-      if (uidEl && navigator.clipboard) {
-        navigator.clipboard.writeText(uidEl.textContent).then(() => {
-          telemetryCopyUidBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
-          setTimeout(() => {
-            telemetryCopyUidBtn.innerHTML = '<i class="fa-regular fa-copy"></i>';
-          }, 2000);
-        }).catch(() => {});
-      }
-    });
-
     // Toast helper for floating feedback
     function showShareToast(shareUrl, uid) {
       let toast = document.getElementById('maxhiveShareToast');
@@ -2061,18 +1976,6 @@
 
     // Run initial sync on load
     syncShareSectionUrls();
-
-    // Telemetry Quick Action (Opens Telemetry Popup Modal)
-    const telemetryBtn = document.querySelector('[data-drawer-action="telemetry"]');
-    if (telemetryBtn) {
-      telemetryBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        toggleDrawer(false);
-        setTimeout(() => {
-          openTelemetryModal();
-        }, 120);
-      });
-    }
 
     // Direct Feedback Quick Action (Telegram @the_max_lab)
     const feedbackBtn = document.querySelector('[data-drawer-action="feedback"]');
