@@ -207,7 +207,41 @@
   // ==========================================================================
   // INITIALIZATION
   // ==========================================================================
+  // Cross-Domain Canonical Shield & Mirror Index Protection
+  function setupMirrorCanonicalShield() {
+    if (typeof window === 'undefined' || !window.location) return;
+    const hostname = (window.location.hostname || '').toLowerCase();
+    const isMirror = hostname.includes('gitlab.io') ||
+                     hostname.includes('codeberg.page') ||
+                     hostname.includes('codeberg.io') ||
+                     (hostname !== 'ohhmax.github.io' && !hostname.includes('localhost') && hostname !== '127.0.0.1');
+
+    // Guarantee canonical link strictly points to primary authority domain https://ohhmax.github.io
+    let canEl = document.querySelector('link[rel="canonical"]');
+    if (!canEl) {
+      canEl = document.createElement('link');
+      canEl.setAttribute('rel', 'canonical');
+      document.head.appendChild(canEl);
+    }
+    const path = (window.location.pathname || '/').replace(/^\/pages\/?/, '/');
+    const cleanPath = (path === '' || path === '/index.html' || path === '/index') ? '/' : path;
+    const canonicalBase = 'https://ohhmax.github.io' + (cleanPath.startsWith('/') ? cleanPath : '/' + cleanPath);
+    canEl.setAttribute('href', canonicalBase);
+
+    // On mirror instances, actively protect main site indexing by telling search crawlers not to index mirror copies
+    if (isMirror) {
+      let robMeta = document.querySelector('meta[name="robots"]');
+      if (!robMeta) {
+        robMeta = document.createElement('meta');
+        robMeta.setAttribute('name', 'robots');
+        document.head.appendChild(robMeta);
+      }
+      robMeta.setAttribute('content', 'noindex, follow');
+    }
+  }
+
   function initMaxHiveNav() {
+    setupMirrorCanonicalShield();
     mascotBtn = document.getElementById('maxhiveMascotBtn');
     robotHead = document.getElementById('maxhiveRobotHead');
     if (typeof renderRobotPro === 'function') renderRobotPro('happy');
@@ -2094,15 +2128,26 @@
         if (el && val) el.setAttribute(attr, val);
       };
 
+      const canonicalTarget = (seo && seo.url && seo.url.startsWith('https://ohhmax.github.io'))
+        ? seo.url
+        : ('https://ohhmax.github.io/' + (normalizedPage === 'about' ? '' : normalizedPage + '/'));
+
       setMeta('meta[name="description"]', 'content', seo.desc);
       setMeta('meta[property="og:title"]', 'content', seo.title);
       setMeta('meta[property="og:description"]', 'content', seo.desc);
       setMeta('meta[property="og:image"]', 'content', seo.image);
-      setMeta('meta[property="og:url"]', 'content', seo.url || window.location.href);
+      setMeta('meta[property="og:url"]', 'content', canonicalTarget);
       setMeta('meta[name="twitter:title"]', 'content', seo.title);
       setMeta('meta[name="twitter:description"]', 'content', seo.desc);
       setMeta('meta[name="twitter:image"]', 'content', seo.twitterImage || seo.image);
-      setMeta('link[rel="canonical"]', 'href', seo.url || 'https://ohhmax.github.io/');
+
+      let canEl = document.querySelector('link[rel="canonical"]');
+      if (!canEl) {
+        canEl = document.createElement('link');
+        canEl.setAttribute('rel', 'canonical');
+        document.head.appendChild(canEl);
+      }
+      canEl.setAttribute('href', canonicalTarget);
     }
   }
 

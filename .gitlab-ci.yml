@@ -7,6 +7,12 @@ pages:
   script:
     - mkdir -p .public
     - cp -r * .public/ 2>/dev/null || true
+    - |
+      find .public -type f -name "*.html" | while read -r f; do
+        sed -i 's/<meta name="robots" content="[^"]*"/<meta name="robots" content="noindex, follow"/g' "$f"
+      done
+      printf "# GitLab Mirror Shield - Canonical: https://ohhmax.github.io\nUser-agent: *\nAllow: /\n\nSitemap: https://ohhmax.github.io/sitemap.xml\n" > .public/robots.txt
+      printf "/*\n  X-Robots-Tag: noindex, follow\n" > .public/_headers
     - mv .public public
   artifacts:
     paths:

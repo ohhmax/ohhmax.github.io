@@ -64,6 +64,12 @@ jobs:
             --exclude='assets/img/gallery/Reel/*.mp4' \
             ./ /tmp/codeberg-pages/
 
+          # Enforce mirror protection: ensure canonical points to https://ohhmax.github.io and instruct crawlers not to index mirror
+          find /tmp/codeberg-pages -type f -name "*.html" | while read -r f; do
+            sed -i 's/<meta name="robots" content="[^"]*"/<meta name="robots" content="noindex, follow"/g' "$f"
+          done
+          printf "# Codeberg Mirror Shield - Canonical: https://ohhmax.github.io\nUser-agent: *\nAllow: /\n\nSitemap: https://ohhmax.github.io/sitemap.xml\n" > /tmp/codeberg-pages/robots.txt
+
           PAGES_SIZE=$(du -sh /tmp/codeberg-pages | awk '{print $1}')
           echo "Prepared Codeberg Pages distribution size: $PAGES_SIZE"
 
