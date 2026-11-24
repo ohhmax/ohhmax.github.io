@@ -21,12 +21,16 @@
 'use strict';
 
 // ============================================================================
-// BACKEND CONFIGURATION
-// Add your custom backend API endpoint URL here (e.g., 'https://api.yourdomain.com/contact')
-// When set, form submissions will be POSTed directly to this endpoint with FormData.
-// If empty, the form will display the success screen locally.
+// CLOUDFLARE WORKER BACKEND CONFIGURATION
+// Relays contact inquiries and visit alerts directly to Telegram group
 // ============================================================================
-const BACKEND_API_ENDPOINT = '';
+const BACKEND_API_ENDPOINT = (typeof window !== 'undefined' && window.PORTFOLIO_BACKEND_URL)
+  ? window.PORTFOLIO_BACKEND_URL
+  : 'https://portfolio-backend.ohmax.workers.dev/api/contact';
+
+const VISIT_API_ENDPOINT = (typeof window !== 'undefined' && window.PORTFOLIO_VISIT_URL)
+  ? window.PORTFOLIO_VISIT_URL
+  : 'https://portfolio-backend.ohmax.workers.dev/api/visit';
 
 // Attachment limits
 const MAX_ATTACHMENTS = 5;
@@ -302,6 +306,27 @@ function handleSendAnotherMessage() {
   }
 }
 
+/**
+ * Asynchronously pings Cloudflare Worker backend to deliver live visit notification to Telegram
+ */
+function pingVisitBeacon() {
+  if (!VISIT_API_ENDPOINT) return;
+  try {
+    const payload = {
+      referrer: document.referrer || 'Direct',
+      path: window.location.pathname + window.location.hash,
+      screen: `${window.screen.width}x${window.screen.height}`,
+      timestamp: Date.now()
+    };
+    fetch(VISIT_API_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      mode: 'cors'
+    }).catch(() => {});
+  } catch (e) {}
+}
+
 // Initialize on DOM Ready
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('contactForm') || document.querySelector('[data-form]');
@@ -315,4 +340,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   initAttachmentPicker();
+  pingVisitBeacon();
 });

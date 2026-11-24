@@ -8,12 +8,20 @@ on:
     paths-ignore:
       - 'portfolio-monitor/**'
       - 'android/**'
+      - 'backend/**'
       - '.github/workflows/android-build.yml'
+      - '.github/workflows/deploy-backend.yml'
+      - '.github/workflows/mirror-gitlab.yml'
+      - '.github/workflows/mirror-codeberg.yml'
   pull_request:
     paths-ignore:
       - 'portfolio-monitor/**'
       - 'android/**'
+      - 'backend/**'
       - '.github/workflows/android-build.yml'
+      - '.github/workflows/deploy-backend.yml'
+      - '.github/workflows/mirror-gitlab.yml'
+      - '.github/workflows/mirror-codeberg.yml'
   workflow_dispatch:
 
 jobs:

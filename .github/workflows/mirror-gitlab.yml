@@ -1,0 +1,35 @@
+name: Mirror to GitLab
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '.github/workflows/android-build.yml'
+      - '.github/workflows/deploy-backend.yml'
+  workflow_dispatch:
+
+jobs:
+  mirror-gitlab:
+    name: Sync Repository to GitLab Pages
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Complete History
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to GitLab Repository
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+        run: |
+          if [ -z "$GITLAB_TOKEN" ]; then
+            echo "Error: GITLAB_TOKEN secret is not configured."
+            exit 1
+          fi
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote add gitlab "https://oauth2:${GITLAB_TOKEN}@gitlab.com/ohhmax/ohhmax.gitlab.io.git"
+          git push --force gitlab main:main
+          echo "Successfully mirrored repository to GitLab (https://gitlab.com/ohhmax/ohhmax.gitlab.io)."

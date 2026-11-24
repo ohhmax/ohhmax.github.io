@@ -1,84 +1,16 @@
-# Mahendra Mali (Max) - Official Portfolio & Systems Hub
+# Portfolio Mirror Status Monitor
 
-[![Website](https://img.shields.io/badge/Portfolio-ohhmax.github.io-00f2fe?style=for-the-badge&logo=googlechrome&logoColor=white)](https://ohhmax.github.io)
-[![Telegram](https://img.shields.io/badge/Telegram-@mahendraplus-0088cc?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/mahendraplus)
-[![Status](https://img.shields.io/badge/Status-100%25%20Standalone%20&%20Offline--Ready-success?style=for-the-badge)](https://ohhmax.github.io)
+Live mirror monitor for Mahendra Mali (Max) developer portfolio across distributed platforms.
 
-Welcome to the official developer portfolio of Mahendra Mali (Max). Engineered for high performance, self-reliance, and universal discovery across modern search engines and AI assistants (Google, Bing AI, ChatGPT, Perplexity, Claude, Gemini).
+| Provider | Endpoint URL | Status | Sync Mechanism |
+|---|---|---|---|
+| GitHub Pages | [https://ohhmax.github.io](https://ohhmax.github.io) | Live | Primary Source Branch |
+| GitLab Pages | [https://ohhmax.gitlab.io](https://ohhmax.gitlab.io) | Live | Automated CI/CD Mirror |
+| Codeberg Pages | [https://ohhmax.codeberg.page/](https://ohhmax.codeberg.page/) | Live | Automated CI/CD Mirror |
 
----
+## Mirror Architecture
 
-## Key Architecture & Features
-
-### 1. MaxHive Robotic Mascot & Glass Dock Bottom Navigation
-- Robotic Mascot Eye:
-  - Live cursor and touch tracking with smooth spring mathematics.
-  - Realistic eye blinking engine with random double-blinks.
-  - Interactive emotion cycles: Neutral, Happy smile, Love hearts, Wink, and Searching radar.
-  - Glowing red antenna and OLED visor screen with CRT scanlines.
-- Glassmorphism Floating Dock:
-  - Floating bottom navigation with active tab indicators and micro-haptic bounce.
-  - One-tap quick action drawer / bottom sheet containing user identity, direct links, and tools.
-  - Dual responsive sync between desktop glass navbar and mobile floating dock.
-
-### 2. 100% Standalone & Resilient Architecture
-- Zero External API Failures: Completely independent of external GitHub API requests.
-- Instant Project Catalog: 40+ curated engineering projects loaded from high-performance local database (projects-data.js & projects.json) with instant category filtering.
-- Offline-Ready Fallbacks: Testimonials, blogs, and cryptographic secret messaging run seamlessly whether online, offline, or viewed locally via file://.
-
-### 3. SEO & Universal AI Indexation
-- Semantic HTML5 with high accessibility standards.
-- Schema.org JSON-LD Graph: Full Person, WebSite, ProfilePage, and ItemList entity graph for immediate entity recognition by Google, Bing, Copilot, and Perplexity.
-- LLM Specifications: Includes standard llms.txt, llms-full.txt, and ai.txt files for AI search engine grounding.
-- Valid 2026 Sitemap & Robots.txt: Welcoming modern crawlers (Googlebot, Bingbot, GPTBot, ClaudeBot, PerplexityBot, Applebot).
-
----
-
-## Featured Innovations
-
-| Project | Tech Stack | Highlights |
-|---|---|---|
-| **[CellLock 5G](https://ohhmax.github.io/#projects)** | TypeScript, WebSockets, Python | Real-time cellular radio telemetry, tower lock, and RF signal diagnostics. |
-| **[AI Home Automation](https://ohhmax.github.io/#projects)** | C++, Arduino Mega, ESP8266 | 50-Relay industrial hardware controller with EEPROM power-cycle state preservation. |
-| **[MAXTER for Termux](https://ohhmax.github.io/#projects)** | Zsh, Shell, Termux API | High-productivity mobile developer terminal environment with Fish-style syntax highlighting. |
-| **[MaxFit Gym Platform](https://ohhmax.github.io/#projects)** | Kotlin, Android SDK, Firebase | Full-stack gym management app with member biometrics and attendance telemetry. |
-| **MaxQEMU** | QEMU, Alpine Linux, Termux | Ultra-lightweight Linux virtualization on Android with accelerated terminal & GUI. |
-| **Go Port Proxy** | Golang, Sockets, Concurrency | High-throughput concurrent reverse proxy and multiplexer for microsecond routing. |
-| **MdgWa LSPosed** | Java, Smali, ART Runtime | Low-level Android hooking module for dynamic method interception and privacy enforcement. |
-
----
-
-## Repository Structure
-
-```text
-MyPortfolio-2026/
-├── index.html                   # Main portfolio hub with MaxHive dock and media vault
-├── 404.html                     # Standalone redirect and error handler
-├── package.json                 # Project configuration and test scripts
-├── robots.txt                   # Search engine and AI crawler directives
-├── sitemap.xml                  # Canonical XML sitemap with image namespace
-├── llms.txt                     # Standard LLM context dossier
-├── ai.txt                       # Machine-readable AI manifest
-├── assets/                      # Media assets (images, icons, video, vendor fonts)
-│   ├── img/                     # Grouped gallery media, moments, and logos
-│   ├── video/                   # Video assets and previews
-│   └── vendor/                  # FontAwesome and Ionicons icon fonts
-├── css/                         # Modular stylesheets (style, gallery, maxhive-nav)
-├── js/                          # Frontend scripts (gallery, nav, moments, projects)
-├── pages/                       # Standalone documents (cv-resume-latest-info.html)
-├── components/                  # Reusable UI component blueprints (modals, dock)
-├── data/                        # Structured content (gallery-items.json, resume.json)
-├── docs/                        # Architecture documentation and gallery guides
-├── portfolio-monitor/           # Android companion app source and APK package
-└── tools/                       # Build automation, SEO verification, and test suites
-```
-
----
-
-## Contact & Connect
-
-- **Personal Telegram**: [@mahendraplus](https://t.me/mahendraplus)
-- **Email**: [mahendrakumargahelot@gmail.com](mailto:mahendrakumargahelot@gmail.com)
-- **Instagram**: [@m4u.xt](https://www.instagram.com/m4u.xt)
-- **Discord**: `@m4u.xt`
-- **Location**: Banaskantha, Gujarat, India
+All mirrors synchronize automatically on every commit to the main branch via dedicated GitHub Actions workflows:
+- Primary Host: GitHub Pages (ohhmax.github.io)
+- Redundant Mirror 1: GitLab Pages (ohhmax.gitlab.io)
+- Redundant Mirror 2: Codeberg Pages (ohhmax.codeberg.page)
