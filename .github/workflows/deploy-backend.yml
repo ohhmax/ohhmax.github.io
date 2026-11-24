@@ -29,6 +29,7 @@ jobs:
         working-directory: backend
         env:
           CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
@@ -39,11 +40,19 @@ jobs:
 
           export CLOUDFLARE_API_TOKEN="$CLOUDFLARE_TOKEN"
 
-          # Discover Cloudflare Account ID dynamically to avoid /memberships 10000 auth errors
-          ACCOUNT_ID=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_TOKEN" "https://api.cloudflare.com/client/v4/accounts" | jq -r '.result[0].id // empty')
-          if [ -n "$ACCOUNT_ID" ] && [ "$ACCOUNT_ID" != "null" ]; then
-            echo "Cloudflare Account ID discovered: ${ACCOUNT_ID:0:6}***"
-            export CLOUDFLARE_ACCOUNT_ID="$ACCOUNT_ID"
+          # 1. Check if user configured CLOUDFLARE_ACCOUNT_ID secret
+          if [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            export CLOUDFLARE_ACCOUNT_ID="$CLOUDFLARE_ACCOUNT_ID"
+            echo "Using configured Cloudflare Account ID: ${CLOUDFLARE_ACCOUNT_ID:0:6}***"
+          else
+            # 2. Attempt dynamic discovery from Cloudflare API
+            ACCOUNT_ID=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_TOKEN" "https://api.cloudflare.com/client/v4/accounts" | jq -r '.result[0].id // empty')
+            if [ -n "$ACCOUNT_ID" ] && [ "$ACCOUNT_ID" != "null" ]; then
+              echo "Cloudflare Account ID discovered from API: ${ACCOUNT_ID:0:6}***"
+              export CLOUDFLARE_ACCOUNT_ID="$ACCOUNT_ID"
+            else
+              echo "Note: If deployment fails with code 10000, please add CLOUDFLARE_ACCOUNT_ID to GitHub Secrets (found in Cloudflare Dashboard -> Workers & Pages right sidebar)."
+            fi
           fi
 
           # Deploy worker with environment variables injected securely
