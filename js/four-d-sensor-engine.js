@@ -207,27 +207,23 @@
   }
 
   /**
-   * Reset all CSS Variables to Neutral Defaults
+   * Reset all Mascot CSS Variables to Neutral Defaults
    */
   function resetVariables() {
-    if (!rootEl) return;
-    rootEl.style.setProperty('--sensor-card-rx', '0deg');
-    rootEl.style.setProperty('--sensor-card-ry', '0deg');
-    rootEl.style.setProperty('--sensor-sheen-x', '50%');
-    rootEl.style.setProperty('--sensor-sheen-y', '50%');
-    rootEl.style.setProperty('--sensor-sheen-opacity', '0');
-    rootEl.style.setProperty('--bg-dot-offset-x', '0px');
-    rootEl.style.setProperty('--bg-dot-offset-y', '0px');
-    rootEl.style.setProperty('--sensor-panda-rx', '0deg');
-    rootEl.style.setProperty('--sensor-panda-ry', '0deg');
-    rootEl.style.setProperty('--sensor-panda-rz', '0deg');
-    rootEl.style.setProperty('--sensor-panda-ty', '0px');
-    rootEl.style.setProperty('--sensor-ear-left-rot', '0deg');
-    rootEl.style.setProperty('--sensor-ear-left-ty', '0px');
-    rootEl.style.setProperty('--sensor-ear-right-rot', '0deg');
-    rootEl.style.setProperty('--sensor-ear-right-ty', '0px');
-    rootEl.style.setProperty('--sensor-pupil-x', '0px');
-    rootEl.style.setProperty('--sensor-pupil-y', '0px');
+    if (!pandaHeadEl) {
+      pandaHeadEl = document.getElementById('maxhiveRobotHead') || document.querySelector('.maxhive-robot-head');
+    }
+    if (!pandaHeadEl) return;
+    pandaHeadEl.style.setProperty('--sensor-panda-rx', '0deg');
+    pandaHeadEl.style.setProperty('--sensor-panda-ry', '0deg');
+    pandaHeadEl.style.setProperty('--sensor-panda-rz', '0deg');
+    pandaHeadEl.style.setProperty('--sensor-panda-ty', '0px');
+    pandaHeadEl.style.setProperty('--sensor-ear-left-rot', '0deg');
+    pandaHeadEl.style.setProperty('--sensor-ear-left-ty', '0px');
+    pandaHeadEl.style.setProperty('--sensor-ear-right-rot', '0deg');
+    pandaHeadEl.style.setProperty('--sensor-ear-right-ty', '0px');
+    pandaHeadEl.style.setProperty('--sensor-pupil-x', '0px');
+    pandaHeadEl.style.setProperty('--sensor-pupil-y', '0px');
   }
 
   /**
@@ -377,11 +373,7 @@
    * Dynamically Adjust Light Reflections based on Ambient Lux
    */
   function applyAmbientLightLevel(lux) {
-    if (!rootEl) return;
-    // Dim ambient (< 20 lux): softer specular, warmer glow
-    // Bright ambient (> 1000 lux): crisp specular highlight
-    const opacity = lux < 25 ? 0.45 : (lux > 800 ? 0.95 : 0.75);
-    rootEl.style.setProperty('--sensor-sheen-opacity', opacity.toString());
+    // Sheen reflection handled purely without global style invalidation
   }
 
   /**
@@ -465,41 +457,28 @@
 
   /**
    * Core 4D Physics Render Frame
+   * Scoped strictly to Mascot Robot element to eliminate global DOM style recalcs
    */
   function renderFrameValues() {
-    if (!rootEl) return;
+    if (!pandaHeadEl) {
+      pandaHeadEl = document.getElementById('maxhiveRobotHead') || document.querySelector('.maxhive-robot-head');
+    }
+    if (!pandaHeadEl) return;
 
     const normPitch = state.smoothedPitch / 45; // [-1, 1]
     const normRoll = state.smoothedRoll / 45;   // [-1, 1]
 
-    // 1. 3D Card Perspective Tilt
-    const cardRx = (-normPitch * CONFIG.maxCardTiltDeg).toFixed(2);
-    const cardRy = (normRoll * CONFIG.maxCardTiltDeg).toFixed(2);
-    rootEl.style.setProperty('--sensor-card-rx', `${cardRx}deg`);
-    rootEl.style.setProperty('--sensor-card-ry', `${cardRy}deg`);
-
-    // 2. Dynamic Specular Light Sheen Reflection
-    const sheenX = ((normRoll + 1) * 50).toFixed(1);
-    const sheenY = ((normPitch + 1) * 50).toFixed(1);
-    rootEl.style.setProperty('--sensor-sheen-x', `${sheenX}%`);
-    rootEl.style.setProperty('--sensor-sheen-y', `${sheenY}%`);
-
-    // 3. Background Dot Matrix (Kept 100% static - zero motion on gravity/mouse)
-    rootEl.style.setProperty('--bg-dot-offset-x', '0px');
-    rootEl.style.setProperty('--bg-dot-offset-y', '0px');
-
-    // 4. Cyber Panda Mascot Inertial Reactivity
+    // 1. Cyber Mascot Inertial Reactivity (Scoped to Robot Head)
     const pandaRx = (-normPitch * (CONFIG.maxPandaTiltDeg * 0.7)).toFixed(2);
     const pandaRy = (normRoll * CONFIG.maxPandaTiltDeg).toFixed(2);
     const pandaRz = (normRoll * 4.5).toFixed(2);
     const pandaTy = (normPitch * 2.2).toFixed(2);
-    rootEl.style.setProperty('--sensor-panda-rx', `${pandaRx}deg`);
-    rootEl.style.setProperty('--sensor-panda-ry', `${pandaRy}deg`);
-    rootEl.style.setProperty('--sensor-panda-rz', `${pandaRz}deg`);
-    rootEl.style.setProperty('--sensor-panda-ty', `${pandaTy}px`);
+    pandaHeadEl.style.setProperty('--sensor-panda-rx', `${pandaRx}deg`);
+    pandaHeadEl.style.setProperty('--sensor-panda-ry', `${pandaRy}deg`);
+    pandaHeadEl.style.setProperty('--sensor-panda-rz', `${pandaRz}deg`);
+    pandaHeadEl.style.setProperty('--sensor-panda-ty', `${pandaTy}px`);
 
-    // 5. Ear Physics with Spring Lag Simulation
-    // Left ear compresses on left roll, right ear perks up alertly
+    // 2. Ear Physics with Spring Lag Simulation
     const targetLeftEarRot = -normRoll * 14;
     const targetRightEarRot = -normRoll * 14;
 
@@ -511,16 +490,16 @@
     state.earRightVelocity = (state.earRightVelocity + earForceR) * 0.72;
     state.earRightRot += state.earRightVelocity;
 
-    rootEl.style.setProperty('--sensor-ear-left-rot', `${state.earLeftRot.toFixed(2)}deg`);
-    rootEl.style.setProperty('--sensor-ear-left-ty', `${(-normRoll * 2.5).toFixed(2)}px`);
-    rootEl.style.setProperty('--sensor-ear-right-rot', `${state.earRightRot.toFixed(2)}deg`);
-    rootEl.style.setProperty('--sensor-ear-right-ty', `${(normRoll * 2.5).toFixed(2)}px`);
+    pandaHeadEl.style.setProperty('--sensor-ear-left-rot', `${state.earLeftRot.toFixed(2)}deg`);
+    pandaHeadEl.style.setProperty('--sensor-ear-left-ty', `${(-normRoll * 2.5).toFixed(2)}px`);
+    pandaHeadEl.style.setProperty('--sensor-ear-right-rot', `${state.earRightRot.toFixed(2)}deg`);
+    pandaHeadEl.style.setProperty('--sensor-ear-right-ty', `${(normRoll * 2.5).toFixed(2)}px`);
 
-    // 6. Cyber Panda Pupil Gaze Orientation Tracking
+    // 3. Cyber Mascot Pupil Gaze Orientation Tracking
     const pupilX = (normRoll * CONFIG.maxPandaPupilPx).toFixed(2);
     const pupilY = (normPitch * (CONFIG.maxPandaPupilPx * 0.7)).toFixed(2);
-    rootEl.style.setProperty('--sensor-pupil-x', `${pupilX}px`);
-    rootEl.style.setProperty('--sensor-pupil-y', `${pupilY}px`);
+    pandaHeadEl.style.setProperty('--sensor-pupil-x', `${pupilX}px`);
+    pandaHeadEl.style.setProperty('--sensor-pupil-y', `${pupilY}px`);
   }
 
   /**

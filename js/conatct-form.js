@@ -32,6 +32,10 @@ const VISIT_API_ENDPOINT = (typeof window !== 'undefined' && window.PORTFOLIO_VI
   ? window.PORTFOLIO_VISIT_URL
   : 'https://api.ohhmax.workers.dev/api/visit';
 
+const VISIT_COUNT_API_ENDPOINT = (typeof window !== 'undefined' && window.PORTFOLIO_VISIT_COUNT_URL)
+  ? window.PORTFOLIO_VISIT_COUNT_URL
+  : 'https://api.ohhmax.workers.dev/api/visit-count';
+
 // Attachment limits
 const MAX_ATTACHMENTS = 5;
 const MAX_FILE_SIZE_BYTES = 45 * 1024 * 1024; // 45 MB per file
@@ -307,22 +311,75 @@ function handleSendAnotherMessage() {
 }
 
 /**
+ * Formats unique visitor counter for display (accurate number matching data/visitor_analytics.json)
+ */
+function formatVisitorDisplay(count) {
+  const num = parseInt(count, 10);
+  if (isNaN(num)) return '1,000';
+  return num.toLocaleString();
+}
+
+/**
+ * Initializes and updates the Total Unique Visitors counter in Share section
+ */
+async function initShareVisitorCounter() {
+  const countEl = document.getElementById('shareVisitorCount');
+  if (!countEl) return;
+
+  const cached = localStorage.getItem('portfolio_unique_visitors') || '1000';
+  countEl.textContent = formatVisitorDisplay(cached);
+
+  try {
+    const res = await fetch(VISIT_COUNT_API_ENDPOINT, { mode: 'cors' });
+    if (res.ok) {
+      const data = await res.json();
+      if (data && typeof data.count === 'number') {
+        localStorage.setItem('portfolio_unique_visitors', String(data.count));
+        countEl.textContent = formatVisitorDisplay(data.count);
+      }
+    }
+  } catch (e) {}
+}
+
+/**
  * Asynchronously pings Cloudflare Worker backend to deliver live visit notification to Telegram
+ * strictly throttled per browser session and 30-minute cooldown to prevent spam on page refreshes
  */
 function pingVisitBeacon() {
   if (!VISIT_API_ENDPOINT) return;
   try {
+    const now = Date.now();
+    const sessionVisited = sessionStorage.getItem('portfolio_visited_session');
+    const lastVisitTs = parseInt(localStorage.getItem('portfolio_last_visit_ts') || '0', 10);
+    const THIRTY_MINUTES = 30 * 60 * 1000;
+
+    // Do not dispatch beacon if already sent in this browser session or within 30 min cooldown
+    if (sessionVisited || (now - lastVisitTs < THIRTY_MINUTES)) {
+      initShareVisitorCounter();
+      return;
+    }
+
+    sessionStorage.setItem('portfolio_visited_session', 'true');
+    localStorage.setItem('portfolio_last_visit_ts', String(now));
+
     const payload = {
       referrer: document.referrer || 'Direct',
       path: window.location.pathname + window.location.hash,
       screen: `${window.screen.width}x${window.screen.height}`,
-      timestamp: Date.now()
+      timestamp: now
     };
+
     fetch(VISIT_API_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
       mode: 'cors'
+    }).then(res => res.json()).then(data => {
+      if (data && data.count) {
+        localStorage.setItem('portfolio_unique_visitors', String(data.count));
+        const countEl = document.getElementById('shareVisitorCount');
+        if (countEl) countEl.textContent = formatVisitorDisplay(data.count);
+      }
     }).catch(() => {});
   } catch (e) {}
 }
@@ -341,4 +398,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initAttachmentPicker();
   pingVisitBeacon();
+  initShareVisitorCounter();
 });

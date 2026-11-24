@@ -24,6 +24,11 @@ const CORS_HEADERS = {
   'Access-Control-Max-Age': '86400',
 };
 
+// In-memory unique visitor telemetry tracking and rate throttling (baseline matches data/visitor_analytics.json)
+let inMemoryVisitorCount = 1000;
+const recentVisits = new Map();
+const VISIT_THROTTLE_WINDOW_MS = 30 * 60 * 1000; // 30 minutes cooldown
+
 function jsonResponse(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
@@ -40,6 +45,35 @@ function escapeHtml(text) {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
+}
+
+function getFileBadge(fileName) {
+  const ext = (fileName.split('.').pop() || '').toLowerCase();
+  if (['png', 'jpg', 'jpeg', 'webp', 'gif', 'svg', 'bmp', 'avif'].includes(ext)) {
+    return { emoji: '🖼️', label: 'Image Attachment' };
+  }
+  if (['pdf'].includes(ext)) {
+    return { emoji: '📄', label: 'PDF Document' };
+  }
+  if (['zip', 'rar', '7z', 'tar', 'gz', 'bz2'].includes(ext)) {
+    return { emoji: '📦', label: 'Archive / Package' };
+  }
+  if (['doc', 'docx', 'odt', 'rtf', 'txt', 'md'].includes(ext)) {
+    return { emoji: '📝', label: 'Document / Text' };
+  }
+  if (['xls', 'xlsx', 'csv'].includes(ext)) {
+    return { emoji: '📊', label: 'Spreadsheet / Data' };
+  }
+  if (['js', 'ts', 'jsx', 'tsx', 'py', 'java', 'c', 'cpp', 'rs', 'go', 'html', 'css', 'json', 'yaml', 'yml', 'sh', 'sql', 'php'].includes(ext)) {
+    return { emoji: '💻', label: 'Source Code / Data' };
+  }
+  if (['mp4', 'mov', 'avi', 'mkv', 'webm'].includes(ext)) {
+    return { emoji: '🎬', label: 'Video File' };
+  }
+  if (['mp3', 'wav', 'ogg', 'm4a', 'flac'].includes(ext)) {
+    return { emoji: '🎵', label: 'Audio File' };
+  }
+  return { emoji: '📎', label: 'Attached File' };
 }
 
 async function sendTelegramMessage(botToken, chatId, htmlText) {
@@ -67,7 +101,7 @@ async function sendTelegramMessage(botToken, chatId, htmlText) {
   }
 }
 
-async function sendTelegramDocument(botToken, chatId, fileBlob, fileName, caption) {
+async function sendTelegramDocument(botToken, chatId, fileBlob, fileName, caption, replyToMessageId = null) {
   if (!botToken || !chatId) return { ok: false };
 
   const endpoint = `https://api.telegram.org/bot${botToken}/sendDocument`;
@@ -78,6 +112,9 @@ async function sendTelegramDocument(botToken, chatId, fileBlob, fileName, captio
     if (caption) {
       formData.append('caption', caption);
       formData.append('parse_mode', 'HTML');
+    }
+    if (replyToMessageId) {
+      formData.append('reply_to_message_id', String(replyToMessageId));
     }
 
     const res = await fetch(endpoint, {
@@ -114,11 +151,22 @@ export default {
           'https://ohhmax.gitlab.io',
           'https://ohhmax.codeberg.page'
         ],
+        uniqueVisitors: inMemoryVisitorCount,
         timestamp: new Date().toISOString()
       });
     }
 
-    // 3. Visitor Telemetry Ping (/api/visit or /visit)
+    // 3. Unique Visitor Counter Endpoint (/api/visit-count or /visit-count)
+    if ((path === '/api/visit-count' || path === '/visit-count') && request.method === 'GET') {
+      return jsonResponse({
+        success: true,
+        count: inMemoryVisitorCount,
+        baseline: 1000,
+        timestamp: Date.now()
+      });
+    }
+
+    // 4. Visitor Telemetry Ping (/api/visit or /visit)
     if ((path === '/api/visit' || path === '/visit') && request.method === 'POST') {
       try {
         let body = {};
@@ -138,7 +186,16 @@ export default {
         const pagePath = body.path || '/';
         const screen = body.screen || 'N/A';
 
-        const visitAlert = 
+        // Rate-limit check: Throttle repeated visits from the same IP (30 min window)
+        const now = Date.now();
+        const lastVisit = recentVisits.get(ip);
+        const isThrottled = Boolean(lastVisit && (now - lastVisit < VISIT_THROTTLE_WINDOW_MS));
+
+        if (!isThrottled) {
+          recentVisits.set(ip, now);
+          inMemoryVisitorCount++;
+
+          const visitAlert = 
 `<b>Portfolio Visitor Alert</b>
 
 <b>Location:</b> ${escapeHtml(city)}, ${escapeHtml(region ? region + ', ' : '')}${escapeHtml(country)}
@@ -150,15 +207,21 @@ export default {
 <b>Device:</b> <code>${escapeHtml(userAgent)}</code>
 <b>Time:</b> ${new Date().toUTCString()}`;
 
-        ctx.waitUntil(sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, env.TELEGRAM_CHAT_ID, visitAlert));
+          ctx.waitUntil(sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, env.TELEGRAM_CHAT_ID, visitAlert));
+        }
 
-        return jsonResponse({ success: true, message: 'Visit logged successfully' });
+        return jsonResponse({
+          success: true,
+          message: isThrottled ? 'Visit recorded (throttled cooldown active)' : 'Visit logged successfully',
+          count: inMemoryVisitorCount,
+          throttled: isThrottled
+        });
       } catch (err) {
         return jsonResponse({ success: false, error: err.message }, 500);
       }
     }
 
-    // 4. Contact Form Submission (/api/contact or /api/submit or /contact)
+    // 5. Contact Form Submission (/api/contact or /api/submit or /contact)
     if ((path === '/api/contact' || path === '/api/submit' || path === '/contact') && request.method === 'POST') {
       try {
         const contentType = request.headers.get('content-type') || '';
@@ -217,16 +280,27 @@ ${escapeHtml(message)}
 • Attachments: ${attachments.length} file(s)
 • Received: ${new Date().toUTCString()}`;
 
-        // Send inquiry alert to Telegram
-        await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, env.TELEGRAM_CHAT_ID, inquiryAlert);
+        // Send inquiry alert to Telegram and capture returned message_id
+        const inquiryRes = await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, env.TELEGRAM_CHAT_ID, inquiryAlert);
+        const replyToMessageId = (inquiryRes && inquiryRes.ok && inquiryRes.result) ? inquiryRes.result.message_id : null;
 
-        // Forward file attachments to Telegram if present
+        // Forward file attachments to Telegram if present as replies with emojis and clean labels
         if (attachments.length > 0 && env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID) {
           for (const file of attachments) {
             try {
               const fileName = file.name || 'attachment';
-              const fileCaption = `Attachment from <b>${escapeHtml(name)}</b>: <code>${escapeHtml(fileName)}</code>`;
-              ctx.waitUntil(sendTelegramDocument(env.TELEGRAM_BOT_TOKEN, env.TELEGRAM_CHAT_ID, file, fileName, fileCaption));
+              const badge = getFileBadge(fileName);
+              const fileCaption = `${badge.emoji} <b>${badge.label}</b>\n` +
+                `📁 <b>File:</b> <code>${escapeHtml(fileName)}</code>\n` +
+                `👤 <b>From:</b> ${escapeHtml(name)} | 🏷️ <b>Form:</b> ${escapeHtml(subject || 'General Inquiry')}`;
+              ctx.waitUntil(sendTelegramDocument(
+                env.TELEGRAM_BOT_TOKEN,
+                env.TELEGRAM_CHAT_ID,
+                file,
+                fileName,
+                fileCaption,
+                replyToMessageId
+              ));
             } catch (fileErr) {
               console.error('File forwarding notice:', fileErr);
             }

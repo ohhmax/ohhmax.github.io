@@ -566,93 +566,6 @@
     return;
   }
 
-    // Throttle background canvas: only render every 3rd frame (~20fps on 60Hz)
-    bgFrameCount++;
-    const shouldDrawBg = (bgFrameCount % (BG_FRAME_SKIP + 1) === 0);
-
-    // Slowly cycle base hue for live shifting fog (adjusted for ~20fps effective rate)
-    // At 60fps it was 0.08/frame. At ~20fps we do 0.24/frame for same visual speed.
-    if (shouldDrawBg) {
-      baseHue = (baseHue + 0.24) % 360;
-    }
-
-    const isLightMode = document.body.classList.contains('light-theme') ||
-      document.documentElement.getAttribute('data-theme') === 'light';
-
-    // 1. Draw Background: Cyber Graph Grid, Electric Current Pulses, and Ambient Fog
-    if (bgCtx && shouldDrawBg) {
-      bgCtx.clearRect(0, 0, bgWidth, bgHeight);
-
-      // Draw subtle cybernetic coordinate graph lines
-      drawCyberGrid(isLightMode);
-
-      // Draw and update electric current pulses traveling along grid wires
-      for (let i = 0; i < electricCurrents.length; i++) {
-        electricCurrents[i].update();
-        electricCurrents[i].draw(isLightMode);
-      }
-
-      // Draw and update intersection node flashes
-      for (let i = nodeFlashes.length - 1; i >= 0; i--) {
-        if (nodeFlashes[i].update()) {
-          nodeFlashes[i].draw(isLightMode);
-        } else {
-          nodeFlashes.splice(i, 1);
-        }
-      }
-
-      // Draw live organic ambient fog (independent of mouse movement)
-      for (let i = 0; i < fogPuffs.length; i++) {
-        fogPuffs[i].update();
-        fogPuffs[i].draw(isLightMode);
-      }
-    }
-
-    // 2. Draw Foreground Touch & Sparks Overlay - ONLY when particles exist
-    const hasTouchParticles = ripples.length > 0 || sparks.length > 0 ||
-      cursorSmoke.length > 0 || risingSmoke.length > 0;
-
-    if (touchCtx && hasTouchParticles) {
-      touchCtx.clearRect(0, 0, touchCanvas.width, touchCanvas.height);
-
-      // Render & update ripples
-      for (let i = ripples.length - 1; i >= 0; i--) {
-        if (ripples[i].update()) {
-          ripples[i].draw(isLightMode);
-        } else {
-          ripples.splice(i, 1);
-        }
-      }
-
-      // Render & update sparks
-      for (let i = sparks.length - 1; i >= 0; i--) {
-        if (sparks[i].update()) {
-          sparks[i].draw(isLightMode);
-        } else {
-          sparks.splice(i, 1);
-        }
-      }
-
-      // Render cursor smoke wisps
-      for (let i = cursorSmoke.length - 1; i >= 0; i--) {
-        if (cursorSmoke[i].update()) {
-          cursorSmoke[i].draw(isLightMode);
-        } else {
-          cursorSmoke.splice(i, 1);
-        }
-      }
-
-      // Render rising atmospheric smoke plumes (Lasts ~2-2.5s, rising up into the air)
-      for (let i = risingSmoke.length - 1; i >= 0; i--) {
-        if (risingSmoke[i].update()) {
-          risingSmoke[i].draw(isLightMode);
-        } else {
-          risingSmoke.splice(i, 1);
-        }
-      }
-    }
-  }
-
   // Spawn delicate micro water bubble touch effect directly on high-priority canvas
   function spawnTouchEffect(x, y) {
     pointerX = x;
@@ -708,25 +621,24 @@
     if (!cursorDot || !isFinePointer) return;
 
     window.addEventListener('mousemove', (e) => {
-      cursorDot.style.left = `${e.clientX}px`;
-      cursorDot.style.top = `${e.clientY}px`;
+      cursorDot.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
     }, { passive: true });
 
     // Interactive Hover States
-    const interactiveSelectors = 'a, button, input, textarea, [role="button"], .content-card, .project-card-box, .maxhive-stat-card, .cert-item-card, .contact-channel-card';
+    const interactiveSelectors = 'a, button, input, textarea, [role="button"]';
     document.addEventListener('mouseover', (e) => {
       const target = e.target.closest(interactiveSelectors);
       if (target) {
         cursorDot.classList.add('hovered');
       }
-    });
+    }, { passive: true });
 
     document.addEventListener('mouseout', (e) => {
       const target = e.target.closest(interactiveSelectors);
       if (target) {
         cursorDot.classList.remove('hovered');
       }
-    });
+    }, { passive: true });
   }
 
   // 4. Touch Event Listeners for Mobile & Tablets

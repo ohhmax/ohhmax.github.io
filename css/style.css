@@ -221,16 +221,32 @@ html[data-theme="dark"] body {
   opacity: 1;
 }
 
-.sidebar,
-article {
+.sidebar {
   background: var(--article-bg);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--main-border);
   border-radius: 28px;
   padding: 15px;
   box-shadow: var(--box-shadow-1);
   z-index: 1;
+}
+
+article {
+  background: var(--article-bg);
+  border: 1px solid var(--main-border);
+  border-radius: 28px;
+  padding: 15px;
+  box-shadow: var(--box-shadow-1);
+  z-index: 1;
+}
+
+body.light-theme .sidebar,
+html[data-theme="light"] .sidebar,
+body.light-theme article,
+html[data-theme="light"] article {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 .separator {
@@ -5736,7 +5752,7 @@ body.light-theme .max-cursor-dot {
 
 /* Form & Input Enhancements for Light Theme */
 body.light-theme .form-input,
-body.light-theme input,
+body.light-theme input:not(.share-simple-input),
 body.light-theme textarea {
   background: #ffffff !important;
   border: 1px solid #cbd5e1 !important;
@@ -5744,13 +5760,13 @@ body.light-theme textarea {
 }
 
 body.light-theme .form-input::placeholder,
-body.light-theme input::placeholder,
+body.light-theme input:not(.share-simple-input)::placeholder,
 body.light-theme textarea::placeholder {
   color: #94a3b8 !important;
 }
 
 body.light-theme .form-input:focus,
-body.light-theme input:focus,
+body.light-theme input:not(.share-simple-input):focus,
 body.light-theme textarea:focus {
   border-color: #0284c7 !important;
   box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15) !important;
@@ -12845,8 +12861,6 @@ html[data-theme="light"] .testimonial-step-btn:hover {
 .info_more-btn,
 .testimonial-step-btn {
   -webkit-tap-highlight-color: transparent !important;
-  transform: translateZ(0);
-  will-change: transform;
 }
 
 .compact-testimonial-row:active,
