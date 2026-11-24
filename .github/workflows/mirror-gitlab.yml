@@ -31,5 +31,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git remote add gitlab "https://oauth2:${GITLAB_TOKEN}@gitlab.com/ohhmax/ohhmax.gitlab.io.git"
-          git push --force gitlab main:main
+          git fetch gitlab main || true
+          git merge -s ours gitlab/main --allow-unrelated-histories -m "chore: sync with GitLab history" || true
+          git push gitlab main:main || git push --force gitlab main:main
           echo "Successfully mirrored repository to GitLab (https://gitlab.com/ohhmax/ohhmax.gitlab.io)."

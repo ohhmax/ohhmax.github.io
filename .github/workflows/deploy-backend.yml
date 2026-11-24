@@ -26,13 +26,30 @@ jobs:
         run: npm install
 
       - name: Deploy Worker to Cloudflare
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_TOKEN }}
-          workingDirectory: 'backend'
-          secrets: |
-            TELEGRAM_BOT_TOKEN
-            TELEGRAM_CHAT_ID
+        working-directory: backend
         env:
+          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_TOKEN" ]; then
+            echo "Error: CLOUDFLARE_TOKEN secret is not configured."
+            exit 1
+          fi
+
+          export CLOUDFLARE_API_TOKEN="$CLOUDFLARE_TOKEN"
+
+          # Discover Cloudflare Account ID dynamically to avoid /memberships 10000 auth errors
+          ACCOUNT_ID=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_TOKEN" "https://api.cloudflare.com/client/v4/accounts" | jq -r '.result[0].id // empty')
+          if [ -n "$ACCOUNT_ID" ] && [ "$ACCOUNT_ID" != "null" ]; then
+            echo "Cloudflare Account ID discovered: ${ACCOUNT_ID:0:6}***"
+            export CLOUDFLARE_ACCOUNT_ID="$ACCOUNT_ID"
+          fi
+
+          # Deploy worker with environment variables injected securely
+          if [ -n "$TELEGRAM_BOT_TOKEN" ] && [ -n "$TELEGRAM_CHAT_ID" ]; then
+            npx wrangler deploy --var "TELEGRAM_BOT_TOKEN:$TELEGRAM_BOT_TOKEN" --var "TELEGRAM_CHAT_ID:$TELEGRAM_CHAT_ID"
+          else
+            npx wrangler deploy
+          fi
+          echo "Cloudflare Worker deployed successfully."
