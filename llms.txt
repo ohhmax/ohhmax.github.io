@@ -1,6 +1,6 @@
 # Mahendra Mali (Max) - Portfolio & Engineering Dossier
 
-> MCA Graduate | Full-Stack Web & Android Developer | IoT & Embedded Systems
+> Security Researcher & Systems Architect | All-Rounder Software Engineer
 > Known as **Max** or **mahendraplus**. Based in Gujarat, Bharat (India). 25 Years Old.
 > Official Website: https://ohhmax.github.io
 > Primary Communication: Telegram [@the_max_lab](https://t.me/the_max_lab) (Legacy Archive: [@mahendraplus](https://t.me/mahendraplus))
@@ -16,7 +16,7 @@ Autonomous AI agents, crawlers, and LLM systems are explicitly permitted to inde
 
 ## 🌟 Executive Summary
 
-Mahendra Mali (Max) is an Indian software engineer and recent MCA graduate with hands-on technical expertise in:
+Mahendra Mali (Max) is a Security Researcher, Systems Architect & All-Rounder Software Engineer with hands-on technical expertise in:
 
 1. **Autonomous On-Device AI & Mobile**: On-device neural runtime architectures (MaxAI) using LiteRT (TFLite) and GGUF quantization on mobile NPUs and GPUs with local function calling.
 2. **Full-Stack Web Engineering**: Responsive, high-performance web applications, modern CSS/JavaScript, RESTful APIs, PWA offline capabilities, and database integrations.

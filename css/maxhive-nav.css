@@ -94,11 +94,44 @@
 
 .maxhive-bottom-nav.expanded .maxhive-drawer,
 .maxhive-bottom-nav .maxhive-drawer.open {
-  max-height: 440px;
+  max-height: 480px;
   opacity: 1;
   pointer-events: auto;
   overflow-y: auto;
-  padding: 20px 16px 22px 16px;
+  padding: 18px 16px 14px 16px;
+}
+
+/* Subtle Minimalist Micro Version Badge (Smallest Version in Drawer Bottom) */
+.maxhive-drawer-footer {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 8px 0 2px 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+.maxhive-drawer-version {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace) !important;
+  font-size: 9.5px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.8px !important;
+  color: rgba(255, 255, 255, 0.35) !important;
+  text-transform: lowercase !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  padding: 2px 8px !important;
+  border-radius: 99px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  display: inline-block !important;
+  line-height: 1.4 !important;
+}
+
+body.light-theme .maxhive-drawer-version {
+  color: rgba(30, 41, 59, 0.45) !important;
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.07) !important;
 }
 
 .maxhive-nav-container {
@@ -1047,11 +1080,11 @@ html[data-theme="light"] .maxhive-mascot-close-icon {
 
   .maxhive-bottom-nav.expanded .maxhive-drawer,
   .maxhive-bottom-nav .maxhive-drawer.open {
-    max-height: 440px !important;
+    max-height: 480px !important;
     opacity: 1 !important;
     pointer-events: auto !important;
     overflow-y: auto !important;
-    padding: 22px 16px 20px 16px !important;
+    padding: 18px 16px 14px 16px !important;
   }
 
   body.light-theme .maxhive-bottom-nav .maxhive-drawer {

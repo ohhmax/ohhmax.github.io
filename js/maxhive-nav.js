@@ -75,87 +75,87 @@
   // SEO Page Titles, Meta Descriptions & Dedicated Section Social Preview Banners
   const pageSEO = {
     about: {
-      title: "Mahendra Mali (Max) | MCA Graduate & Full-Stack Developer",
-      desc: "Portfolio of Mahendra Mali (Max). Full-stack web developer and MCA graduate with expertise in Android applications, IoT microcontroller systems, and Linux.",
-      image: "./assets/img/og/og-about-1200x630.png",
-      twitterImage: "./assets/img/og/hd-about-1920x1080.png",
+      title: "Mahendra Mali (Max) | Security Researcher & Systems Architect",
+      desc: "Portfolio of Mahendra Mali (Max). Security Researcher, Systems Architect & All-Rounder Engineer with expertise in Android applications, IoT microcontroller systems, and Linux.",
+      image: "https://ohhmax.github.io/assets/img/og/og-about-1200x630.png",
+      twitterImage: "https://ohhmax.github.io/assets/img/og/hd-about-1920x1080.png",
       url: "https://ohhmax.github.io/about/"
     },
     gallery: {
       title: "Gallery | Mahendra Mali (Max)",
       desc: "Curated collection of 130 verified photographs, hardware prototypes, national science exhibitions, certificates, and video demonstrations by Mahendra Mali (Max).",
-      image: "./assets/img/og/og-gallery-1200x630.png",
-      twitterImage: "./assets/img/og/hd-gallery-1920x1080.png",
+      image: "https://ohhmax.github.io/assets/img/og/og-gallery-1200x630.png",
+      twitterImage: "https://ohhmax.github.io/assets/img/og/hd-gallery-1920x1080.png",
       url: "https://ohhmax.github.io/gallery/"
     },
     milestones: {
       title: "Milestones & Credentials Archive | Mahendra Mali (Max)",
       desc: "Archive of verified national science exhibition certificates, hardware demonstrations, and research milestones by Mahendra Mali (Max).",
-      image: "./assets/img/og/og-milestones-1200x630.png",
-      twitterImage: "./assets/img/og/hd-milestones-1920x1080.png",
+      image: "https://ohhmax.github.io/assets/img/og/og-milestones-1200x630.png",
+      twitterImage: "https://ohhmax.github.io/assets/img/og/hd-milestones-1920x1080.png",
       url: "https://ohhmax.github.io/milestones/"
     },
     resume: {
-      title: "Resume & Qualifications | Mahendra Mali (Max) - Full-Stack Developer",
-      desc: "Curriculum vitae of Mahendra Mali: MCA graduate (2024 to 2026), BCA graduate, practical experience in web development, Android apps, and IoT systems.",
-      image: "./assets/img/og/og-resume-1200x630.png",
-      twitterImage: "./assets/img/og/hd-resume-1920x1080.png",
+      title: "Resume & Qualifications | Mahendra Mali (Max) - Systems Architect",
+      desc: "Curriculum vitae of Mahendra Mali: Security Researcher & Systems Architect with practical experience in full-stack web, Android internals, and IoT systems.",
+      image: "https://ohhmax.github.io/assets/img/og/og-resume-1200x630.png",
+      twitterImage: "https://ohhmax.github.io/assets/img/og/hd-resume-1920x1080.png",
       url: "https://ohhmax.github.io/resume/"
     },
     projects: {
       title: "Projects & Applications | Mahendra Mali (Max)",
       desc: "Explore projects by Mahendra Mali including AI Home Automation, MaxFit gym application, MAXTER Termux suite, and microcontroller safety systems.",
-      image: "./assets/img/og/og-projects-1200x630.png",
-      twitterImage: "./assets/img/og/hd-projects-1920x1080.png",
+      image: "https://ohhmax.github.io/assets/img/og/og-projects-1200x630.png",
+      twitterImage: "https://ohhmax.github.io/assets/img/og/hd-projects-1920x1080.png",
       url: "https://ohhmax.github.io/projects/"
     },
     'project-detail': {
       title: "Project Architecture | Mahendra Mali (Max)",
       desc: "Architectural specifications, engineering challenge, and technical implementation by Mahendra Mali (Max).",
-      image: "./assets/img/og/og-projects-1200x630.png",
-      twitterImage: "./assets/img/og/hd-projects-1920x1080.png",
+      image: "https://ohhmax.github.io/assets/img/og/og-projects-1200x630.png",
+      twitterImage: "https://ohhmax.github.io/assets/img/og/hd-projects-1920x1080.png",
       url: "https://ohhmax.github.io/projects/"
     },
     'moment-detail': {
       title: "Milestone & Credential Dossier | Mahendra Mali (Max)",
       desc: "Technical specification and verified institutional documentation of engineering milestones, national exhibitions, and credentials.",
-      image: "./assets/img/og/og-milestones-1200x630.png",
-      twitterImage: "./assets/img/og/hd-milestones-1920x1080.png",
+      image: "https://ohhmax.github.io/assets/img/og/og-milestones-1200x630.png",
+      twitterImage: "https://ohhmax.github.io/assets/img/og/hd-milestones-1920x1080.png",
       url: "https://ohhmax.github.io/milestones/"
     },
     moments: {
       title: "Milestones and Credentials Archive | Mahendra Mali (Max)",
       desc: "Archive of verified national science exhibition certificates, hardware demonstrations, and research milestones by Mahendra Mali (Max).",
-      image: "./assets/img/og/og-milestones-1200x630.png",
-      twitterImage: "./assets/img/og/hd-milestones-1920x1080.png",
+      image: "https://ohhmax.github.io/assets/img/og/og-milestones-1200x630.png",
+      twitterImage: "https://ohhmax.github.io/assets/img/og/hd-milestones-1920x1080.png",
       url: "https://ohhmax.github.io/milestones/"
     },
     testimonials: {
       title: "What People Are Saying | Peer Reviews & Recommendations | Mahendra Mali (Max)",
       desc: "Verified testimonials, peer recommendations, and direct feedback for Mahendra Mali (Max) from academic professors, project partners, and engineering mentors.",
-      image: "./assets/img/og/og-testimonials-1200x630.png",
-      twitterImage: "./assets/img/og/hd-testimonials-1920x1080.png",
+      image: "https://ohhmax.github.io/assets/img/og/og-testimonials-1200x630.png",
+      twitterImage: "https://ohhmax.github.io/assets/img/og/hd-testimonials-1920x1080.png",
       url: "https://ohhmax.github.io/testimonials/"
     },
     'testimonial-detail': {
       title: "What People Are Saying | Verified Recommendation | Mahendra Mali (Max)",
       desc: "Full verified engineering testimonial and mentor endorsement for Mahendra Mali (Max).",
-      image: "./assets/img/og/og-testimonials-1200x630.png",
-      twitterImage: "./assets/img/og/hd-testimonials-1920x1080.png",
+      image: "https://ohhmax.github.io/assets/img/og/og-testimonials-1200x630.png",
+      twitterImage: "https://ohhmax.github.io/assets/img/og/hd-testimonials-1920x1080.png",
       url: "https://ohhmax.github.io/#testimonials"
     },
     contact: {
-      title: "Contact Mahendra Mali (Max) | Open to Work",
+      title: "Contact Mahendra Mali (Max) | Security Researcher & Systems Architect",
       desc: "Get in touch with Mahendra Mali (Max) for software engineering roles, full-stack web development, and Android development opportunities.",
-      image: "./assets/img/og/og-contact-1200x630.png",
-      twitterImage: "./assets/img/og/hd-contact-1920x1080.png",
+      image: "https://ohhmax.github.io/assets/img/og/og-contact-1200x630.png",
+      twitterImage: "https://ohhmax.github.io/assets/img/og/hd-contact-1920x1080.png",
       url: "https://ohhmax.github.io/contact/"
     },
     share: {
       title: "Share Portfolio | Mahendra Mali (Max)",
       desc: "Share Mahendra Mali's engineering portfolio with colleagues and friends via WhatsApp, Telegram, LinkedIn, Instagram, and X using your unique invite link.",
-      image: "./assets/img/og/og-about-1200x630.png",
-      twitterImage: "./assets/img/og/hd-about-1920x1080.png",
+      image: "https://ohhmax.github.io/assets/img/og/og-1200x630.jpg",
+      twitterImage: "https://ohhmax.github.io/assets/img/og/og-1200x630.jpg",
       url: "https://ohhmax.github.io/#share"
     }
   };
@@ -230,6 +230,12 @@
     setupColorSchemeSync();
     setupSmartRobotCaptions();
     initRobotPreloaderFlight();
+
+    // Sync drawer micro version badge with stamped portfolio version
+    const versionBadge = document.getElementById('drawerVersionBadge');
+    if (versionBadge && typeof window !== 'undefined' && window.PORTFOLIO_VERSION) {
+      versionBadge.textContent = window.PORTFOLIO_VERSION;
+    }
   }
 
   // ==========================================================================
@@ -2296,11 +2302,11 @@
     if (!roleElem) return;
 
     const roles = [
-      "MCA Graduate • Seeking Job Roles",
-      "Full-Stack Web Developer",
-      "Android & Mobile App Developer",
-      "IoT & Embedded Systems Engineer",
-      "Linux & Backend Engineer"
+      "Security Researcher • Systems Architect",
+      "Full-Stack Software Engineer",
+      "Android & Embedded Systems Architect",
+      "IoT & Firmware Reverse Engineer",
+      "Linux Systems & Cloud Infrastructure"
     ];
 
     let currentRoleIdx = 0;

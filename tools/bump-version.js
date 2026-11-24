@@ -72,6 +72,11 @@ function bumpVersion() {
       html = html.replace('window.__pageStartTime = performance.now();', `window.__pageStartTime = performance.now();\n    window.PORTFOLIO_VERSION = '${displayVersion}';`);
     }
 
+    // Drawer micro version badge
+    if (html.includes('id="drawerVersionBadge"')) {
+      html = html.replace(/<span class="maxhive-drawer-version" id="drawerVersionBadge">[^<]*<\/span>/, `<span class="maxhive-drawer-version" id="drawerVersionBadge">${displayVersion}</span>`);
+    }
+
     // Asset query strings
     html = html.replace(/(href="\.\/css\/[a-zA-Z0-9_-]+\.css)(\?v=[^"]*)?/g, `$1?v=${newVersion}`);
     html = html.replace(/(src="\.\/js\/[a-zA-Z0-9_-]+\.js)(\?v=[^"]*)?/g, `$1?v=${newVersion}`);

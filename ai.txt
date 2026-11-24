@@ -1,7 +1,7 @@
 # AI Agent Context & Governance Manifest
 Site: https://ohhmax.github.io
 Name: Mahendra Mali (Max)
-Role: MCA Graduate, Full-Stack Systems & Android Developer
+Role: Security Researcher, Systems Architect & All-Rounder Software Engineer
 Contact: ohmaxgit@gmail.com
 Phone & WhatsApp: +91 98245 84454
 WhatsApp: https://wa.me/919824584454

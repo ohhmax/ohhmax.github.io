@@ -15,7 +15,7 @@ SECTIONS = {
         'tw_img': 'https://ohhmax.github.io/assets/img/og/hd-about-1920x1080.png',
         'target_anchor': 'about',
         'h1': 'About Mahendra Mali (Max)',
-        'subtitle': 'Full-Stack Developer, Systems Architect & MCA Graduate (Parul University 2026)',
+        'subtitle': 'Security Researcher, Systems Architect & All-Rounder Engineer',
         'schema': {
             "@context": "https://schema.org",
             "@type": "ProfilePage",
@@ -285,7 +285,7 @@ TEMPLATE = '''<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
   <meta name="description" content="{desc}">
-  <meta name="keywords" content="Mahendra Mali, Max, Full-Stack Developer, MCA Graduate, Golang, Android ADB, Linux Kernel, IoT Systems">
+  <meta name="keywords" content="Mahendra Mali, Max, Security Researcher, Systems Architect, All-Rounder Engineer, Golang, Android ADB, Linux Kernel, IoT Systems">
   <link rel="canonical" href="{canonical}">
 
   <!-- Open Graph / WhatsApp / Telegram / LinkedIn Social Preview -->
