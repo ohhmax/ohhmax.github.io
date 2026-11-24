@@ -6,13 +6,116 @@
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
     <loc>https://ohhmax.github.io/</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <lastmod>2026-11-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/og/og-1200x630.jpg</image:loc>
+      <image:title>Mahendra Mali (Max) Official Portfolio Banner</image:title>
+      <image:caption>Official social preview banner for Mahendra Mali (Max) Full-Stack Developer and Systems Engineer Portfolio.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/og/og-1200x630.png</image:loc>
+      <image:title>Mahendra Mali (Max) Full-Stack Engineer Banner</image:title>
+      <image:caption>High resolution open graph banner featuring Mahendra Mali MCA graduate and software architect.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/og/hd-banner-1920x1080.png</image:loc>
+      <image:title>Mahendra Mali (Max) Systems and Embedded Engineering Banner</image:title>
+      <image:caption>Full HD 1080p panoramic banner showcasing systems engineering and cellular IoT research by Mahendra Mali.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/max/Mahendra-Mali-14.png</image:loc>
+      <image:title>Mahendra Mali (Max) - Full-Stack Developer Profile Portrait</image:title>
+      <image:caption>Primary executive profile portrait of Mahendra Mali (Max), MCA graduate and full-stack software engineer.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/max/Mahendra-Mali-01.png</image:loc>
+      <image:title>Mahendra Mali - Software Systems Developer</image:title>
+      <image:caption>Professional engineering portrait of Mahendra Mali specializing in Web, Android, and Embedded IoT.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/max/Mahendra-Mali-07.png</image:loc>
+      <image:title>Mahendra Mali - Android and IoT Systems Architect</image:title>
+      <image:caption>Mahendra Mali researching cellular radio protocols and microcontroller automation architectures.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/max/Mahendra-Mali-11.png</image:loc>
+      <image:title>Mahendra Mali - Embedded Systems Engineer</image:title>
+      <image:caption>Mahendra Mali testing microcontroller relay boards, EEPROM state recovery, and wireless transceivers.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/max/avatar-01.png</image:loc>
+      <image:title>Mahendra Mali (Max) Developer Avatar</image:title>
+      <image:caption>Cyberpunk stylized developer mascot avatar of Mahendra Mali.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/about/</loc>
+    <lastmod>2026-11-24T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/og/og-about-1200x630.png</image:loc>
+      <image:title>About Mahendra Mali (Max) - Biography and Engineering Journey</image:title>
+      <image:caption>Detailed biography and engineering background of Mahendra Mali (Max), MCA graduate from Gujarat.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/og/hd-about-1920x1080.png</image:loc>
+      <image:title>About Mahendra Mali Systems Engineering Background</image:title>
+      <image:caption>HD visual banner highlighting Mahendra Mali's expertise in full-stack web, Android, and Linux tooling.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/max/Mahendra-Mali-04.png</image:loc>
+      <image:title>Mahendra Mali Professional Portrait</image:title>
+      <image:caption>Executive portrait of Mahendra Mali featured on the About dossier.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/max/Mahendra-Mali-08.png</image:loc>
+      <image:title>Mahendra Mali Academic and Systems Journey</image:title>
+      <image:caption>Mahendra Mali during academic research sprints and systems engineering experiments.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/projects/</loc>
+    <lastmod>2026-11-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/og/og-projects-1200x630.png</image:loc>
+      <image:title>Mahendra Mali Featured Engineering Projects Banner</image:title>
+      <image:caption>Production engineering portfolio of 19 software innovations engineered by Mahendra Mali.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/og/hd-projects-1920x1080.png</image:loc>
+      <image:title>Mahendra Mali Production Systems Showcase</image:title>
+      <image:caption>High definition banner featuring MaxAI on-device AI runtime, CellLock5G modem telemetry, and HomeMax IoT.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ohhmax.github.io/resume/</loc>
+    <lastmod>2026-11-24T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/og/og-resume-1200x630.png</image:loc>
+      <image:title>Mahendra Mali Resume and Technical Dossier</image:title>
+      <image:caption>Curriculum vitae and professional qualifications of Mahendra Mali (Max) - MCA Graduate.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/og/hd-resume-1920x1080.png</image:loc>
+      <image:title>Mahendra Mali Full-Stack Engineer Technical Qualifications</image:title>
+      <image:caption>Detailed technical skill matrix and engineering certifications of Mahendra Mali.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/max/Mahendra-Mali-05.png</image:loc>
+      <image:title>Mahendra Mali Credentials Portrait</image:title>
+      <image:caption>Professional profile photo of Mahendra Mali accompanying his engineering credentials.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://ohhmax.github.io/gallery/</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <lastmod>2026-11-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <image:image>
@@ -732,213 +835,121 @@
     </image:image>
   </url>
   <url>
-    <loc>https://ohhmax.github.io/about/</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#about</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/projects/</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#projects</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/resume/</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#resume</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://ohhmax.github.io/testimonials/</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <lastmod>2026-11-24T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#testimonials</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.90</priority>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/og/og-testimonials-1200x630.png</image:loc>
+      <image:title>Mahendra Mali Endorsements and Peer Reviews</image:title>
+      <image:caption>Academic and professional testimonials praising Mahendra Mali's systems development expertise.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/og/hd-testimonials-1920x1080.png</image:loc>
+      <image:title>Mahendra Mali Industry Recommendations</image:title>
+      <image:caption>Industry leader and professor recommendations for Mahendra Mali (Max).</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://ohhmax.github.io/milestones/</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <lastmod>2026-11-24T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#milestones</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/og/og-milestones-1200x630.png</image:loc>
+      <image:title>Mahendra Mali Career Milestones and Honors</image:title>
+      <image:caption>Engineering timeline, awards, and certifications earned by Mahendra Mali.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/og/hd-milestones-1920x1080.png</image:loc>
+      <image:title>Mahendra Mali Engineering Timeline and Credentials</image:title>
+      <image:caption>Comprehensive chronological milestones of Mahendra Mali's engineering career.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/Certifications/c1.jpg</image:loc>
+      <image:title>Mahendra Mali Engineering Certificate - Software Systems</image:title>
+      <image:caption>Verified engineering certificate awarded to Mahendra Mali.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/Certifications/c2.jpg</image:loc>
+      <image:title>Mahendra Mali Engineering Certificate - Embedded Development</image:title>
+      <image:caption>Technical achievement certificate in embedded hardware and microcontroller engineering.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/Certifications/c3.jpg</image:loc>
+      <image:title>Mahendra Mali Engineering Certificate - Full-Stack Architecture</image:title>
+      <image:caption>Professional certification in modern web application architecture and cloud deployment.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/Certifications/c4.jpg</image:loc>
+      <image:title>Mahendra Mali Engineering Certificate - Android Application Development</image:title>
+      <image:caption>Official certificate of excellence in native Android mobile application engineering.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/Certifications/c5.jpg</image:loc>
+      <image:title>Mahendra Mali Engineering Certificate - Linux Systems Administration</image:title>
+      <image:caption>Certification in production Linux server administration and kernel environment tuning.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/Certifications/c6.jpg</image:loc>
+      <image:title>Mahendra Mali Engineering Certificate - Network Security</image:title>
+      <image:caption>Technical credentials in network telemetry, firewalling, and secure API gateways.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/Certifications/c7.jpg</image:loc>
+      <image:title>Mahendra Mali Engineering Certificate - IoT Microcontroller Automation</image:title>
+      <image:caption>Verified credentials in multi-relay industrial automation and persistent EEPROM storage.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/Certifications/c8.jpg</image:loc>
+      <image:title>Mahendra Mali Engineering Certificate - Python and Data Systems</image:title>
+      <image:caption>Certification in Python backend development and structured data engineering.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://ohhmax.github.io/contact/</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <lastmod>2026-11-24T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/og/og-contact-1200x630.png</image:loc>
+      <image:title>Contact Mahendra Mali (Max) - Full-Stack Developer</image:title>
+      <image:caption>Direct contact portal to hire or collaborate with Mahendra Mali (Max).</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ohhmax.github.io/assets/img/og/hd-contact-1920x1080.png</image:loc>
+      <image:title>Get in Touch with Mahendra Mali</image:title>
+      <image:caption>Connect via email, phone, WhatsApp, or Telegram for software engineering opportunities.</image:caption>
+    </image:image>
   </url>
   <url>
-    <loc>https://ohhmax.github.io/#contact</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <loc>https://ohhmax.github.io/cv-resume-latest-info.html</loc>
+    <lastmod>2026-11-24T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://ohhmax.github.io/#gallery</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
     <loc>https://ohhmax.github.io/resume.json</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <lastmod>2026-11-24T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://ohhmax.github.io/llms.txt</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <lastmod>2026-11-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://ohhmax.github.io/llms-full.txt</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <lastmod>2026-11-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://ohhmax.github.io/#project-maxai</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
+    <loc>https://ohhmax.github.io/ai.txt</loc>
+    <lastmod>2026-11-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-celllock5g</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-homemax</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-cellwatchpro</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-amul-dairy-platform</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-maxfit</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-maxhive-osint</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-ipcai-studio</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-luci-cyber-theme</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-adb-on-wrt</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-go-port-proxy</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-maxter</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-qualcomm-custom-kernel</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-maxkit-android</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-sdx65-modem-pipeline</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-alcohol-safety-interlock</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-ultrasonic-profiler</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-developer-cheatsheets</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://ohhmax.github.io/#project-gsrtc-transit-platform</loc>
-    <lastmod>2026-10-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.80</priority>
   </url>
 </urlset>

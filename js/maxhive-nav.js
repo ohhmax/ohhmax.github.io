@@ -1878,7 +1878,8 @@
         uid = 'UID_' + Math.floor(Math.random() * 0xFFFFFFFFFF).toString(16).toUpperCase();
         try { localStorage.setItem('max_uid', uid); } catch (e) {}
       }
-      const baseUrl = window.location.origin + window.location.pathname;
+      // Always use canonical domain for sharing across all mirrors & localhost
+      const baseUrl = 'https://ohhmax.github.io/';
       const shareUrl = `${baseUrl}?ref=${encodeURIComponent(uid)}`;
       return { uid, shareUrl };
     }
