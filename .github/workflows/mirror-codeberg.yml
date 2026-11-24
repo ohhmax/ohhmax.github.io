@@ -32,4 +32,5 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git remote add codeberg "https://ohhmax:${CODEBERG_TOKEN}@codeberg.org/ohhmax/pages.git"
           git push --force codeberg main:main
+          git push --force codeberg main:pages
           echo "Successfully mirrored repository to Codeberg (https://codeberg.org/ohhmax/pages)."
