@@ -40,13 +40,9 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          # 1. Attempt to sync repository code to Codeberg main branch (proceeds to pages deployment if full repo exceeds quota)
+          # 1. Configure remote and prune heavy main branch on Codeberg to free quota (pages branch is the sole deployment target)
           git remote add codeberg "https://ohhmax:${TOKEN_CLEAN}@codeberg.org/ohhmax/pages.git"
-          if ! git push --force codeberg main:main; then
-            echo "Notice: Codeberg repository quota exceeded for full git tree; proceeding to deploy optimized lightweight static pages branch."
-          else
-            echo "Successfully mirrored full repository to Codeberg main branch."
-          fi
+          git push codeberg --delete main || true
 
           # 2. Build lightweight, quota-compliant distribution for Codeberg Pages (<100 MiB limit)
           mkdir -p /tmp/codeberg-pages
