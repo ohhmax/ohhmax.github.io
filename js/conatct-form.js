@@ -26,11 +26,11 @@
 // ============================================================================
 const BACKEND_API_ENDPOINT = (typeof window !== 'undefined' && window.PORTFOLIO_BACKEND_URL)
   ? window.PORTFOLIO_BACKEND_URL
-  : 'https://portfolio-backend.ohmax.workers.dev/api/contact';
+  : 'https://api.ohhmax.workers.dev/api/contact';
 
 const VISIT_API_ENDPOINT = (typeof window !== 'undefined' && window.PORTFOLIO_VISIT_URL)
   ? window.PORTFOLIO_VISIT_URL
-  : 'https://portfolio-backend.ohmax.workers.dev/api/visit';
+  : 'https://api.ohhmax.workers.dev/api/visit';
 
 // Attachment limits
 const MAX_ATTACHMENTS = 5;
