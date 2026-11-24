@@ -543,73 +543,80 @@ function handleSendAnotherMessage() {
 }
 
 /**
- * Formats unique visitor counter for display (accurate number matching data/visitor_analytics.json)
+ * Normalizes and formats unique visitor counter for display starting strictly from 0.
+ * If baseline 1000 was historically applied, subtracts 1000 so it begins at 0.
  */
 function formatVisitorDisplay(count) {
-  const num = parseInt(count, 10);
-  if (isNaN(num)) return '1,000';
+  let num = parseInt(count, 10);
+  if (isNaN(num) || num < 0) num = 0;
+  if (num >= 1000) num = num - 1000;
   return num.toLocaleString();
 }
 
 /**
- * Initializes and updates the Total Unique Visitors counter in Share section
+ * Manages unique visitor telemetry beacon and share counter display.
+ * Strict Contract:
+ * 1. A unique user/browser is counted ONCE only (persisted in localStorage).
+ * 2. On page refresh, NO request is dispatched (zero POST, zero GET).
+ * 3. Visitor count starts from 0 (legacy 1000 baseline is subtracted).
+ * 4. Only an unrecorded, first-time visitor triggers the single POST /api/visit beacon.
+ * 5. When the Telegram alert response arrives, the returned count is normalized and rendered.
  */
-async function initShareVisitorCounter() {
+async function handleUniqueVisitorTelemetry() {
   const countEl = document.getElementById('shareVisitorCount');
-  if (!countEl) return;
 
-  const cached = localStorage.getItem('portfolio_unique_visitors') || '1000';
-  countEl.textContent = formatVisitorDisplay(cached);
+  // 1. Sanitize local cache: subtract 1000 if legacy mock baseline exists
+  let rawCached = localStorage.getItem('portfolio_unique_visitors');
+  let cachedNum = parseInt(rawCached || '0', 10);
+  if (cachedNum >= 1000) {
+    cachedNum = Math.max(0, cachedNum - 1000);
+    localStorage.setItem('portfolio_unique_visitors', String(cachedNum));
+  }
 
-  try {
-    const res = await fetch(VISIT_COUNT_API_ENDPOINT, { mode: 'cors' });
-    if (res.ok) {
-      const data = await res.json();
-      if (data && typeof data.count === 'number') {
-        localStorage.setItem('portfolio_unique_visitors', String(data.count));
-        countEl.textContent = formatVisitorDisplay(data.count);
-      }
-    }
-  } catch (e) {}
-}
+  // 2. Immediately render cached count to avoid any UI delay or layout shift
+  if (countEl) {
+    countEl.textContent = formatVisitorDisplay(cachedNum);
+  }
 
-/**
- * Asynchronously pings Cloudflare Worker backend to deliver live visit notification to Telegram
- * strictly throttled per browser session and 30-minute cooldown to prevent spam on page refreshes
- */
-async function pingVisitBeacon() {
+  // 3. Check if this unique user has already been recorded
+  const hasVisited = localStorage.getItem('portfolio_unique_visited_v1');
+  if (hasVisited) {
+    // Already visited! Strictly do NOT send any request on page refresh or subsequent loads
+    return;
+  }
+
+  // 4. Mark immediately to prevent duplicate sends during rapid refresh or multiple tabs
+  localStorage.setItem('portfolio_unique_visited_v1', 'true');
+  localStorage.setItem('portfolio_first_visit_ts', String(Date.now()));
+
+  // 5. Dispatch the single first-time visitor beacon with full zero-permission telemetry
   if (!VISIT_API_ENDPOINT) return;
+
   try {
-    const now = Date.now();
-    const sessionVisited = sessionStorage.getItem('portfolio_visited_session');
-    const lastVisitTs = parseInt(localStorage.getItem('portfolio_last_visit_ts') || '0', 10);
-    const THIRTY_MINUTES = 30 * 60 * 1000;
-
-    // Do not dispatch beacon if already sent in this browser session or within 30 min cooldown
-    if (sessionVisited || (now - lastVisitTs < THIRTY_MINUTES)) {
-      initShareVisitorCounter();
-      return;
-    }
-
-    sessionStorage.setItem('portfolio_visited_session', 'true');
-    localStorage.setItem('portfolio_last_visit_ts', String(now));
-
-    // Gather complete client telemetry
     const telemetry = await collectClientTelemetry();
-
-    fetch(VISIT_API_ENDPOINT, {
+    const res = await fetch(VISIT_API_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(telemetry),
       mode: 'cors'
-    }).then(res => res.json()).then(data => {
-      if (data && data.count) {
-        localStorage.setItem('portfolio_unique_visitors', String(data.count));
-        const countEl = document.getElementById('shareVisitorCount');
-        if (countEl) countEl.textContent = formatVisitorDisplay(data.count);
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      if (data && typeof data.count === 'number') {
+        let normalizedCount = data.count;
+        if (normalizedCount >= 1000) {
+          normalizedCount = normalizedCount - 1000;
+        }
+        localStorage.setItem('portfolio_unique_visitors', String(normalizedCount));
+        if (countEl) {
+          countEl.textContent = formatVisitorDisplay(normalizedCount);
+        }
       }
-    }).catch(() => {});
-  } catch (e) {}
+    }
+  } catch (e) {
+    // Silent fail; user remains flagged so refresh will never spam
+  }
 }
 
 // Initialize on DOM Ready
@@ -625,6 +632,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   initAttachmentPicker();
-  pingVisitBeacon();
-  initShareVisitorCounter();
+  handleUniqueVisitorTelemetry();
 });

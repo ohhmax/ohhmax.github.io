@@ -20,7 +20,7 @@
  * ============================================================================
  */
 
-const PORTFOLIO_VERSION = 'v3.9.3';
+const PORTFOLIO_VERSION = 'v3.9.4';
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -29,10 +29,38 @@ const CORS_HEADERS = {
   'Access-Control-Max-Age': '86400',
 };
 
-// In-memory unique visitor telemetry tracking and rate throttling (baseline matches data/visitor_analytics.json)
-let inMemoryVisitorCount = 1000;
+// In-memory unique visitor telemetry tracking and rate throttling (starts at 0)
+let inMemoryVisitorCount = 0;
 const recentVisits = new Map();
-const VISIT_THROTTLE_WINDOW_MS = 30 * 60 * 1000; // 30 minutes cooldown
+const VISIT_THROTTLE_WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours cooldown per IP to prevent duplicate counts
+
+async function getStoredVisitorCount(env) {
+  if (env && env.VISITOR_KV) {
+    try {
+      const stored = await env.VISITOR_KV.get('unique_visitor_count');
+      if (stored !== null) {
+        let parsed = parseInt(stored, 10);
+        if (!isNaN(parsed)) {
+          if (parsed >= 1000) parsed = parsed - 1000;
+          return parsed;
+        }
+      }
+    } catch (e) {}
+  }
+  return inMemoryVisitorCount;
+}
+
+async function recordStoredVisitor(env) {
+  let count = await getStoredVisitorCount(env);
+  count++;
+  inMemoryVisitorCount = count;
+  if (env && env.VISITOR_KV) {
+    try {
+      await env.VISITOR_KV.put('unique_visitor_count', String(count));
+    } catch (e) {}
+  }
+  return count;
+}
 
 function jsonResponse(data, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -195,6 +223,7 @@ export default {
 
     // 2. Health & Root Probe
     if (path === '' || path === '/' || path === '/health') {
+      const currentCount = await getStoredVisitorCount(env);
       return jsonResponse({
         status: 'online',
         service: 'MaxPortfolio Cloudflare Worker Gateway',
@@ -204,17 +233,18 @@ export default {
           'https://ohhmax.gitlab.io',
           'https://ohhmax.codeberg.page'
         ],
-        uniqueVisitors: inMemoryVisitorCount,
+        uniqueVisitors: currentCount,
         timestamp: new Date().toISOString()
       });
     }
 
     // 3. Unique Visitor Counter Endpoint (/api/visit-count or /visit-count)
     if ((path === '/api/visit-count' || path === '/visit-count') && request.method === 'GET') {
+      const currentCount = await getStoredVisitorCount(env);
       return jsonResponse({
         success: true,
-        count: inMemoryVisitorCount,
-        baseline: 1000,
+        count: currentCount,
+        baseline: 0,
         version: PORTFOLIO_VERSION,
         timestamp: Date.now()
       });
@@ -263,20 +293,23 @@ export default {
         const referrer = body.referrer || request.headers.get('referer') || 'Direct Entry';
         const localTime = body.localTime || new Date().toUTCString();
 
-        // Rate-limit check: Throttle repeated visits from the same IP (30 min window)
+        // Rate-limit check: Throttle repeated visits from the same IP (24h cooldown)
         const now = Date.now();
         const lastVisit = recentVisits.get(ip);
         const isThrottled = Boolean(lastVisit && (now - lastVisit < VISIT_THROTTLE_WINDOW_MS));
 
+        let currentCount = await getStoredVisitorCount(env);
+
         if (!isThrottled) {
           recentVisits.set(ip, now);
-          inMemoryVisitorCount++;
+          currentCount = await recordStoredVisitor(env);
 
           const visitAlert =
 `⚡ <b>PORTFOLIO VISITOR ALERT</b>
 
 🌐 <b>Host Mirror:</b> ${escapeHtml(mirrorBadge)}
 🏷️ <b>Version:</b> <code>${escapeHtml(version)}</code>
+👥 <b>Visitor Count:</b> #<code>${currentCount}</code>
 
 📍 <b>Visitor Location:</b>
 ${flag} <b>Country:</b> ${escapeHtml(countryName)} (<code>${escapeHtml(countryCode)}</code>)
@@ -306,7 +339,7 @@ ${flag} <b>Country:</b> ${escapeHtml(countryName)} (<code>${escapeHtml(countryCo
         return jsonResponse({
           success: true,
           message: isThrottled ? 'Visit recorded (throttled cooldown active)' : 'Visit logged successfully',
-          count: inMemoryVisitorCount,
+          count: currentCount,
           version: PORTFOLIO_VERSION,
           throttled: isThrottled
         });

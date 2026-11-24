@@ -103,6 +103,28 @@ jobs:
             export CLOUDFLARE_ACCOUNT_ID="$TARGET_ACCOUNT_ID"
           fi
 
+          # 2.5 Optional KV Namespace Provisioning & Binding
+          echo "Checking KV namespace configuration for persistent visitor counting..."
+          KV_ID=""
+          KV_LIST=$(npx wrangler kv namespace list 2>/dev/null || echo "[]")
+          if [ -n "$KV_LIST" ] && [ "$KV_LIST" != "[]" ]; then
+            KV_ID=$(echo "$KV_LIST" | jq -r '.[] | select(.title | test("VISITOR_KV"; "i")) | .id' 2>/dev/null | head -1 || echo "")
+          fi
+
+          if [ -z "$KV_ID" ] || [ "$KV_ID" = "null" ]; then
+            CREATE_OUT=$(npx wrangler kv namespace create VISITOR_KV 2>/dev/null || echo "")
+            KV_ID=$(echo "$CREATE_OUT" | grep -o 'id = "[^"]*"' | head -1 | cut -d'"' -f2 || echo "")
+          fi
+
+          if [ -n "$KV_ID" ] && [ "$KV_ID" != "null" ]; then
+            echo "Binding VISITOR_KV ($KV_ID) to wrangler.toml..."
+            if ! grep -q "VISITOR_KV" wrangler.toml; then
+              printf '\n[[kv_namespaces]]\nbinding = "VISITOR_KV"\nid = "%s"\n' "$KV_ID" >> wrangler.toml
+            fi
+          else
+            echo "Notice: Cloudflare KV storage using in-memory tracker fallback."
+          fi
+
           # 3. Deploy Worker using Wrangler
           echo "Starting Wrangler deployment..."
           DEPLOY_CMD="npx wrangler deploy"
