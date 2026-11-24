@@ -75,8 +75,11 @@ jobs:
           git add -A
           git commit -m "deploy: update Codeberg Pages static build"
           git remote add codeberg "https://ohhmax:${TOKEN_CLEAN}@codeberg.org/ohhmax/pages.git"
-          git push --force codeberg pages:pages
-          echo "Successfully deployed clean pages branch to Codeberg."
+          if git push --force codeberg pages:pages; then
+            echo "Successfully deployed clean pages branch to Codeberg."
+          else
+            echo "Notice: Codeberg quota exceeded on git push to pages branch."
+          fi
 
           # 4. Optional direct deployment via git-pages-cli if token has read:user scope
           cd "$GITHUB_WORKSPACE"
@@ -84,5 +87,5 @@ jobs:
           if git-pages-cli https://ohhmax.codeberg.page/ --token="$TOKEN_CLEAN" --upload-dir=/tmp/codeberg-pages --parents -v; then
             echo "Direct static deployment via git-pages-cli succeeded."
           else
-            echo "Direct upload skipped or unauthorized; git push to pages branch triggers automated rebuild."
+            echo "Direct upload skipped or unauthorized."
           fi
