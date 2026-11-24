@@ -1,6 +1,7 @@
 # Dependencies & Worker Cache
 node_modules/
 .wrangler/
+out/
 
 # User Uploaded Dynamic Attachments & Private Keys
 data/attachments/

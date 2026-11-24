@@ -37,28 +37,49 @@ jobs:
 
           TOKEN_CLEAN=$(echo -n "$CODEBERG_TOKEN" | tr -d '\r\n\t ')
 
-          # 1. Push code to Codeberg repository branches
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # 1. Push complete repository code to Codeberg main branch
           git remote add codeberg "https://ohhmax:${TOKEN_CLEAN}@codeberg.org/ohhmax/pages.git"
           git push --force codeberg main:main
-          git push --force codeberg main:pages
-          echo "Successfully mirrored repository to Codeberg branches (main, pages)."
+          echo "Successfully mirrored full repository to Codeberg main branch."
 
-          # 2. Deploy static web files directly to Codeberg Pages via git-pages-cli if authorized
-          mkdir -p /tmp/codeberg-dist
-          rsync -avL --exclude='.git' --exclude='.github' --exclude='.forgejo' --exclude='portfolio-monitor' --exclude='android' --exclude='backend' --exclude='scratch' --exclude='.playwright-mcp' --exclude='out' --exclude='data/attachments' ./ /tmp/codeberg-dist/
+          # 2. Build lightweight, quota-compliant distribution for Codeberg Pages (<100 MiB limit)
+          mkdir -p /tmp/codeberg-pages
+          rsync -avL \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.forgejo' \
+            --exclude='portfolio-monitor' \
+            --exclude='android' \
+            --exclude='backend' \
+            --exclude='scratch' \
+            --exclude='.playwright-mcp' \
+            --exclude='out' \
+            --exclude='data/attachments' \
+            --exclude='assets/img/gallery/Reel/*.mp4' \
+            ./ /tmp/codeberg-pages/
 
-          echo "Attempting direct deployment to Codeberg Pages server via git-pages-cli..."
-          if git-pages-cli https://ohhmax.codeberg.page/ --token="$TOKEN_CLEAN" --upload-dir=/tmp/codeberg-dist --parents -v; then
+          PAGES_SIZE=$(du -sh /tmp/codeberg-pages | awk '{print $1}')
+          echo "Prepared Codeberg Pages distribution size: $PAGES_SIZE"
+
+          # 3. Deploy dedicated single-commit pages branch to Codeberg
+          cd /tmp/codeberg-pages
+          git init -b pages
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "deploy: update Codeberg Pages static build"
+          git remote add codeberg "https://ohhmax:${TOKEN_CLEAN}@codeberg.org/ohhmax/pages.git"
+          git push --force codeberg pages:pages
+          echo "Successfully deployed clean pages branch to Codeberg."
+
+          # 4. Optional direct deployment via git-pages-cli if token has read:user scope
+          cd "$GITHUB_WORKSPACE"
+          echo "Attempting optional direct deployment via git-pages-cli..."
+          if git-pages-cli https://ohhmax.codeberg.page/ --token="$TOKEN_CLEAN" --upload-dir=/tmp/codeberg-pages --parents -v; then
             echo "Direct static deployment via git-pages-cli succeeded."
           else
-            echo "Notice: git-pages-cli direct upload requires 'read:user' scope on CODEBERG_TOKEN in addition to 'repo'."
-            echo "Dispatching webhook rebuild fallback signal..."
-            HOOKS_RES=$(curl -s -H "Authorization: token $TOKEN_CLEAN" "https://codeberg.org/api/v1/repos/ohhmax/pages/hooks")
-            HOOK_ID=$(echo "$HOOKS_RES" | jq -r '.[]? | select((.type=="git_pages") or (.type=="git-pages") or (((.config.url // "") | contains("codeberg.page")))) | .id' | head -n 1)
-            if [ -n "$HOOK_ID" ] && [ "$HOOK_ID" != "null" ]; then
-              curl -s -X POST "https://codeberg.org/api/v1/repos/ohhmax/pages/hooks/$HOOK_ID/tests" -H "Authorization: token $TOKEN_CLEAN" || true
-              echo "Rebuild trigger signal dispatched to git-pages webhook."
-            fi
+            echo "Direct upload skipped or unauthorized; git push to pages branch triggers automated rebuild."
           fi

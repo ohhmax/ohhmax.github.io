@@ -2177,6 +2177,20 @@ function printPortfolioResume() {
 }
 window.printPortfolioResume = printPortfolioResume;
 
+// Resilient Media Fallback for Cross-Host Mirror Deployments (Codeberg, GitLab, etc.)
+window.addEventListener('error', function (e) {
+  if (e.target && e.target.tagName === 'VIDEO') {
+    const video = e.target;
+    const currentSrc = video.currentSrc || video.src;
+    if (currentSrc && !currentSrc.startsWith('https://ohhmax.github.io/')) {
+      const cleanPath = currentSrc.replace(/^[a-z]+:\/\/[^/]+\//, '');
+      video.src = 'https://ohhmax.github.io/' + cleanPath;
+      video.load();
+      video.play().catch(() => {});
+    }
+  }
+}, true);
+
 // Bootstrap on DOM Ready with Resilient Safe-Execution Wrappers
 document.addEventListener('DOMContentLoaded', () => {
   const safeInit = (fn, name) => {

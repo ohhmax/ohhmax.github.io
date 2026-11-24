@@ -545,6 +545,14 @@
         videoEl.controls = false;
         videoEl.removeAttribute('controls');
         videoEl.poster = thumb;
+        videoEl.onerror = () => {
+          if (src && !videoEl.src.startsWith('https://ohhmax.github.io/')) {
+            const fallbackSrc = 'https://ohhmax.github.io/' + src.replace(/^\/+/, '');
+            videoEl.src = fallbackSrc;
+            videoEl.load();
+            videoEl.play().catch(() => {});
+          }
+        };
         videoEl.src = src;
         videoEl.muted = false;
         videoEl.volume = 1.0;

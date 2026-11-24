@@ -29,6 +29,7 @@ jobs:
         working-directory: backend
         env:
           CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -40,37 +41,58 @@ jobs:
 
           # Sanitize inputs by trimming any whitespace or line endings
           CF_TOKEN=$(echo -n "$CLOUDFLARE_TOKEN" | tr -d '\r\n\t ')
+          CF_EMAIL=$(echo -n "$CLOUDFLARE_EMAIL" | tr -d '\r\n\t ')
           CF_ACCOUNT_ID=$(echo -n "$CLOUDFLARE_ACCOUNT_ID" | tr -d '\r\n\t ')
           TG_BOT_TOKEN=$(echo -n "$TELEGRAM_BOT_TOKEN" | tr -d '\r\n\t ')
           TG_CHAT_ID=$(echo -n "$TELEGRAM_CHAT_ID" | tr -d '\r\n\t ')
 
           # 1. Cloudflare Token Diagnostic Verification
-          echo "Verifying Cloudflare API Token..."
+          echo "Verifying Cloudflare API credentials..."
           VERIFY_RES=$(curl -s -H "Authorization: Bearer $CF_TOKEN" "https://api.cloudflare.com/client/v4/user/tokens/verify")
           VERIFY_SUCCESS=$(echo "$VERIFY_RES" | jq -r '.success // false')
           VERIFY_STATUS=$(echo "$VERIFY_RES" | jq -r '.result.status // "unknown"')
 
+          AUTH_MODE="token"
           if [ "$VERIFY_SUCCESS" = "true" ]; then
             echo "Cloudflare API Token verified successfully (Status: $VERIFY_STATUS)."
+            export CLOUDFLARE_API_TOKEN="$CF_TOKEN"
+          elif [ -n "$CF_EMAIL" ]; then
+            echo "Bearer token verification failed; attempting Global API Key verification with email..."
+            GLOBAL_RES=$(curl -s -H "X-Auth-Key: $CF_TOKEN" -H "X-Auth-Email: $CF_EMAIL" "https://api.cloudflare.com/client/v4/user")
+            GLOBAL_SUCCESS=$(echo "$GLOBAL_RES" | jq -r '.success // false')
+            if [ "$GLOBAL_SUCCESS" = "true" ]; then
+              echo "Cloudflare Global API Key verified successfully."
+              AUTH_MODE="key"
+              export CLOUDFLARE_API_KEY="$CF_TOKEN"
+              export CLOUDFLARE_EMAIL="$CF_EMAIL"
+            else
+              echo "Notice: Global API Key verification returned: $GLOBAL_RES"
+            fi
           else
             echo "Notice: Cloudflare Token verification returned: $VERIFY_RES"
             echo "If code is 1000, please verify that CLOUDFLARE_TOKEN in GitHub Secrets contains a fresh API Token created via Cloudflare Dashboard -> My Profile -> API Tokens -> Create Token -> Edit Cloudflare Workers template."
+            export CLOUDFLARE_API_TOKEN="$CF_TOKEN"
           fi
 
           # 2. Account Discovery / Verification
-          ACCOUNTS_RES=$(curl -s -H "Authorization: Bearer $CF_TOKEN" "https://api.cloudflare.com/client/v4/accounts")
-          DISCOVERED_ACCOUNT_ID=$(echo "$ACCOUNTS_RES" | jq -r '.result[0].id // empty')
-          ACCOUNT_COUNT=$(echo "$ACCOUNTS_RES" | jq -r '.result | length // 0')
-
           TARGET_ACCOUNT_ID=""
           if [ -n "$CF_ACCOUNT_ID" ]; then
             TARGET_ACCOUNT_ID="$CF_ACCOUNT_ID"
             echo "Using configured Cloudflare Account ID: ${TARGET_ACCOUNT_ID:0:6}***"
-          elif [ -n "$DISCOVERED_ACCOUNT_ID" ] && [ "$DISCOVERED_ACCOUNT_ID" != "null" ]; then
-            TARGET_ACCOUNT_ID="$DISCOVERED_ACCOUNT_ID"
-            echo "Auto-discovered Cloudflare Account ID: ${TARGET_ACCOUNT_ID:0:6}*** (Total authorized accounts: $ACCOUNT_COUNT)"
           else
-            echo "Warning: No account ID discovered from API token. Please verify CLOUDFLARE_ACCOUNT_ID."
+            if [ "$AUTH_MODE" = "key" ]; then
+              ACCOUNTS_RES=$(curl -s -H "X-Auth-Key: $CF_TOKEN" -H "X-Auth-Email: $CF_EMAIL" "https://api.cloudflare.com/client/v4/accounts")
+            else
+              ACCOUNTS_RES=$(curl -s -H "Authorization: Bearer $CF_TOKEN" "https://api.cloudflare.com/client/v4/accounts")
+            fi
+            DISCOVERED_ACCOUNT_ID=$(echo "$ACCOUNTS_RES" | jq -r '.result[0].id // empty')
+            ACCOUNT_COUNT=$(echo "$ACCOUNTS_RES" | jq -r '.result | length // 0')
+            if [ -n "$DISCOVERED_ACCOUNT_ID" ] && [ "$DISCOVERED_ACCOUNT_ID" != "null" ]; then
+              TARGET_ACCOUNT_ID="$DISCOVERED_ACCOUNT_ID"
+              echo "Auto-discovered Cloudflare Account ID: ${TARGET_ACCOUNT_ID:0:6}*** (Total authorized accounts: $ACCOUNT_COUNT)"
+            else
+              echo "Warning: No account ID discovered. Please verify CLOUDFLARE_ACCOUNT_ID."
+            fi
           fi
 
           # Inject account_id directly into wrangler.toml to avoid runtime lookup issues
@@ -80,8 +102,6 @@ jobs:
             fi
             export CLOUDFLARE_ACCOUNT_ID="$TARGET_ACCOUNT_ID"
           fi
-
-          export CLOUDFLARE_API_TOKEN="$CF_TOKEN"
 
           # 3. Deploy Worker using Wrangler
           echo "Starting Wrangler deployment..."
