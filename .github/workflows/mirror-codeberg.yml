@@ -68,13 +68,32 @@ jobs:
               echo "Created git-pages webhook with ID: $HOOK_ID"
             else
               echo "Active git-pages webhook identified with ID: $HOOK_ID"
+              # Verify / update webhook configuration to ensure active push triggers
+              HOOK_INFO=$(curl -s -H "Authorization: token $TOKEN_CLEAN" "https://codeberg.org/api/v1/repos/ohhmax/pages/hooks/$HOOK_ID")
+              echo "Webhook configuration: $(echo "$HOOK_INFO" | jq -c '{id, type, active, events, branch_filter, config}')"
+
+              PATCH_RES=$(curl -s -X PATCH "https://codeberg.org/api/v1/repos/ohhmax/pages/hooks/$HOOK_ID" \
+                -H "Authorization: token $TOKEN_CLEAN" \
+                -H "Content-Type: application/json" \
+                -d '{
+                  "active": true,
+                  "events": ["push"],
+                  "branch_filter": "*",
+                  "config": {
+                    "url": "https://ohhmax.codeberg.page",
+                    "content_type": "json"
+                  }
+                }')
+              echo "Webhook configuration refreshed."
             fi
 
             if [ -n "$HOOK_ID" ] && [ "$HOOK_ID" != "null" ]; then
               echo "Dispatching git-pages test event to trigger immediate rebuild..."
-              curl -s -X POST "https://codeberg.org/api/v1/repos/ohhmax/pages/hooks/$HOOK_ID/tests" \
-                -H "Authorization: token $TOKEN_CLEAN"
-              echo "Rebuild trigger signal dispatched to git-pages."
+              TEST_RES=$(curl -s -w "\n%{http_code}" -X POST "https://codeberg.org/api/v1/repos/ohhmax/pages/hooks/$HOOK_ID/tests" \
+                -H "Authorization: token $TOKEN_CLEAN")
+              TEST_CODE=$(echo "$TEST_RES" | tail -n 1)
+              TEST_BODY=$(echo "$TEST_RES" | sed '$d')
+              echo "Rebuild trigger response HTTP $TEST_CODE: $TEST_BODY"
             fi
           else
             echo "Notice: Codeberg hooks API returned HTTP $HTTP_CODE."

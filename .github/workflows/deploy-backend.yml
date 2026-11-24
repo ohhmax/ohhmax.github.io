@@ -54,6 +54,7 @@ jobs:
             echo "Cloudflare API Token verified successfully (Status: $VERIFY_STATUS)."
           else
             echo "Notice: Cloudflare Token verification returned: $VERIFY_RES"
+            echo "If code is 1000, please verify that CLOUDFLARE_TOKEN in GitHub Secrets contains a fresh API Token created via Cloudflare Dashboard -> My Profile -> API Tokens -> Create Token -> Edit Cloudflare Workers template."
           fi
 
           # 2. Account Discovery / Verification
@@ -85,9 +86,6 @@ jobs:
           # 3. Deploy Worker using Wrangler
           echo "Starting Wrangler deployment..."
           DEPLOY_CMD="npx wrangler deploy"
-          if [ -n "$TARGET_ACCOUNT_ID" ]; then
-            DEPLOY_CMD="$DEPLOY_CMD --account-id $TARGET_ACCOUNT_ID"
-          fi
 
           if [ -n "$TG_BOT_TOKEN" ] && [ -n "$TG_CHAT_ID" ]; then
             $DEPLOY_CMD --var "TELEGRAM_BOT_TOKEN:$TG_BOT_TOKEN" --var "TELEGRAM_CHAT_ID:$TG_CHAT_ID"
