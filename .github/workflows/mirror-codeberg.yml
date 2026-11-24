@@ -47,7 +47,7 @@ jobs:
 
           # 2. Deploy static web files directly to Codeberg Pages via git-pages-cli
           mkdir -p /tmp/codeberg-dist
-          rsync -av --exclude='.git' --exclude='.github' --exclude='.forgejo' --exclude='portfolio-monitor' --exclude='android' --exclude='backend' --exclude='scratch' --exclude='.playwright-mcp' ./ /tmp/codeberg-dist/
+          rsync -avL --exclude='.git' --exclude='.github' --exclude='.forgejo' --exclude='portfolio-monitor' --exclude='android' --exclude='backend' --exclude='scratch' --exclude='.playwright-mcp' --exclude='out' --exclude='data/attachments' ./ /tmp/codeberg-dist/
 
           echo "Uploading static portfolio files to Codeberg Pages server..."
           git-pages-cli https://ohhmax.codeberg.page/ --token="$TOKEN_CLEAN" --upload-dir=/tmp/codeberg-dist --parents -v
