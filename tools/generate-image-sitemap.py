@@ -76,10 +76,10 @@ def main():
         '    <priority>0.95</priority>'
     ]
 
-    # Add all gallery media items to /gallery/ URL entry with Google Image Sitemap schema
+    # Add all gallery media items to /gallery/ URL entry with Google Image Sitemap schema (images only, skip videos)
     for item in gallery_items:
         src = item.get('src', '')
-        if not src:
+        if not src or src.lower().endswith('.mp4'):
             continue
         full_url = f'https://ohhmax.github.io/{src}'
         title = escape_xml(item.get('title', ''))
@@ -129,21 +129,6 @@ def main():
         '    <priority>0.90</priority>',
         '  </url>'
     ])
-
-    # Machine readable endpoints
-    for ep, prio, freq in [
-        ('resume.json', '0.80', 'monthly'),
-        ('llms.txt', '0.85', 'weekly'),
-        ('llms-full.txt', '0.85', 'weekly')
-    ]:
-        xml_lines.extend([
-            '  <url>',
-            f'    <loc>https://ohhmax.github.io/{ep}</loc>',
-            '    <lastmod>2026-10-30T00:00:00+00:00</lastmod>',
-            f'    <changefreq>{freq}</changefreq>',
-            f'    <priority>{prio}</priority>',
-            '  </url>'
-        ])
 
     # Project deep links
     for pid in project_slugs:
