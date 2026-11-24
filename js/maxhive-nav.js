@@ -187,11 +187,19 @@
   }
   window.playNotificationChime = playNotificationChime;
 
-  function triggerMicroHaptic() {
+  let userHasInteracted = false;
+  if (typeof window !== 'undefined') {
+    ['pointerdown', 'touchstart', 'click', 'keydown'].forEach(evt => {
+      window.addEventListener(evt, () => { userHasInteracted = true; }, { once: true, passive: true });
+    });
+  }
+
+  function triggerMicroHaptic(pattern = [8]) {
+    if (!userHasInteracted) return;
     if (typeof navigator !== 'undefined' && navigator.vibrate) {
       try {
         // Modern subtle 8ms micro-pulse (crisp tick, never jarring)
-        navigator.vibrate([8]);
+        navigator.vibrate(pattern);
       } catch (e) {}
     }
   }

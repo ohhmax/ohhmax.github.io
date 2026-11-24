@@ -123,10 +123,18 @@
     return Math.max(min, Math.min(max, val));
   }
 
+  let userHasInteracted = false;
+  if (typeof window !== 'undefined') {
+    ['pointerdown', 'touchstart', 'click', 'keydown'].forEach(evt => {
+      window.addEventListener(evt, () => { userHasInteracted = true; }, { once: true, passive: true });
+    });
+  }
+
   /**
    * Safe Vibration Feedback
    */
   function triggerHaptic(pattern) {
+    if (!userHasInteracted) return;
     try {
       if (typeof navigator !== 'undefined' && navigator.vibrate) {
         navigator.vibrate(pattern);

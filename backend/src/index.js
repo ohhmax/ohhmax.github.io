@@ -5,17 +5,22 @@
  *
  * Capabilities:
  * 1. POST /api/contact: Receives inquiries with optional file attachments,
- *    relays formatted alerts to Telegram group via Bot API.
- * 2. POST /api/visit: Receives visitor ping, extracts Cloudflare edge geo
- *    telemetry (Country, City, IP, ISP), and delivers alert to Telegram.
- * 3. GET /health: Worker health status and mirror registry.
+ *    relays formatted HTML alerts with rich telemetry to Telegram group via Bot API.
+ * 2. POST /api/visit: Receives visitor telemetry beacon, extracts Cloudflare edge
+ *    geo telemetry (Flag, Country, Region/State, City, Postal, ISP, ASN, Colo, IP)
+ *    and client zero-permission device specs (Model, Battery, Network, GPU, Screen),
+ *    and delivers alert to Telegram.
+ * 3. GET /api/visit-count: Returns total unique visitor count (baseline 1,000).
+ * 4. GET /health: Worker health status, mirror registry, and version info.
  *
  * Security:
  * - Zero tokens hardcoded. Reads from Worker environment variables:
  *   env.TELEGRAM_BOT_TOKEN, env.TELEGRAM_CHAT_ID.
- * - Strict CORS configuration.
+ * - Strict CORS headers allowing safe cross-origin requests from all portfolio mirrors.
  * ============================================================================
  */
+
+const PORTFOLIO_VERSION = 'v3.9.1';
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -47,6 +52,53 @@ function escapeHtml(text) {
     .replace(/>/g, '&gt;');
 }
 
+/**
+ * Generates Unicode flag emoji from 2-letter ISO country code
+ */
+function getCountryFlag(countryCode) {
+  if (!countryCode || countryCode === 'Unknown' || countryCode.length !== 2) return '🌐';
+  try {
+    const codePoints = countryCode
+      .toUpperCase()
+      .split('')
+      .map(char => 127397 + char.charCodeAt(0));
+    return String.fromCodePoint(...codePoints);
+  } catch (e) {
+    return '🌐';
+  }
+}
+
+/**
+ * Resolves full country name from 2-letter ISO country code
+ */
+function getCountryName(countryCode) {
+  if (!countryCode || countryCode === 'Unknown' || countryCode.length !== 2) return countryCode || 'Unknown';
+  try {
+    const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
+    return regionNames.of(countryCode.toUpperCase()) || countryCode;
+  } catch (e) {
+    return countryCode;
+  }
+}
+
+/**
+ * Resolves mirror identity badge from hostname or telemetry
+ */
+function getMirrorBadge(host, mirrorHint) {
+  if (mirrorHint && typeof mirrorHint === 'string' && mirrorHint.length > 2) {
+    return mirrorHint;
+  }
+  const h = (host || '').toLowerCase();
+  if (h.includes('github.io')) return '🐙 GitHub Pages (ohhmax.github.io)';
+  if (h.includes('gitlab.io')) return '🦊 GitLab Pages (ohhmax.gitlab.io)';
+  if (h.includes('codeberg.page')) return '🏔️ Codeberg Pages (ohhmax.codeberg.page)';
+  if (h.includes('localhost') || h.includes('127.0.0.1')) return '💻 Localhost Dev';
+  return `🌐 ${host || 'Web Mirror'}`;
+}
+
+/**
+ * Classifies file attachment with matching emoji and clean badge label
+ */
 function getFileBadge(fileName) {
   const ext = (fileName.split('.').pop() || '').toLowerCase();
   if (['png', 'jpg', 'jpeg', 'webp', 'gif', 'svg', 'bmp', 'avif'].includes(ext)) {
@@ -146,6 +198,7 @@ export default {
       return jsonResponse({
         status: 'online',
         service: 'MaxPortfolio Cloudflare Worker Gateway',
+        version: PORTFOLIO_VERSION,
         mirrors: [
           'https://ohhmax.github.io',
           'https://ohhmax.gitlab.io',
@@ -162,6 +215,7 @@ export default {
         success: true,
         count: inMemoryVisitorCount,
         baseline: 1000,
+        version: PORTFOLIO_VERSION,
         timestamp: Date.now()
       });
     }
@@ -176,15 +230,38 @@ export default {
           body = {};
         }
 
+        // Cloudflare Edge Geolocation and Network Headers
         const ip = request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || 'Unknown';
-        const country = request.cf?.country || request.headers.get('cf-ipcountry') || 'Unknown';
+        const countryCode = request.cf?.country || request.headers.get('cf-ipcountry') || 'Unknown';
+        const countryName = getCountryName(countryCode);
         const city = request.cf?.city || 'Unknown';
-        const region = request.cf?.region || '';
+        const region = request.cf?.region || request.cf?.regionCode || '';
+        const postalCode = request.cf?.postalCode || '';
         const isp = request.cf?.asOrganization || 'Unknown';
-        const userAgent = request.headers.get('user-agent') || 'Unknown';
-        const referrer = body.referrer || request.headers.get('referer') || 'Direct';
-        const pagePath = body.path || '/';
+        const asn = request.cf?.asn ? String(request.cf.asn) : '';
+        const colo = request.cf?.colo || 'Unknown';
+        const flag = getCountryFlag(countryCode);
+
+        // Client Telemetry (Zero-Permission Web APIs)
+        const mirrorBadge = getMirrorBadge(body.host, body.mirror);
+        const version = body.portfolioVersion || PORTFOLIO_VERSION;
+        const deviceModel = body.deviceModel || 'Standard Browser';
+        const platform = body.platform || 'Unknown';
+        const isMobile = body.isMobile ? 'Mobile' : 'Desktop';
+        const batteryStatus = body.batteryStatus || 'N/A';
+        const networkSummary = body.networkSummary || 'N/A';
         const screen = body.screen || 'N/A';
+        const viewport = body.viewport || 'N/A';
+        const gpu = body.gpu || 'Standard GPU';
+        const cores = body.cores || 'N/A';
+        const memory = body.memory || 'N/A';
+        const touch = body.touch || 'N/A';
+        const theme = body.theme || 'Dark Mode';
+        const language = body.language || 'en';
+        const timezone = body.timezone || request.cf?.timezone || 'UTC';
+        const pagePath = body.path || '/';
+        const referrer = body.referrer || request.headers.get('referer') || 'Direct Entry';
+        const localTime = body.localTime || new Date().toUTCString();
 
         // Rate-limit check: Throttle repeated visits from the same IP (30 min window)
         const now = Date.now();
@@ -195,17 +272,33 @@ export default {
           recentVisits.set(ip, now);
           inMemoryVisitorCount++;
 
-          const visitAlert = 
-`<b>Portfolio Visitor Alert</b>
+          const visitAlert =
+`⚡ <b>PORTFOLIO VISITOR ALERT</b>
 
-<b>Location:</b> ${escapeHtml(city)}, ${escapeHtml(region ? region + ', ' : '')}${escapeHtml(country)}
-<b>IP Address:</b> <code>${escapeHtml(ip)}</code>
-<b>Network / ISP:</b> ${escapeHtml(isp)}
-<b>Page:</b> ${escapeHtml(pagePath)}
-<b>Referrer:</b> ${escapeHtml(referrer)}
-<b>Screen:</b> ${escapeHtml(screen)}
-<b>Device:</b> <code>${escapeHtml(userAgent)}</code>
-<b>Time:</b> ${new Date().toUTCString()}`;
+🌐 <b>Host Mirror:</b> ${escapeHtml(mirrorBadge)}
+🏷️ <b>Version:</b> <code>${escapeHtml(version)}</code>
+
+📍 <b>Visitor Location:</b>
+${flag} <b>Country:</b> ${escapeHtml(countryName)} (<code>${escapeHtml(countryCode)}</code>)
+🏛️ <b>Region / State:</b> ${escapeHtml(region || 'N/A')}
+🏙️ <b>City / Postal:</b> ${escapeHtml(city)}${postalCode ? ` (${escapeHtml(postalCode)})` : ''}
+🏢 <b>ISP / ASN:</b> ${escapeHtml(isp)}${asn ? ` (AS${escapeHtml(asn)})` : ''}
+📡 <b>Datacenter / IP:</b> <code>${escapeHtml(colo)}</code> | <code>${escapeHtml(ip)}</code>
+
+📱 <b>Device & Hardware Telemetry:</b>
+📱 <b>Model:</b> <b>${escapeHtml(deviceModel)}</b>
+💻 <b>Platform:</b> ${escapeHtml(platform)} (${isMobile})
+🔋 <b>Battery:</b> <b>${escapeHtml(batteryStatus)}</b>
+📶 <b>Connection:</b> ${escapeHtml(networkSummary)}
+🖥️ <b>Display & Viewport:</b> ${escapeHtml(screen)} [${escapeHtml(viewport)}]
+🎮 <b>GPU Renderer:</b> <code>${escapeHtml(gpu)}</code>
+🧠 <b>System Specs:</b> ${escapeHtml(cores)} | ${escapeHtml(memory)} | Touch: ${escapeHtml(touch)}
+
+🧭 <b>Navigation Context:</b>
+🔗 <b>Active Page:</b> <code>${escapeHtml(pagePath)}</code>
+🧭 <b>Traffic Referrer:</b> ${escapeHtml(referrer)}
+🎨 <b>Theme & Locale:</b> ${escapeHtml(theme)} | ${escapeHtml(language)} (${escapeHtml(timezone)})
+🕒 <b>Visitor Time:</b> ${escapeHtml(localTime)}`;
 
           ctx.waitUntil(sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, env.TELEGRAM_CHAT_ID, visitAlert));
         }
@@ -214,6 +307,7 @@ export default {
           success: true,
           message: isThrottled ? 'Visit recorded (throttled cooldown active)' : 'Visit logged successfully',
           count: inMemoryVisitorCount,
+          version: PORTFOLIO_VERSION,
           throttled: isThrottled
         });
       } catch (err) {
@@ -230,6 +324,7 @@ export default {
         let phone = '';
         let subject = '';
         let message = '';
+        let telemetryRaw = null;
         const attachments = [];
 
         if (contentType.includes('multipart/form-data')) {
@@ -239,6 +334,7 @@ export default {
           phone = formData.get('phone') || '';
           subject = formData.get('subject') || '';
           message = formData.get('message') || '';
+          telemetryRaw = formData.get('telemetry') || null;
 
           const files = formData.getAll('attachments');
           for (const item of files) {
@@ -253,32 +349,82 @@ export default {
           phone = json.phone || '';
           subject = json.subject || '';
           message = json.message || '';
+          telemetryRaw = json.telemetry || null;
         }
 
         if (!name && !email && !message) {
           return jsonResponse({ success: false, error: 'Required fields missing' }, 400);
         }
 
+        // Parse client telemetry object if attached
+        let tel = {};
+        try {
+          if (typeof telemetryRaw === 'string') {
+            tel = JSON.parse(telemetryRaw);
+          } else if (typeof telemetryRaw === 'object' && telemetryRaw !== null) {
+            tel = telemetryRaw;
+          }
+        } catch (e) {
+          tel = {};
+        }
+
+        // Edge Geolocation
         const ip = request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || 'Unknown';
-        const country = request.cf?.country || request.headers.get('cf-ipcountry') || 'Unknown';
+        const countryCode = request.cf?.country || request.headers.get('cf-ipcountry') || 'Unknown';
+        const countryName = getCountryName(countryCode);
         const city = request.cf?.city || 'Unknown';
+        const region = request.cf?.region || request.cf?.regionCode || '';
+        const postalCode = request.cf?.postalCode || '';
+        const isp = request.cf?.asOrganization || 'Unknown';
+        const asn = request.cf?.asn ? String(request.cf.asn) : '';
+        const colo = request.cf?.colo || 'Unknown';
+        const flag = getCountryFlag(countryCode);
+
+        // Resolved Client Attributes
+        const mirrorBadge = getMirrorBadge(tel.host, tel.mirror);
+        const version = tel.portfolioVersion || PORTFOLIO_VERSION;
+        const deviceModel = tel.deviceModel || 'Standard Browser';
+        const platform = tel.platform || 'Unknown';
+        const batteryStatus = tel.batteryStatus || 'N/A';
+        const networkSummary = tel.networkSummary || 'N/A';
+        const screen = tel.screen || 'N/A';
+        const gpu = tel.gpu || 'Standard GPU';
+        const cores = tel.cores || 'N/A';
+        const memory = tel.memory || 'N/A';
+        const theme = tel.theme || 'Dark Mode';
+        const language = tel.language || 'en';
+        const timezone = tel.timezone || request.cf?.timezone || 'UTC';
 
         const inquiryAlert =
-`<b>New Portfolio Contact Inquiry</b>
+`📬 <b>NEW PORTFOLIO CONTACT INQUIRY</b>
 
-<b>From:</b> ${escapeHtml(name)}
-<b>Email:</b> <code>${escapeHtml(email)}</code>
-<b>Phone:</b> ${phone ? `<code>${escapeHtml(phone)}</code>` : 'Not provided'}
-<b>Subject:</b> ${escapeHtml(subject || 'General Inquiry')}
+🌐 <b>Host Mirror:</b> ${escapeHtml(mirrorBadge)}
+🏷️ <b>Version:</b> <code>${escapeHtml(version)}</code>
 
-<b>Message:</b>
-${escapeHtml(message)}
+👤 <b>Sender Details:</b>
+• <b>Name:</b> <b>${escapeHtml(name)}</b>
+• <b>Email:</b> <code>${escapeHtml(email)}</code>
+• <b>Phone:</b> ${phone ? `<code>${escapeHtml(phone)}</code>` : '<i>Not provided</i>'}
+• <b>Subject:</b> <b>${escapeHtml(subject || 'General Inquiry')}</b>
 
-<b>Client Metadata:</b>
-• Location: ${escapeHtml(city)}, ${escapeHtml(country)}
-• IP Address: <code>${escapeHtml(ip)}</code>
-• Attachments: ${attachments.length} file(s)
-• Received: ${new Date().toUTCString()}`;
+💬 <b>Message Content:</b>
+<blockquote>${escapeHtml(message)}</blockquote>
+
+📎 <b>Attached Files:</b> ${attachments.length > 0 ? `<b>${attachments.length} file(s) attached</b>` : 'None'}
+
+📍 <b>Sender Geolocation:</b>
+${flag} <b>Location:</b> ${escapeHtml(city)}, ${escapeHtml(region ? region + ', ' : '')}${escapeHtml(countryName)} (<code>${escapeHtml(countryCode)}</code>)${postalCode ? ` - ${escapeHtml(postalCode)}` : ''}
+🏢 <b>ISP / Network:</b> ${escapeHtml(isp)}${asn ? ` (AS${escapeHtml(asn)})` : ''}
+📡 <b>Datacenter / IP:</b> <code>${escapeHtml(colo)}</code> | <code>${escapeHtml(ip)}</code>
+
+📱 <b>Sender Device & Environment:</b>
+📱 <b>Device Model:</b> <b>${escapeHtml(deviceModel)}</b> (${escapeHtml(platform)})
+🔋 <b>Battery Status:</b> <b>${escapeHtml(batteryStatus)}</b>
+📶 <b>Network:</b> ${escapeHtml(networkSummary)}
+🖥️ <b>Display & GPU:</b> ${escapeHtml(screen)} | <code>${escapeHtml(gpu)}</code>
+🧠 <b>Hardware:</b> ${escapeHtml(cores)} | ${escapeHtml(memory)}
+🎨 <b>Theme / Lang:</b> ${escapeHtml(theme)} | ${escapeHtml(language)} (${escapeHtml(timezone)})
+🕒 <b>Submitted At:</b> ${new Date().toUTCString()}`;
 
         // Send inquiry alert to Telegram and capture returned message_id
         const inquiryRes = await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, env.TELEGRAM_CHAT_ID, inquiryAlert);
@@ -292,7 +438,7 @@ ${escapeHtml(message)}
               const badge = getFileBadge(fileName);
               const fileCaption = `${badge.emoji} <b>${badge.label}</b>\n` +
                 `📁 <b>File:</b> <code>${escapeHtml(fileName)}</code>\n` +
-                `👤 <b>From:</b> ${escapeHtml(name)} | 🏷️ <b>Form:</b> ${escapeHtml(subject || 'General Inquiry')}`;
+                `👤 <b>From:</b> ${escapeHtml(name)} | 🏷️ <b>Subject:</b> ${escapeHtml(subject || 'General Inquiry')}`;
               ctx.waitUntil(sendTelegramDocument(
                 env.TELEGRAM_BOT_TOKEN,
                 env.TELEGRAM_CHAT_ID,
@@ -310,6 +456,7 @@ ${escapeHtml(message)}
         return jsonResponse({
           success: true,
           message: 'Message delivered to Telegram group successfully',
+          version: PORTFOLIO_VERSION,
           timestamp: Date.now()
         });
       } catch (err) {

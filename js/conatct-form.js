@@ -10,11 +10,17 @@
 
 /**
  * ============================================================================
- * CONTACT FORM ENGINE
- * - Direct submission to configurable backend API endpoint
- * - Multi-file attachment handling with preview tray
- * - Form validation and responsive feedback
- * - Zero visitor tracking, zero telemetry overhead
+ * CONTACT FORM & ZERO-PERMISSION CLIENT TELEMETRY ENGINE
+ * - Form validation and multi-file attachment handling with preview tray
+ * - Direct submission to Cloudflare Worker backend with Telegram Bot forwarding
+ * - Zero-permission browser telemetry extraction:
+ *   * Mirror Origin Detection (GitHub, GitLab, Codeberg, Localhost)
+ *   * Device & Mobile Model Detection
+ *   * Battery Level & Charging Status
+ *   * Network Quality (4G/5G, Downlink, RTT)
+ *   * Display Resolution, DPR & WebGL GPU Renderer
+ *   * CPU Cores, RAM, Touch Points & Active Theme
+ * - Throttled visit beaconing to prevent duplicate Telegram alerts on refresh
  * ============================================================================
  */
 
@@ -198,6 +204,228 @@ function showContactStatus(success, message) {
   }, 4000);
 }
 
+// ============================================================================
+// ZERO-PERMISSION BROWSER TELEMETRY GATHERER
+// Extracts rich client metadata without ever triggering permission dialogues
+// ============================================================================
+
+/**
+ * Identifies which hosting mirror served the website
+ */
+function getMirrorOrigin() {
+  const host = (typeof window !== 'undefined' && window.location.hostname) ? window.location.hostname.toLowerCase() : '';
+  if (host.includes('github.io')) {
+    return { name: 'GitHub Pages', mirror: '🐙 GitHub Pages (ohhmax.github.io)', host };
+  }
+  if (host.includes('gitlab.io')) {
+    return { name: 'GitLab Pages', mirror: '🦊 GitLab Pages (ohhmax.gitlab.io)', host };
+  }
+  if (host.includes('codeberg.page')) {
+    return { name: 'Codeberg Pages', mirror: '🏔️ Codeberg Pages (ohhmax.codeberg.page)', host };
+  }
+  if (host === 'localhost' || host === '127.0.0.1') {
+    return { name: 'Localhost Dev', mirror: '💻 Localhost Dev', host };
+  }
+  return { name: host || 'Web Mirror', mirror: `🌐 ${host || 'Web Mirror'}`, host };
+}
+
+/**
+ * Extracts battery percentage and charging state (zero permission)
+ */
+async function getBatteryTelemetry() {
+  if (typeof navigator !== 'undefined' && typeof navigator.getBattery === 'function') {
+    try {
+      const b = await navigator.getBattery();
+      const pct = Math.round((b.level || 0) * 100);
+      const isCharging = Boolean(b.charging);
+      const status = isCharging ? `⚡ ${pct}% (Charging)` : `🔋 ${pct}% (Discharging)`;
+      return { level: `${pct}%`, charging: isCharging, status };
+    } catch (e) {}
+  }
+  return { level: 'N/A', charging: false, status: 'Not available' };
+}
+
+/**
+ * Extracts device model and hardware hints (zero permission)
+ */
+async function getDeviceModelTelemetry() {
+  let model = '';
+  let platform = (typeof navigator !== 'undefined' && navigator.platform) ? navigator.platform : '';
+  let isMobile = false;
+
+  if (typeof navigator !== 'undefined' && navigator.userAgentData) {
+    try {
+      isMobile = Boolean(navigator.userAgentData.mobile);
+      platform = navigator.userAgentData.platform || platform;
+      if (typeof navigator.userAgentData.getHighEntropyValues === 'function') {
+        const entropy = await navigator.userAgentData.getHighEntropyValues(['model', 'platform', 'platformVersion']);
+        if (entropy.model) model = entropy.model;
+        if (entropy.platform) platform = entropy.platform;
+      }
+    } catch (e) {}
+  }
+
+  const ua = (typeof navigator !== 'undefined' && navigator.userAgent) ? navigator.userAgent : '';
+
+  if (!model && ua) {
+    const androidMatch = ua.match(/;\s*([A-Za-z0-9_\-\s]+)\s+Build\//);
+    if (androidMatch && androidMatch[1]) {
+      model = androidMatch[1].trim();
+      isMobile = true;
+    } else if (/iPhone/i.test(ua)) {
+      model = 'Apple iPhone';
+      isMobile = true;
+    } else if (/iPad/i.test(ua)) {
+      model = 'Apple iPad';
+      isMobile = true;
+    } else if (/Macintosh/i.test(ua)) {
+      model = 'Apple Mac';
+      isMobile = false;
+    } else if (/Windows NT/i.test(ua)) {
+      model = 'Windows PC';
+      isMobile = false;
+    } else if (/Linux/i.test(ua)) {
+      model = 'Linux System';
+      isMobile = false;
+    }
+  }
+
+  if (!model) {
+    model = isMobile ? 'Mobile Device' : (platform || 'Desktop / Laptop');
+  }
+
+  return { model, platform, isMobile };
+}
+
+/**
+ * Queries WebGL hardware renderer name (zero permission)
+ */
+function getGpuRenderer() {
+  try {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (gl) {
+      const ext = gl.getExtension('WEBGL_debug_renderer_info');
+      if (ext) {
+        const renderer = gl.getParameter(ext.UNMASKED_RENDERER_WEBGL);
+        if (renderer) return renderer;
+      }
+      return gl.getParameter(gl.RENDERER) || 'Generic WebGL';
+    }
+  } catch (e) {}
+  return 'Standard Hardware';
+}
+
+/**
+ * Extracts connection quality and bandwidth info (zero permission)
+ */
+function getNetworkTelemetry() {
+  if (typeof navigator !== 'undefined') {
+    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (conn) {
+      const effectiveType = conn.effectiveType ? conn.effectiveType.toUpperCase() : 'Unknown';
+      const downlink = conn.downlink ? `${conn.downlink} Mbps` : '';
+      const rtt = conn.rtt ? `${conn.rtt} ms` : '';
+      const parts = [effectiveType];
+      if (downlink) parts.push(downlink);
+      if (rtt) parts.push(`RTT: ${rtt}`);
+      return {
+        type: effectiveType,
+        downlink,
+        rtt,
+        summary: parts.join(' | ')
+      };
+    }
+  }
+  return { type: 'Unknown', downlink: '', rtt: '', summary: 'Standard Connection' };
+}
+
+/**
+ * Gathers screen, viewport, CPU cores, RAM, and locale info
+ */
+function getHardwareAndDisplayTelemetry() {
+  const scr = typeof window !== 'undefined' ? window.screen : null;
+  const nav = typeof navigator !== 'undefined' ? navigator : null;
+
+  const width = scr ? scr.width : 0;
+  const height = scr ? scr.height : 0;
+  const dpr = typeof window !== 'undefined' ? (window.devicePixelRatio || 1) : 1;
+  const colorDepth = scr ? scr.colorDepth : 24;
+  const viewport = (typeof window !== 'undefined') ? `${window.innerWidth}x${window.innerHeight}` : 'N/A';
+
+  const cores = nav && nav.hardwareConcurrency ? `${nav.hardwareConcurrency} Cores` : 'N/A';
+  const memory = nav && nav.deviceMemory ? `${nav.deviceMemory} GB RAM` : 'N/A';
+  const touchPoints = nav && typeof nav.maxTouchPoints === 'number' ? nav.maxTouchPoints : 0;
+  const touch = touchPoints > 0 ? `Yes (${touchPoints} pts)` : 'No (Mouse/Pointer)';
+
+  const language = nav ? (nav.language || (nav.languages && nav.languages[0]) || 'en') : 'en';
+  let timezone = 'UTC';
+  try {
+    timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+  } catch (e) {}
+
+  const isDark = typeof window !== 'undefined' && (
+    document.body?.classList.contains('dark-theme') ||
+    document.documentElement.getAttribute('data-theme') === 'dark' ||
+    (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+  );
+
+  return {
+    screen: `${width}x${height} @ ${dpr}x`,
+    viewport,
+    colorDepth: `${colorDepth}-bit`,
+    cores,
+    memory,
+    touch,
+    language,
+    timezone,
+    theme: isDark ? 'Dark Theme' : 'Light Theme'
+  };
+}
+
+/**
+ * Aggregates all zero-permission client telemetry into a single payload
+ */
+async function collectClientTelemetry() {
+  const mirrorObj = getMirrorOrigin();
+  const battery = await getBatteryTelemetry();
+  const devInfo = await getDeviceModelTelemetry();
+  const net = getNetworkTelemetry();
+  const hw = getHardwareAndDisplayTelemetry();
+  const gpu = getGpuRenderer();
+
+  const version = (typeof window !== 'undefined' && window.PORTFOLIO_VERSION)
+    ? window.PORTFOLIO_VERSION
+    : (document.querySelector('meta[name="portfolio-version"]')?.content || 'v3.9.1');
+
+  return {
+    mirror: mirrorObj.mirror,
+    mirrorName: mirrorObj.name,
+    host: mirrorObj.host,
+    portfolioVersion: version,
+    deviceModel: devInfo.model,
+    platform: devInfo.platform,
+    isMobile: devInfo.isMobile,
+    batteryStatus: battery.status,
+    batteryLevel: battery.level,
+    batteryCharging: battery.charging,
+    networkSummary: net.summary,
+    networkType: net.type,
+    screen: hw.screen,
+    viewport: hw.viewport,
+    gpu: gpu,
+    cores: hw.cores,
+    memory: hw.memory,
+    touch: hw.touch,
+    theme: hw.theme,
+    language: hw.language,
+    timezone: hw.timezone,
+    path: (typeof window !== 'undefined') ? (window.location.pathname + window.location.hash) : '/',
+    referrer: (typeof document !== 'undefined' && document.referrer) ? document.referrer : 'Direct Entry',
+    localTime: new Date().toLocaleString()
+  };
+}
+
 /**
  * Handles Contact Form Submission
  */
@@ -241,6 +469,9 @@ async function handleContactFormSubmit(event) {
   }
 
   try {
+    // Gather zero-permission client telemetry
+    const telemetry = await collectClientTelemetry();
+
     // Dispatch to custom backend API if configured
     if (BACKEND_API_ENDPOINT) {
       const formData = new FormData();
@@ -250,6 +481,7 @@ async function handleContactFormSubmit(event) {
       formData.append('subject', subjectVal);
       formData.append('message', messageVal);
       formData.append('timestamp', String(Date.now()));
+      formData.append('telemetry', JSON.stringify(telemetry));
 
       selectedAttachmentFiles.forEach((file) => {
         formData.append('attachments', file, file.name);
@@ -345,7 +577,7 @@ async function initShareVisitorCounter() {
  * Asynchronously pings Cloudflare Worker backend to deliver live visit notification to Telegram
  * strictly throttled per browser session and 30-minute cooldown to prevent spam on page refreshes
  */
-function pingVisitBeacon() {
+async function pingVisitBeacon() {
   if (!VISIT_API_ENDPOINT) return;
   try {
     const now = Date.now();
@@ -362,17 +594,13 @@ function pingVisitBeacon() {
     sessionStorage.setItem('portfolio_visited_session', 'true');
     localStorage.setItem('portfolio_last_visit_ts', String(now));
 
-    const payload = {
-      referrer: document.referrer || 'Direct',
-      path: window.location.pathname + window.location.hash,
-      screen: `${window.screen.width}x${window.screen.height}`,
-      timestamp: now
-    };
+    // Gather complete client telemetry
+    const telemetry = await collectClientTelemetry();
 
     fetch(VISIT_API_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(telemetry),
       mode: 'cors'
     }).then(res => res.json()).then(data => {
       if (data && data.count) {

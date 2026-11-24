@@ -1,6 +1,7 @@
 {
   "name": "portfolio-backend",
   "version": "1.0.0",
+  "type": "module",
   "description": "Cloudflare Worker Backend for Mahendra Mali Portfolio",
   "main": "src/index.js",
   "scripts": {

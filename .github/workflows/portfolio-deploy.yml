@@ -58,6 +58,11 @@ jobs:
           test -f sitemap.xml || exit 1
           echo "Static portfolio core files verified."
 
+      - name: Stamp Portfolio Version & Build Assets
+        run: |
+          node tools/bump-version.js --stamp-only
+          echo "Portfolio version stamped successfully."
+
       - name: Upload Static Web Artifact
         uses: actions/upload-pages-artifact@v3
         with:
