@@ -16,10 +16,10 @@ jobs:
       - name: Checkout Source Code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js 20
+      - name: Set up Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Install Dependencies
         working-directory: backend
@@ -34,31 +34,65 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           if [ -z "$CLOUDFLARE_TOKEN" ]; then
-            echo "Error: CLOUDFLARE_TOKEN secret is not configured."
+            echo "Error: CLOUDFLARE_TOKEN secret is not configured in repository secrets."
             exit 1
           fi
 
-          export CLOUDFLARE_API_TOKEN="$CLOUDFLARE_TOKEN"
+          # Sanitize inputs by trimming any whitespace or line endings
+          CF_TOKEN=$(echo -n "$CLOUDFLARE_TOKEN" | tr -d '\r\n\t ')
+          CF_ACCOUNT_ID=$(echo -n "$CLOUDFLARE_ACCOUNT_ID" | tr -d '\r\n\t ')
+          TG_BOT_TOKEN=$(echo -n "$TELEGRAM_BOT_TOKEN" | tr -d '\r\n\t ')
+          TG_CHAT_ID=$(echo -n "$TELEGRAM_CHAT_ID" | tr -d '\r\n\t ')
 
-          # 1. Check if user configured CLOUDFLARE_ACCOUNT_ID secret
-          if [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
-            export CLOUDFLARE_ACCOUNT_ID="$CLOUDFLARE_ACCOUNT_ID"
-            echo "Using configured Cloudflare Account ID: ${CLOUDFLARE_ACCOUNT_ID:0:6}***"
+          # 1. Cloudflare Token Diagnostic Verification
+          echo "Verifying Cloudflare API Token..."
+          VERIFY_RES=$(curl -s -H "Authorization: Bearer $CF_TOKEN" "https://api.cloudflare.com/client/v4/user/tokens/verify")
+          VERIFY_SUCCESS=$(echo "$VERIFY_RES" | jq -r '.success // false')
+          VERIFY_STATUS=$(echo "$VERIFY_RES" | jq -r '.result.status // "unknown"')
+
+          if [ "$VERIFY_SUCCESS" = "true" ]; then
+            echo "Cloudflare API Token verified successfully (Status: $VERIFY_STATUS)."
           else
-            # 2. Attempt dynamic discovery from Cloudflare API
-            ACCOUNT_ID=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_TOKEN" "https://api.cloudflare.com/client/v4/accounts" | jq -r '.result[0].id // empty')
-            if [ -n "$ACCOUNT_ID" ] && [ "$ACCOUNT_ID" != "null" ]; then
-              echo "Cloudflare Account ID discovered from API: ${ACCOUNT_ID:0:6}***"
-              export CLOUDFLARE_ACCOUNT_ID="$ACCOUNT_ID"
-            else
-              echo "Note: If deployment fails with code 10000, please add CLOUDFLARE_ACCOUNT_ID to GitHub Secrets (found in Cloudflare Dashboard -> Workers & Pages right sidebar)."
+            echo "Notice: Cloudflare Token verification returned: $VERIFY_RES"
+          fi
+
+          # 2. Account Discovery / Verification
+          ACCOUNTS_RES=$(curl -s -H "Authorization: Bearer $CF_TOKEN" "https://api.cloudflare.com/client/v4/accounts")
+          DISCOVERED_ACCOUNT_ID=$(echo "$ACCOUNTS_RES" | jq -r '.result[0].id // empty')
+          ACCOUNT_COUNT=$(echo "$ACCOUNTS_RES" | jq -r '.result | length // 0')
+
+          TARGET_ACCOUNT_ID=""
+          if [ -n "$CF_ACCOUNT_ID" ]; then
+            TARGET_ACCOUNT_ID="$CF_ACCOUNT_ID"
+            echo "Using configured Cloudflare Account ID: ${TARGET_ACCOUNT_ID:0:6}***"
+          elif [ -n "$DISCOVERED_ACCOUNT_ID" ] && [ "$DISCOVERED_ACCOUNT_ID" != "null" ]; then
+            TARGET_ACCOUNT_ID="$DISCOVERED_ACCOUNT_ID"
+            echo "Auto-discovered Cloudflare Account ID: ${TARGET_ACCOUNT_ID:0:6}*** (Total authorized accounts: $ACCOUNT_COUNT)"
+          else
+            echo "Warning: No account ID discovered from API token. Please verify CLOUDFLARE_ACCOUNT_ID."
+          fi
+
+          # Inject account_id directly into wrangler.toml to avoid runtime lookup issues
+          if [ -n "$TARGET_ACCOUNT_ID" ]; then
+            if ! grep -q "^account_id" wrangler.toml; then
+              sed -i "1i account_id = \"$TARGET_ACCOUNT_ID\"" wrangler.toml
             fi
+            export CLOUDFLARE_ACCOUNT_ID="$TARGET_ACCOUNT_ID"
           fi
 
-          # Deploy worker with environment variables injected securely
-          if [ -n "$TELEGRAM_BOT_TOKEN" ] && [ -n "$TELEGRAM_CHAT_ID" ]; then
-            npx wrangler deploy --var "TELEGRAM_BOT_TOKEN:$TELEGRAM_BOT_TOKEN" --var "TELEGRAM_CHAT_ID:$TELEGRAM_CHAT_ID"
-          else
-            npx wrangler deploy
+          export CLOUDFLARE_API_TOKEN="$CF_TOKEN"
+
+          # 3. Deploy Worker using Wrangler
+          echo "Starting Wrangler deployment..."
+          DEPLOY_CMD="npx wrangler deploy"
+          if [ -n "$TARGET_ACCOUNT_ID" ]; then
+            DEPLOY_CMD="$DEPLOY_CMD --account-id $TARGET_ACCOUNT_ID"
           fi
+
+          if [ -n "$TG_BOT_TOKEN" ] && [ -n "$TG_CHAT_ID" ]; then
+            $DEPLOY_CMD --var "TELEGRAM_BOT_TOKEN:$TG_BOT_TOKEN" --var "TELEGRAM_CHAT_ID:$TG_CHAT_ID"
+          else
+            $DEPLOY_CMD
+          fi
+
           echo "Cloudflare Worker deployed successfully."
