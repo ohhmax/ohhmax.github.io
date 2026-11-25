@@ -1448,6 +1448,72 @@ function initMaxNicknameModal() {
 }
 
 // ==========================================================================
+// LEGAL & COMPLIANCE TRUST CENTER MODAL
+// ==========================================================================
+function initLegalModal() {
+  const modal = document.getElementById('legalModal');
+  const closeBtn = document.getElementById('legalModalCloseBtn');
+  const backdrop = document.getElementById('legalModalBackdrop');
+
+  window.openLegalModal = function(tab) {
+    if (!modal) return;
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (tab && typeof window.switchLegalTab === 'function') {
+      window.switchLegalTab(tab);
+    }
+  };
+
+  window.closeLegalModal = function() {
+    if (!modal) return;
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  window.switchLegalTab = function(tabName) {
+    const tabs = document.querySelectorAll('.legal-tab-btn');
+    tabs.forEach(btn => {
+      if (btn.getAttribute('data-legal-tab') === tabName) {
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+      } else {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+      }
+    });
+
+    const panels = {
+      privacy: document.getElementById('legalTabPrivacy'),
+      disclaimer: document.getElementById('legalTabDisclaimer'),
+      terms: document.getElementById('legalTabTerms')
+    };
+
+    Object.keys(panels).forEach(key => {
+      const p = panels[key];
+      if (!p) return;
+      if (key === tabName) {
+        p.style.display = 'block';
+        p.classList.add('active');
+      } else {
+        p.style.display = 'none';
+        p.classList.remove('active');
+      }
+    });
+  };
+
+  if (closeBtn) closeBtn.addEventListener('click', window.closeLegalModal);
+  if (backdrop) backdrop.addEventListener('click', window.closeLegalModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.style.display === 'flex') {
+      window.closeLegalModal();
+    }
+  });
+}
+
+// ==========================================================================
 // 3D NAME TOUCH / POINTER INWARD PRESS DEPTH EFFECT
 // ==========================================================================
 function init3DNameTouchPress() {
@@ -2208,6 +2274,7 @@ document.addEventListener('DOMContentLoaded', () => {
   safeInit(initPhotoHighlightsBanner, 'initPhotoHighlightsBanner');
   safeInit(initGalleryTimelineModal, 'initGalleryTimelineModal');
   safeInit(initMaxNicknameModal, 'initMaxNicknameModal');
+  safeInit(initLegalModal, 'initLegalModal');
   safeInit(init3DNameTouchPress, 'init3DNameTouchPress');
   safeInit(initMomentsSlider, 'initMomentsSlider');
   safeInit(initDedicatedGallery, 'initDedicatedGallery');

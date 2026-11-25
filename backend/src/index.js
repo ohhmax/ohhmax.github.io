@@ -20,7 +20,7 @@
  * ============================================================================
  */
 
-const PORTFOLIO_VERSION = 'v3.9.7';
+const PORTFOLIO_VERSION = 'v3.9.8';
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',

@@ -35,6 +35,60 @@
 'use strict';
 
 (function () {
+  let isVideoMuted = false;
+  let isAutoNextEnabled = true;
+  try {
+    isAutoNextEnabled = localStorage.getItem('portfolio_reel_autonext') !== 'false';
+  } catch (e) {}
+
+  function syncVideoControlsUI() {
+    const muteBtn = document.getElementById('galleryVideoMuteBtn');
+    const muteIcon = document.getElementById('galleryVideoMuteIcon');
+    const videoEl = document.getElementById('galleryVideoPlayer');
+    if (muteIcon && videoEl) {
+      if (videoEl.muted) {
+        muteIcon.className = 'fa-solid fa-volume-xmark';
+        if (muteBtn) muteBtn.title = 'Unmute Audio';
+      } else {
+        muteIcon.className = 'fa-solid fa-volume-high';
+        if (muteBtn) muteBtn.title = 'Mute Audio';
+      }
+    }
+
+    const autoNextBtn = document.getElementById('galleryAutoNextBtn');
+    if (autoNextBtn) {
+      if (isAutoNextEnabled) {
+        autoNextBtn.classList.add('active');
+        autoNextBtn.title = 'Auto Next Reel: ON';
+      } else {
+        autoNextBtn.classList.remove('active');
+        autoNextBtn.title = 'Auto Next Reel: OFF';
+      }
+    }
+  }
+
+  function toggleVideoMute(e) {
+    if (e) e.stopPropagation();
+    const videoEl = document.getElementById('galleryVideoPlayer');
+    if (!videoEl) return;
+    videoEl.muted = !videoEl.muted;
+    isVideoMuted = videoEl.muted;
+    syncVideoControlsUI();
+  }
+
+  function toggleAutoNext(e) {
+    if (e) e.stopPropagation();
+    isAutoNextEnabled = !isAutoNextEnabled;
+    try {
+      localStorage.setItem('portfolio_reel_autonext', isAutoNextEnabled ? 'true' : 'false');
+    } catch (err) {}
+    const videoEl = document.getElementById('galleryVideoPlayer');
+    if (videoEl) {
+      videoEl.loop = !isAutoNextEnabled;
+    }
+    syncVideoControlsUI();
+  }
+
   // Strictly display only 2 rows on all devices:
   // Desktop & Tablet (> 640px): 4 columns x 2 rows = 8 items
   // Mobile (<= 640px): 2 columns x 2 rows = 4 items
@@ -554,7 +608,8 @@
           }
         };
         videoEl.src = src;
-        videoEl.muted = false;
+        videoEl.loop = !isAutoNextEnabled;
+        videoEl.muted = isVideoMuted;
         videoEl.volume = 1.0;
 
         const updateCountdown = () => {
@@ -572,10 +627,16 @@
         };
 
         videoEl.ontimeupdate = updateCountdown;
-        videoEl.onloadedmetadata = updateCountdown;
+        videoEl.onloadedmetadata = () => {
+          updateCountdown();
+          syncVideoControlsUI();
+        };
         videoEl.onseeked = updateCountdown;
         videoEl.onended = () => {
           updateCountdown();
+          if (isAutoNextEnabled) {
+            navigateGalleryMedia(1);
+          }
         };
 
         if (!videoEl.dataset.tapBound) {
@@ -595,20 +656,23 @@
         const onReady = () => {
           if (spinner) spinner.style.display = 'none';
           updateCountdown();
+          syncVideoControlsUI();
         };
 
         videoEl.oncanplay = onReady;
         videoEl.onplaying = onReady;
         videoEl.onwaiting = () => { if (spinner) spinner.style.display = 'flex'; };
 
+        // Default Auto Play with Muted Fallback
         const playPromise = videoEl.play();
         if (playPromise !== undefined) {
           playPromise.catch(() => {
             videoEl.muted = true;
+            syncVideoControlsUI();
             videoEl.play().catch(() => {});
-            videoEl.addEventListener('click', () => { videoEl.muted = false; }, { once: true });
           });
         }
+        syncVideoControlsUI();
       }
     } else {
       if (stageEl) {
@@ -1000,6 +1064,8 @@
   window.navigateGalleryMedia = navigateGalleryMedia;
   window.navigatePhotoLightbox = navigateGalleryMedia;
   window.closeGalleryModals = closeGalleryModals;
+  window.toggleVideoMute = toggleVideoMute;
+  window.toggleAutoNext = toggleAutoNext;
   window.initPortfolioGallery = initGalleryEvents;
   window.resetGallerySearch = resetGallerySearch;
   window.checkAndShowGallerySwipeHint = checkAndShowSwipeHint;

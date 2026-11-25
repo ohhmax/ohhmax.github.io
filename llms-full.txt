@@ -9,7 +9,6 @@ This document contains architectural, technical, and biographical context for la
 - **Full Name**: Mahendra Mali
 - **Alternate Names**: Max, Mahendra, mahendraplus
 - **Location**: Gujarat, Bharat (India)
-- **Age**: 25 Years Old
 - **Nationality**: Indian
 - **Primary Roles**:
   - Full-Stack Web Developer

@@ -230,14 +230,23 @@ def main():
       <div class="lightbox-media-wrap" id="photoLightboxImageWrap">
         <img id="photoLightboxImg" src="" alt="Full-Screen Image" class="lightbox-fullscreen-media">
         
-        <!-- Video Stage with Top-Right Monospace Countdown Timer -->
+        <!-- Video Stage with Top-Right Controls & Countdown Timer -->
         <div class="lightbox-video-stage" id="galleryVideoStage" style="display: none;">
           <video id="galleryVideoPlayer" 
                  class="lightbox-fullscreen-media" 
                  playsinline 
-                 preload="auto" 
-                 loop></video>
-          <div class="video-countdown-scrim" id="galleryVideoCountdown" aria-label="Remaining Video Time">00:00</div>
+                 preload="auto"></video>
+          
+          <!-- Floating Top-Right Controls Overlay on Reel -->
+          <div class="reel-top-controls" id="reelTopControls">
+            <button type="button" class="reel-ctrl-btn reel-autonext-btn active" id="galleryAutoNextBtn" onclick="toggleAutoNext(event)" title="Auto Next Reel: ON" aria-label="Toggle Auto Next Reel">
+              <i class="fa-solid fa-forward-step" id="galleryAutoNextIcon"></i>
+            </button>
+            <button type="button" class="reel-ctrl-btn reel-mute-btn" id="galleryVideoMuteBtn" onclick="toggleVideoMute(event)" title="Mute / Unmute Audio" aria-label="Toggle Audio">
+              <i class="fa-solid fa-volume-high" id="galleryVideoMuteIcon"></i>
+            </button>
+            <div class="video-countdown-scrim" id="galleryVideoCountdown" aria-label="Remaining Video Time">00:00</div>
+          </div>
         </div>
       </div>
 
