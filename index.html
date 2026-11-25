@@ -1107,6 +1107,18 @@
         </div>
       </aside>
 
+      <!-- Portfolio Exploration Progress Bar (No Label, Guide Icon + Animated Progress Bar) -->
+      <div class="desktop-sidebar-progress" id="portfolioProgressWrap" role="progressbar" aria-label="Portfolio Exploration Progress" aria-valuenow="17" aria-valuemin="0" aria-valuemax="100" title="Portfolio Exploration Journey">
+        <div class="progress-guide-icon-box" title="Portfolio Journey">
+          <i class="fa-solid fa-compass progress-guide-icon" id="portfolioProgressIcon" aria-hidden="true"></i>
+        </div>
+        <div class="portfolio-progress-track">
+          <div class="portfolio-progress-fill" id="portfolioProgressBar" style="width: 17%;">
+            <span class="progress-pulse-head" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+
       <!-- Desktop Legal & Compliance Trust Matrix -->
       <div class="desktop-legal-bar" id="desktopLegalBar" aria-label="Security, Privacy &amp; Legal Policies">
         <button type="button" class="desktop-legal-btn" onclick="navigateToPage('privacy');" title="Privacy Policy">
@@ -1123,6 +1135,15 @@
           <i class="fa-solid fa-file-contract"></i>
           <span>Terms</span>
         </button>
+      </div>
+
+      <!-- Desktop Sidebar Footer: Visitor Counter & Version Badge -->
+      <div class="desktop-sidebar-footer" id="desktopSidebarFooter">
+        <span class="desktop-footer-capsule" id="sidebarVisitorsBadge" title="Total Unique Visitors">
+          <i class="fa-solid fa-eye" aria-hidden="true"></i>
+          <span id="sidebarVisitorCount">0</span>
+        </span>
+        <span class="desktop-footer-capsule" id="sidebarVersionBadge" title="Portfolio Version">v3.9.8</span>
       </div>
 
     </div>
@@ -1150,7 +1171,7 @@
             </div>
             <button type="button" class="about-expand-btn" id="aboutExpandToggleBtn" aria-expanded="false" aria-controls="aboutMoreContent">
               <span class="expand-btn-text">Read More</span>
-              <i class="fa-solid fa-chevron-right expand-btn-icon"></i>
+              <i class="fa-solid fa-chevron-down expand-btn-icon"></i>
             </button>
           </div>
         </section>
@@ -7953,16 +7974,16 @@
             <span class="btn-sub"><i class="fa-solid fa-arrow-left"></i> Previous</span>
             <span class="btn-main">Resume &amp; Qualifications</span>
           </button>
-          <button type="button" class="pagination-nav-btn next-btn" onclick="navigateToPage('testimonials')">
-            <span class="btn-sub">Next Section</span>
-            <span class="btn-main">What People Are Saying <i class="fa-solid fa-arrow-right"></i></span>
+          <button type="button" class="pagination-nav-btn next-btn" onclick="if(window.PROJECTS_DATA && window.PROJECTS_DATA.length){openProjectDetail(window.PROJECTS_DATA[0]);}else{navigateToPage('testimonials');}">
+            <span class="btn-sub">Next: Start Project Tour</span>
+            <span class="btn-main">MaxNet-Router-OS <i class="fa-solid fa-arrow-right"></i></span>
           </button>
         </div>
       </article>
 
       <!-- Project Detail Section -->
       <article class="project-detail" data-page="project-detail">
-        <!-- Compact Breadcrumb Bar with Icon-Only Back Button & Next/Prev Project Arrows -->
+        <!-- Compact Breadcrumb Bar with Icon-Only Back Button -->
         <div class="section-breadcrumb-bar compact-crumb">
           <button type="button" class="breadcrumb-back-icon-btn" onclick="navigateToPage('projects')" aria-label="Back to Projects" title="Back to Projects">
             <i class="fa-solid fa-arrow-left"></i>
@@ -7972,70 +7993,48 @@
             <span class="crumb-sep"><i class="fa-solid fa-chevron-right"></i></span>
             <span class="crumb-current" id="detailBreadcrumbTitle">MaxAI</span>
           </nav>
-          <!-- Next / Previous Project Navigation Arrows -->
-          <div class="project-detail-nav-arrows">
-            <button type="button" class="project-step-arrow-btn" id="projectDetailPrevArrow" onclick="navigateProjectDetail(-1)" aria-label="Previous Project" title="Previous Project">
-              <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <span class="project-step-counter" id="projectDetailStepCounter">1 / 20</span>
-            <button type="button" class="project-step-arrow-btn" id="projectDetailNextArrow" onclick="navigateProjectDetail(1)" aria-label="Next Project" title="Next Project">
-              <i class="fa-solid fa-chevron-right"></i>
-            </button>
-          </div>
         </div>
 
-        <div class="project-detail-content-wrap">
-          <header class="project-detail-header">
-            <div class="project-detail-badge-row">
-              <span class="project-detail-badge" id="detailProjectCategory">Edge AI &amp; Autonomous</span>
-              <span class="project-detail-lang" id="detailProjectLang"><i class="fa-solid fa-code"></i> C++</span>
-            </div>
-            <h2 class="h2 article-title project-detail-title" id="detailProjectTitle">MaxAI</h2>
-          </header>
+        <header>
+          <h2 class="h2 article-title project-detail-title" id="detailProjectTitle">MaxAI</h2>
+        </header>
 
-          <!-- Engineering Breakdown Cards -->
-          <div class="project-deepdive-grid">
-            <div class="deepdive-card challenge">
-              <div class="deepdive-card-header">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                <h4>Engineering Challenge</h4>
-              </div>
-              <p id="detailProjectProblem">Engineered to overcome high latency, hardware resets, and unreliable carrier coverage.</p>
-            </div>
+        <section class="legal-plain-content project-plain-content">
+          <p class="legal-lead" id="detailProjectDesc">
+            High-performance on-device AI runtime engineered for sub-second offline neural execution.
+          </p>
 
-            <div class="deepdive-card solution">
-              <div class="deepdive-card-header">
-                <i class="fa-solid fa-microchip"></i>
-                <h4>Architectural Solution &amp; Stack</h4>
-              </div>
-              <p id="detailProjectSolution">Custom bare-metal or systems-level architecture with non-blocking concurrency.</p>
-              <div class="project-tech-chips" id="detailProjectTechChips"></div>
-            </div>
+          <h3 class="legal-subheading"><i class="fa-solid fa-triangle-exclamation" style="color: #f59e0b;"></i> Engineering Challenge</h3>
+          <p id="detailProjectProblem">
+            Engineered to overcome high latency, hardware resets, and unreliable carrier coverage.
+          </p>
 
-            <div class="deepdive-card impact">
-              <div class="deepdive-card-header">
-                <i class="fa-solid fa-chart-line"></i>
-                <h4>Production Impact &amp; Reliability</h4>
-              </div>
-              <p id="detailProjectImpact">Ensures high throughput, automated failover, and fault-tolerant continuous uptime.</p>
-            </div>
-          </div>
+          <h3 class="legal-subheading"><i class="fa-solid fa-microchip" style="color: #38bdf8;"></i> Architectural Solution &amp; Stack</h3>
+          <p id="detailProjectSolution">
+            Custom bare-metal or systems-level architecture with non-blocking concurrency.
+          </p>
+          <div class="project-tech-chips" id="detailProjectTechChips"></div>
+
+          <h3 class="legal-subheading"><i class="fa-solid fa-chart-line" style="color: #10b981;"></i> Production Impact &amp; Reliability</h3>
+          <p id="detailProjectImpact">
+            Ensures high throughput, automated failover, and fault-tolerant continuous uptime.
+          </p>
 
           <!-- Action Buttons: Clean Project Repository & Web Links Only -->
-          <div class="project-detail-actions" id="projectDetailActions"></div>
-        </div>
+          <div class="project-detail-actions" id="projectDetailActions" style="margin-top: 24px; margin-bottom: 24px;"></div>
 
-        <!-- Section Bottom Pagination Navigation -->
-        <div class="section-bottom-pagination two-way">
-          <button type="button" class="pagination-nav-btn prev-btn" onclick="navigateToPage('projects')">
-            <span class="btn-sub"><i class="fa-solid fa-arrow-left"></i> Back</span>
-            <span class="btn-main">All Projects</span>
-          </button>
-          <button type="button" class="pagination-nav-btn next-btn" onclick="navigateToPage('testimonials')">
-            <span class="btn-sub">Next Section</span>
-            <span class="btn-main">What People Are Saying <i class="fa-solid fa-arrow-right"></i></span>
-          </button>
-        </div>
+          <!-- Section Bottom Next / Previous Project Navigation -->
+          <div class="section-bottom-pagination two-way">
+            <button type="button" class="pagination-nav-btn prev-btn" id="projectDetailBottomPrevBtn" onclick="navigateProjectDetail(-1)">
+              <span class="btn-sub"><i class="fa-solid fa-arrow-left"></i> Previous Project</span>
+              <span class="btn-main" id="projectDetailPrevName">Previous Project</span>
+            </button>
+            <button type="button" class="pagination-nav-btn next-btn" id="projectDetailBottomNextBtn" onclick="navigateProjectDetail(1)">
+              <span class="btn-sub">Next Project <i class="fa-solid fa-arrow-right"></i></span>
+              <span class="btn-main" id="projectDetailNextName">Next Project</span>
+            </button>
+          </div>
+        </section>
       </article>
 
       <!-- Testimonials Section -->
@@ -9156,6 +9155,18 @@
             <small>Light &amp; Dark Toggle</small>
           </div>
         </button>
+      </div>
+
+      <!-- Portfolio Exploration Progress Bar (Mobile Drawer) -->
+      <div class="maxhive-drawer-progress" id="drawerPortfolioProgressWrap" role="progressbar" aria-label="Portfolio Exploration Progress" aria-valuenow="17" aria-valuemin="0" aria-valuemax="100" title="Portfolio Exploration Journey">
+        <div class="progress-guide-icon-box" title="Portfolio Journey">
+          <i class="fa-solid fa-compass progress-guide-icon" id="drawerPortfolioProgressIcon" aria-hidden="true"></i>
+        </div>
+        <div class="portfolio-progress-track">
+          <div class="portfolio-progress-fill" id="drawerPortfolioProgressBar" style="width: 17%;">
+            <span class="progress-pulse-head" aria-hidden="true"></span>
+          </div>
+        </div>
       </div>
 
       <!-- Dedicated Legal & Trust Section in Drawer -->

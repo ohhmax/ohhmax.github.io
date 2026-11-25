@@ -386,24 +386,18 @@ function openProjectDetail(project) {
 
   const crumbTitle = document.getElementById('detailBreadcrumbTitle');
   const detailTitle = document.getElementById('detailProjectTitle');
-  const detailCategory = document.getElementById('detailProjectCategory');
-  const detailLang = document.getElementById('detailProjectLang');
+  const detailDesc = document.getElementById('detailProjectDesc');
   const detailProblem = document.getElementById('detailProjectProblem');
   const detailSolution = document.getElementById('detailProjectSolution');
   const detailImpact = document.getElementById('detailProjectImpact');
   const detailChips = document.getElementById('detailProjectTechChips');
-  const copyBtn = document.getElementById('detailCopySummaryBtn');
-  const stepCounter = document.getElementById('projectDetailStepCounter');
-
-  if (stepCounter && list.length > 0) {
-    stepCounter.textContent = `${currentProjectIndex + 1} / ${list.length}`;
-  }
+  const prevNameEl = document.getElementById('projectDetailPrevName');
+  const nextNameEl = document.getElementById('projectDetailNextName');
 
   const shortName = project.name || project.title;
   if (crumbTitle) crumbTitle.textContent = shortName;
   if (detailTitle) detailTitle.textContent = shortName;
-  if (detailCategory) detailCategory.textContent = project.category || 'Systems';
-  if (detailLang) detailLang.innerHTML = `<i class="fa-solid fa-code"></i> ${project.language || 'C++'}`;
+  if (detailDesc) detailDesc.textContent = project.description || 'Production system engineered by Mahendra Mali (Max).';
 
   if (detailProblem) {
     detailProblem.textContent = project.details?.problem || 'Engineered to overcome high latency, hardware resets, and unreliable carrier coverage.';
@@ -424,6 +418,41 @@ function openProjectDetail(project) {
       span.textContent = tag;
       detailChips.appendChild(span);
     });
+  }
+
+  // Update Bottom Next & Previous Project Names and Navigation Targets
+  const prevBtn = document.getElementById('projectDetailBottomPrevBtn');
+  const nextBtn = document.getElementById('projectDetailBottomNextBtn');
+  if (list.length > 0) {
+    if (currentProjectIndex === 0) {
+      if (prevBtn) {
+        const sub = prevBtn.querySelector('.btn-sub');
+        if (sub) sub.innerHTML = '<i class="fa-solid fa-arrow-left"></i> All Projects';
+      }
+      if (prevNameEl) prevNameEl.textContent = 'Projects Catalog';
+    } else {
+      const prevProj = list[currentProjectIndex - 1];
+      if (prevBtn) {
+        const sub = prevBtn.querySelector('.btn-sub');
+        if (sub) sub.innerHTML = '<i class="fa-solid fa-arrow-left"></i> Previous Project';
+      }
+      if (prevNameEl && prevProj) prevNameEl.textContent = prevProj.name || prevProj.title;
+    }
+
+    if (currentProjectIndex === list.length - 1) {
+      if (nextBtn) {
+        const sub = nextBtn.querySelector('.btn-sub');
+        if (sub) sub.innerHTML = 'Next Section <i class="fa-solid fa-arrow-right"></i>';
+      }
+      if (nextNameEl) nextNameEl.textContent = 'What People Are Saying';
+    } else {
+      const nextProj = list[currentProjectIndex + 1];
+      if (nextBtn) {
+        const sub = nextBtn.querySelector('.btn-sub');
+        if (sub) sub.innerHTML = 'Next Project <i class="fa-solid fa-arrow-right"></i>';
+      }
+      if (nextNameEl && nextProj) nextNameEl.textContent = nextProj.name || nextProj.title;
+    }
   }
 
   // Render clean project URLs only (No Discuss Architecture, No Copy Summary)
@@ -447,6 +476,19 @@ window.openProjectDetail = openProjectDetail;
 function navigateProjectDetail(direction) {
   const list = (window.PROJECTS_DATA && window.PROJECTS_DATA.length) ? window.PROJECTS_DATA : [];
   if (!list.length) return;
+
+  if (direction > 0 && currentProjectIndex === list.length - 1) {
+    if (typeof navigateToPage === 'function') {
+      navigateToPage('testimonials');
+      return;
+    }
+  } else if (direction < 0 && currentProjectIndex === 0) {
+    if (typeof navigateToPage === 'function') {
+      navigateToPage('projects');
+      return;
+    }
+  }
+
   currentProjectIndex = (currentProjectIndex + direction + list.length) % list.length;
   openProjectDetail(list[currentProjectIndex]);
 }
@@ -1950,7 +1992,13 @@ function initAboutExpander() {
         textSpan.textContent = isExpanded ? 'Show Less' : 'Read More';
       }
       if (icon) {
-        icon.style.transform = isExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
+        if (isExpanded) {
+          icon.style.animation = 'none';
+          icon.style.transform = 'rotate(180deg)';
+        } else {
+          icon.style.animation = '';
+          icon.style.transform = 'rotate(0deg)';
+        }
       }
     });
   }

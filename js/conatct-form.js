@@ -588,6 +588,8 @@ function updateVisitorCountDisplay(count) {
   if (drawerEl) drawerEl.textContent = formatted;
   const shareEl = document.getElementById('shareVisitorCount');
   if (shareEl) shareEl.textContent = formatted;
+  const sidebarEl = document.getElementById('sidebarVisitorCount');
+  if (sidebarEl) sidebarEl.textContent = formatted;
 }
 
 /**

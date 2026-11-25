@@ -293,18 +293,25 @@
     setupSmartRobotCaptions();
     initRobotPreloaderFlight();
 
-    // Sync drawer micro version badge and visitor counter capsule
+    // Sync drawer & sidebar micro version badge and visitor counter capsule
     const versionBadge = document.getElementById('drawerVersionBadge');
     if (versionBadge && typeof window !== 'undefined' && window.PORTFOLIO_VERSION) {
       versionBadge.textContent = window.PORTFOLIO_VERSION;
     }
+    const sidebarVersion = document.getElementById('sidebarVersionBadge');
+    if (sidebarVersion && typeof window !== 'undefined' && window.PORTFOLIO_VERSION) {
+      sidebarVersion.textContent = window.PORTFOLIO_VERSION;
+    }
     const drawerVisEl = document.getElementById('drawerVisitorCount');
-    if (drawerVisEl && typeof localStorage !== 'undefined') {
+    const sidebarVisEl = document.getElementById('sidebarVisitorCount');
+    if (typeof localStorage !== 'undefined') {
       let rawCount = localStorage.getItem('portfolio_unique_visitors');
       let num = parseInt(rawCount || '0', 10);
       if (num >= 1000) num -= 1000;
-      drawerVisEl.textContent = num.toLocaleString();
+      if (drawerVisEl) drawerVisEl.textContent = num.toLocaleString();
+      if (sidebarVisEl) sidebarVisEl.textContent = num.toLocaleString();
     }
+    updatePortfolioProgressBar('about');
   }
 
   // ==========================================================================
@@ -2089,6 +2096,7 @@
   // ==========================================================================
   const PORTFOLIO_SECTIONS = [
     { key: 'about', label: 'About' },
+    { key: 'resume', label: 'Resume' },
     { key: 'projects', label: 'Projects' },
     { key: 'testimonials', label: 'What People Are Saying' },
     { key: 'gallery', label: 'Gallery' },
@@ -2098,6 +2106,56 @@
     { key: 'disclaimer', label: 'Disclaimer' },
     { key: 'terms', label: 'Terms' }
   ];
+
+  const CORE_JOURNEY_KEYS = ['about', 'resume', 'projects', 'testimonials', 'gallery', 'contact'];
+
+  function updatePortfolioProgressBar(currentKey) {
+    try {
+      let explored = JSON.parse(localStorage.getItem('max_explored_keys') || '[]');
+      if (currentKey) {
+        let mappedKey = currentKey;
+        if (mappedKey === 'project-detail') mappedKey = 'projects';
+        if (mappedKey === 'moment-detail') mappedKey = 'gallery';
+        if (mappedKey === 'testimonial-detail') mappedKey = 'testimonials';
+        if (!explored.includes(mappedKey)) {
+          explored.push(mappedKey);
+          localStorage.setItem('max_explored_keys', JSON.stringify(explored));
+        }
+      }
+
+      if (!explored.includes('about')) {
+        explored.push('about');
+        localStorage.setItem('max_explored_keys', JSON.stringify(explored));
+      }
+
+      const visitedCount = CORE_JOURNEY_KEYS.filter(k => explored.includes(k)).length;
+      const progressPercent = Math.max(17, Math.min(100, Math.round((visitedCount / CORE_JOURNEY_KEYS.length) * 100)));
+
+      const fills = document.querySelectorAll('#portfolioProgressBar, #drawerPortfolioProgressBar');
+      fills.forEach(fill => {
+        fill.style.width = `${progressPercent}%`;
+      });
+
+      const wraps = document.querySelectorAll('#portfolioProgressWrap, #drawerPortfolioProgressWrap');
+      wraps.forEach(wrap => {
+        wrap.setAttribute('aria-valuenow', String(progressPercent));
+      });
+
+      const icons = document.querySelectorAll('#portfolioProgressIcon, #drawerPortfolioProgressIcon');
+      icons.forEach(icon => {
+        if (progressPercent >= 100) {
+          icon.className = 'fa-solid fa-circle-check progress-guide-icon';
+          icon.style.color = '#10b981';
+          icon.style.animation = 'none';
+        } else {
+          icon.className = 'fa-solid fa-compass progress-guide-icon';
+          icon.style.color = '';
+          icon.style.animation = '';
+        }
+      });
+    } catch (e) {}
+  }
+  window.updatePortfolioProgressBar = updatePortfolioProgressBar;
 
   function trackExploredSection(pageKey) {
     try {
@@ -2113,6 +2171,7 @@
 
   function updateDomForPage(normalizedPage) {
     trackExploredSection(normalizedPage);
+    updatePortfolioProgressBar(normalizedPage);
 
     // 1. Update active article view
     const articles = document.querySelectorAll('article[data-page]');
