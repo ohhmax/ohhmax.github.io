@@ -194,6 +194,74 @@ function initProjectModal() {
   }
 }
 
+// Clean Project Repository and Web Links Renderer (Zero Fluff, Only Direct Technical URLs)
+function renderProjectActionButtons(container, project) {
+  if (!container || !project) return;
+  container.innerHTML = '';
+
+  const shortName = project.name || project.title || '';
+  const repoSlug = shortName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+  // 1. Live Website Link
+  const webUrl = project.liveUrl || project.webUrl;
+  if (webUrl) {
+    const a = document.createElement('a');
+    a.href = webUrl;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.className = 'detail-action-btn btn-web';
+    a.innerHTML = '<i class="fa-solid fa-globe"></i> <span>Live Website</span>';
+    container.appendChild(a);
+  }
+
+  // 2. GitHub Repository Link
+  const ghUrl = project.githubUrl || `https://github.com/ohhmax/${repoSlug}`;
+  if (ghUrl) {
+    const a = document.createElement('a');
+    a.href = ghUrl;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.className = 'detail-action-btn btn-github';
+    a.innerHTML = '<i class="fa-brands fa-github"></i> <span>GitHub Repo</span>';
+    container.appendChild(a);
+  }
+
+  // 3. GitLab Mirror Link
+  const glUrl = project.gitlabUrl || `https://gitlab.com/ohhmax/${repoSlug}`;
+  if (glUrl) {
+    const a = document.createElement('a');
+    a.href = glUrl;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.className = 'detail-action-btn btn-gitlab';
+    a.innerHTML = '<i class="fa-brands fa-gitlab"></i> <span>GitLab Mirror</span>';
+    container.appendChild(a);
+  }
+
+  // 4. Codeberg Mirror Link
+  const cbUrl = project.codebergUrl || `https://codeberg.org/ohhmax/${repoSlug}`;
+  if (cbUrl) {
+    const a = document.createElement('a');
+    a.href = cbUrl;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.className = 'detail-action-btn btn-codeberg';
+    a.innerHTML = '<i class="fa-solid fa-mountain"></i> <span>Codeberg</span>';
+    container.appendChild(a);
+  }
+
+  // 5. Documentation Link
+  if (project.docUrl && project.docUrl !== webUrl) {
+    const a = document.createElement('a');
+    a.href = project.docUrl;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.className = 'detail-action-btn btn-docs';
+    a.innerHTML = '<i class="fa-solid fa-book"></i> <span>Documentation</span>';
+    container.appendChild(a);
+  }
+}
+
 function openProjectModal(project) {
   const modal = document.getElementById('projectModal');
   if (!modal || !project) return;
@@ -210,7 +278,7 @@ function openProjectModal(project) {
   const solElem = document.getElementById('modalProjectSolution');
   const impElem = document.getElementById('modalProjectImpact');
   const chipsElem = document.getElementById('modalProjectTechChips');
-  const inquireBtn = document.getElementById('modalInquireBtn');
+  const actionsContainer = document.getElementById('modalProjectActions');
 
   if (catElem) catElem.textContent = project.category || 'Engineering';
   if (titleElem) titleElem.textContent = project.title || project.name;
@@ -242,19 +310,6 @@ function openProjectModal(project) {
     }
   }
 
-
-
-  // Handle Documentation Button
-  const docBtn = document.getElementById('modalProjectDocBtn');
-  if (docBtn) {
-    if (project.docUrl || project.documentation) {
-      docBtn.style.display = 'inline-flex';
-      docBtn.href = project.docUrl || project.documentation || '#';
-    } else {
-      docBtn.style.display = 'none';
-    }
-  }
-
   // Render technology chips
   if (chipsElem) {
     chipsElem.innerHTML = '';
@@ -267,10 +322,9 @@ function openProjectModal(project) {
     });
   }
 
-  // Setup direct Telegram inquiry link
-  if (inquireBtn) {
-    const message = encodeURIComponent(`Hi Max, I saw your project "${project.title}" and would like to discuss its engineering architecture.`);
-    inquireBtn.href = `https://t.me/the_max_lab?text=${message}`;
+  // Render clean project URLs only (No Discuss Architecture, No Copy Summary)
+  if (actionsContainer) {
+    renderProjectActionButtons(actionsContainer, project);
   }
 
   modal.classList.add('active');
@@ -372,15 +426,10 @@ function openProjectDetail(project) {
     });
   }
 
-  if (copyBtn) {
-    copyBtn.onclick = () => {
-      const text = `${shortName}\nCategory: ${project.category}\nLanguage: ${project.language}\nChallenge: ${project.details?.problem || project.description}\nSolution: ${project.details?.solution || ''}\nImpact: ${project.details?.impact || ''}\nTechnologies: ${project.technologies || ''}`;
-      navigator.clipboard?.writeText(text).then(() => {
-        const original = copyBtn.innerHTML;
-        copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> <span>Copied!</span>';
-        setTimeout(() => { copyBtn.innerHTML = original; }, 2000);
-      }).catch(() => {});
-    };
+  // Render clean project URLs only (No Discuss Architecture, No Copy Summary)
+  const detailActions = document.getElementById('projectDetailActions');
+  if (detailActions) {
+    renderProjectActionButtons(detailActions, project);
   }
 
   const projectSlug = (project.name || project.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -1448,34 +1497,18 @@ function initMaxNicknameModal() {
 }
 
 // ==========================================================================
-// LEGAL & COMPLIANCE TRUST CENTER MODAL
+// TRUST, SECURITY & COMPLIANCE SECTION CONTROLLER
+// Dedicated Page Architecture & Category Filter
 // ==========================================================================
-function initLegalModal() {
-  const modal = document.getElementById('legalModal');
-  const closeBtn = document.getElementById('legalModalCloseBtn');
-  const backdrop = document.getElementById('legalModalBackdrop');
+function initTrustSection() {
+  window.switchTrustPolicy = function(targetCategory) {
+    const category = targetCategory || 'all';
+    const navButtons = document.querySelectorAll('.trust-nav-btn');
+    const cards = document.querySelectorAll('.trust-card');
 
-  window.openLegalModal = function(tab) {
-    if (!modal) return;
-    modal.style.display = 'flex';
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    if (tab && typeof window.switchLegalTab === 'function') {
-      window.switchLegalTab(tab);
-    }
-  };
-
-  window.closeLegalModal = function() {
-    if (!modal) return;
-    modal.style.display = 'none';
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  };
-
-  window.switchLegalTab = function(tabName) {
-    const tabs = document.querySelectorAll('.legal-tab-btn');
-    tabs.forEach(btn => {
-      if (btn.getAttribute('data-legal-tab') === tabName) {
+    navButtons.forEach(btn => {
+      const btnTarget = btn.getAttribute('data-trust-target');
+      if (btnTarget === category) {
         btn.classList.add('active');
         btn.setAttribute('aria-selected', 'true');
       } else {
@@ -1484,33 +1517,36 @@ function initLegalModal() {
       }
     });
 
-    const panels = {
-      privacy: document.getElementById('legalTabPrivacy'),
-      disclaimer: document.getElementById('legalTabDisclaimer'),
-      terms: document.getElementById('legalTabTerms')
-    };
-
-    Object.keys(panels).forEach(key => {
-      const p = panels[key];
-      if (!p) return;
-      if (key === tabName) {
-        p.style.display = 'block';
-        p.classList.add('active');
+    cards.forEach(card => {
+      const cardCategory = card.getAttribute('data-policy-category');
+      if (category === 'all' || cardCategory === category) {
+        card.classList.remove('is-hidden');
       } else {
-        p.style.display = 'none';
-        p.classList.remove('active');
+        card.classList.add('is-hidden');
       }
     });
+
+    if (category !== 'all') {
+      const targetCard = document.querySelector(`.trust-card[data-policy-category="${category}"]`);
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
   };
 
-  if (closeBtn) closeBtn.addEventListener('click', window.closeLegalModal);
-  if (backdrop) backdrop.addEventListener('click', window.closeLegalModal);
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal && modal.style.display === 'flex') {
-      window.closeLegalModal();
+  // Graceful fallback for legacy modal callers
+  window.openLegalModal = function(policyKey) {
+    if (typeof window.navigateToPage === 'function') {
+      window.navigateToPage('trust');
     }
-  });
+    if (policyKey && typeof window.switchTrustPolicy === 'function') {
+      window.switchTrustPolicy(policyKey);
+    }
+  };
+
+  window.closeLegalModal = function() {
+    // No-op: Modal replaced by dedicated section
+  };
 }
 
 // ==========================================================================
@@ -2274,7 +2310,7 @@ document.addEventListener('DOMContentLoaded', () => {
   safeInit(initPhotoHighlightsBanner, 'initPhotoHighlightsBanner');
   safeInit(initGalleryTimelineModal, 'initGalleryTimelineModal');
   safeInit(initMaxNicknameModal, 'initMaxNicknameModal');
-  safeInit(initLegalModal, 'initLegalModal');
+  safeInit(initTrustSection, 'initTrustSection');
   safeInit(init3DNameTouchPress, 'init3DNameTouchPress');
   safeInit(initMomentsSlider, 'initMomentsSlider');
   safeInit(initDedicatedGallery, 'initDedicatedGallery');

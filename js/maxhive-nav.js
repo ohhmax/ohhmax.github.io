@@ -157,6 +157,34 @@
       image: "https://ohhmax.github.io/assets/img/og/og-1200x630.jpg",
       twitterImage: "https://ohhmax.github.io/assets/img/og/og-1200x630.jpg",
       url: "https://ohhmax.github.io/#share"
+    },
+    privacy: {
+      title: "Privacy Policy | Mahendra Mali (Max)",
+      desc: "Zero tracking architecture, anonymous traffic counter, and local storage hygiene policy for Mahendra Mali (Max).",
+      image: "https://ohhmax.github.io/assets/img/og/og-about-1200x630.png",
+      twitterImage: "https://ohhmax.github.io/assets/img/og/hd-about-1920x1080.png",
+      url: "https://ohhmax.github.io/#privacy"
+    },
+    disclaimer: {
+      title: "Security & Research Disclaimer | Mahendra Mali (Max)",
+      desc: "Authorized defensive cybersecurity research, Coordinated Vulnerability Disclosure (CVD), and liability limitation for Mahendra Mali (Max).",
+      image: "https://ohhmax.github.io/assets/img/og/og-about-1200x630.png",
+      twitterImage: "https://ohhmax.github.io/assets/img/og/hd-about-1920x1080.png",
+      url: "https://ohhmax.github.io/#disclaimer"
+    },
+    terms: {
+      title: "Terms & Licensing | Mahendra Mali (Max)",
+      desc: "Intellectual property authorship, permitted AI agent indexing, and commercial software licensing terms for Mahendra Mali (Max).",
+      image: "https://ohhmax.github.io/assets/img/og/og-about-1200x630.png",
+      twitterImage: "https://ohhmax.github.io/assets/img/og/hd-about-1920x1080.png",
+      url: "https://ohhmax.github.io/#terms"
+    },
+    trust: {
+      title: "Trust, Security & Compliance | Mahendra Mali (Max)",
+      desc: "Transparent privacy policy, authorized defensive security research disclosures, and intellectual property terms for Mahendra Mali (Max).",
+      image: "https://ohhmax.github.io/assets/img/og/og-about-1200x630.png",
+      twitterImage: "https://ohhmax.github.io/assets/img/og/hd-about-1920x1080.png",
+      url: "https://ohhmax.github.io/#privacy"
     }
   };
 
@@ -2065,7 +2093,10 @@
     { key: 'testimonials', label: 'What People Are Saying' },
     { key: 'gallery', label: 'Gallery' },
     { key: 'contact', label: 'Contact' },
-    { key: 'share', label: 'Share' }
+    { key: 'share', label: 'Share' },
+    { key: 'privacy', label: 'Privacy Policy' },
+    { key: 'disclaimer', label: 'Disclaimer' },
+    { key: 'terms', label: 'Terms' }
   ];
 
   function trackExploredSection(pageKey) {
@@ -2115,7 +2146,7 @@
     }
 
     // 2. Update Bottom Nav buttons
-    const navHighlightTarget = (normalizedPage === 'gallery' || normalizedPage === 'moment-detail' || normalizedPage === 'testimonial-detail' || normalizedPage === 'testimonials' || normalizedPage === 'share') ? 'about' : (normalizedPage === 'project-detail' ? 'projects' : normalizedPage);
+    const navHighlightTarget = (normalizedPage === 'gallery' || normalizedPage === 'moment-detail' || normalizedPage === 'testimonial-detail' || normalizedPage === 'testimonials' || normalizedPage === 'share' || normalizedPage === 'trust' || normalizedPage === 'privacy' || normalizedPage === 'disclaimer' || normalizedPage === 'terms') ? 'about' : (normalizedPage === 'project-detail' ? 'projects' : normalizedPage);
     const bottomButtons = document.querySelectorAll('.maxhive-nav-btn[data-nav-target]');
     bottomButtons.forEach(btn => {
       if (btn.getAttribute('data-nav-target') === navHighlightTarget) {
@@ -2166,6 +2197,10 @@
       normalizedPage = 'gallery';
     }
 
+    if (normalizedPage === 'legal' || normalizedPage === 'trust' || normalizedPage === 'compliance') {
+      normalizedPage = 'privacy';
+    }
+
     if (normalizedPage !== 'project-detail' && (normalizedPage.startsWith('project-') || normalizedPage.startsWith('projects-'))) {
       if (typeof window.openProjectByName === 'function') {
         const opened = window.openProjectByName(normalizedPage);
@@ -2193,7 +2228,11 @@
       gallery: 'star',
       milestones: 'star',
       contact: 'wink',
-      share: 'sparkle'
+      share: 'sparkle',
+      privacy: 'shield',
+      disclaimer: 'nerd',
+      terms: 'happy',
+      trust: 'shield'
     };
     if (pageEmoteMap[normalizedPage]) {
       setEmotion(pageEmoteMap[normalizedPage]);
@@ -2221,6 +2260,7 @@
       if (window.location.hash) {
         const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase().trim();
         if (hash === 'moments') return 'gallery';
+        if (hash === 'trust' || hash === 'legal' || hash === 'compliance') return 'privacy';
         if (pageSEO[hash]) return hash;
       }
       try {
@@ -2229,6 +2269,7 @@
         if (p) {
           const pLower = p.toLowerCase();
           if (pLower === 'moments') return 'gallery';
+          if (pLower === 'trust' || pLower === 'legal' || pLower === 'compliance') return 'privacy';
           if (pageSEO[pLower]) {
             const cleanPath = pLower === 'about' ? window.location.pathname : `${window.location.pathname}#${pLower}`;
             window.history.replaceState({ page: pLower }, '', cleanPath);

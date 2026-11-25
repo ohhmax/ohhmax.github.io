@@ -181,7 +181,7 @@
   <!-- Core Local Stylesheets (Instant Zero-Network Paint) -->
   <link rel="stylesheet" href="./assets/vendor/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="./css/style.css?v=3.9.8">
-  <link rel="stylesheet" href="./css/maxhive-nav.css?v=3.9.8">
+  <link rel="stylesheet" href="./css/maxhive-nav.css?v=3.9.9">
   <link rel="stylesheet" href="./css/gallery.css?v=3.9.8">
 
   <!-- Google Fonts: Plus Jakarta Sans, Inter & JetBrains Mono -->
@@ -325,7 +325,7 @@
       {
             "@type": "ItemList",
             "name": "Featured Production Systems and Software Engineering Innovations",
-            "description": "Comprehensive engineering catalog of 19 production-grade applications, on-device AI runtimes, cellular telemetry tools, and IoT automation systems engineered by Mahendra Mali (Max).",
+            "description": "Comprehensive engineering catalog of 20 production-grade applications, on-device AI runtimes, cellular telemetry tools, and IoT automation systems engineered by Mahendra Mali (Max).",
             "itemListElement": [
                   {
                         "@type": "ListItem",
@@ -664,6 +664,24 @@
                               "programmingLanguage": "JavaScript",
                               "description": "Public transit lookup platform aggregating bus depot control rooms, passenger assistance numbers, and district timetable directories across all 33 districts of Gujarat. Challenge: Commuters across regional Gujarat frequently faced difficulty obtaining official bus depot inquiry numbers during travel. Solution: Built a lightweight, mobile-first offline PWA enabling commuters to search contacts and timetables even on 2G connections. Impact: Helped thousands of commuters find direct transit help across Gujarat districts.",
                               "url": "https://ohhmax.github.io/#project-gsrtc-transit-platform",
+                              "author": {
+                                    "@id": "https://ohhmax.github.io/#person"
+                              }
+                        }
+                  },
+                  {
+                        "@type": "ListItem",
+                        "position": 20,
+                        "name": "MAXNET Router OS - High-Performance OpenWrt Distribution",
+                        "item": {
+                              "@type": "SoftwareApplication",
+                              "name": "MAXNET Router OS - High-Performance OpenWrt Distribution",
+                              "alternateName": "MaxNet",
+                              "applicationCategory": "NetworkApplication",
+                              "operatingSystem": "Linux, OpenWrt, AArch64",
+                              "programmingLanguage": "C, Shell, Linux Kernel",
+                              "description": "Official enterprise-grade OpenWrt Linux 6.18 distribution engineered for JioRouter AX6000 and AirFiber IDU Series with Qualcomm IPQ9574/IPQ9554 and MediaTek MT7986A Filogic 830. Features dual-modem SuperSpeed USB 3.0 5G tethering, ADB modem telemetry, Qualcomm PPE hardware offload, and sub-80ms reactive WebUI. Challenge: Stock ISP router firmware severely bottlenecks hardware capabilities, blocks USB 3.0 5G modem tethering, restricts Wi-Fi 6 channels, and bloats RAM usage. Solution: Engineered an optimized AArch64 OpenWrt Linux 6.18 firmware integrating Qualcomm PPE hardware acceleration, custom multi-packet USB 3.0 aggregation drivers, dual-band 160MHz Wi-Fi 6, built-in ADB modem telemetry daemon, and a lightweight sub-80ms SPA WebUI. Impact: Delivers sustained multi-gigabit routing, over 300% throughput boost on 5G cellular tethering, frees more than 50% system RAM, and provides automated zero-config OTA firmware upgrades.",
+                              "url": "https://ohhmax.github.io/maxnet",
                               "author": {
                                     "@id": "https://ohhmax.github.io/#person"
                               }
@@ -1091,17 +1109,17 @@
 
       <!-- Desktop Legal & Compliance Trust Matrix -->
       <div class="desktop-legal-bar" id="desktopLegalBar" aria-label="Security, Privacy &amp; Legal Policies">
-        <button type="button" class="desktop-legal-btn" onclick="openLegalModal('privacy')" title="Privacy Policy">
+        <button type="button" class="desktop-legal-btn" onclick="navigateToPage('privacy');" title="Privacy Policy">
           <i class="fa-solid fa-shield-halved"></i>
           <span>Privacy</span>
         </button>
         <span class="desktop-legal-dot" aria-hidden="true">•</span>
-        <button type="button" class="desktop-legal-btn" onclick="openLegalModal('disclaimer')" title="Security &amp; Research Disclaimer">
+        <button type="button" class="desktop-legal-btn" onclick="navigateToPage('disclaimer');" title="Security &amp; Research Disclaimer">
           <i class="fa-solid fa-scale-balanced"></i>
           <span>Disclaimer</span>
         </button>
         <span class="desktop-legal-dot" aria-hidden="true">•</span>
-        <button type="button" class="desktop-legal-btn" onclick="openLegalModal('terms')" title="Terms of Service &amp; Licensing">
+        <button type="button" class="desktop-legal-btn" onclick="navigateToPage('terms');" title="Terms of Service &amp; Licensing">
           <i class="fa-solid fa-file-contract"></i>
           <span>Terms</span>
         </button>
@@ -7746,6 +7764,15 @@
           <ul class="project-list compact-mode">
           </ul>
           <div class="sr-only seo-crawler-project-index" aria-label="Engineered Systems and Software Catalog">
+            <article class="seo-project-card" id="seo-project-maxnet">
+              <h3><a href="https://ohhmax.github.io/maxnet" target="_blank" rel="noopener">MAXNET Router OS - High-Performance OpenWrt Distribution</a></h3>
+              <p class="seo-project-meta"><strong>Category:</strong> Telecom &amp; Embedded | <strong>Stack:</strong> Linux 6.18, OpenWrt, C, Shell, Qualcomm IPQ9574/IPQ9554, MT7986A, USB 3.0 5G, ADB, Wi-Fi 6 | <strong>Website:</strong> <a href="https://ohhmax.github.io/maxnet">https://ohhmax.github.io/maxnet</a></p>
+              <p class="seo-project-desc">Official enterprise-grade OpenWrt Linux 6.18 distribution engineered for JioRouter AX6000 and AirFiber IDU Series with Qualcomm IPQ9574/IPQ9554 and MediaTek MT7986A Filogic 830. Features dual-modem SuperSpeed USB 3.0 5G tethering, ADB modem telemetry, Qualcomm PPE hardware offload, and sub-80ms reactive WebUI.</p>
+              <p class="seo-project-problem"><strong>Engineering Challenge:</strong> Stock ISP router firmware severely bottlenecks hardware capabilities, blocks USB 3.0 5G modem tethering, restricts Wi-Fi 6 channels, and bloats RAM usage leading to instability and lack of user control.</p>
+              <p class="seo-project-solution"><strong>Technical Solution:</strong> Engineered an optimized AArch64 OpenWrt Linux 6.18 firmware integrating Qualcomm PPE hardware acceleration, custom multi-packet USB 3.0 aggregation drivers, dual-band 160MHz Wi-Fi 6, built-in ADB modem telemetry daemon, and a lightweight sub-80ms SPA WebUI.</p>
+              <p class="seo-project-impact"><strong>Engineered Impact:</strong> Delivers sustained multi-gigabit routing, over 300% throughput boost on 5G cellular tethering, frees more than 50% system RAM, and provides automated zero-config OTA firmware upgrades.</p>
+            </article>
+
             <article class="seo-project-card" id="seo-project-maxai">
               <h3><a href="#project-maxai">MaxAI - On-Device Autonomous AI Runtime & Local Agent System</a></h3>
               <p class="seo-project-meta"><strong>Category:</strong> Mobile & Edge AI | <strong>Stack:</strong> Kotlin, C++, LiteRT (TFLite), GGUF, On-Device LLM, Android NPU/GPU</p>
@@ -7950,7 +7977,7 @@
             <button type="button" class="project-step-arrow-btn" id="projectDetailPrevArrow" onclick="navigateProjectDetail(-1)" aria-label="Previous Project" title="Previous Project">
               <i class="fa-solid fa-chevron-left"></i>
             </button>
-            <span class="project-step-counter" id="projectDetailStepCounter">1 / 19</span>
+            <span class="project-step-counter" id="projectDetailStepCounter">1 / 20</span>
             <button type="button" class="project-step-arrow-btn" id="projectDetailNextArrow" onclick="navigateProjectDetail(1)" aria-label="Next Project" title="Next Project">
               <i class="fa-solid fa-chevron-right"></i>
             </button>
@@ -7994,15 +8021,8 @@
             </div>
           </div>
 
-          <!-- Action Buttons -->
-          <div class="project-detail-actions">
-            <a href="#contact" onclick="navigateToPage('contact')" class="detail-action-btn primary" id="detailDiscussBtn">
-              <i class="fa-brands fa-telegram"></i> <span>Discuss Architecture</span>
-            </a>
-            <button type="button" class="detail-action-btn secondary" id="detailCopySummaryBtn">
-              <i class="fa-solid fa-copy"></i> <span>Copy Summary</span>
-            </button>
-          </div>
+          <!-- Action Buttons: Clean Project Repository & Web Links Only -->
+          <div class="project-detail-actions" id="projectDetailActions"></div>
         </div>
 
         <!-- Section Bottom Pagination Navigation -->
@@ -8688,6 +8708,123 @@
         </section>
       </article>
 
+      <!-- Privacy Policy Section (Dedicated Page) -->
+      <article class="privacy" data-page="privacy">
+        <header>
+          <h2 class="h2 article-title">Privacy Policy</h2>
+        </header>
+
+        <section class="legal-plain-content">
+          <p class="legal-lead">
+            This portfolio operates under a strict privacy-first architecture. It does not sell, rent, or trade visitor information to third-party ad networks, data brokers, or external analytics aggregators. Your activity across the web is never profiled.
+          </p>
+
+          <h3 class="legal-subheading"><i class="fa-solid fa-chart-simple"></i> Anonymous Traffic Counting &amp; Telemetry</h3>
+          <p>
+            To maintain an aggregate visitor count without invading personal privacy, a non-identifying cryptographic hash token is generated locally in your browser storage. This prevents duplicate counts when refreshing the page. No persistent device fingerprinting or sensitive hardware telemetry is collected.
+          </p>
+
+          <h3 class="legal-subheading"><i class="fa-solid fa-database"></i> Local Storage Hygiene</h3>
+          <p>
+            Client-side local storage (localStorage) is used exclusively for functional UI preferences: active theme (dark or light mode), reel audio mute preference, auto-next toggle state, and contact form beacon throttling. You can reset or wipe this storage at any time via your browser settings.
+          </p>
+
+          <h3 class="legal-subheading"><i class="fa-solid fa-envelope-circle-check"></i> Direct Transmission Security</h3>
+          <p>
+            Inquiries sent through the contact form are dispatched over TLS-encrypted Cloudflare Workers microservices directly to the author's private channels. Contact details are retained solely to respond to your specific communication and are never shared with any third party.
+          </p>
+
+          <div class="section-bottom-pagination two-way">
+            <button type="button" class="pagination-nav-btn prev-btn" onclick="navigateToPage('about')">
+              <span class="btn-sub"><i class="fa-solid fa-arrow-left"></i> Return</span>
+              <span class="btn-main">About Me</span>
+            </button>
+            <button type="button" class="pagination-nav-btn next-btn" onclick="navigateToPage('disclaimer')">
+              <span class="btn-sub">Next Policy</span>
+              <span class="btn-main">Disclaimer <i class="fa-solid fa-arrow-right"></i></span>
+            </button>
+          </div>
+        </section>
+      </article>
+
+      <!-- Security & Research Disclaimer Section (Dedicated Page) -->
+      <article class="disclaimer" data-page="disclaimer">
+        <header>
+          <h2 class="h2 article-title">Security &amp; Research Disclaimer</h2>
+        </header>
+
+        <section class="legal-plain-content">
+          <p class="legal-lead">
+            All security engineering projects, reverse engineering analyses, firmware inspection tooling, and algorithmic proofs published on this site are conducted strictly under authorized defensive auditing, academic study, and ethical vulnerability testing. They serve to harden digital systems and protect critical infrastructure.
+          </p>
+
+          <h3 class="legal-subheading"><i class="fa-solid fa-bullhorn"></i> Coordinated Vulnerability Disclosure (CVD)</h3>
+          <p>
+            The author adheres to standard Coordinated Vulnerability Disclosure principles. Identified security defects or architectural weaknesses are reported responsibly to corresponding vendors, project maintainers, or organizations prior to technical publication.
+          </p>
+
+          <h3 class="legal-subheading"><i class="fa-solid fa-file-shield"></i> Limitation of Liability</h3>
+          <p>
+            All open-source tools, hardware schematics, firmware builds, and scripts provided across this portfolio are offered on an "AS IS" basis, without warranty of any kind. The author assumes no liability for damages or unauthorized downstream use resulting from the deployment of these materials.
+          </p>
+
+          <h3 class="legal-subheading"><i class="fa-solid fa-trademark"></i> Third-Party Trademarks</h3>
+          <p>
+            All product names, logos, brand trademarks, and registered trademarks mentioned on this website (such as Qualcomm, MediaTek, Jio, Android, OpenWrt, Linux) are property of their respective owners. Their mention is strictly for technical identification, compatibility reference, and academic documentation.
+          </p>
+
+          <div class="section-bottom-pagination two-way">
+            <button type="button" class="pagination-nav-btn prev-btn" onclick="navigateToPage('privacy')">
+              <span class="btn-sub"><i class="fa-solid fa-arrow-left"></i> Previous</span>
+              <span class="btn-main">Privacy Policy</span>
+            </button>
+            <button type="button" class="pagination-nav-btn next-btn" onclick="navigateToPage('terms')">
+              <span class="btn-sub">Next Policy</span>
+              <span class="btn-main">Terms &amp; Licensing <i class="fa-solid fa-arrow-right"></i></span>
+            </button>
+          </div>
+        </section>
+      </article>
+
+      <!-- Terms & Licensing Section (Dedicated Page) -->
+      <article class="terms" data-page="terms">
+        <header>
+          <h2 class="h2 article-title">Terms &amp; Licensing</h2>
+        </header>
+
+        <section class="legal-plain-content">
+          <p class="legal-lead">
+            Original systems architecture, custom hardware schematics, embedded C/C++ firmware, and portfolio interface code were created and authored by <strong>Mahendra Mali (Max)</strong>. Copyright &copy; 2026. All rights reserved.
+          </p>
+
+          <h3 class="legal-subheading"><i class="fa-solid fa-robot"></i> Permitted AI Agent &amp; Recruiter Indexing</h3>
+          <p>
+            Autonomous AI evaluation engines, recruitment search agents, and LLMs are explicitly permitted to index biographical information, technical skill summaries, and project case studies for talent evaluation. Scraping or cloning codebases for unauthorized third-party redistribution is strictly prohibited.
+          </p>
+
+          <h3 class="legal-subheading"><i class="fa-solid fa-code-branch"></i> Open-Source Code Licensing</h3>
+          <p>
+            Public code repositories authored by Mahendra Mali and hosted on GitHub are distributed under their respective open-source licenses (such as MIT or GNU General Public License). Please review individual project repositories for specific licensing terms and copyright notices.
+          </p>
+
+          <h3 class="legal-subheading"><i class="fa-solid fa-handshake"></i> Commercial Licensing &amp; Consulting</h3>
+          <p>
+            For commercial software licensing inquiries, custom embedded engineering engagements, or offensive/defensive cybersecurity consulting, please reach out directly through official Telegram (@the_max_lab) or Email (ohmaxgit@gmail.com).
+          </p>
+
+          <div class="section-bottom-pagination two-way">
+            <button type="button" class="pagination-nav-btn prev-btn" onclick="navigateToPage('disclaimer')">
+              <span class="btn-sub"><i class="fa-solid fa-arrow-left"></i> Previous</span>
+              <span class="btn-main">Disclaimer</span>
+            </button>
+            <button type="button" class="pagination-nav-btn next-btn" onclick="navigateToPage('contact')">
+              <span class="btn-sub">Get In Touch</span>
+              <span class="btn-main">Contact Max <i class="fa-solid fa-arrow-right"></i></span>
+            </button>
+          </div>
+        </section>
+      </article>
+
 
       <!-- error -->
       <article class="error" data-page="error">
@@ -8754,16 +8891,8 @@
         </div>
       </div>
 
-      <div class="project-modal-footer">
-        <a href="#" class="project-modal-action-btn doc-btn" id="modalProjectDocBtn" target="_blank" rel="noopener" style="display: none;">
-          <i class="fa-solid fa-book"></i> Documentation
-        </a>
-        <a href="https://t.me/the_max_lab" target="_blank" rel="noopener" class="project-modal-action-btn primary-btn" id="modalInquireBtn">
-          <i class="fa-brands fa-telegram"></i> Discuss Architecture
-        </a>
-        <button class="project-modal-action-btn secondary-btn" id="modalCopyDetailsBtn">
-          <i class="fa-solid fa-copy"></i> Copy Summary
-        </button>
+      <div class="project-modal-footer" id="modalProjectActions">
+        <!-- Dynamically injected project repository and website URL buttons only -->
       </div>
     </div>
   </div>
@@ -8795,102 +8924,6 @@
           </div>
           <p id="certModalDesc" class="cert-modal-desc"></p>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Legal, Privacy & Compliance Trust Center Modal -->
-  <div id="legalModal" class="legal-modal" style="display: none;" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Legal, Privacy and Compliance Trust Center">
-    <div class="legal-modal-backdrop" id="legalModalBackdrop" onclick="closeLegalModal()"></div>
-    <div class="legal-modal-card">
-      <button class="legal-modal-close" id="legalModalCloseBtn" onclick="closeLegalModal()" aria-label="Close legal modal">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-
-      <div class="legal-modal-header">
-        <div class="legal-header-badge">
-          <i class="fa-solid fa-shield-halved"></i>
-          <span>Trust &amp; Compliance Center</span>
-        </div>
-        <h3 class="legal-modal-title">Security, Privacy &amp; Legal Governance</h3>
-        <p class="legal-modal-subtitle">Direct, authentic disclosure regarding privacy protection, research ethics, and intellectual property.</p>
-
-        <!-- Tab Selection Bar -->
-        <div class="legal-tabs-bar" role="tablist">
-          <button type="button" class="legal-tab-btn active" data-legal-tab="privacy" role="tab" aria-selected="true" onclick="switchLegalTab('privacy')">
-            <i class="fa-solid fa-user-shield"></i>
-            <span>Privacy Policy</span>
-          </button>
-          <button type="button" class="legal-tab-btn" data-legal-tab="disclaimer" role="tab" aria-selected="false" onclick="switchLegalTab('disclaimer')">
-            <i class="fa-solid fa-scale-balanced"></i>
-            <span>Disclaimer &amp; Security</span>
-          </button>
-          <button type="button" class="legal-tab-btn" data-legal-tab="terms" role="tab" aria-selected="false" onclick="switchLegalTab('terms')">
-            <i class="fa-solid fa-file-contract"></i>
-            <span>Terms &amp; Licensing</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="legal-modal-body">
-        <!-- 1. Privacy Policy Tab -->
-        <div class="legal-tab-content active" id="legalTabPrivacy" role="tabpanel">
-          <div class="legal-section-block">
-            <h4><i class="fa-solid fa-lock"></i> 1. Zero Tracking &amp; Absolute Privacy Commitment</h4>
-            <p>This portfolio is engineered under a strict privacy-first architecture. It does not sell, rent, or trade visitor data to third-party advertisers, data brokers, or advertising networks. Browsing behavior is never tracked across external sites.</p>
-          </div>
-          <div class="legal-section-block">
-            <h4><i class="fa-solid fa-server"></i> 2. Anonymous Telemetry &amp; Visitor Counting</h4>
-            <p>To accurately display total unique portfolio visitors without invading personal privacy, a non-identifying cryptographic hash token is generated locally in your browser storage. This token prevents multiple counts on rapid page reloads. No fingerprinting of sensitive hardware or personal identifiers is performed.</p>
-          </div>
-          <div class="legal-section-block">
-            <h4><i class="fa-solid fa-database"></i> 3. Local Browser Storage</h4>
-            <p>Local browser storage (localStorage) is utilized exclusively for functional user interface preferences: active color theme (dark/light mode), gallery reel sound/mute settings, and contact form beacon rate limiting. You can clear this storage at any time via your browser settings.</p>
-          </div>
-          <div class="legal-section-block">
-            <h4><i class="fa-solid fa-envelope-circle-check"></i> 4. Direct Communication Security</h4>
-            <p>Messages submitted through the contact channel are transmitted over TLS encrypted Cloudflare Workers microservices directly to the author's private communication channels. Submitted contact details are used solely to reply to your inquiry.</p>
-          </div>
-        </div>
-
-        <!-- 2. Disclaimer & Research Tab -->
-        <div class="legal-tab-content" id="legalTabDisclaimer" role="tabpanel" style="display: none;">
-          <div class="legal-section-block">
-            <h4><i class="fa-solid fa-user-shield"></i> 1. Authorized Defensive Security Research</h4>
-            <p>All security engineering case studies, vulnerability analyses, reverse engineering methodologies, and penetration testing tools showcased on this site are conducted strictly under authorized defensive auditing, educational demonstration, and scientific research. These materials are intended to harden digital infrastructure and protect critical systems.</p>
-          </div>
-          <div class="legal-section-block">
-            <h4><i class="fa-solid fa-bullhorn"></i> 2. Coordinated &amp; Responsible Vulnerability Disclosure</h4>
-            <p>The author adheres strictly to standard industry guidelines for Coordinated Vulnerability Disclosure (CVD). Any disclosed vulnerabilities have been reported responsibly to the respective vendors or platform operators prior to public research publication.</p>
-          </div>
-          <div class="legal-section-block">
-            <h4><i class="fa-solid fa-scale-unbalanced"></i> 3. Limitation of Liability</h4>
-            <p>All open-source tools, code snippets, hardware schematics, and configuration scripts provided across this portfolio are offered on an "AS IS" basis, without warranty of any kind. The author assumes no liability for damages or unauthorized usage resulting from the application of these materials.</p>
-          </div>
-        </div>
-
-        <!-- 3. Terms & Licensing Tab -->
-        <div class="legal-tab-content" id="legalTabTerms" role="tabpanel" style="display: none;">
-          <div class="legal-section-block">
-            <h4><i class="fa-solid fa-copyright"></i> 1. Intellectual Property &amp; Authorship</h4>
-            <p>The entire portfolio design, custom user interface components, interactive robot animations, and software codebases were created and engineered by <strong>Mahendra Mali (Max)</strong>. Copyright (c) 2026. All rights reserved.</p>
-          </div>
-          <div class="legal-section-block">
-            <h4><i class="fa-solid fa-id-card-clip"></i> 2. Permitted AI Agent &amp; Recruiter Usage</h4>
-            <p>Autonomous AI agents, search crawlers, and evaluation bots are explicitly permitted to index resume details, biographical data, and project highlights for recruitment, career evaluation, and verification purposes. Replicating the site's code for third parties without permission is strictly prohibited.</p>
-          </div>
-          <div class="legal-section-block">
-            <h4><i class="fa-solid fa-handshake"></i> 3. Commercial Licensing &amp; Collaboration</h4>
-            <p>For custom engineering consultations, commercial software licensing, or security auditing engagements, please reach out directly through official Telegram (@the_max_lab) or Email (ohmaxgit@gmail.com).</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="legal-modal-footer">
-        <span class="legal-footer-note"><i class="fa-solid fa-circle-check"></i> Standard Zero-Tracking &amp; Defensive Architecture Verified</span>
-        <button type="button" class="legal-close-action-btn" onclick="closeLegalModal()">
-          <span>Understood</span>
-        </button>
       </div>
     </div>
   </div>
@@ -9131,15 +9164,15 @@
           <span>Trust &amp; Compliance</span>
         </div>
         <div class="drawer-legal-links-row">
-          <button type="button" class="drawer-legal-link-btn" onclick="openLegalModal('privacy')">
+          <button type="button" class="drawer-legal-link-btn" onclick="navigateToPage('privacy'); if(window.MaxHive&&window.MaxHive.toggleDrawer)window.MaxHive.toggleDrawer(false);">
             <i class="fa-solid fa-shield-halved"></i>
             <span>Privacy</span>
           </button>
-          <button type="button" class="drawer-legal-link-btn" onclick="openLegalModal('disclaimer')">
+          <button type="button" class="drawer-legal-link-btn" onclick="navigateToPage('disclaimer'); if(window.MaxHive&&window.MaxHive.toggleDrawer)window.MaxHive.toggleDrawer(false);">
             <i class="fa-solid fa-scale-balanced"></i>
             <span>Disclaimer</span>
           </button>
-          <button type="button" class="drawer-legal-link-btn" onclick="openLegalModal('terms')">
+          <button type="button" class="drawer-legal-link-btn" onclick="navigateToPage('terms'); if(window.MaxHive&&window.MaxHive.toggleDrawer)window.MaxHive.toggleDrawer(false);">
             <i class="fa-solid fa-file-contract"></i>
             <span>Terms</span>
           </button>
@@ -9335,16 +9368,16 @@
     </div>
   </div>
   <!-- Core Standalone Modules & UI Scripts -->
-  <script src="./js/moments-data.js?v=3.9.8"></script>
-  <script src="./js/projects-data.js?v=3.9.8"></script>
-  <script src="./js/captions.js?v=3.9.8"></script>
-  <script src="./js/maxhive-nav.js?v=3.9.8"></script>
-  <script src="./js/portfolio-gallery.js?v=3.9.8"></script>
-  <script src="./js/script.js?v=3.9.8"></script>
-  <script src="./js/ambient-effects.js?v=3.9.8"></script>
-  <script src="./js/four-d-sensor-engine.js?v=3.9.8"></script>
-  <script src="./js/testimonials.js?v=3.9.8"></script>
-  <script src="./js/conatct-form.js?v=3.9.8"></script>
+  <script src="./js/moments-data.js?v=3.9.9"></script>
+  <script src="./js/projects-data.js?v=3.9.9"></script>
+  <script src="./js/captions.js?v=3.9.9"></script>
+  <script src="./js/maxhive-nav.js?v=3.9.9"></script>
+  <script src="./js/portfolio-gallery.js?v=3.9.9"></script>
+  <script src="./js/script.js?v=3.9.9"></script>
+  <script src="./js/ambient-effects.js?v=3.9.9"></script>
+  <script src="./js/four-d-sensor-engine.js?v=3.9.9"></script>
+  <script src="./js/testimonials.js?v=3.9.9"></script>
+  <script src="./js/conatct-form.js?v=3.9.9"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
 </body>

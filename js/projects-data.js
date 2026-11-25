@@ -27,6 +27,37 @@
  */
 window.PROJECTS_DATA = [
   {
+    "name": "MaxNet-Router-OS",
+    "title": "MAXNET Router OS - High-Performance OpenWrt Distribution",
+    "category": "Telecom & Embedded",
+    "technologies": "Linux 6.18, OpenWrt, C, Shell, Qualcomm IPQ9574/IPQ9554, MT7986A, USB 3.0 5G, ADB, Wi-Fi 6",
+    "language": "C / Shell",
+    "year": "2025 to 2026 (Active Work)",
+    "status": "In Active Development",
+    "docUrl": "https://ohhmax.github.io/maxnet",
+    "liveUrl": "https://ohhmax.github.io/maxnet",
+    "description": "Enterprise-grade OpenWrt Linux 6.18 distribution engineered for JioRouter AX6000 & AirFiber IDU Series (Qualcomm IPQ9574/IPQ9554 & MediaTek MT7986A). Features dual-modem SuperSpeed USB 3.0 5G tethering, ADB modem telemetry, Qualcomm PPE hardware offload, and sub-80ms reactive WebUI.",
+    "details": {
+      "problem": "Stock ISP router firmware severely bottlenecks hardware capabilities, blocks USB 3.0 5G modem tethering, restricts Wi-Fi 6 channels, and bloats RAM usage leading to instability and lack of user control.",
+      "solution": "Engineered an optimized AArch64 OpenWrt Linux 6.18 firmware integrating Qualcomm PPE hardware acceleration, custom multi-packet USB 3.0 aggregation drivers, dual-band 160MHz Wi-Fi 6, built-in ADB modem telemetry daemon, and a lightweight sub-80ms SPA WebUI.",
+      "impact": "Delivers sustained multi-gigabit routing, over 300% throughput boost on 5G cellular tethering, frees more than 50% system RAM, and provides automated zero-config OTA firmware upgrades."
+    },
+    "featured": true,
+    "tags": [
+      "OpenWrt",
+      "Linux 6.18",
+      "Qualcomm IPQ9574",
+      "MediaTek MT7986A",
+      "5G Tethering",
+      "Jio AX6000",
+      "Wi-Fi 6",
+      "Networking"
+    ],
+    "githubUrl": "https://github.com/ohhmax/maxnet",
+    "gitlabUrl": "https://gitlab.com/ohhmax/maxnet",
+    "codebergUrl": "https://codeberg.org/ohhmax/maxnet"
+  },
+  {
     "name": "MaxAI",
     "title": "MaxAI - On-Device Autonomous AI Runtime & Local Agent System",
     "category": "Mobile & Edge AI",
@@ -34,7 +65,7 @@ window.PROJECTS_DATA = [
     "language": "Kotlin / C++",
     "year": "2025 to 2026 (Active Work)",
     "status": "In Active Development",
-    "docUrl": "https://github.com/mahendraplus/maxai#readme",
+    "docUrl": "https://github.com/ohhmax/maxai#readme",
     "description": "Autonomous on-device neural runtime executing quantized GGUF and LiteRT models directly on mobile GPUs and NPUs with zero cloud latency, local tool calling, and embedded privacy.",
     "details": {
       "problem": "Cloud-dependent AI services impose severe network latency, demand persistent internet connectivity, leak confidential personal telemetry, and incur recurring cloud fees.",
@@ -49,7 +80,10 @@ window.PROJECTS_DATA = [
       "Local LLM",
       "Kotlin",
       "Android NPU"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/maxai",
+    "gitlabUrl": "https://gitlab.com/ohhmax/maxai",
+    "codebergUrl": "https://codeberg.org/ohhmax/maxai"
   },
   {
     "name": "CellLock5G",
@@ -70,7 +104,10 @@ window.PROJECTS_DATA = [
       "MediaTek",
       "Telecom",
       "Android"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/celllock5g",
+    "gitlabUrl": "https://gitlab.com/ohhmax/celllock5g",
+    "codebergUrl": "https://codeberg.org/ohhmax/celllock5g"
   },
   {
     "name": "HomeMax",
@@ -91,7 +128,10 @@ window.PROJECTS_DATA = [
       "50-Relays",
       "EEPROM",
       "Industrial IoT"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/homemax",
+    "gitlabUrl": "https://gitlab.com/ohhmax/homemax",
+    "codebergUrl": "https://codeberg.org/ohhmax/homemax"
   },
   {
     "name": "CellWatchPro",
@@ -112,7 +152,10 @@ window.PROJECTS_DATA = [
       "Android SDK",
       "LTE/5G",
       "Diagnostics"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/cellwatchpro",
+    "gitlabUrl": "https://gitlab.com/ohhmax/cellwatchpro",
+    "codebergUrl": "https://codeberg.org/ohhmax/cellwatchpro"
   },
   {
     "name": "Amul-Dairy-Platform",
@@ -133,7 +176,10 @@ window.PROJECTS_DATA = [
       "IoT Serial",
       "PostgreSQL",
       "REST API"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/amul-dairy-platform",
+    "gitlabUrl": "https://gitlab.com/ohhmax/amul-dairy-platform",
+    "codebergUrl": "https://codeberg.org/ohhmax/amul-dairy-platform"
   },
   {
     "name": "MaxFit",
@@ -154,7 +200,10 @@ window.PROJECTS_DATA = [
       "Firebase",
       "Biometrics",
       "Billing"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/maxfit",
+    "gitlabUrl": "https://gitlab.com/ohhmax/maxfit",
+    "codebergUrl": "https://codeberg.org/ohhmax/maxfit"
   },
   {
     "name": "MaxHive-OSINT",
@@ -175,7 +224,10 @@ window.PROJECTS_DATA = [
       "Tailwind CSS",
       "OSINT",
       "Cyber Intelligence"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/maxhive-osint",
+    "gitlabUrl": "https://gitlab.com/ohhmax/maxhive-osint",
+    "codebergUrl": "https://codeberg.org/ohhmax/maxhive-osint"
   },
   {
     "name": "IPCAI-Studio",
@@ -196,7 +248,10 @@ window.PROJECTS_DATA = [
       "RTSP",
       "OpenCV",
       "Smart Camera"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/ipcai-studio",
+    "gitlabUrl": "https://gitlab.com/ohhmax/ipcai-studio",
+    "codebergUrl": "https://codeberg.org/ohhmax/ipcai-studio"
   },
   {
     "name": "LuCI-Cyber-Theme",
@@ -217,7 +272,10 @@ window.PROJECTS_DATA = [
       "LuCI Theme",
       "Networking",
       "Linux"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/luci-theme-cyber",
+    "gitlabUrl": "https://gitlab.com/ohhmax/luci-theme-cyber",
+    "codebergUrl": "https://codeberg.org/ohhmax/luci-theme-cyber"
   },
   {
     "name": "Adb_on_wrt",
@@ -238,7 +296,10 @@ window.PROJECTS_DATA = [
       "WAN Failover",
       "Networking",
       "Shell"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/adb_on_wrt",
+    "gitlabUrl": "https://gitlab.com/ohhmax/adb_on_wrt",
+    "codebergUrl": "https://codeberg.org/ohhmax/adb_on_wrt"
   },
   {
     "name": "Go-Port-Proxy",
@@ -259,7 +320,10 @@ window.PROJECTS_DATA = [
       "Sockets",
       "Reverse Proxy",
       "Networking"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/go-port-proxy",
+    "gitlabUrl": "https://gitlab.com/ohhmax/go-port-proxy",
+    "codebergUrl": "https://codeberg.org/ohhmax/go-port-proxy"
   },
   {
     "name": "MAXTER",
@@ -280,7 +344,10 @@ window.PROJECTS_DATA = [
       "Linux",
       "Developer Productivity",
       "Android"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/maxter",
+    "gitlabUrl": "https://gitlab.com/ohhmax/maxter",
+    "codebergUrl": "https://codeberg.org/ohhmax/maxter"
   },
   {
     "name": "Qualcomm-Custom-Kernel",
@@ -301,7 +368,10 @@ window.PROJECTS_DATA = [
       "Device Tree",
       "TWRP",
       "AOSP"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/android_kernel_qualcomm_msm8916",
+    "gitlabUrl": "https://gitlab.com/ohhmax/android_kernel_qualcomm_msm8916",
+    "codebergUrl": "https://codeberg.org/ohhmax/android_kernel_qualcomm_msm8916"
   },
   {
     "name": "MaxKit-Android",
@@ -321,7 +391,10 @@ window.PROJECTS_DATA = [
       "Hardware Diagnostics",
       "Java",
       "Sensors"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/maxkit-android",
+    "gitlabUrl": "https://gitlab.com/ohhmax/maxkit-android",
+    "codebergUrl": "https://codeberg.org/ohhmax/maxkit-android"
   },
   {
     "name": "SDX65-Modem-Pipeline",
@@ -341,7 +414,10 @@ window.PROJECTS_DATA = [
       "5G Modem",
       "EDL Protocol",
       "Firmware Recovery"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/sdx65-modem-tools",
+    "gitlabUrl": "https://gitlab.com/ohhmax/sdx65-modem-tools",
+    "codebergUrl": "https://codeberg.org/ohhmax/sdx65-modem-tools"
   },
   {
     "name": "Alcohol-Safety-Interlock",
@@ -362,7 +438,10 @@ window.PROJECTS_DATA = [
       "Automotive Safety",
       "Relays",
       "Embedded"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/alcohol-safety-interlock",
+    "gitlabUrl": "https://gitlab.com/ohhmax/alcohol-safety-interlock",
+    "codebergUrl": "https://codeberg.org/ohhmax/alcohol-safety-interlock"
   },
   {
     "name": "Ultrasonic-Profiler",
@@ -383,7 +462,10 @@ window.PROJECTS_DATA = [
       "OLED",
       "AVR",
       "C++"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/ultrasonic-distance-profiler",
+    "gitlabUrl": "https://gitlab.com/ohhmax/ultrasonic-distance-profiler",
+    "codebergUrl": "https://codeberg.org/ohhmax/ultrasonic-distance-profiler"
   },
   {
     "name": "Developer-Cheatsheets",
@@ -404,7 +486,10 @@ window.PROJECTS_DATA = [
       "Git",
       "DevOps",
       "Reference"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/developer-cheatsheets",
+    "gitlabUrl": "https://gitlab.com/ohhmax/developer-cheatsheets",
+    "codebergUrl": "https://codeberg.org/ohhmax/developer-cheatsheets"
   },
   {
     "name": "GSRTC-Transit-Platform",
@@ -425,6 +510,9 @@ window.PROJECTS_DATA = [
       "Offline-First",
       "JavaScript",
       "Gujarat"
-    ]
+    ],
+    "githubUrl": "https://github.com/ohhmax/gsrtc-transit-platform",
+    "gitlabUrl": "https://gitlab.com/ohhmax/gsrtc-transit-platform",
+    "codebergUrl": "https://codeberg.org/ohhmax/gsrtc-transit-platform"
   }
 ];

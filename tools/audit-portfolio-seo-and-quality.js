@@ -184,8 +184,8 @@ check('Dedicated Testimonials Page', html.includes('data-page="testimonials"'), 
 check('Testimonials Drawer Link', html.includes('data-drawer-navigate="testimonials"'), 'Drawer contains direct testimonials navigation card');
 check('Zero /maxadmin Portal', !fs.existsSync(path.join(ROOT_DIR, 'admin.html')) && !html.includes('href="/maxadmin"'), 'Admin portal completely removed');
 check('Zero Project Category Dropdown Duplication', !html.includes('filter-select-box'), 'Mobile select dropdown removed; filter pills only');
-check('Schema.org 19 Projects Indexed', html.includes('Featured Production Systems and Software Engineering Innovations'), 'All 19 projects indexed in JSON-LD');
-check('Crawler Catalog 19 Projects Present', (html.match(/class="seo-project-card"/g) || []).length === 19, 'Found exactly 19 crawler-accessible project articles');
+check('Schema.org 20 Projects Indexed', html.includes('Featured Production Systems and Software Engineering Innovations'), 'All 20 projects indexed in JSON-LD');
+check('Crawler Catalog 20 Projects Present', (html.match(/class="seo-project-card"/g) || []).length === 20, 'Found exactly 20 crawler-accessible project articles');
 
 const resumeStandalone = fs.readFileSync(path.join(ROOT_DIR, 'resume', 'index.html'), 'utf8');
 const hasViewInResumeDock = resumeStandalone.includes('btn-view');
