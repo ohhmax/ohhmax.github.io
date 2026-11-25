@@ -82,6 +82,36 @@ async function markDeviceCounted(env, deviceId) {
   }
 }
 
+async function isAlertThrottled(env, alertKey) {
+  const now = Date.now();
+  const lastAlert = recentAlerts.get(alertKey);
+  if (lastAlert && (now - lastAlert < ALERT_COOLDOWN_MS)) {
+    return true;
+  }
+  if (env && env.VISITOR_KV) {
+    try {
+      const kvAlert = await env.VISITOR_KV.get('alert_' + alertKey);
+      if (kvAlert !== null) {
+        const lastTs = parseInt(kvAlert, 10);
+        if (!isNaN(lastTs) && (now - lastTs < ALERT_COOLDOWN_MS)) {
+          return true;
+        }
+      }
+    } catch (e) {}
+  }
+  return false;
+}
+
+async function markAlertSent(env, alertKey) {
+  const now = Date.now();
+  recentAlerts.set(alertKey, now);
+  if (env && env.VISITOR_KV) {
+    try {
+      await env.VISITOR_KV.put('alert_' + alertKey, String(now), { expirationTtl: 60 });
+    } catch (e) {}
+  }
+}
+
 function jsonResponse(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
@@ -320,9 +350,7 @@ export default {
         const alertKey = deviceId + '_' + ip;
 
         // Rate-limit check: Throttle rapid refreshes (< 10 seconds cooldown per device/IP)
-        const now = Date.now();
-        const lastAlert = recentAlerts.get(alertKey);
-        const isThrottled = Boolean(lastAlert && (now - lastAlert < ALERT_COOLDOWN_MS));
+        const isThrottled = await isAlertThrottled(env, alertKey);
 
         let currentCount = await getStoredVisitorCount(env);
 
@@ -337,7 +365,7 @@ export default {
         }
 
         // Record alert timestamp for cooldown enforcement
-        recentAlerts.set(alertKey, now);
+        await markAlertSent(env, alertKey);
 
         // Single Count Contract: A device is counted ONCE only in unique visitor counter
         const alreadyCountedInKv = await isDeviceAlreadyCounted(env, deviceId);
