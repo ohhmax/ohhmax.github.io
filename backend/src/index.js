@@ -20,7 +20,7 @@
  * ============================================================================
  */
 
-const PORTFOLIO_VERSION = 'v3.9.6';
+const PORTFOLIO_VERSION = 'v3.9.7';
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -31,8 +31,8 @@ const CORS_HEADERS = {
 
 // In-memory unique visitor telemetry tracking and rate throttling (starts at 0)
 let inMemoryVisitorCount = 0;
-const recentVisits = new Map();
-const VISIT_THROTTLE_WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours cooldown per IP to prevent duplicate counts
+const recentAlerts = new Map();
+const ALERT_COOLDOWN_MS = 10 * 1000; // 10 seconds cooldown to block rapid 5s refresh spam
 
 async function getStoredVisitorCount(env) {
   if (env && env.VISITOR_KV) {
@@ -60,6 +60,26 @@ async function recordStoredVisitor(env) {
     } catch (e) {}
   }
   return count;
+}
+
+async function isDeviceAlreadyCounted(env, deviceId) {
+  if (!deviceId) return false;
+  if (env && env.VISITOR_KV) {
+    try {
+      const val = await env.VISITOR_KV.get('dev_' + deviceId);
+      return val !== null;
+    } catch (e) {}
+  }
+  return false;
+}
+
+async function markDeviceCounted(env, deviceId) {
+  if (!deviceId) return;
+  if (env && env.VISITOR_KV) {
+    try {
+      await env.VISITOR_KV.put('dev_' + deviceId, String(Date.now()));
+    } catch (e) {}
+  }
 }
 
 function jsonResponse(data, status = 200) {
@@ -293,23 +313,55 @@ export default {
         const referrer = body.referrer || request.headers.get('referer') || 'Direct Entry';
         const localTime = body.localTime || new Date().toUTCString();
 
-        // Rate-limit check: Throttle repeated visits from the same IP (24h cooldown)
+        // Unique Device Tracking & Telemetry Identification
+        const deviceId = (body.deviceId && typeof body.deviceId === 'string' && body.deviceId.length >= 4)
+          ? body.deviceId
+          : ('DEV-' + ip.replace(/[^a-zA-Z0-9]/g, '').slice(0, 16));
+        const alertKey = deviceId + '_' + ip;
+
+        // Rate-limit check: Throttle rapid refreshes (< 10 seconds cooldown per device/IP)
         const now = Date.now();
-        const lastVisit = recentVisits.get(ip);
-        const isThrottled = Boolean(lastVisit && (now - lastVisit < VISIT_THROTTLE_WINDOW_MS));
+        const lastAlert = recentAlerts.get(alertKey);
+        const isThrottled = Boolean(lastAlert && (now - lastAlert < ALERT_COOLDOWN_MS));
 
         let currentCount = await getStoredVisitorCount(env);
 
-        if (!isThrottled) {
-          recentVisits.set(ip, now);
-          currentCount = await recordStoredVisitor(env);
+        if (isThrottled) {
+          return jsonResponse({
+            success: true,
+            message: 'Visit alert throttled (rapid refresh cooldown active)',
+            count: currentCount,
+            version: PORTFOLIO_VERSION,
+            throttled: true
+          });
+        }
 
-          const visitAlert =
+        // Record alert timestamp for cooldown enforcement
+        recentAlerts.set(alertKey, now);
+
+        // Single Count Contract: A device is counted ONCE only in unique visitor counter
+        const alreadyCountedInKv = await isDeviceAlreadyCounted(env, deviceId);
+        const isAlreadyCounted = (body.isNewDevice === false) || alreadyCountedInKv;
+
+        if (!isAlreadyCounted) {
+          // Genuinely new unique device: increment persistent counter and record in KV
+          currentCount = await recordStoredVisitor(env);
+          await markDeviceCounted(env, deviceId);
+        }
+
+        const isFirstTime = !isAlreadyCounted;
+        const statusBadge = isFirstTime
+          ? '🆕 <b>First-Time Unique Device</b>'
+          : (body.isReopen ? '🔄 <b>Session Reopen (Return Visit)</b>' : '🔄 <b>Returning Visitor (Cooldown Cleared)</b>');
+
+        const visitAlert =
 `⚡ <b>PORTFOLIO VISITOR ALERT</b>
 
+👥 <b>Status:</b> ${statusBadge}
+🆔 <b>Device UID:</b> <code>${escapeHtml(deviceId)}</code>
+🔢 <b>Total Unique Visitors:</b> #<code>${currentCount}</code>
 🌐 <b>Host Mirror:</b> ${escapeHtml(mirrorBadge)}
 🏷️ <b>Version:</b> <code>${escapeHtml(version)}</code>
-👥 <b>Visitor Count:</b> #<code>${currentCount}</code>
 
 📍 <b>Visitor Location:</b>
 ${flag} <b>Country:</b> ${escapeHtml(countryName)} (<code>${escapeHtml(countryCode)}</code>)
@@ -333,15 +385,15 @@ ${flag} <b>Country:</b> ${escapeHtml(countryName)} (<code>${escapeHtml(countryCo
 🎨 <b>Theme & Locale:</b> ${escapeHtml(theme)} | ${escapeHtml(language)} (${escapeHtml(timezone)})
 🕒 <b>Visitor Time:</b> ${escapeHtml(localTime)}`;
 
-          ctx.waitUntil(sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, env.TELEGRAM_CHAT_ID, visitAlert));
-        }
+        ctx.waitUntil(sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, env.TELEGRAM_CHAT_ID, visitAlert));
 
         return jsonResponse({
           success: true,
-          message: isThrottled ? 'Visit recorded (throttled cooldown active)' : 'Visit logged successfully',
+          message: isFirstTime ? 'First-time unique device logged and counted' : 'Returning visit logged (count unchanged)',
           count: currentCount,
+          isNewDevice: isFirstTime,
           version: PORTFOLIO_VERSION,
-          throttled: isThrottled
+          throttled: false
         });
       } catch (err) {
         return jsonResponse({ success: false, error: err.message }, 500);

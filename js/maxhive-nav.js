@@ -265,10 +265,17 @@
     setupSmartRobotCaptions();
     initRobotPreloaderFlight();
 
-    // Sync drawer micro version badge with stamped portfolio version
+    // Sync drawer micro version badge and visitor counter capsule
     const versionBadge = document.getElementById('drawerVersionBadge');
     if (versionBadge && typeof window !== 'undefined' && window.PORTFOLIO_VERSION) {
       versionBadge.textContent = window.PORTFOLIO_VERSION;
+    }
+    const drawerVisEl = document.getElementById('drawerVisitorCount');
+    if (drawerVisEl && typeof localStorage !== 'undefined') {
+      let rawCount = localStorage.getItem('portfolio_unique_visitors');
+      let num = parseInt(rawCount || '0', 10);
+      if (num >= 1000) num -= 1000;
+      drawerVisEl.textContent = num.toLocaleString();
     }
   }
 

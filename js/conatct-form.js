@@ -398,7 +398,33 @@ async function collectClientTelemetry() {
     ? window.PORTFOLIO_VERSION
     : (document.querySelector('meta[name="portfolio-version"]')?.content || 'v3.9.1');
 
+  // Persistent Unique Device Identifier
+  let deviceId = '';
+  try {
+    deviceId = localStorage.getItem('portfolio_device_id');
+    if (!deviceId) {
+      deviceId = 'DEV-' + Math.random().toString(36).substring(2, 9).toUpperCase() + '-' + Date.now().toString(36).toUpperCase();
+      localStorage.setItem('portfolio_device_id', deviceId);
+      localStorage.setItem('portfolio_device_created', String(Date.now()));
+    }
+  } catch (e) {
+    deviceId = 'DEV-' + Math.random().toString(36).substring(2, 9).toUpperCase();
+  }
+
+  let isNewDevice = true;
+  try {
+    isNewDevice = !localStorage.getItem('portfolio_device_counted');
+  } catch (e) {}
+
+  let isReopen = true;
+  try {
+    isReopen = !sessionStorage.getItem('portfolio_session_active');
+  } catch (e) {}
+
   return {
+    deviceId: deviceId,
+    isNewDevice: isNewDevice,
+    isReopen: isReopen,
     mirror: mirrorObj.mirror,
     mirrorName: mirrorObj.name,
     host: mirrorObj.host,
@@ -554,17 +580,25 @@ function formatVisitorDisplay(count) {
 }
 
 /**
- * Manages unique visitor telemetry beacon and share counter display.
+ * Updates all visitor count UI elements across the drawer and pages.
+ */
+function updateVisitorCountDisplay(count) {
+  const formatted = formatVisitorDisplay(count);
+  const drawerEl = document.getElementById('drawerVisitorCount');
+  if (drawerEl) drawerEl.textContent = formatted;
+  const shareEl = document.getElementById('shareVisitorCount');
+  if (shareEl) shareEl.textContent = formatted;
+}
+
+/**
+ * Manages unique visitor telemetry beacon and drawer capsule counter display.
  * Strict Contract:
- * 1. A unique user/browser is counted ONCE only (persisted in localStorage).
- * 2. On page refresh, NO request is dispatched (zero POST, zero GET).
- * 3. Visitor count starts from 0 (legacy 1000 baseline is subtracted).
- * 4. Only an unrecorded, first-time visitor triggers the single POST /api/visit beacon.
- * 5. When the Telegram alert response arrives, the returned count is normalized and rendered.
+ * 1. Rapid refresh throttle: Refreshes within 10 seconds (e.g. every 5s) trigger ZERO network requests.
+ * 2. After 10s cooldown OR when site is closed and reopened, a visit alert is dispatched.
+ * 3. Visitor COUNT is strictly 1 per unique device ID (does not increment on refresh or return visits).
+ * 4. Immediate cached render on DOM load to prevent layout shift.
  */
 async function handleUniqueVisitorTelemetry() {
-  const countEl = document.getElementById('shareVisitorCount');
-
   // 1. Sanitize local cache: subtract 1000 if legacy mock baseline exists
   let rawCached = localStorage.getItem('portfolio_unique_visitors');
   let cachedNum = parseInt(rawCached || '0', 10);
@@ -573,23 +607,29 @@ async function handleUniqueVisitorTelemetry() {
     localStorage.setItem('portfolio_unique_visitors', String(cachedNum));
   }
 
-  // 2. Immediately render cached count to avoid any UI delay or layout shift
-  if (countEl) {
-    countEl.textContent = formatVisitorDisplay(cachedNum);
-  }
+  // 2. Immediately render cached count in drawer capsule to avoid layout shift
+  updateVisitorCountDisplay(cachedNum);
 
-  // 3. Check if this unique user has already been recorded
-  const hasVisited = localStorage.getItem('portfolio_unique_visited_v1');
-  if (hasVisited) {
-    // Already visited! Strictly do NOT send any request on page refresh or subsequent loads
+  // 3. Throttle Check: Suppress rapid refreshes (< 10 seconds cooldown)
+  const now = Date.now();
+  let lastBeaconTs = 0;
+  try {
+    lastBeaconTs = parseInt(localStorage.getItem('portfolio_last_beacon_ts') || '0', 10);
+  } catch (e) {}
+
+  const timeSinceLastBeacon = now - lastBeaconTs;
+  if (timeSinceLastBeacon < 10000) {
+    // Rapid refresh detected (e.g. refreshed in 5 seconds). Suppress network request entirely!
     return;
   }
 
-  // 4. Mark immediately to prevent duplicate sends during rapid refresh or multiple tabs
-  localStorage.setItem('portfolio_unique_visited_v1', 'true');
-  localStorage.setItem('portfolio_first_visit_ts', String(Date.now()));
+  // Mark session active in sessionStorage and stamp beacon timestamp in localStorage
+  try {
+    localStorage.setItem('portfolio_last_beacon_ts', String(now));
+    sessionStorage.setItem('portfolio_session_active', 'true');
+  } catch (e) {}
 
-  // 5. Dispatch the single first-time visitor beacon with full zero-permission telemetry
+  // 4. Dispatch the telemetry beacon with unique device UID
   if (!VISIT_API_ENDPOINT) return;
 
   try {
@@ -608,14 +648,15 @@ async function handleUniqueVisitorTelemetry() {
         if (normalizedCount >= 1000) {
           normalizedCount = normalizedCount - 1000;
         }
-        localStorage.setItem('portfolio_unique_visitors', String(normalizedCount));
-        if (countEl) {
-          countEl.textContent = formatVisitorDisplay(normalizedCount);
-        }
+        try {
+          localStorage.setItem('portfolio_unique_visitors', String(normalizedCount));
+          localStorage.setItem('portfolio_device_counted', 'true');
+        } catch (e) {}
+        updateVisitorCountDisplay(normalizedCount);
       }
     }
   } catch (e) {
-    // Silent fail; user remains flagged so refresh will never spam
+    // Silent fail; graceful offline resilience
   }
 }
 

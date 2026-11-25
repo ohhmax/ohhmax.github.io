@@ -98,14 +98,21 @@
   opacity: 1;
   pointer-events: auto;
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
   padding: 18px 16px 14px 16px;
 }
 
-/* Subtle Minimalist Micro Version Badge (Smallest Version in Drawer Bottom) */
+body.light-theme .maxhive-drawer {
+  scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+
+/* Subtle Minimalist Micro Drawer Footer (Visitor Capsule Left & Version Badge Right) */
 .maxhive-drawer-footer {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  gap: 8px !important;
   padding: 8px 0 2px 0 !important;
   margin: 0 !important;
   width: 100% !important;
@@ -113,25 +120,46 @@
   user-select: none !important;
 }
 
-.maxhive-drawer-version {
+.maxhive-drawer-capsule {
   font-family: var(--font-mono, 'JetBrains Mono', monospace) !important;
   font-size: 9.5px !important;
   font-weight: 500 !important;
-  letter-spacing: 0.8px !important;
-  color: rgba(255, 255, 255, 0.35) !important;
-  text-transform: lowercase !important;
+  letter-spacing: 0.6px !important;
+  color: rgba(255, 255, 255, 0.45) !important;
   background: rgba(255, 255, 255, 0.04) !important;
-  padding: 2px 8px !important;
+  padding: 2.5px 8px !important;
   border-radius: 99px !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  display: inline-block !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
   line-height: 1.4 !important;
+  pointer-events: auto !important;
+  cursor: default;
 }
 
-body.light-theme .maxhive-drawer-version {
-  color: rgba(30, 41, 59, 0.45) !important;
+.maxhive-drawer-version {
+  text-transform: lowercase !important;
+}
+
+.maxhive-drawer-visitors {
+  text-transform: none !important;
+}
+
+.maxhive-drawer-visitors i {
+  font-size: 8.5px !important;
+  color: #f59e0b !important;
+  opacity: 0.95 !important;
+}
+
+body.light-theme .maxhive-drawer-capsule {
+  color: rgba(30, 41, 59, 0.55) !important;
   background: rgba(0, 0, 0, 0.03) !important;
   border-color: rgba(0, 0, 0, 0.07) !important;
+}
+
+body.light-theme .maxhive-drawer-visitors i {
+  color: #d97706 !important;
 }
 
 .maxhive-nav-container {

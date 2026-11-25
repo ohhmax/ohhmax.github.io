@@ -74,7 +74,7 @@ function bumpVersion() {
 
     // Drawer micro version badge
     if (html.includes('id="drawerVersionBadge"')) {
-      html = html.replace(/<span class="maxhive-drawer-version" id="drawerVersionBadge">[^<]*<\/span>/, `<span class="maxhive-drawer-version" id="drawerVersionBadge">${displayVersion}</span>`);
+      html = html.replace(/(<span[^>]*id="drawerVersionBadge"[^>]*>)[^<]*(<\/span>)/, `$1${displayVersion}$2`);
     }
 
     // Asset query strings
