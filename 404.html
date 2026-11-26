@@ -2,62 +2,60 @@
 <html lang="en">
 
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TPSB9LKL"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-T4QKFS53YQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
+    gtag('config', 'G-T4QKFS53YQ', {
+      'cookie_domain': 'none',
+      'cookie_flags': 'SameSite=Lax;Secure'
+    });
   </script>
 
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>404: Page Not Found | Mahendra Mali (Max)</title>
+  <title>404 Page Not Found | Mahendra Mali (Max)</title>
   <meta name="description" content="Requested page not found on Mahendra Mali's portfolio.">
   <meta name="robots" content="noindex, follow">
-  <link rel="canonical" href="https://ohhmax.github.io/404.html">
-  <meta name="theme-color" content="#09090b">
+  <meta name="theme-color" content="#090a0f">
 
-  <!-- Favicons -->
-  <link rel="icon" href="./favicon.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="./assets/img/logo/icon-64x64.png" type="image/x-icon">
-
-  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/assets/img/logo/icon-64x64.png" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('max_portfolio_theme');
+        var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        var theme = saved ? saved : (prefersLight ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', theme === 'light' ? '#f8fafc' : '#090a0f');
+      } catch (e) {}
+    })();
+  </script>
 
   <style>
     :root {
-      --bg: #09090b;
-      --card-bg: #121214;
-      --border: rgba(255, 255, 255, 0.1);
-      --text: #f4f4f5;
-      --text-muted: #a1a1aa;
-      --text-dim: #71717a;
-      --btn-bg: #ffffff;
-      --btn-text: #000000;
-      --btn-hover: #e4e4e7;
-      --code-bg: rgba(255, 255, 255, 0.08);
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --text: #fdfbf7;
+      --muted: #a8a29e;
+      --dim: #71717a;
+      --accent: #f59e0b;
+      --accent-hover: #fbbf24;
+      --divider: rgba(255, 255, 255, 0.12);
     }
 
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #f4f4f5;
-        --card-bg: #ffffff;
-        --border: #e4e4e7;
-        --text: #18181b;
-        --text-muted: #52525b;
-        --text-dim: #71717a;
-        --btn-bg: #18181b;
-        --btn-text: #ffffff;
-        --btn-hover: #27272a;
-        --code-bg: rgba(0, 0, 0, 0.06);
-      }
+    html[data-theme="light"] {
+      --text: #0f172a;
+      --muted: #334155;
+      --dim: #475569;
+      --accent: #b45309;
+      --accent-hover: #92400e;
+      --divider: rgba(15, 23, 42, 0.14);
     }
 
     *, *::before, *::after {
@@ -67,182 +65,145 @@
     }
 
     body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: var(--font-sans);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 32px 24px;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #090a0f;
+      background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.28) 1px, transparent 1.4px),
+        radial-gradient(circle at 50% 0%, #151926 0%, #090a0f 75%);
+      background-size: 16px 16px, 100% 100%;
+      color: var(--text);
       line-height: 1.6;
     }
 
-    .error-container {
-      max-width: 540px;
+    html[data-theme="light"] body {
+      background-color: #f8fafc;
+      background-image:
+        radial-gradient(circle, rgba(15, 23, 42, 0.08) 1px, transparent 1.4px),
+        linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    }
+
+    main {
+      max-width: 520px;
       width: 100%;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 36px 32px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
       text-align: center;
     }
 
-    .error-header-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--code-bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 5px 14px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-    }
-
-    .error-code {
-      font-family: var(--font-mono);
-      font-size: 72px;
-      font-weight: 700;
+    .code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(64px, 14vw, 96px);
+      font-weight: 600;
       line-height: 1;
-      letter-spacing: -2px;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-
-    .error-title {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--text);
+      letter-spacing: -0.04em;
+      color: var(--accent);
       margin-bottom: 12px;
     }
 
-    .error-desc {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 24px;
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 10px;
     }
 
-    .error-path-chip {
-      display: inline-block;
-      max-width: 100%;
-      background: var(--code-bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-family: var(--font-mono);
-      font-size: 12px;
-      padding: 4px 10px;
-      border-radius: 8px;
+    p.desc {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .route-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--dim);
       word-break: break-all;
       margin-bottom: 28px;
     }
 
-    .error-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .btn-primary {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: var(--btn-bg);
-      color: var(--btn-text);
+    .return-link {
+      display: inline-block;
+      padding: 11px 24px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #090a0f;
       font-size: 14px;
       font-weight: 700;
-      padding: 14px 22px;
-      border-radius: 14px;
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: background 0.2s ease, transform 0.2s ease;
     }
 
-    .btn-primary:hover {
-      background: var(--btn-hover);
-      transform: translateY(-2px);
+    html[data-theme="light"] .return-link {
+      color: #ffffff;
     }
 
-    .quick-links {
+    .return-link:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    nav.quick-nav {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      margin-top: 20px;
       flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 18px;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--divider);
     }
 
-    .quick-links a {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-muted);
+    nav.quick-nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
       text-decoration: none;
+      padding: 8px 6px;
       transition: color 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
     }
 
-    .quick-links a:hover {
-      color: var(--text);
+    nav.quick-nav a:hover {
+      color: var(--accent);
     }
 
-    .footer-brand {
-      margin-top: 32px;
+    footer {
+      margin-top: 24px;
       font-size: 12px;
-      color: var(--text-dim);
+      color: var(--dim);
     }
   </style>
 </head>
 
 <body>
-  <main class="error-container">
-    <div class="error-header-badge">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      <span>Page Not Found</span>
-    </div>
+  <main>
+    <div class="code" aria-hidden="true">404</div>
+    <h1>Page Not Found</h1>
+    <p class="desc">The requested page does not exist on this portfolio.</p>
+    <div class="route-text" id="errorPathText"></div>
 
-    <div class="error-code">404</div>
-    <h1 class="error-title">Page Not Found</h1>
+    <a href="/" class="return-link">Return to Home</a>
 
-    <p class="error-desc">
-      The requested page or resource could not be found. You can return back to the main portfolio.
-    </p>
+    <nav class="quick-nav" aria-label="Portfolio navigation">
+      <a href="/about/">About</a>
+      <a href="/projects/">Projects</a>
+      <a href="/resume/">Resume</a>
+      <a href="/gallery/">Gallery</a>
+      <a href="/milestones/">Milestones</a>
+      <a href="/cv-resume-latest-info.html">CV</a>
+      <a href="/contact/">Contact</a>
+    </nav>
 
-    <div class="error-path-chip" id="errorPathChip">Loading route...</div>
-
-    <div class="error-actions">
-      <a href="./" class="btn-primary">
-        <i class="fa-solid fa-house"></i>
-        <span>Return to Home</span>
-      </a>
-    </div>
-
-    <div class="quick-links">
-      <a href="./#projects"><i class="fa-solid fa-layer-group"></i> Projects</a>
-      <a href="./#resume"><i class="fa-solid fa-file-lines"></i> Resume</a>
-      <a href="cv-resume-latest-info.html"><i class="fa-solid fa-id-card"></i> Modern CV</a>
-      <a href="./#contact"><i class="fa-solid fa-paper-plane"></i> Contact</a>
-    </div>
-
-    <div class="footer-brand">
-      Mahendra Mali (Max) • Security Researcher &amp; Systems Architect
-    </div>
+    <footer>Mahendra Mali (Max)</footer>
   </main>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const chip = document.getElementById('errorPathChip');
-      if (chip) {
-        const path = window.location.pathname + window.location.search + window.location.hash;
-        chip.textContent = path || '/404';
+    (function () {
+      var el = document.getElementById('errorPathText');
+      if (el) {
+        el.textContent = window.location.pathname + window.location.search + window.location.hash;
       }
-    });
+    })();
   </script>
 </body>
 
