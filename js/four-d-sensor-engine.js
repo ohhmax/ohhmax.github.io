@@ -573,10 +573,12 @@
     // Initial neutral styling
     resetVariables();
 
-    // Attach Sensor Listeners
-    if (typeof window.DeviceOrientationEvent !== 'undefined') {
-      window.addEventListener('deviceorientation', handleDeviceOrientation, { passive: true });
-      window.addEventListener('devicemotion', handleDeviceMotion, { passive: true });
+    // Attach Sensor Listeners only on actual mobile devices where hardware sensors exist
+    if (state.isMobileDevice && typeof window.DeviceOrientationEvent !== 'undefined') {
+      if (typeof window.DeviceOrientationEvent.requestPermission !== 'function') {
+        window.addEventListener('deviceorientation', handleDeviceOrientation, { passive: true });
+        window.addEventListener('devicemotion', handleDeviceMotion, { passive: true });
+      }
 
       // iOS 13+ permission workflow check if explicit permission needed
       if (typeof window.DeviceOrientationEvent.requestPermission === 'function') {

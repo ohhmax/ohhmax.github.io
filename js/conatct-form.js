@@ -675,5 +675,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   initAttachmentPicker();
-  handleUniqueVisitorTelemetry();
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(handleUniqueVisitorTelemetry, { timeout: 2000 });
+  } else {
+    setTimeout(handleUniqueVisitorTelemetry, 1500);
+  }
 });

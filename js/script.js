@@ -2025,7 +2025,6 @@ function initServicesZigZagInteractive() {
   function deselectAllCards() {
     serviceItems.forEach((card) => {
       card.classList.remove('is-selected');
-      card.setAttribute('aria-selected', 'false');
     });
   }
 
@@ -2033,10 +2032,8 @@ function initServicesZigZagInteractive() {
     serviceItems.forEach((card, i) => {
       if (i === idx) {
         card.classList.add('is-selected');
-        card.setAttribute('aria-selected', 'true');
       } else {
         card.classList.remove('is-selected');
-        card.setAttribute('aria-selected', 'false');
       }
     });
   }

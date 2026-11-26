@@ -2578,12 +2578,13 @@
       }, 550);
     }
 
-    // Measure real page load event
-    if (document.readyState === 'complete') {
-      setTimeout(revealPage, 100);
+    // Measure real DOM readiness for instant LCP paint
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      setTimeout(revealPage, 40);
     } else {
-      window.addEventListener('load', () => setTimeout(revealPage, 80), { once: true });
-      setTimeout(revealPage, 2500); // Fail-safe
+      document.addEventListener('DOMContentLoaded', () => setTimeout(revealPage, 40), { once: true });
+      window.addEventListener('load', () => setTimeout(revealPage, 20), { once: true });
+      setTimeout(revealPage, 1200); // Fail-safe
     }
   }
 
