@@ -20,7 +20,7 @@
  * ============================================================================
  */
 
-/* Auto-generated robot captions dataset - English Only - Zero em/en-dashes */
+/* Robot captions dataset */
 window.MAXHIVE_CAPTIONS = {
   "late_night": {
     "en": [

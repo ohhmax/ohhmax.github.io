@@ -114,11 +114,7 @@ def main():
 
     # Save assets/js/gallery-data.js
     gallery_data_js = f'''/**
- * assets/js/gallery-data.js
- * MaxPortfolio - Dedicated Gallery and Visual Archive Data
- * Self-describing naming convention: <year>_<title-slug>.<ext>
- * Groupwise Organized Media Vault (videos, honors, hardware-iot, tech-lab, fitness, portraits)
- * Strict Zero Em-Dash / En-Dash Contract Verified.
+ * assets/js/gallery-data.js - Gallery and visual archive catalog.
  */
 
 window.MAX_GALLERY_DATA = {json.dumps(updated_items, indent=2, ensure_ascii=False)};

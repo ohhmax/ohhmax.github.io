@@ -1,14 +1,5 @@
 """
-tools/build_gallery_standalone_page.py
-Generates the 100% pre-rendered, static HTML dedicated gallery page (gallery/index.html).
-Features:
-- Pure static HTML with all 142 items pre-rendered (perfect for curl and AI bots).
-- Group-wise and year-wise chronological layout (2026 to 2017).
-- Clean visual Pinterest gallery presentation without card-level text clutter.
-- Rich Schema.org microdata and complete ImageGallery JSON-LD for AI search engines.
-- Interactive client-side filtering (Year tabs, Category tabs, instant DOM search).
-- Responsive masonry grid with fullscreen lightbox modal.
-- Zero Em-Dash Contract Verified.
+tools/build_gallery_standalone_page.py - Generates static gallery/index.html.
 """
 
 import os

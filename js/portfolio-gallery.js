@@ -21,15 +21,7 @@
  */
 
 /**
- * js/portfolio-gallery.js
- * Clean Mobirise-Inspired Gallery Controller for Mahendra Mali (Max) Portfolio
- * Features:
- * - 4 Curated Folders: Me (Default), Moments, Tech, Reels (No "All" filter)
- * - Automatic Album Chaining: Next advances to the next album, all the way to the end
- * - Real-Time 1:1 Touch Drag & Swipe Animation for Photos & Video Reels
- * - High-Resolution Full-Screen Media Lightbox (Photos & Videos)
- * - Device Back Button Safety: Back closes modal and stays on #gallery
- * Strict Zero Em-Dash & En-Dash Contract Verified.
+ * js/portfolio-gallery.js - Gallery grid, filtering, swipe navigation, and lightbox.
  */
 
 'use strict';

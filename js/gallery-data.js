@@ -1,9 +1,5 @@
 /**
- * js/gallery-data.js
- * Auto-generated gallery media catalog for Mahendra Mali (Max) portfolio.
- * Curated Folders: Me (56), Moments (20), Tech (30), Reel (27).
- * Total items: 133
- * Strict Zero Em-Dash & En-Dash Contract Verified.
+ * js/gallery-data.js - Gallery media catalog (133 items across Me, Moments, Tech, Reel).
  */
 window.GALLERY_ITEMS = [
   {

@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-Enrich subpages with rich, authentic content to resolve 'Thin content' and 'Orphan page' warnings.
-Strict Zero Em-Dash & En-Dash Contract Verified.
+Enrich subpages with pre-rendered content and internal links.
 """
 import json
 import re

@@ -121,12 +121,8 @@ def main():
 
     all_cards_str = '\n'.join(cards_html)
 
-    # Clean Mobirise-Style Gallery Section Markup (Portfolio Theme)
-    gallery_section_html = f'''      <!-- ==========================================================================
-           PORTFOLIO GALLERY
-           Clean Mobirise-Inspired Photo-First Grid with Dedicated Video Player & Lightbox
-           Strict Zero Em-Dash / En-Dash Contract Verified
-           ========================================================================== -->
+    # Gallery section markup
+    gallery_section_html = f'''      <!-- Portfolio Gallery -->
       <article class="gallery" data-page="gallery" id="gallery">
         <header>
           <h2 class="h2 article-title">Gallery</h2>

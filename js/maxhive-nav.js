@@ -648,11 +648,7 @@
     }
   }
 
-    // ==========================================================================
-  // ROBOT FACE PRO - 40 EXOTIC EMOTIONS VECTOR ENGINE
-  // All 40 Emotes Preserved: Mood, Action, Fun
-  // Strict Zero Em-Dash & En-Dash Compliant
-  // ==========================================================================
+  // Robot emotion SVG renderer (40 states)
   const X_EYES = [105, 175], CY_EYES = 134;
   const ringPro = (x, r = 24, w = 3) => '<circle cx="' + x + '" cy="' + CY_EYES + '" r="' + r + '" fill="none" stroke="currentColor" stroke-width="' + w + '"/>';
   const pupPro = (x, o, r = 11) => '<g class="pupil"><circle cx="' + x + '" cy="' + (CY_EYES + 3 + (o.pd || 0)) + '" r="' + r + '" fill="currentColor"/><circle cx="' + (x - 4) + '" cy="' + (CY_EYES - 1 + (o.pd || 0)) + '" r="3.5" fill="#fff"/></g>';

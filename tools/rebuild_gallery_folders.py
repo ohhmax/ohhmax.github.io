@@ -149,11 +149,7 @@ def main():
 
     # 2. Write js/gallery-data.js
     gallery_data_js = f"""/**
- * js/gallery-data.js
- * Auto-generated gallery media catalog for Mahendra Mali (Max) portfolio.
- * Curated Folders: Me (56), Moments (20), Tech (30), Reel (27).
- * Total items: {len(new_items_sorted)}
- * Strict Zero Em-Dash & En-Dash Contract Verified.
+ * js/gallery-data.js - Gallery media catalog ({len(new_items_sorted)} items).
  */
 window.GALLERY_ITEMS = {json.dumps(new_items_sorted, indent=2, ensure_ascii=False)};
 """
@@ -250,11 +246,7 @@ window.GALLERY_ITEMS = {json.dumps(new_items_sorted, indent=2, ensure_ascii=Fals
           </button>
         </div>'''
 
-    gallery_section_html = f'''      <!-- ==========================================================================
-           PORTFOLIO GALLERY
-           Clean Mobirise-Inspired Photo-First Grid with Dedicated Video Player & Lightbox
-           Strict Zero Em-Dash / En-Dash Contract Verified
-           ========================================================================== -->
+    gallery_section_html = f'''      <!-- Portfolio Gallery -->
       <article class="gallery" data-page="gallery" id="gallery">
         <header>
           <h2 class="h2 article-title">Gallery</h2>

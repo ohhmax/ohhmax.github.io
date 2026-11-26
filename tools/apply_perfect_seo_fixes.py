@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-Apply perfect Schema.org, Link Graph, and Crawler discovery across all pages.
-Strict Zero Em-Dash & En-Dash Guarantee.
+Apply Schema.org, Link Graph, and Crawler discovery fixes across all pages.
 """
 
 import json

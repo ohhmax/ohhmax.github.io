@@ -1,8 +1,5 @@
 """
-tools/generate-image-sitemap.py
-Generates an advanced sitemap.xml with Google Image Sitemap schema
-indexing all gallery photos, videos, section landing pages, and projects.
-Zero Em-Dash Contract Verified.
+tools/generate-image-sitemap.py - Generates sitemap.xml with image entries.
 """
 
 import os

@@ -1088,7 +1088,7 @@ def validate_dataset():
         print("ALL CRITERIA PASSED: Zero dashes, word count <= 12, min 8 captions per language.")
 
     # Export to js/captions.js
-    js_content = "/* Auto-generated robot captions dataset - Zero em/en-dashes */\n"
+    js_content = "/* Robot captions dataset */\n"
     js_content += "window.MAXHIVE_CAPTIONS = " + json.dumps(CAPTIONS, indent=2, ensure_ascii=False) + ";\n"
 
     with open("js/captions.js", "w", encoding="utf-8") as f:
@@ -1134,7 +1134,7 @@ def validate_dataset():
     else:
         print("ALL CRITERIA PASSED: Zero dashes, word count <= 12, min 8 captions per language.")
 
-    js_content = "/* Auto-generated robot captions dataset - Zero em/en-dashes */\\n"
+    js_content = "/* Robot captions dataset */\\n"
     js_content += "window.MAXHIVE_CAPTIONS = " + json.dumps(CAPTIONS_DATA, indent=2, ensure_ascii=False) + ";\\n"
     with open("js/captions.js", "w", encoding="utf-8") as f:
         f.write(js_content)

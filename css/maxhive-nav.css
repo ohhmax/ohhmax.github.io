@@ -425,11 +425,7 @@ html[data-theme="light"] .maxhive-mascot-tag {
   pointer-events: none;
 }
 
-/* ==========================================================================
-   ROBOT FACE PRO - VECTOR HIGH-PRECISION CYBER EMOTION ENGINE
-   40 Distinct Expressive Dynamic Emotes (Mood, Action, Fun)
-   Strict Zero Em-Dash & En-Dash Compliant
-   ========================================================================== */
+/* Robot face SVG emotion states */
 .maxhive-robot-head.robot-face-pro,
 .maxhive-robot-head {
   position: relative;
@@ -1406,10 +1402,7 @@ html {
   -webkit-overflow-scrolling: touch;
 }
 
-/* ==========================================================================
-   MINIMAL PREMIUM LOADER & UNBLUR REVEAL ANIMATIONS
-   Strict Zero Em-Dash & En-Dash Contract Verified
-   ========================================================================== */
+/* Preloader reveal state */
 .site-robot-preloader {
   display: none !important;
   pointer-events: none !important;
@@ -1600,10 +1593,7 @@ html[data-theme="light"] .maxhive-share-toast .share-toast-content span {
   margin-top: 14px;
 }
 
-/* ==========================================================================
-   SHARE SECTION - CLEAN & MINIMALIST
-   Zero Em-Dash & Zero En-Dash Compliant
-   ========================================================================== */
+/* Share section */
 .share-page-content {
   display: flex;
   flex-direction: column;
