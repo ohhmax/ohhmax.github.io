@@ -2351,9 +2351,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const deferInit = (fn, name) => {
     if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => safeInit(fn, name), { timeout: 1200 });
+      requestIdleCallback(() => safeInit(fn, name), { timeout: 2500 });
     } else {
-      setTimeout(() => safeInit(fn, name), 60);
+      setTimeout(() => safeInit(fn, name), 300);
     }
   };
 

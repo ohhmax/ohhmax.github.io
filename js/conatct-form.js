@@ -708,7 +708,19 @@ function initContactModule() {
   }
 
   initAttachmentPicker();
-  setTimeout(handleUniqueVisitorTelemetry, 80);
+  // Immediately render cached visitor count to avoid layout shift
+  try {
+    const rawCached = localStorage.getItem('portfolio_unique_visitors');
+    let cachedNum = parseInt(rawCached || '0', 10);
+    if (cachedNum >= 1000) cachedNum = Math.max(0, cachedNum - 1000);
+    updateVisitorCountDisplay(cachedNum);
+  } catch (e) {}
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(handleUniqueVisitorTelemetry, { timeout: 3000 });
+  } else {
+    setTimeout(handleUniqueVisitorTelemetry, 2000);
+  }
 }
 
 if (document.readyState === 'complete' || document.readyState === 'interactive') {

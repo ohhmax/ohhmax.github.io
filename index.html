@@ -8422,7 +8422,7 @@
           <!-- Endorser Profile Summary Card -->
           <div class="detail-profile-card">
             <div class="detail-avatar" id="detailAvatar" style="background: #0ea5e9;">
-              <img id="detailAvatarImg" src="assets/img/testimonials/tulsidas-nakrani.jpg" alt="Dr. Tulsidas Nakrani" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+              <img id="detailAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3C/svg%3E" alt="Dr. Tulsidas Nakrani" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
               <span id="detailAvatarText" style="display: none;">TN</span>
             </div>
             <div class="detail-profile-info">
@@ -8916,7 +8916,7 @@
       </button>
       <div class="cert-modal-body">
         <div class="cert-modal-img-container">
-          <img id="certModalImg" src="./assets/img/Certifications/c1.jpg" alt="Certificate Image" class="cert-modal-image">
+          <img id="certModalImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3C/svg%3E" alt="Certificate Image" class="cert-modal-image" loading="lazy">
         </div>
         <div class="cert-modal-info">
           <div class="cert-modal-header-row">
@@ -9406,10 +9406,17 @@
           document.body.appendChild(s);
         });
       }
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(loadDeferredScripts, { timeout: 1500 });
+      function scheduleDeferred() {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(loadDeferredScripts, { timeout: 3500 });
+        } else {
+          setTimeout(loadDeferredScripts, 2500);
+        }
+      }
+      if (document.readyState === 'complete') {
+        scheduleDeferred();
       } else {
-        window.addEventListener('load', function () { setTimeout(loadDeferredScripts, 100); }, { once: true });
+        window.addEventListener('load', scheduleDeferred, { once: true });
       }
     })();
   </script>
