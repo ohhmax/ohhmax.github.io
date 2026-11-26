@@ -6403,6 +6403,12 @@ body.light-theme .moment-direct-nav-counter,
   cursor: pointer;
 }
 
+.moments-slider-container picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .moments-slider-img,
 .moments-slider-video {
   width: 100% !important;

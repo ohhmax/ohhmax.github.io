@@ -1746,7 +1746,7 @@ function initMomentsSlider() {
 
   const data = window.MAX_MOMENTS_DATA;
   let activeIndex = 0;
-  const SLIDE_DURATION = 3500;
+  const SLIDE_DURATION = 8000;
   const CIRCLE_CIRCUMFERENCE = 100.53;
   let progressDirection = 'next';
   let progressStart = 0;
@@ -1824,7 +1824,7 @@ function initMomentsSlider() {
     }, 120); // 120ms interval (8.3 fps) is butter-smooth for progress rings and eliminates continuous 60fps rAF thrashing
   }
 
-  function renderSlide(idx) {
+  function renderSlide(idx, autoStart = true) {
     if (idx < 0) idx = data.length - 1;
     if (idx >= data.length) idx = 0;
     activeIndex = idx;
@@ -1853,7 +1853,11 @@ function initMomentsSlider() {
       imgElem.src = item.img || item.src;
       imgElem.alt = item.title;
     }
-    startPhotoProgress();
+    if (autoStart) {
+      startPhotoProgress();
+    } else {
+      stopProgress();
+    }
 
     if (badgeElem) {
       const icon = item.type === 'video' ? 'fa-solid fa-play' : (item.type === 'certificate' ? 'fa-solid fa-shield-halved' : 'fa-solid fa-trophy');
@@ -1871,7 +1875,7 @@ function initMomentsSlider() {
       e.preventDefault();
       e.stopPropagation();
       progressDirection = 'prev';
-      renderSlide(activeIndex - 1);
+      renderSlide(activeIndex - 1, true);
     });
   }
 
@@ -1880,7 +1884,7 @@ function initMomentsSlider() {
       e.preventDefault();
       e.stopPropagation();
       progressDirection = 'next';
-      renderSlide(activeIndex + 1);
+      renderSlide(activeIndex + 1, true);
     });
   }
 
@@ -1897,13 +1901,13 @@ function initMomentsSlider() {
         videoElem.currentTime = 0;
         videoElem.play().catch(() => {});
         videoElem.onended = () => {
-          renderSlide(activeIndex + 1);
+          renderSlide(activeIndex + 1, true);
         };
       }
     }
   });
 
-  renderSlide(0);
+  renderSlide(0, false);
 }
 
 function initCertModal() {
@@ -2356,10 +2360,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Immediate critical above-the-fold UI setup
   safeInit(initMomentsSlider, 'initMomentsSlider');
   safeInit(initAboutExpander, 'initAboutExpander');
-  safeInit(init3DNameTouchPress, 'init3DNameTouchPress');
-  safeInit(initServicesZigZagInteractive, 'initServicesZigZagInteractive');
 
   // Defer off-screen tabs, deep modals, and heavy lists to idle frames
+  deferInit(initServicesZigZagInteractive, 'initServicesZigZagInteractive');
+  deferInit(init3DNameTouchPress, 'init3DNameTouchPress');
   deferInit(populateProjects, 'populateProjects');
   deferInit(initProjectModal, 'initProjectModal');
   deferInit(bindModalItems, 'bindModalItems');
