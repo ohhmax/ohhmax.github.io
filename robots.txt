@@ -22,7 +22,6 @@ Allow: /css/
 Allow: /js/
 Allow: /data/
 Allow: /pages/
-Allow: /components/
 Allow: /docs/
 Allow: /cv-resume-latest-info.html
 Allow: /resume.json

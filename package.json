@@ -4,11 +4,8 @@
   "description": "Personal Portfolio & Engineering Dossier of Mahendra Mali (Max) - Security Researcher, Systems Architect & All-Rounder Engineer",
   "main": "index.html",
   "scripts": {
-    "start": "node tools/vault-server.js",
-    "admin": "node tools/vault-server.js",
-    "test": "node tools/audit-portfolio-seo-and-quality.js",
-    "audit": "node tools/audit-portfolio-seo-and-quality.js",
-    "bump": "node tools/bump-version.js"
+    "start": "python3 -m http.server 8080",
+    "test": "node -e \"const fs=require('fs'),path=require('path');['index.html','404.html','robots.txt','sitemap.xml','assets/xml/sitemap.xml','data/resume.json','data/gallery-items.json','maxconf.json'].forEach(f=>{if(!fs.existsSync(f))throw new Error('Missing '+f)});['data/resume.json','data/gallery-items.json','maxconf.json','package.json'].forEach(f=>JSON.parse(fs.readFileSync(f,'utf8')));const htmls=['index.html','404.html','about/index.html','projects/index.html','gallery/index.html','resume/index.html','milestones/index.html','testimonials/index.html','contact/index.html','pages/cv-resume-latest-info.html'];for(const h of htmls){const s=fs.readFileSync(h,'utf8');if(/[\\u2013\\u2014]/.test(s))throw new Error('Dash found in '+h);for(const m of s.matchAll(/(?:href|src)=\\\"(\\.?\\/[^\\\"#?]+)/g)){if(m[1].startsWith('//'))continue;const rel=m[1].replace(/^\\.?\\//,'');if(!rel)continue;if(!fs.existsSync(rel)&&!fs.existsSync(path.join(path.dirname(h),m[1])))throw new Error(h+' broken ref: '+m[1]);}}console.log('Portfolio self-check passed across '+htmls.length+' HTML pages.');\""
   },
   "keywords": [
     "portfolio",

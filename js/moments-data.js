@@ -314,7 +314,7 @@ window.MAX_MOMENTS_DATA = [
     ]
   },
   {
-    "src": "assets/img/gallery/img20181214135526-2000x1000.jpg",
+    "src": "assets/img/moments/moment_9.webp",
     "id": "moment-9",
     "type": "image",
     "title": "State Science Fair Model Setup",
@@ -334,7 +334,7 @@ window.MAX_MOMENTS_DATA = [
     ]
   },
   {
-    "src": "assets/img/gallery/20171030-173056-2000x1125.jpg",
+    "src": "assets/img/moments/moment_10.webp",
     "id": "moment-10",
     "type": "image",
     "title": "Hardware Prototyping Laboratory",
@@ -374,7 +374,7 @@ window.MAX_MOMENTS_DATA = [
     ]
   },
   {
-    "src": "assets/img/gallery/iit-gandhinagar-certy-2000x1398.jpg",
+    "src": "assets/img/moments/moment_12.webp",
     "id": "moment-12",
     "type": "certificate",
     "title": "Amalthea 18 Certificate of Recognition",

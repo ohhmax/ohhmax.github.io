@@ -28,3 +28,6 @@ android/
 # System Files
 .DS_Store
 Thumbs.db
+
+# Local analytics logs (served locally by portfolio-monitor only)
+data/visitor_analytics.json

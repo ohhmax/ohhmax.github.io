@@ -6,27 +6,23 @@ This guide explains how media is structured, named, and how to effortlessly add 
 
 ## 📁 Directory Architecture
 
-All visual gallery media is stored inside `assets/img/gallery/` organized into six semantic subfolders:
+All visual gallery media is stored inside `assets/img/gallery/` organized into four semantic subfolders:
 
 ```
 assets/img/gallery/
-├── videos/         (Live video reels, national demonstrations, and video projects)
-│   └── thumbs/     (WebP poster thumbnails for instant loading)
-├── honors/         (National and State science exhibitions, trophies, certificates)
+├── Reel/           (Live video reels, national demonstrations, and WebP poster thumbs)
 │   └── thumbs/
-├── hardware-iot/   (IoT microcontrollers, circuits, solar EV roadway tracks)
+├── Moments/        (National and State science exhibitions, awards, certificates, campus moments)
 │   └── thumbs/
-├── tech-lab/       (Kernel debugging, Linux matrices, internship appointment letters)
+├── Tech/           (IoT microcontrollers, circuits, solar EV tracks, kernel debugging, systems)
 │   └── thumbs/
-├── fitness/        (Gym workouts, training routines, and fitness milestones)
-│   └── thumbs/
-└── portraits/      (Developer portraits, campus moments, travel landscapes)
+└── Me/             (Developer portraits, personal milestones, fitness routines)
     └── thumbs/
 ```
 
 ---
 
-## 🏷️ Self-Describing Filename Format
+## Self-Describing Filename Format
 
 Every media asset follows a predictable, self-documenting naming convention:
 
@@ -45,37 +41,12 @@ Every media asset follows a predictable, self-documenting naming convention:
 ### What Each Part Means:
 1. **Year prefix (`2019_`, `2024_`, `2026_`)**: Automatically determines the date and sorts photos chronologically in file managers.
 2. **Title slug (`qualcomm-enterprise-board-...`)**: Automatically converts into the user-facing title and SEO search keywords.
-3. **Parent folder (`honors/`, `videos/`, etc.)**: Automatically assigns the category filter tab and badge.
+3. **Parent folder (`Moments/`, `Reel/`, `Tech/`, `Me/`)**: Assigns the category filter group and badge.
 
 ---
 
-## ⚡ How to Add New Photos or Videos
+## How to Maintain Gallery Assets
 
-To add a new photo or video in the future:
-1. Choose the appropriate subfolder (`honors/`, `hardware-iot/`, `tech-lab/`, `videos/`, `fitness/`, or `portraits/`).
-2. Name your file using the `<year>_<title-slug>.<ext>` pattern.
-   Example: `assets/img/gallery/honors/2026_national-coding-hackathon-first-prize.jpg`.
-3. Run the generator script:
-   ```bash
-   python3 tools/reorganize_gallery_media.py
-   python3 tools/build_portfolio_reels_gallery.py
-   python3 tools/build_gallery_standalone_page.py
-   python3 tools/generate-image-sitemap.py
-   npm test
-   ```
-4. Done! The gallery, Schema.org metadata, sitemap, and vertical Reels explorer will update automatically.
-
----
-
-## 🗑️ How to Delete Photos or Videos
-
-1. Simply delete the file from `assets/img/gallery/<group>/`.
-2. Run:
-   ```bash
-   python3 tools/reorganize_gallery_media.py
-   python3 tools/build_portfolio_reels_gallery.py
-   python3 tools/build_gallery_standalone_page.py
-   python3 tools/generate-image-sitemap.py
-   npm test
-   ```
-3. The deleted photo is automatically purged from the JSON catalog, HTML pages, and sitemaps.
+1. Store media in the appropriate subfolder (`Moments/`, `Tech/`, `Reel/`, or `Me/`) using `<year>_<title-slug>.<ext>`, with a `.webp` thumbnail in its `thumbs/` subfolder.
+2. Keep `data/gallery-items.json`, `gallery/index.html`, `index.html`, `sitemap.xml`, and `assets/xml/sitemap.xml` synchronized.
+3. Run `npm test` to verify all media references, JSON schemas, and HTML pages pass with zero broken links.

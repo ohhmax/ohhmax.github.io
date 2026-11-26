@@ -60,7 +60,25 @@ jobs:
 
       - name: Stamp Portfolio Version & Build Assets
         run: |
-          node tools/bump-version.js --stamp-only
+          node -e '
+            const fs = require("fs");
+            const v = JSON.parse(fs.readFileSync("package.json", "utf8")).version;
+            const sync = (p, fn) => {
+              if (!fs.existsSync(p)) return;
+              const prev = fs.readFileSync(p, "utf8");
+              const next = fn(prev);
+              if (next !== prev) fs.writeFileSync(p, next, "utf8");
+            };
+            sync("index.html", (s) => s
+              .replace(/(<meta\s+name="portfolio-version"\s+content=")v?\d+\.\d+\.\d+(")/gi, `$1v${v}$2`)
+              .replace(/(window\.PORTFOLIO_VERSION\s*=\s*\x27)v?\d+\.\d+\.\d+(\x27)/g, `$1v${v}$2`)
+              .replace(/(id="drawerVersionBadge"[^>]*>)v?\d+\.\d+\.\d+(<\/)/gi, `$1v${v}$2`)
+            );
+            sync("backend/src/index.js", (s) => s
+              .replace(/(const\s+PORTFOLIO_VERSION\s*=\s*\x27v?)\d+\.\d+\.\d+(\x27)/g, `$1${v}$2`)
+            );
+            console.log("Stamped version:", v);
+          '
           echo "Portfolio version stamped successfully."
 
       - name: Upload Static Web Artifact
