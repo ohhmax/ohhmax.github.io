@@ -612,7 +612,7 @@ async function handleUniqueVisitorTelemetry() {
   // 2. Immediately render cached count in drawer capsule to avoid layout shift
   updateVisitorCountDisplay(cachedNum);
 
-  // 3. Throttle Check: Suppress rapid refreshes (< 10 seconds cooldown)
+  // 3. Throttle Check: Suppress rapid refreshes (< 3 seconds cooldown), unless count is uninitialized
   const now = Date.now();
   let lastBeaconTs = 0;
   try {
@@ -620,12 +620,11 @@ async function handleUniqueVisitorTelemetry() {
   } catch (e) {}
 
   const timeSinceLastBeacon = now - lastBeaconTs;
-  if (timeSinceLastBeacon < 10000) {
-    // Rapid refresh detected (e.g. refreshed in 5 seconds). Suppress network request entirely!
+  if (cachedNum > 0 && timeSinceLastBeacon < 3000) {
     return;
   }
 
-  // Mark session active in sessionStorage and stamp beacon timestamp in localStorage
+  // Stamp beacon timestamp
   try {
     localStorage.setItem('portfolio_last_beacon_ts', String(now));
     sessionStorage.setItem('portfolio_session_active', 'true');
@@ -656,14 +655,27 @@ async function handleUniqueVisitorTelemetry() {
         } catch (e) {}
         updateVisitorCountDisplay(normalizedCount);
       }
+    } else if (VISIT_COUNT_API_ENDPOINT) {
+      // Fallback: fetch count directly
+      const countRes = await fetch(VISIT_COUNT_API_ENDPOINT);
+      if (countRes.ok) {
+        const cData = await countRes.json();
+        if (cData && typeof cData.count === 'number') {
+          let num = cData.count >= 1000 ? cData.count - 1000 : cData.count;
+          try {
+            localStorage.setItem('portfolio_unique_visitors', String(num));
+          } catch (e) {}
+          updateVisitorCountDisplay(num);
+        }
+      }
     }
   } catch (e) {
-    // Silent fail; graceful offline resilience
+    // Offline resilience
   }
 }
 
-// Initialize on DOM Ready
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize on DOM Ready or immediately if DOM is already loaded
+function initContactModule() {
   const form = document.getElementById('contactForm') || document.querySelector('[data-form]');
   if (form) {
     form.addEventListener('submit', handleContactFormSubmit);
@@ -676,8 +688,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initAttachmentPicker();
   if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(handleUniqueVisitorTelemetry, { timeout: 2000 });
+    window.requestIdleCallback(handleUniqueVisitorTelemetry, { timeout: 1200 });
   } else {
-    setTimeout(handleUniqueVisitorTelemetry, 1500);
+    setTimeout(handleUniqueVisitorTelemetry, 400);
   }
-});
+}
+
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  initContactModule();
+} else {
+  document.addEventListener('DOMContentLoaded', initContactModule, { once: true });
+}

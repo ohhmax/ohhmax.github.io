@@ -196,8 +196,8 @@
   <!-- Core Local Stylesheets (Instant Zero-Network Paint) -->
   <link rel="stylesheet" href="./assets/vendor/fontawesome/css/all.min.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="./assets/vendor/fontawesome/css/all.min.css"></noscript>
-  <link rel="stylesheet" href="./css/style.css?v=3.9.8">
-  <link rel="stylesheet" href="./css/maxhive-nav.css?v=3.9.9">
+  <link rel="stylesheet" href="./css/style.min.css?v=3.9.9">
+  <link rel="stylesheet" href="./css/maxhive-nav.min.css?v=3.9.9">
   <link rel="stylesheet" href="./css/gallery.css?v=3.9.8" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="./css/gallery.css?v=3.9.8"></noscript>
 
@@ -9418,17 +9418,17 @@
   </div>
   <!-- Core Standalone Modules & UI Scripts -->
   <script defer src="./js/moments-data.js?v=3.9.9"></script>
-  <script defer src="./js/projects-data.js?v=3.9.9"></script>
-  <script defer src="./js/captions.js?v=3.9.9"></script>
   <script defer src="./js/maxhive-nav.js?v=3.9.9"></script>
-  <script defer src="./js/portfolio-gallery.js?v=3.9.9"></script>
   <script defer src="./js/script.js?v=3.9.9"></script>
+  <script defer src="./js/conatct-form.js?v=3.9.9"></script>
   <script>
     (function () {
       function loadDeferredScripts() {
         var scripts = [
+          './js/projects-data.js?v=3.9.9',
+          './js/captions.js?v=3.9.9',
+          './js/portfolio-gallery.js?v=3.9.9',
           './js/testimonials.js?v=3.9.9',
-          './js/conatct-form.js?v=3.9.9',
           './js/ambient-effects.js?v=3.9.9',
           './js/four-d-sensor-engine.js?v=3.9.9'
         ];
@@ -9448,9 +9448,9 @@
         document.body.appendChild(ionNo);
       }
       if ('requestIdleCallback' in window) {
-        requestIdleCallback(loadDeferredScripts, { timeout: 1500 });
+        requestIdleCallback(loadDeferredScripts, { timeout: 1200 });
       } else {
-        window.addEventListener('load', function () { setTimeout(loadDeferredScripts, 100); }, { once: true });
+        window.addEventListener('load', function () { setTimeout(loadDeferredScripts, 60); }, { once: true });
       }
     })();
   </script>
