@@ -73,7 +73,7 @@ window.MAX_MOMENTS_DATA = [
     "title": "NCERT National Science Exhibition Merit Certificate",
     "category": "National Certificate",
     "desc": "Official National Merit Certificate awarded at the 46th JNNSMEE 2019 by NCERT Director Prof. Hrushikesh Senapaty.",
-    "img": "./assets/img/Certifications/c2.jpg",
+    "img": "./assets/img/Certifications/c2.webp",
     "venue": "B.T.I. Campus, Shankar Nagar, Raipur, Chhattisgarh",
     "date": "October 15 to 20, 2019",
     "organizer": "National Council of Educational Research and Training (NCERT, New Delhi)",
@@ -82,8 +82,8 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "Awarded National Certificate of Merit for pioneering research in dynamic wireless power transmission for electric vehicles without onboard chemical batteries.",
     "gallery_photos": [
-      "./assets/img/Certifications/c2.jpg",
-      "./assets/img/Certifications/c1.jpg",
+      "./assets/img/Certifications/c2.webp",
+      "./assets/img/Certifications/c1.webp",
       "./assets/img/moments/moment_2.webp"
     ]
   },
@@ -94,7 +94,7 @@ window.MAX_MOMENTS_DATA = [
     "title": "GCERT Gujarat State Science Fair Gold Medal Certificate",
     "category": "State Certificate",
     "desc": "Official First Place State Certificate conferred by Gujarat Council of Educational Research and Training at the State Science Fair.",
-    "img": "./assets/img/Certifications/c3.jpg",
+    "img": "./assets/img/Certifications/c3.webp",
     "venue": "State Science Center, Gandhinagar, Gujarat",
     "date": "February 2019",
     "organizer": "Gujarat Council of Educational Research and Training (GCERT)",
@@ -103,8 +103,8 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "State Gold Medal honors in Sustainable Energy and Clean Technology, qualifying as the premier representative for Gujarat at the National Science Exhibition.",
     "gallery_photos": [
-      "./assets/img/Certifications/c3.jpg",
-      "./assets/img/Certifications/c4.jpg",
+      "./assets/img/Certifications/c3.webp",
+      "./assets/img/Certifications/c4.webp",
       "./assets/img/moments/moment_6.webp"
     ]
   },
@@ -115,7 +115,7 @@ window.MAX_MOMENTS_DATA = [
     "title": "INSEF Mumbai National Honourable Mention Certificate",
     "category": "National Certificate",
     "desc": "Conferred National Honourable Mention Certificate by Science Society of India at the Indian Science and Engineering Fair Mumbai.",
-    "img": "./assets/img/Certifications/c5.jpg",
+    "img": "./assets/img/Certifications/c5.webp",
     "venue": "SIES Dr. APJ Abdul Kalam Memorial Complex, Mumbai, Maharashtra",
     "date": "December 2017",
     "organizer": "Science Society of India (SSI) & SIES",
@@ -124,8 +124,8 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "Recognized among select national finalists for innovative electronics circuitry and high-efficiency wireless energy coupling.",
     "gallery_photos": [
-      "./assets/img/Certifications/c5.jpg",
-      "./assets/img/Certifications/c3.jpg"
+      "./assets/img/Certifications/c5.webp",
+      "./assets/img/Certifications/c3.webp"
     ]
   },
   {
@@ -198,7 +198,7 @@ window.MAX_MOMENTS_DATA = [
     "title": "Banaskantha District Science Fair First Prize Certificate",
     "category": "District Award",
     "desc": "First Prize certificate awarded by District Education Committee for best working physical innovation model.",
-    "img": "./assets/img/Certifications/c4.jpg",
+    "img": "./assets/img/Certifications/c4.webp",
     "venue": "District Science Center, Banaskantha, Gujarat",
     "date": "December 2018",
     "organizer": "District Science Board and GCERT",
@@ -207,7 +207,7 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "Won First Rank in the Senior Engineering Category for autonomous wireless power transfer across primary and secondary tuned induction circuits.",
     "gallery_photos": [
-      "./assets/img/Certifications/c4.jpg",
+      "./assets/img/Certifications/c4.webp",
       "./assets/img/moments/moment_4.webp"
     ]
   },

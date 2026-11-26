@@ -265,21 +265,31 @@ def main():
     # Category counts
     cat_counts = {
         'all': len(items),
-        'honors': len([i for i in items if i.get('category') == 'honors']),
-        'innovations': len([i for i in items if i.get('category') == 'innovations']),
-        'portraits': len([i for i in items if i.get('category') == 'portraits']),
-        'fitness': len([i for i in items if i.get('category') == 'fitness']),
-        'workspace': len([i for i in items if i.get('category') in ('workspace', 'milestones')]),
-        'videos': len([i for i in items if i.get('type') == 'video'])
+        'me': len([i for i in items if i.get('category') == 'me']),
+        'moments': len([i for i in items if i.get('category') == 'moments']),
+        'tech': len([i for i in items if i.get('category') == 'tech']),
+        'reel': len([i for i in items if i.get('category') == 'reel' or i.get('type') == 'video'])
     }
 
     page_html = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-T4QKFS53YQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){{dataLayer.push(arguments);}}
+    gtag('js', new Date());
+    gtag('config', 'G-T4QKFS53YQ', {{
+      'cookie_domain': 'none',
+      'cookie_flags': 'SameSite=Lax;Secure'
+    }});
+  </script>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery | Mahendra Mali (Max)</title>
-  <meta name="description" content="Official visual gallery archive of Mahendra Mali (Max): 130 verified photos and video reels of national science fair honors, IoT hardware prototypes, lab systems, and portraits organized year-wise (2017 to 2026).">
+  <meta name="description" content="Official visual gallery archive of Mahendra Mali (Max): 133 verified photos and video reels of national science fair exhibitions and hardware prototypes.">
   <meta name="keywords" content="Mahendra Mali Gallery, Max Portfolio Photos, NCERT Science Exhibition Raipur, GCERT State Gold Medal, IoT Hardware Prototypes, Video Reels, Full-Stack Developer">
   <link rel="canonical" href="https://ohhmax.github.io/gallery/">
 
@@ -287,7 +297,7 @@ def main():
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Mahendra Mali (Max)">
   <meta property="og:title" content="Gallery | Mahendra Mali (Max)">
-  <meta property="og:description" content="Browse 130 authenticated photos and video reels of national science fair honors, IoT prototypes, and executive portraits from 2017 to 2026.">
+  <meta property="og:description" content="Browse 133 authenticated photos and video reels of national science fair honors, IoT prototypes, and executive portraits from 2017 to 2026.">
   <meta property="og:url" content="https://ohhmax.github.io/gallery/">
   <meta property="og:image" content="https://ohhmax.github.io/assets/img/og/og-gallery-1200x630.png">
   <meta property="og:image:width" content="1200">
@@ -299,7 +309,7 @@ def main():
   <meta name="twitter:site" content="@mahendraplus">
   <meta name="twitter:creator" content="@mahendraplus">
   <meta name="twitter:title" content="Gallery | Mahendra Mali (Max)">
-  <meta name="twitter:description" content="Browse 130 authenticated photos and video reels of national science fair honors, IoT prototypes, and executive portraits from 2017 to 2026.">
+  <meta name="twitter:description" content="Browse 133 authenticated photos and video reels of national science fair honors, IoT prototypes, and executive portraits from 2017 to 2026.">
   <meta name="twitter:image" content="https://ohhmax.github.io/assets/img/og/hd-gallery-1920x1080.png">
 
   <!-- Robots & AI Crawlers (100% Crawling & Full Indexing) -->
@@ -310,7 +320,7 @@ def main():
   <link rel="shortcut icon" href="/assets/img/logo/favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=optional" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Schema.org JSON-LD Structured Data for Search Engines & AI Bots -->
@@ -1128,7 +1138,7 @@ def main():
         <span style="color: var(--accent-cyan); font-weight: 600;">Visual Gallery</span>
       </div>
       <div class="nav-actions-right">
-        <span class="stat-pill" id="totalMediaBadge"><i class="fa-solid fa-layer-group"></i> 130 Media Items</span>
+        <span class="stat-pill" id="totalMediaBadge"><i class="fa-solid fa-layer-group"></i> {len(items)} Media Items</span>
         <button type="button" class="theme-toggle-btn" id="galleryThemeToggleBtn" title="Toggle Light / Dark Mode" aria-label="Toggle theme">
           <i class="fa-solid fa-circle-half-stroke"></i>
         </button>
@@ -1139,7 +1149,7 @@ def main():
     <section class="gallery-hero">
       <h1>Gallery | <span>Verified Moments</span></h1>
       <p class="gallery-hero-sub">
-        Chronological archive of 130 verified national science exhibition merit honors, 
+        Chronological archive of {len(items)} verified national science exhibition merit honors, 
         resonant wireless EV prototypes, Linux kernel lab consoles, video reels, and personal portraits (2017 to 2026).
       </p>
       <img src="/assets/img/og/og-gallery-1200x630.png" alt="Gallery | Mahendra Mali (Max)" class="gallery-hero-banner" width="1200" height="320">
@@ -1150,12 +1160,12 @@ def main():
       <div class="toolbar-search-row">
         <div class="search-input-wrap">
           <i class="fa-solid fa-magnifying-glass search-icon"></i>
-          <input type="text" id="gallerySearchInput" class="gallery-search-field" placeholder="Search by title, code (e.g. HONOR-NCERT, FITNESS, WORK), year, or location..." aria-label="Search gallery items">
+          <input type="text" id="gallerySearchInput" class="gallery-search-field" placeholder="Search by title, code, year, or location..." aria-label="Search gallery items">
           <button type="button" id="searchClearBtn" class="search-clear-btn" aria-label="Clear search">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
-        <span class="stat-pill" id="filteredCountBadge">Showing 142 of 142</span>
+        <span class="stat-pill" id="filteredCountBadge">Showing {len(items)} of {len(items)}</span>
       </div>
 
       <!-- Year Filter Tabs -->
@@ -1163,7 +1173,7 @@ def main():
       <div class="filter-pill-row" id="yearFilterGroup">
         <button type="button" class="filter-btn active" data-filter-type="year" data-filter-val="all">
           <span>All Years</span>
-          <span class="filter-count">142</span>
+          <span class="filter-count">{len(items)}</span>
         </button>
         <button type="button" class="filter-btn" data-filter-type="year" data-filter-val="2026">
           <span>2026</span>
@@ -1210,29 +1220,21 @@ def main():
           <span>All Categories</span>
           <span class="filter-count">{cat_counts['all']}</span>
         </button>
-        <button type="button" class="filter-btn" data-filter-type="cat" data-filter-val="honors">
-          <span>National &amp; State Honors</span>
-          <span class="filter-count">{cat_counts['honors']}</span>
+        <button type="button" class="filter-btn" data-filter-type="cat" data-filter-val="me">
+          <span>Me</span>
+          <span class="filter-count">{cat_counts['me']}</span>
         </button>
-        <button type="button" class="filter-btn" data-filter-type="cat" data-filter-val="innovations">
-          <span>Innovations &amp; Prototypes</span>
-          <span class="filter-count">{cat_counts['innovations']}</span>
+        <button type="button" class="filter-btn" data-filter-type="cat" data-filter-val="moments">
+          <span>Moments</span>
+          <span class="filter-count">{cat_counts['moments']}</span>
         </button>
-        <button type="button" class="filter-btn" data-filter-type="cat" data-filter-val="portraits">
-          <span>Portraits &amp; Memories</span>
-          <span class="filter-count">{cat_counts['portraits']}</span>
+        <button type="button" class="filter-btn" data-filter-type="cat" data-filter-val="tech">
+          <span>Tech</span>
+          <span class="filter-count">{cat_counts['tech']}</span>
         </button>
-        <button type="button" class="filter-btn" data-filter-type="cat" data-filter-val="fitness">
-          <span>Fitness &amp; Gym</span>
-          <span class="filter-count">{cat_counts['fitness']}</span>
-        </button>
-        <button type="button" class="filter-btn" data-filter-type="cat" data-filter-val="workspace">
-          <span>Tech Lab &amp; Milestones</span>
-          <span class="filter-count">{cat_counts['workspace']}</span>
-        </button>
-        <button type="button" class="filter-btn" data-filter-type="cat" data-filter-val="videos">
-          <span>Video Reels</span>
-          <span class="filter-count">{cat_counts['videos']}</span>
+        <button type="button" class="filter-btn" data-filter-type="cat" data-filter-val="reel">
+          <span>Reels</span>
+          <span class="filter-count">{cat_counts['reel']}</span>
         </button>
       </div>
     </section>
@@ -1250,6 +1252,15 @@ def main():
         <i class="fa-solid fa-house"></i>
         <span>Return to Main Portfolio</span>
       </a>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:18px;font-size:0.92rem;">
+        <a href="../about/" style="color:#38bdf8;text-decoration:none;">&bull; About Max</a>
+        <a href="../projects/" style="color:#38bdf8;text-decoration:none;">&bull; 20 Engineered Projects</a>
+        <a href="../resume/" style="color:#38bdf8;text-decoration:none;">&bull; Verified Curriculum Vitae</a>
+        <a href="../testimonials/" style="color:#38bdf8;text-decoration:none;">&bull; Faculty Recommendations</a>
+        <a href="../milestones/" style="color:#38bdf8;text-decoration:none;">&bull; National Science Milestones</a>
+        <a href="../contact/" style="color:#38bdf8;text-decoration:none;">&bull; Direct Contact Channels</a>
+        <a href="https://ohhmax.github.io/maxnet" style="color:#38bdf8;text-decoration:none;">&bull; MAXNET OS</a>
+      </div>
     </footer>
   </div>
 
@@ -1267,7 +1278,7 @@ def main():
       </button>
 
       <div class="lightbox-media-container" id="lightboxMediaContainer">
-        <img id="lightboxImg" src="" alt="">
+        <img id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Gallery Photo Detail View">
         <video id="lightboxVideo" controls playsinline></video>
       </div>
 
@@ -1341,10 +1352,8 @@ def main():
           var catMatches = false;
           if (activeCatFilter === 'all') {{
             catMatches = true;
-          }} else if (activeCatFilter === 'videos') {{
-            catMatches = (cardType === 'video');
-          }} else if (activeCatFilter === 'workspace') {{
-            catMatches = (cardCat === 'workspace' || cardCat === 'milestones');
+          }} else if (activeCatFilter === 'reel') {{
+            catMatches = (cardCat === 'reel' || cardType === 'video');
           }} else {{
             catMatches = (cardCat === activeCatFilter);
           }}

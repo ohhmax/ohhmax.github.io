@@ -395,6 +395,23 @@
     let lastFastScrollTime = 0;
     let lastBottomScrollTime = 0;
     let lastTopScrollTime = 0;
+    let cachedDocScrollHeight = 0;
+    let lastHeightMeasureTime = 0;
+
+    function getCachedDocHeight(now) {
+      if (!cachedDocScrollHeight || (now - lastHeightMeasureTime > 1200)) {
+        lastHeightMeasureTime = now;
+        cachedDocScrollHeight = Math.max(
+          document.documentElement.scrollHeight || 0,
+          document.body ? document.body.scrollHeight : 0
+        );
+      }
+      return cachedDocScrollHeight;
+    }
+
+    window.addEventListener('resize', () => {
+      cachedDocScrollHeight = 0;
+    }, { passive: true });
 
     window.addEventListener('scroll', () => {
       if (scrollTicking) return;
@@ -402,20 +419,13 @@
       requestAnimationFrame(() => {
         const currentScrollY = window.scrollY;
         const scrollDelta = currentScrollY - lastScrollY;
-        const isMobileNav = window.innerWidth < 1024;
         const now = Date.now();
 
         if (currentScrollY > maxScrolledY) {
           maxScrolledY = currentScrollY;
         }
 
-        // Strictly fixed floating navbar: zero auto-hiding or movement on scroll (Firefox-stabilized)
-        const docScrollHeight = Math.max(document.documentElement.scrollHeight, document.body.offsetHeight);
-        if (bottomNav && bottomNav.classList.contains('nav-scroll-hidden')) {
-          bottomNav.classList.remove('nav-scroll-hidden');
-        }
-
-        // Trigger reactions for scroll behaviors
+        // Trigger reactions for scroll behaviors without synchronous scroll-path reflow
         if (Math.abs(scrollDelta) > 115 && (now - lastFastScrollTime > 15000)) {
           lastFastScrollTime = now;
           if (typeof triggerMascotCaption === 'function') {
@@ -423,10 +433,13 @@
           }
         }
 
-        if (window.innerHeight + currentScrollY >= (docScrollHeight - 40) && (now - lastBottomScrollTime > 30000)) {
-          lastBottomScrollTime = now;
-          if (typeof triggerMascotCaption === 'function') {
-            triggerMascotCaption('scroll_bottom', 'celebrating');
+        if (currentScrollY > 200 && (now - lastBottomScrollTime > 30000)) {
+          const docScrollHeight = getCachedDocHeight(now);
+          if (window.innerHeight + currentScrollY >= (docScrollHeight - 40)) {
+            lastBottomScrollTime = now;
+            if (typeof triggerMascotCaption === 'function') {
+              triggerMascotCaption('scroll_bottom', 'celebrating');
+            }
           }
         }
 
