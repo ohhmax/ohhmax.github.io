@@ -13480,3 +13480,65 @@ html[data-theme="light"] .compact-testimonial-row:hover .compact-header-arrow {
   }
 }
 
+.portfolio-pages-directory {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.portfolio-pages-directory .directory-heading {
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+  margin-right: 4px;
+}
+
+.portfolio-pages-directory .directory-pill-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.portfolio-pages-directory .directory-pill-link:hover {
+  border-color: #f59e0b;
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.08);
+}
+
+body.light-theme .portfolio-pages-directory,
+html[data-theme="light"] .portfolio-pages-directory {
+  border-top-color: rgba(15, 23, 42, 0.1);
+}
+
+body.light-theme .portfolio-pages-directory .directory-heading,
+html[data-theme="light"] .portfolio-pages-directory .directory-heading {
+  color: #475569;
+}
+
+body.light-theme .portfolio-pages-directory .directory-pill-link,
+html[data-theme="light"] .portfolio-pages-directory .directory-pill-link {
+  background: #f8fafc;
+  border-color: rgba(15, 23, 42, 0.14);
+  color: #1e293b;
+}
+
+body.light-theme .portfolio-pages-directory .directory-pill-link:hover,
+html[data-theme="light"] .portfolio-pages-directory .directory-pill-link:hover {
+  border-color: #d97706;
+  color: #b45309;
+  background: rgba(245, 158, 11, 0.08);
+}
+

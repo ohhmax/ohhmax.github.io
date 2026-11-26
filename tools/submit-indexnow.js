@@ -14,11 +14,13 @@ const URL_LIST = [
   `https://${HOST}/`,
   `https://${HOST}/about/`,
   `https://${HOST}/projects/`,
+  `https://${HOST}/maxnet/`,
   `https://${HOST}/resume/`,
   `https://${HOST}/testimonials/`,
   `https://${HOST}/milestones/`,
   `https://${HOST}/gallery/`,
   `https://${HOST}/contact/`,
+  `https://${HOST}/cv-resume-latest-info.html`,
   `https://${HOST}/resume.json`,
   `https://${HOST}/llms.txt`,
   `https://${HOST}/llms-full.txt`

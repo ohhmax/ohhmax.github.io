@@ -143,20 +143,24 @@ for label, rel_path, canonical in PAGES:
 # TOOL 4: SCHEMA.ORG JSON-LD STRUCTURED DATA AUDIT
 # ==============================================================================
 print("\n[TOOL 4] Schema.org JSON-LD Structured Data Validation")
-for label, rel_path, _ in PAGES:
+for label, rel_path, canonical in PAGES:
     with open(rel_path, 'r', encoding='utf-8') as f:
         html = f.read()
     soup = BeautifulSoup(html, 'html.parser')
     scripts = soup.find_all('script', attrs={'type': 'application/ld+json'})
     valid_blocks = 0
+    url_matches = True
     for s in scripts:
         try:
             data = json.loads(s.string)
             if '@context' in data or '@graph' in data:
                 valid_blocks += 1
+            if 'url' in data and label not in ('Homepage', 'CV Dossier'):
+                if data['url'].rstrip('/') != canonical.rstrip('/'):
+                    url_matches = False
         except Exception as e:
             pass
-    log_test('Schema', f'[{label}] Valid JSON-LD Schema', valid_blocks > 0, f'{valid_blocks} valid blocks found')
+    log_test('Schema', f'[{label}] Valid JSON-LD Schema', valid_blocks > 0 and url_matches, f'{valid_blocks} valid blocks, url_match={url_matches}')
 
 # ==============================================================================
 # TOOL 5: ROBOTS.TXT, SITEMAP.XML & AI CRAWLER DIRECTIVES
