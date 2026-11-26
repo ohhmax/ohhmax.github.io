@@ -2349,32 +2349,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const deferInit = (fn, name) => {
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => safeInit(fn, name), { timeout: 2500 });
-    } else {
-      setTimeout(() => safeInit(fn, name), 300);
-    }
-  };
-
   // Immediate critical above-the-fold UI setup
   safeInit(initMomentsSlider, 'initMomentsSlider');
   safeInit(initAboutExpander, 'initAboutExpander');
 
-  // Defer off-screen tabs, deep modals, and heavy lists to idle frames
-  deferInit(initServicesZigZagInteractive, 'initServicesZigZagInteractive');
-  deferInit(init3DNameTouchPress, 'init3DNameTouchPress');
-  deferInit(populateProjects, 'populateProjects');
-  deferInit(initProjectModal, 'initProjectModal');
-  deferInit(bindModalItems, 'bindModalItems');
-  deferInit(initCertModal, 'initCertModal');
-  deferInit(initPhotoHighlightsBanner, 'initPhotoHighlightsBanner');
-  deferInit(initGalleryTimelineModal, 'initGalleryTimelineModal');
-  deferInit(initMaxNicknameModal, 'initMaxNicknameModal');
-  deferInit(initTrustSection, 'initTrustSection');
-  deferInit(initDedicatedGallery, 'initDedicatedGallery');
-  deferInit(initMomentsGalleryModal, 'initMomentsGalleryModal');
-  deferInit(initMomentDossierModal, 'initMomentDossierModal');
-  deferInit(initLivingVisitorCompanion, 'initLivingVisitorCompanion');
-  deferInit(initScrollReveal, 'initScrollReveal');
+  // Cooperative task scheduling: run secondary features in isolated idle slices to eliminate TBT
+  const deferredQueue = [
+    [initServicesZigZagInteractive, 'initServicesZigZagInteractive'],
+    [init3DNameTouchPress, 'init3DNameTouchPress'],
+    [populateProjects, 'populateProjects'],
+    [initProjectModal, 'initProjectModal'],
+    [bindModalItems, 'bindModalItems'],
+    [initCertModal, 'initCertModal'],
+    [initPhotoHighlightsBanner, 'initPhotoHighlightsBanner'],
+    [initGalleryTimelineModal, 'initGalleryTimelineModal'],
+    [initMaxNicknameModal, 'initMaxNicknameModal'],
+    [initTrustSection, 'initTrustSection'],
+    [initDedicatedGallery, 'initDedicatedGallery'],
+    [initMomentsGalleryModal, 'initMomentsGalleryModal'],
+    [initMomentDossierModal, 'initMomentDossierModal'],
+    [initLivingVisitorCompanion, 'initLivingVisitorCompanion'],
+    [initScrollReveal, 'initScrollReveal']
+  ];
+
+  function runNextDeferred() {
+    if (deferredQueue.length === 0) return;
+    const item = deferredQueue.shift();
+    safeInit(item[0], item[1]);
+    if (deferredQueue.length > 0) {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(runNextDeferred, { timeout: 3500 });
+      } else {
+        setTimeout(runNextDeferred, 80);
+      }
+    }
+  }
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(runNextDeferred, { timeout: 2000 });
+  } else {
+    setTimeout(runNextDeferred, 250);
+  }
 });
