@@ -2216,32 +2216,32 @@ function initServicesZigZagInteractive() {
     const cards = Array.from(serviceItems);
     if (!cards.length) return;
 
+    // Batch all layout reads before any DOM writes to avoid forced synchronous reflow
     const listRect = listContainer.getBoundingClientRect();
     if (listRect.width === 0) return;
     const W = listRect.width;
     const startX = 14;
-
-    const firstCardRect = cards[0].getBoundingClientRect();
-    const topY = firstCardRect.top - listRect.top;
-
-    // Fixed uniform corner radius matching CSS border-radius
     const R = window.innerWidth <= 600 ? 20 : 26;
-    const firstCornerR = Math.min(R, cards[0].offsetHeight / 2);
+    const cardBoxes = cards.map((card) => {
+      const r = card.getBoundingClientRect();
+      return {
+        top: r.top - listRect.top,
+        height: r.height || card.offsetHeight
+      };
+    });
 
-    startDot.setAttribute('cx', startX);
-    startDot.setAttribute('cy', topY);
+    const topY = cardBoxes[0].top;
+    const firstCornerR = Math.min(R, cardBoxes[0].height / 2);
 
     let d = `M ${startX} ${topY} L ${W - firstCornerR} ${topY} `;
+    let cumLength = (W - firstCornerR) - startX;
+    let lastBottom = topY;
 
-    let cumLength = 0;
-    const len0 = (W - firstCornerR) - startX;
-    cumLength += len0;
-
-    cards.forEach((card, i) => {
-      const cRect = card.getBoundingClientRect();
-      const cTop = cRect.top - listRect.top;
-      const cHeight = card.offsetHeight;
+    cardBoxes.forEach((box, i) => {
+      const cTop = box.top;
+      const cHeight = box.height;
       const cBottom = cTop + cHeight;
+      lastBottom = cBottom;
       const cornerR = Math.min(R, cHeight / 2);
       const isOdd = (i % 2 === 0);
 
@@ -2250,65 +2250,56 @@ function initServicesZigZagInteractive() {
       const vertHalf = vertLen / 2;
 
       if (isOdd) {
-        // Rocket stops right at the center of the right curved cap
         cardStopDistances[i] = cumLength + quarterArc + vertHalf;
-
-        // Arc around top-right corner
         d += `A ${cornerR} ${cornerR} 0 0 1 ${W} ${cTop + cornerR} `;
         if (cBottom - cornerR > cTop + cornerR) {
           d += `L ${W} ${cBottom - cornerR} `;
         }
-        // Arc around bottom-right corner
         d += `A ${cornerR} ${cornerR} 0 0 1 ${W - cornerR} ${cBottom} `;
-
         cumLength += Math.PI * cornerR + vertLen;
 
-        if (i < cards.length - 1) {
-          const nextCard = cards[i + 1];
-          const nextCornerR = Math.min(R, nextCard.offsetHeight / 2);
+        if (i < cardBoxes.length - 1) {
+          const nextCornerR = Math.min(R, cardBoxes[i + 1].height / 2);
           d += `L ${nextCornerR} ${cBottom} `;
-
-          const segLen = (W - cornerR) - nextCornerR;
-          cumLength += segLen;
+          cumLength += (W - cornerR) - nextCornerR;
         } else {
           d += `L ${startX} ${cBottom} `;
-          endDot.setAttribute('cx', startX);
-          endDot.setAttribute('cy', cBottom);
         }
       } else {
-        // Rocket stops right at the center of the left curved cap
         cardStopDistances[i] = cumLength + quarterArc + vertHalf;
-
-        // Arc around top-left corner
         d += `A ${cornerR} ${cornerR} 0 0 0 0 ${cTop + cornerR} `;
         if (cBottom - cornerR > cTop + cornerR) {
           d += `L 0 ${cBottom - cornerR} `;
         }
-        // Arc around bottom-left corner
         d += `A ${cornerR} ${cornerR} 0 0 0 ${cornerR} ${cBottom} `;
-
         cumLength += Math.PI * cornerR + vertLen;
 
-        if (i < cards.length - 1) {
-          const nextCard = cards[i + 1];
-          const nextCornerR = Math.min(R, nextCard.offsetHeight / 2);
+        if (i < cardBoxes.length - 1) {
+          const nextCornerR = Math.min(R, cardBoxes[i + 1].height / 2);
           d += `L ${W - nextCornerR} ${cBottom} `;
-
-          const segLen = (W - nextCornerR) - cornerR;
-          cumLength += segLen;
+          cumLength += (W - nextCornerR) - cornerR;
         } else {
           d += `L ${startX} ${cBottom} `;
-          endDot.setAttribute('cx', startX);
-          endDot.setAttribute('cy', cBottom);
         }
       }
     });
 
+    startDot.setAttribute('cx', startX);
+    startDot.setAttribute('cy', topY);
+    endDot.setAttribute('cx', startX);
+    endDot.setAttribute('cy', lastBottom);
     pathElem.setAttribute('d', d);
 
-    // Keep rocket planted on the recalculated path
+    // Keep rocket planted cleanly without synchronous post-write getTotalLength reflow
     if (rocketElem && !rocketElem.classList.contains('riding')) {
-      placeRocketAt(rocketCurrentDistance, isScrollingUp, true);
+      if (rocketCurrentDistance === 0) {
+        const posX = Math.max(16, Math.min(W - 16, startX));
+        rocketElem.style.left = `${posX - 17}px`;
+        rocketElem.style.top = `${topY - 10}px`;
+        rocketElem.style.transform = 'rotate(-90deg)';
+      } else {
+        requestAnimationFrame(() => placeRocketAt(rocketCurrentDistance, isScrollingUp, true));
+      }
     }
   }
 
@@ -2445,9 +2436,8 @@ function initServicesZigZagInteractive() {
     });
   });
 
-  // Initial draw
-  updateSerpentineSvgWave();
-  setTimeout(updateSerpentineSvgWave, 100);
+  // Initial draw scheduled on next animation frame
+  requestAnimationFrame(updateSerpentineSvgWave);
 }
 
 // Instant Direct Vector PDF Printing and Export from Real HTML Resume
