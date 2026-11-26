@@ -22,6 +22,28 @@
 
 window.MAX_MOMENTS_DATA = [
   {
+    "src": "assets/img/moments/moment_2.jpg",
+    "id": "moment-ncert-demo",
+    "type": "photo",
+    "title": "National Science Exhibition Live Demonstration",
+    "category": "Live Prototype Demo",
+    "desc": "Live field demonstration of the scale resonant wireless electric car operating continuously without chemical battery on inductive roadway track.",
+    "img": "./assets/img/moments/moment_2.jpg",
+    "venue": "B.T.I. Campus, Shankar Nagar, Raipur, Chhattisgarh",
+    "date": "October 15 to 20, 2019",
+    "organizer": "National Council of Educational Research and Training (NCERT)",
+    "references": [
+      { "title": "NCERT National Science Exhibition Portal", "url": "https://ncert.nic.in" },
+      { "title": "46th JNNSMEE Official Archive", "url": "https://ncert.nic.in" }
+    ],
+    "full_details": "Working scale demonstration of resonant inductive wireless power transfer. The vehicle collects energy dynamically from submerged magnetic coils, eliminating onboard battery weight and battery degradation.",
+    "gallery_photos": [
+      "./assets/img/moments/moment_2.jpg",
+      "./assets/img/moments/moment_3.jpg",
+      "./assets/img/moments/moment_5.jpg"
+    ]
+  },
+  {
     "src": "assets/video/science_fair_highlights.mp4",
     "id": "moment-video-1",
     "type": "video",

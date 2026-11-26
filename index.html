@@ -6,8 +6,7 @@
 <html lang="en">
 
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-T4QKFS53YQ"></script>
+  <!-- Google tag (gtag.js) - Deferred to Idle to protect Main Thread -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -16,6 +15,21 @@
       'cookie_domain': 'none',
       'cookie_flags': 'SameSite=Lax;Secure'
     });
+    (function() {
+      function loadGtag() {
+        if (window.__gtagLoaded) return;
+        window.__gtagLoaded = true;
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-T4QKFS53YQ';
+        document.head.appendChild(s);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGtag, { timeout: 2000 });
+      } else {
+        window.addEventListener('load', function() { setTimeout(loadGtag, 100); }, { once: true });
+      }
+    })();
   </script>
 
   <!-- Character encoding -->
@@ -175,8 +189,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://unpkg.com">
 
-  <!-- High-Priority Profile Image Preload -->
+  <!-- High-Priority Above-the-Fold Image Preloads -->
   <link rel="preload" as="image" href="./assets/img/max/Mahendra-Mali-18.png" fetchpriority="high">
+  <link rel="preload" as="image" href="./assets/img/moments/moment_2.jpg" fetchpriority="high">
 
   <!-- Core Local Stylesheets (Instant Zero-Network Paint) -->
   <link rel="stylesheet" href="./assets/vendor/fontawesome/css/all.min.css" media="print" onload="this.media='all'">
@@ -907,8 +922,8 @@
         if (decEl) decEl.textContent = Math.floor((elapsed % 1) * 100).toString().padStart(2, '0');
       }
 
-      // Fast interval guarantees continuous updates even during synchronous script parsing
-      timerId = setInterval(tick, 16);
+      // Smooth interval guarantees updates without thrashing the parser
+      timerId = setInterval(tick, 80);
 
       window.__stopPreloaderCounter = function() {
         running = false;
@@ -1216,7 +1231,7 @@
                   <i class="fa-solid fa-chevron-right"></i>
                 </button>
 
-                <img id="momentsSliderImg" src="./assets/img/moments/moment_2.jpg" alt="Science Fair Innovation Moment" class="moments-slider-img" width="480" height="270" loading="eager" decoding="async">
+                <img id="momentsSliderImg" src="./assets/img/moments/moment_2.jpg" alt="Science Fair Innovation Moment" class="moments-slider-img" width="480" height="270" fetchpriority="high" loading="eager" decoding="async">
                 <video id="momentsSliderVideo" class="moments-slider-video" muted playsinline style="display: none;"></video>
 
                 <!-- Compact Short Info with Dark Bottom Shadow (Clean 1 Line) -->
@@ -1398,7 +1413,7 @@
                   </div>
                   <div class="serpentine-divider" aria-hidden="true"></div>
                   <div class="serpentine-icon-box">
-                    <img src="./assets/img/icons/electronic-solution.png" alt="Circuit Designing &amp; Hardware Engineering" width="38" height="38">
+                    <img src="./assets/img/icons/electronic-solution.png" loading="lazy" decoding="async" alt="Circuit Designing &amp; Hardware Engineering" width="38" height="38">
                   </div>
                   <div class="serpentine-content-box">
                     <h4 class="serpentine-title">Circuit Designing &amp; Hardware</h4>
@@ -1426,7 +1441,7 @@
                   </div>
                   <div class="serpentine-divider" aria-hidden="true"></div>
                   <div class="serpentine-icon-box">
-                    <img src="./assets/img/icons/iot.png" alt="DIY Gadget Making &amp; IoT Prototyping" width="38" height="38">
+                    <img src="./assets/img/icons/iot.png" loading="lazy" decoding="async" alt="DIY Gadget Making &amp; IoT Prototyping" width="38" height="38">
                   </div>
                   <div class="serpentine-content-box">
                     <h4 class="serpentine-title">DIY Gadget Making &amp; IoT</h4>
@@ -1448,7 +1463,7 @@
                   </div>
                   <div class="serpentine-divider" aria-hidden="true"></div>
                   <div class="serpentine-icon-box">
-                    <img src="./assets/img/icons/web.png" alt="Full-Stack Web Engineering" width="38" height="38">
+                    <img src="./assets/img/icons/web.png" loading="lazy" decoding="async" alt="Full-Stack Web Engineering" width="38" height="38">
                   </div>
                   <div class="serpentine-content-box">
                     <h4 class="serpentine-title">Full-Stack Web Engineering</h4>
@@ -1476,7 +1491,7 @@
                   </div>
                   <div class="serpentine-divider" aria-hidden="true"></div>
                   <div class="serpentine-icon-box">
-                    <img src="./assets/img/icons/mobile.png" alt="Native Android Engineering" width="38" height="38">
+                    <img src="./assets/img/icons/mobile.png" loading="lazy" decoding="async" alt="Native Android Engineering" width="38" height="38">
                   </div>
                   <div class="serpentine-content-box">
                     <h4 class="serpentine-title">Native Android Engineering</h4>
@@ -1498,7 +1513,7 @@
                   </div>
                   <div class="serpentine-divider" aria-hidden="true"></div>
                   <div class="serpentine-icon-box">
-                    <img src="./assets/img/icons/server-management.png" alt="Linux &amp; Server Administration" width="38" height="38">
+                    <img src="./assets/img/icons/server-management.png" loading="lazy" decoding="async" alt="Linux &amp; Server Administration" width="38" height="38">
                   </div>
                   <div class="serpentine-content-box">
                     <h4 class="serpentine-title">Linux &amp; Server Administration</h4>
@@ -1526,7 +1541,7 @@
                   </div>
                   <div class="serpentine-divider" aria-hidden="true"></div>
                   <div class="serpentine-icon-box">
-                    <img src="./assets/img/icons/cybersecurity.png" alt="Radio Telemetry &amp; Wireless Systems" width="38" height="38">
+                    <img src="./assets/img/icons/cybersecurity.png" loading="lazy" decoding="async" alt="Radio Telemetry &amp; Wireless Systems" width="38" height="38">
                   </div>
                   <div class="serpentine-content-box">
                     <h4 class="serpentine-title">Radio Telemetry &amp; Wireless Systems</h4>
@@ -1548,7 +1563,7 @@
                   </div>
                   <div class="serpentine-divider" aria-hidden="true"></div>
                   <div class="serpentine-icon-box">
-                    <img src="./assets/img/icons/networking.png" alt="Network Engineering &amp; Infrastructure" width="38" height="38">
+                    <img src="./assets/img/icons/networking.png" loading="lazy" decoding="async" alt="Network Engineering &amp; Infrastructure" width="38" height="38">
                   </div>
                   <div class="serpentine-content-box">
                     <h4 class="serpentine-title">Network Engineering &amp; Infrastructure</h4>
@@ -8858,6 +8873,22 @@
 
     </div>
   </main>
+  <script>
+    (function () {
+      try {
+        var p = document.getElementById('siteRobotPreloader');
+        if (p && !p.classList.contains('preloader-exit')) {
+          p.classList.add('preloader-exit');
+          if (typeof window.__stopPreloaderCounter === 'function') window.__stopPreloaderCounter();
+          setTimeout(function () {
+            try { p.remove(); } catch (e) { p.style.display = 'none'; }
+          }, 180);
+        }
+        var m = document.querySelector('main');
+        if (m) m.classList.add('page-reveal-in');
+      } catch (e) {}
+    })();
+  </script>
 
   <!-- Project Details Modal -->
   <div id="projectModal" class="project-modal" style="display: none;" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalProjectTitle">
@@ -9301,7 +9332,7 @@
 
       <div class="modal-img-wrapper">
         <figure class="modal-avatar-box">
-          <img src="./assets/img/icons/profile.png" alt="Testimonial Author Profile Avatar" class="modal-avatar-img" data-modal-img width="80" height="80">
+          <img src="./assets/img/icons/profile.png" alt="Testimonial Author Profile Avatar" class="modal-avatar-img" data-modal-img width="80" height="80" loading="lazy" decoding="async">
         </figure>
       </div>
 
@@ -9392,12 +9423,37 @@
   <script defer src="./js/maxhive-nav.js?v=3.9.9"></script>
   <script defer src="./js/portfolio-gallery.js?v=3.9.9"></script>
   <script defer src="./js/script.js?v=3.9.9"></script>
-  <script defer src="./js/ambient-effects.js?v=3.9.9"></script>
-  <script defer src="./js/four-d-sensor-engine.js?v=3.9.9"></script>
-  <script defer src="./js/testimonials.js?v=3.9.9"></script>
-  <script defer src="./js/conatct-form.js?v=3.9.9"></script>
-  <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  <script>
+    (function () {
+      function loadDeferredScripts() {
+        var scripts = [
+          './js/testimonials.js?v=3.9.9',
+          './js/conatct-form.js?v=3.9.9',
+          './js/ambient-effects.js?v=3.9.9',
+          './js/four-d-sensor-engine.js?v=3.9.9'
+        ];
+        scripts.forEach(function (src) {
+          var s = document.createElement('script');
+          s.src = src;
+          s.defer = true;
+          document.body.appendChild(s);
+        });
+        var ionEsm = document.createElement('script');
+        ionEsm.type = 'module';
+        ionEsm.src = 'https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js';
+        document.body.appendChild(ionEsm);
+        var ionNo = document.createElement('script');
+        ionNo.noModule = true;
+        ionNo.src = 'https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js';
+        document.body.appendChild(ionNo);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadDeferredScripts, { timeout: 1500 });
+      } else {
+        window.addEventListener('load', function () { setTimeout(loadDeferredScripts, 100); }, { once: true });
+      }
+    })();
+  </script>
 </body>
 
 </html>

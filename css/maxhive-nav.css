@@ -1421,7 +1421,7 @@ html {
   align-items: center;
   justify-content: center;
   pointer-events: all;
-  transition: opacity 0.35s ease;
+  transition: opacity 0.22s ease;
   will-change: opacity;
 }
 
@@ -1434,6 +1434,7 @@ body.light-theme .site-robot-preloader {
 .site-robot-preloader.preloader-exit {
   opacity: 0;
   pointer-events: none;
+  visibility: hidden;
 }
 
 .preloader-content-box {
@@ -1503,20 +1504,18 @@ body.light-theme .preloader-unit {
   color: #d97706;
 }
 
-/* Premium Entrance: Pure Smooth 1-Second Unified Unblur upon Load */
+/* Premium Entrance: Instant Smooth Fade upon Load (Composited, Zero Layout Shift) */
 main.page-reveal-in {
-  animation: pageSmoothUnblur 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: opacity, filter;
+  animation: pageSmoothFade 0.25s ease-out forwards;
+  will-change: opacity;
 }
 
-@keyframes pageSmoothUnblur {
+@keyframes pageSmoothFade {
   0% {
     opacity: 0;
-    filter: blur(14px);
   }
   100% {
     opacity: 1;
-    filter: blur(0px);
   }
 }
 

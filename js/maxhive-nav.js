@@ -2566,7 +2566,7 @@
         mainEl.classList.add('page-reveal-in');
       }
 
-      // Smooth unblur & fade out preloader
+      // Smooth fade out preloader
       preloader.classList.add('preloader-exit');
 
       setTimeout(() => {
@@ -2575,16 +2575,16 @@
         } catch (e) {
           preloader.style.display = 'none';
         }
-      }, 550);
+      }, 220);
     }
 
-    // Measure real DOM readiness for instant LCP paint
+    // Instant DOM readiness for fastest FCP & LCP paint
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
-      setTimeout(revealPage, 40);
+      revealPage();
     } else {
-      document.addEventListener('DOMContentLoaded', () => setTimeout(revealPage, 40), { once: true });
-      window.addEventListener('load', () => setTimeout(revealPage, 20), { once: true });
-      setTimeout(revealPage, 1200); // Fail-safe
+      document.addEventListener('DOMContentLoaded', revealPage, { once: true });
+      window.addEventListener('load', revealPage, { once: true });
+      setTimeout(revealPage, 500); // Fail-safe
     }
   }
 

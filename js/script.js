@@ -1840,39 +1840,20 @@ function initMomentsSlider() {
       });
     }
 
-    if (item.type === 'video' && item.video_url && videoElem) {
-      stopProgress();
-      if (imgElem) imgElem.style.display = 'none';
-      videoElem.style.display = 'block';
-      videoElem.src = item.video_url;
-      videoElem.currentTime = 0;
-      videoElem.play().catch(() => {});
-
-      videoElem.ontimeupdate = () => {
-        if (videoElem.duration && videoElem.duration > 0) {
-          const pct = (videoElem.currentTime / videoElem.duration) * 100;
-          updateProgressBar(pct);
-        }
-      };
-
-      videoElem.onended = () => {
-        updateProgressBar(100);
-        renderSlide(progressDirection === 'prev' ? activeIndex - 1 : activeIndex + 1);
-      };
-    } else {
-      if (videoElem) {
-        videoElem.pause();
-        videoElem.ontimeupdate = null;
-        videoElem.onended = null;
-        videoElem.style.display = 'none';
-      }
-      if (imgElem) {
-        imgElem.style.display = 'block';
-        imgElem.src = item.img || item.src;
-        imgElem.alt = item.title;
-      }
-      startPhotoProgress();
+    if (videoElem) {
+      videoElem.pause();
+      videoElem.ontimeupdate = null;
+      videoElem.onended = null;
+      videoElem.removeAttribute('src');
+      videoElem.load();
+      videoElem.style.display = 'none';
     }
+    if (imgElem) {
+      imgElem.style.display = 'block';
+      imgElem.src = item.img || item.src;
+      imgElem.alt = item.title;
+    }
+    startPhotoProgress();
 
     if (badgeElem) {
       const icon = item.type === 'video' ? 'fa-solid fa-play' : (item.type === 'certificate' ? 'fa-solid fa-shield-halved' : 'fa-solid fa-trophy');
@@ -1903,8 +1884,24 @@ function initMomentsSlider() {
     });
   }
 
-  // Moments slider container is a visual showcase; clicks perform no action
-  container.style.cursor = 'default';
+  // If current slide is video, click plays the video on-demand
+  container.addEventListener('click', (e) => {
+    if (e.target.closest('.moments-slide-nav-btn')) return;
+    const currentItem = data[activeIndex];
+    if (currentItem && currentItem.type === 'video' && currentItem.video_url && videoElem) {
+      if (videoElem.style.display !== 'block') {
+        stopProgress();
+        if (imgElem) imgElem.style.display = 'none';
+        videoElem.style.display = 'block';
+        videoElem.src = currentItem.video_url;
+        videoElem.currentTime = 0;
+        videoElem.play().catch(() => {});
+        videoElem.onended = () => {
+          renderSlide(activeIndex + 1);
+        };
+      }
+    }
+  });
 
   renderSlide(0);
 }
@@ -2348,21 +2345,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  safeInit(initProjectModal, 'initProjectModal');
-  safeInit(populateProjects, 'populateProjects');
-  safeInit(bindModalItems, 'bindModalItems');
-  safeInit(initCertModal, 'initCertModal');
-  safeInit(initPhotoHighlightsBanner, 'initPhotoHighlightsBanner');
-  safeInit(initGalleryTimelineModal, 'initGalleryTimelineModal');
-  safeInit(initMaxNicknameModal, 'initMaxNicknameModal');
-  safeInit(initTrustSection, 'initTrustSection');
-  safeInit(init3DNameTouchPress, 'init3DNameTouchPress');
+  const deferInit = (fn, name) => {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => safeInit(fn, name), { timeout: 1200 });
+    } else {
+      setTimeout(() => safeInit(fn, name), 60);
+    }
+  };
+
+  // Immediate critical above-the-fold UI setup
   safeInit(initMomentsSlider, 'initMomentsSlider');
-  safeInit(initDedicatedGallery, 'initDedicatedGallery');
-  safeInit(initMomentsGalleryModal, 'initMomentsGalleryModal');
-  safeInit(initMomentDossierModal, 'initMomentDossierModal');
   safeInit(initAboutExpander, 'initAboutExpander');
+  safeInit(init3DNameTouchPress, 'init3DNameTouchPress');
   safeInit(initServicesZigZagInteractive, 'initServicesZigZagInteractive');
-  safeInit(initLivingVisitorCompanion, 'initLivingVisitorCompanion');
-  safeInit(initScrollReveal, 'initScrollReveal');
+
+  // Defer off-screen tabs, deep modals, and heavy lists to idle frames
+  deferInit(populateProjects, 'populateProjects');
+  deferInit(initProjectModal, 'initProjectModal');
+  deferInit(bindModalItems, 'bindModalItems');
+  deferInit(initCertModal, 'initCertModal');
+  deferInit(initPhotoHighlightsBanner, 'initPhotoHighlightsBanner');
+  deferInit(initGalleryTimelineModal, 'initGalleryTimelineModal');
+  deferInit(initMaxNicknameModal, 'initMaxNicknameModal');
+  deferInit(initTrustSection, 'initTrustSection');
+  deferInit(initDedicatedGallery, 'initDedicatedGallery');
+  deferInit(initMomentsGalleryModal, 'initMomentsGalleryModal');
+  deferInit(initMomentDossierModal, 'initMomentDossierModal');
+  deferInit(initLivingVisitorCompanion, 'initLivingVisitorCompanion');
+  deferInit(initScrollReveal, 'initScrollReveal');
 });
