@@ -1746,11 +1746,12 @@ function initMomentsSlider() {
 
   const data = window.MAX_MOMENTS_DATA;
   let activeIndex = 0;
-  const SLIDE_DURATION = 8000;
+  const SLIDE_DURATION = 4500;
   const CIRCLE_CIRCUMFERENCE = 100.53;
   let progressDirection = 'next';
   let progressStart = 0;
-  let progressRaf = null;
+  let autoSlideActivated = false;
+  let initialAutoSlideTimer = null;
 
   if (totalCountElem) totalCountElem.textContent = String(data.length);
 
@@ -1840,7 +1841,7 @@ function initMomentsSlider() {
       });
     }
 
-    if (videoElem) {
+    if (videoElem && (videoElem.hasAttribute('src') || videoElem.style.display !== 'none')) {
       videoElem.pause();
       videoElem.ontimeupdate = null;
       videoElem.onended = null;
@@ -1849,11 +1850,19 @@ function initMomentsSlider() {
       videoElem.style.display = 'none';
     }
     if (imgElem) {
+      const targetSrc = item.img || item.src;
       imgElem.style.display = 'block';
-      imgElem.src = item.img || item.src;
+      if (targetSrc && imgElem.getAttribute('src') !== targetSrc) {
+        imgElem.src = targetSrc;
+      }
       imgElem.alt = item.title;
     }
     if (autoStart) {
+      autoSlideActivated = true;
+      if (initialAutoSlideTimer) {
+        clearTimeout(initialAutoSlideTimer);
+        initialAutoSlideTimer = null;
+      }
       startPhotoProgress();
     } else {
       stopProgress();
@@ -1908,6 +1917,43 @@ function initMomentsSlider() {
   });
 
   renderSlide(0, false);
+
+  function activateAutoSlide() {
+    if (autoSlideActivated) return;
+    autoSlideActivated = true;
+    if (initialAutoSlideTimer) {
+      clearTimeout(initialAutoSlideTimer);
+      initialAutoSlideTimer = null;
+    }
+    if (!document.hidden && !progressTimer) {
+      startPhotoProgress();
+    }
+  }
+
+  // Real user interactions immediately enable auto-sliding
+  ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach((evt) => {
+    window.addEventListener(evt, activateAutoSlide, { once: true, passive: true });
+  });
+
+  // Start auto-slide cleanly after page load and initial paint window settle
+  function schedulePostLoadAutoSlide() {
+    if (autoSlideActivated) return;
+    initialAutoSlideTimer = setTimeout(activateAutoSlide, 5500);
+  }
+  if (document.readyState === 'complete') {
+    schedulePostLoadAutoSlide();
+  } else {
+    window.addEventListener('load', schedulePostLoadAutoSlide, { once: true });
+  }
+
+  // Resume progress cleanly when returning to an active browser tab
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && autoSlideActivated && !progressTimer) {
+      if (!videoElem || videoElem.style.display === 'none') {
+        startPhotoProgress();
+      }
+    }
+  });
 }
 
 function initCertModal() {

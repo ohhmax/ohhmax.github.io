@@ -38,9 +38,9 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "Working scale demonstration of resonant inductive wireless power transfer. The vehicle collects energy dynamically from submerged magnetic coils, eliminating onboard battery weight and battery degradation.",
     "gallery_photos": [
-      "./assets/img/moments/moment_2.jpg",
-      "./assets/img/moments/moment_3.jpg",
-      "./assets/img/moments/moment_5.jpg"
+      "./assets/img/moments/moment_2.webp",
+      "./assets/img/moments/moment_3.webp",
+      "./assets/img/moments/moment_5.webp"
     ]
   },
   {
@@ -51,7 +51,7 @@ window.MAX_MOMENTS_DATA = [
     "title": "National Science Exhibition Live Video Reel",
     "category": "Live Prototype Demo",
     "desc": "Live field video clip of the scale resonant wireless electric car operating continuously without chemical battery on inductive roadway track.",
-    "img": "./assets/img/moments/moment_2.jpg",
+    "img": "./assets/img/moments/moment_5.webp",
     "venue": "B.T.I. Campus, Shankar Nagar, Raipur, Chhattisgarh",
     "date": "October 15 to 20, 2019",
     "organizer": "National Council of Educational Research and Training (NCERT)",
@@ -61,9 +61,9 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "Working scale demonstration of resonant inductive wireless power transfer. The vehicle collects energy dynamically from submerged magnetic coils, eliminating onboard battery weight and battery degradation.",
     "gallery_photos": [
-      "./assets/img/moments/moment_2.jpg",
-      "./assets/img/moments/moment_3.jpg",
-      "./assets/img/moments/moment_5.jpg"
+      "./assets/img/moments/moment_2.webp",
+      "./assets/img/moments/moment_3.webp",
+      "./assets/img/moments/moment_5.webp"
     ]
   },
   {
@@ -84,7 +84,7 @@ window.MAX_MOMENTS_DATA = [
     "gallery_photos": [
       "./assets/img/Certifications/c2.jpg",
       "./assets/img/Certifications/c1.jpg",
-      "./assets/img/moments/moment_2.jpg"
+      "./assets/img/moments/moment_2.webp"
     ]
   },
   {
@@ -105,7 +105,7 @@ window.MAX_MOMENTS_DATA = [
     "gallery_photos": [
       "./assets/img/Certifications/c3.jpg",
       "./assets/img/Certifications/c4.jpg",
-      "./assets/img/moments/moment_6.jpg"
+      "./assets/img/moments/moment_6.webp"
     ]
   },
   {
@@ -135,7 +135,7 @@ window.MAX_MOMENTS_DATA = [
     "title": "IIT Gandhinagar Amalthea Annual Conclave",
     "category": "Applied Robotics",
     "desc": "Demonstration of autonomous wireless robotics prototype at Amalthea annual technical summit, IIT Gandhinagar.",
-    "img": "./assets/img/moments/moment_1.jpg",
+    "img": "./assets/img/moments/moment_1.webp",
     "venue": "IIT Gandhinagar Campus, Palaj, Gandhinagar, Gujarat",
     "date": "October 2018",
     "organizer": "Amalthea Technical Summit Committee, IITGN",
@@ -145,8 +145,8 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "Demonstrated high-frequency magnetic resonance transmission before robotics researchers and visiting university delegates. The project proved continuous operation with minimal thermal heating.",
     "gallery_photos": [
-      "./assets/img/moments/moment_1.jpg",
-      "./assets/img/moments/moment_12.jpg"
+      "./assets/img/moments/moment_1.webp",
+      "./assets/img/moments/moment_12.webp"
     ]
   },
   {
@@ -156,7 +156,7 @@ window.MAX_MOMENTS_DATA = [
     "title": "46th JNNSMEE National Exhibition, Raipur",
     "category": "National Science Honor",
     "desc": "Exhibiting the working scale Batteryless Wireless Electric Car before NCERT national juries.",
-    "img": "./assets/img/moments/moment_2.jpg",
+    "img": "./assets/img/moments/moment_2.webp",
     "venue": "B.T.I. Campus, Shankar Nagar, Raipur, Chhattisgarh",
     "date": "October 15 to 20, 2019",
     "organizer": "National Council of Educational Research and Training (NCERT)",
@@ -166,9 +166,9 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "Selected among 159 premier winning projects across 27 Indian States. The model illustrated an electrified highway corridor supplying magnetic flux to lightweight vehicles in real time.",
     "gallery_photos": [
-      "./assets/img/moments/moment_2.jpg",
-      "./assets/img/moments/moment_3.jpg",
-      "./assets/img/moments/moment_5.jpg"
+      "./assets/img/moments/moment_2.webp",
+      "./assets/img/moments/moment_3.webp",
+      "./assets/img/moments/moment_5.webp"
     ]
   },
   {
@@ -178,7 +178,7 @@ window.MAX_MOMENTS_DATA = [
     "title": "NCERT National Trophy Presentation",
     "category": "Award Ceremony",
     "desc": "Receiving national memento and certificate of merit for pioneering resonant electromagnetic induction roadways.",
-    "img": "./assets/img/moments/moment_3.jpg",
+    "img": "./assets/img/moments/moment_3.webp",
     "venue": "Main Auditorium, Raipur, Chhattisgarh",
     "date": "October 19, 2019",
     "organizer": "NCERT National Evaluation Board",
@@ -187,8 +187,8 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "Conferred the prestigious National Memento and Certificate of Merit by eminent national scientists and state dignitaries for contribution toward sustainable zero-emission transportation infrastructure.",
     "gallery_photos": [
-      "./assets/img/moments/moment_3.jpg",
-      "./assets/img/moments/moment_2.jpg"
+      "./assets/img/moments/moment_3.webp",
+      "./assets/img/moments/moment_2.webp"
     ]
   },
   {
@@ -208,7 +208,7 @@ window.MAX_MOMENTS_DATA = [
     "full_details": "Won First Rank in the Senior Engineering Category for autonomous wireless power transfer across primary and secondary tuned induction circuits.",
     "gallery_photos": [
       "./assets/img/Certifications/c4.jpg",
-      "./assets/img/moments/moment_4.jpg"
+      "./assets/img/moments/moment_4.webp"
     ]
   },
   {
@@ -218,7 +218,7 @@ window.MAX_MOMENTS_DATA = [
     "title": "District Level Science Fair Defense",
     "category": "Hardware Defense",
     "desc": "Presenting circuit schematics, resonant capacitors, and wireless flux transfer principles to evaluators.",
-    "img": "./assets/img/moments/moment_4.jpg",
+    "img": "./assets/img/moments/moment_4.webp",
     "venue": "District Science Center, Banaskantha, Gujarat",
     "date": "December 2018",
     "organizer": "District Education Committee & GCERT",
@@ -227,8 +227,8 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "Comprehensive mathematical defense of primary emitter circuit topology, frequency stability at 150kHz, and secondary tuned LC tank receiver efficiency.",
     "gallery_photos": [
-      "./assets/img/moments/moment_4.jpg",
-      "./assets/img/moments/moment_5.jpg"
+      "./assets/img/moments/moment_4.webp",
+      "./assets/img/moments/moment_5.webp"
     ]
   },
   {
@@ -238,7 +238,7 @@ window.MAX_MOMENTS_DATA = [
     "title": "Wireless Roadway Live Power Test",
     "category": "Live Testing",
     "desc": "Running the scale prototype vehicle across induction loops powered by high-frequency AC field.",
-    "img": "./assets/img/moments/moment_5.jpg",
+    "img": "./assets/img/moments/moment_5.webp",
     "venue": "Live Demonstration Arena",
     "date": "December 2018",
     "organizer": "Science Fair Technical Board",
@@ -247,8 +247,8 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "Verified continuous lap travel along a multi-segmented induction roadway track with instantaneous energy transfer and zero physical tethering.",
     "gallery_photos": [
-      "./assets/img/moments/moment_5.jpg",
-      "./assets/img/moments/moment_4.jpg"
+      "./assets/img/moments/moment_5.webp",
+      "./assets/img/moments/moment_4.webp"
     ]
   },
   {
@@ -258,7 +258,7 @@ window.MAX_MOMENTS_DATA = [
     "title": "45th Gujarat State Science Fair, Gandhinagar",
     "category": "State Gold Medal",
     "desc": "Gold Medal winning demonstration in Sustainable Energy and Clean Technology, GCERT.",
-    "img": "./assets/img/moments/moment_6.jpg",
+    "img": "./assets/img/moments/moment_6.webp",
     "venue": "State Science Exhibition Grounds, Gandhinagar, Gujarat",
     "date": "February 2019",
     "organizer": "Gujarat Council of Educational Research and Training (GCERT)",
@@ -268,9 +268,9 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "Awarded First Prize (Gold Medal) across the State of Gujarat. Evaluators praised the practical applicability for clean urban transit corridors and industrial automated guided vehicles.",
     "gallery_photos": [
-      "./assets/img/moments/moment_6.jpg",
-      "./assets/img/moments/moment_7.jpg",
-      "./assets/img/moments/moment_8.jpg"
+      "./assets/img/moments/moment_6.webp",
+      "./assets/img/moments/moment_7.webp",
+      "./assets/img/moments/moment_8.webp"
     ]
   },
   {
@@ -280,7 +280,7 @@ window.MAX_MOMENTS_DATA = [
     "title": "Jury Technical Q&A & Validation",
     "category": "Peer Review",
     "desc": "Defending mathematical efficiency calculations and electromagnetic coupling factors.",
-    "img": "./assets/img/moments/moment_7.jpg",
+    "img": "./assets/img/moments/moment_7.webp",
     "venue": "State Evaluation Booth, Gandhinagar",
     "date": "February 2019",
     "organizer": "GCERT State Jury",
@@ -289,8 +289,8 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "In-depth review of magnetic flux dispersion, biological shielding boundaries, and copper coil impedance characteristics under dynamic electrical loads.",
     "gallery_photos": [
-      "./assets/img/moments/moment_7.jpg",
-      "./assets/img/moments/moment_6.jpg"
+      "./assets/img/moments/moment_7.webp",
+      "./assets/img/moments/moment_6.webp"
     ]
   },
   {
@@ -300,7 +300,7 @@ window.MAX_MOMENTS_DATA = [
     "title": "Electrified Track Continuous Lap Run",
     "category": "Scale Prototype",
     "desc": "Vehicle cruising continuously without internal chemical battery storage on inductive road.",
-    "img": "./assets/img/moments/moment_8.jpg",
+    "img": "./assets/img/moments/moment_8.webp",
     "venue": "Exhibition Track Hall, Gandhinagar",
     "date": "February 2019",
     "organizer": "GCERT Innovation Pavilion",
@@ -309,8 +309,8 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "Endurance test demonstrating stable continuous locomotion over 45 minutes on active electrified track segments without thermal drift.",
     "gallery_photos": [
-      "./assets/img/moments/moment_8.jpg",
-      "./assets/img/moments/moment_9.jpg"
+      "./assets/img/moments/moment_8.webp",
+      "./assets/img/moments/moment_9.webp"
     ]
   },
   {
@@ -320,7 +320,7 @@ window.MAX_MOMENTS_DATA = [
     "title": "State Science Fair Model Setup",
     "category": "Exhibition Setup",
     "desc": "Complete architectural layout with transmitter driver, oscillator circuit, and receiver coils.",
-    "img": "./assets/img/moments/moment_9.jpg",
+    "img": "./assets/img/moments/moment_9.webp",
     "venue": "Regional Science Pavilion, Gujarat",
     "date": "December 2018",
     "organizer": "State Science Promotion Board",
@@ -329,8 +329,8 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "Layout of the full dual-track demonstration display featuring step-up drivers, power relays, diagnostic meters, and multi-turn induction coils.",
     "gallery_photos": [
-      "./assets/img/moments/moment_9.jpg",
-      "./assets/img/moments/moment_10.jpg"
+      "./assets/img/moments/moment_9.webp",
+      "./assets/img/moments/moment_10.webp"
     ]
   },
   {
@@ -340,7 +340,7 @@ window.MAX_MOMENTS_DATA = [
     "title": "Hardware Prototyping Laboratory",
     "category": "R&D Bench",
     "desc": "Soldering high-frequency power switching transistors and winding multi-turn planar induction coils.",
-    "img": "./assets/img/moments/moment_10.jpg",
+    "img": "./assets/img/moments/moment_10.webp",
     "venue": "Private Engineering Testbench, Gujarat",
     "date": "October 2017",
     "organizer": "Independent Engineering Research",
@@ -349,8 +349,8 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "Hands-on bench development of fast switching resonant circuits, winding flat pancake coils, and verifying mutual inductance with digital oscilloscopes.",
     "gallery_photos": [
-      "./assets/img/moments/moment_10.jpg",
-      "./assets/img/moments/moment_11.jpg"
+      "./assets/img/moments/moment_10.webp",
+      "./assets/img/moments/moment_11.webp"
     ]
   },
   {
@@ -360,7 +360,7 @@ window.MAX_MOMENTS_DATA = [
     "title": "Microcontroller Sensor Array Bench",
     "category": "Embedded Systems",
     "desc": "Early testbench for multi-channel relay controls and analog sensor calibration.",
-    "img": "./assets/img/moments/moment_11.jpg",
+    "img": "./assets/img/moments/moment_11.webp",
     "venue": "Hardware Laboratory Bench",
     "date": "November 2017",
     "organizer": "Independent IoT Development",
@@ -369,8 +369,8 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "Initial testing of 8-channel relay boards, EEPROM non-volatile memory write cycles, and analog sensor interfaces that paved the way for HomeMax Industrial IoT.",
     "gallery_photos": [
-      "./assets/img/moments/moment_11.jpg",
-      "./assets/img/moments/moment_10.jpg"
+      "./assets/img/moments/moment_11.webp",
+      "./assets/img/moments/moment_10.webp"
     ]
   },
   {
@@ -380,7 +380,7 @@ window.MAX_MOMENTS_DATA = [
     "title": "Amalthea 18 Certificate of Recognition",
     "category": "Official Certificate",
     "desc": "Certified by Amalthea coordinator for standout performance in technical robotics exhibitions.",
-    "img": "./assets/img/moments/moment_12.jpg",
+    "img": "./assets/img/moments/moment_12.webp",
     "venue": "IIT Gandhinagar",
     "date": "October 2018",
     "organizer": "Amalthea Summit Organizing Committee",
@@ -389,8 +389,8 @@ window.MAX_MOMENTS_DATA = [
     ],
     "full_details": "Formal certificate honoring technical achievement and live prototype demonstration at the annual student-organized technical conclave of IIT Gandhinagar.",
     "gallery_photos": [
-      "./assets/img/moments/moment_12.jpg",
-      "./assets/img/moments/moment_1.jpg"
+      "./assets/img/moments/moment_12.webp",
+      "./assets/img/moments/moment_1.webp"
     ]
   }
 ];
