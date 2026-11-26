@@ -162,11 +162,7 @@
         // Instant Zero-Flash Preloader Theme Injection
         var styleEl = document.createElement('style');
         styleEl.id = 'theme-preloader-instant-css';
-        if (isLight) {
-          styleEl.textContent = '.site-robot-preloader { background: #eef2f6 !important; } .preloader-counter { color: #0f172a !important; }';
-        } else {
-          styleEl.textContent = '.site-robot-preloader { background: #090a0f !important; } .preloader-counter { color: #f8fafc !important; }';
-        }
+        styleEl.textContent = '.site-robot-preloader { display: none !important; }';
         document.head.appendChild(styleEl);
       } catch(e) {}
     })();
@@ -190,22 +186,54 @@
   <link rel="preconnect" href="https://unpkg.com">
 
   <!-- High-Priority Above-the-Fold Image Preloads -->
-  <link rel="preload" as="image" href="./assets/img/max/Mahendra-Mali-18.png" fetchpriority="high">
-  <link rel="preload" as="image" href="./assets/img/moments/moment_2.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="./assets/img/max/Mahendra-Mali-18.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="./assets/img/moments/moment_2.webp" fetchpriority="high">
+
+  <!-- Core Critical Above-the-Fold Inline Stylesheet -->
+  <style id="critical-above-fold-css">
+    :root {
+      --body-bg-solid: #0c0d12;
+      --article-bg: linear-gradient(145deg, rgba(22, 24, 32, 0.82), rgba(15, 16, 22, 0.92));
+      --main-border: rgba(245, 158, 11, 0.14);
+      --box-shadow-1: 0 4px 20px rgba(0, 0, 0, 0.6);
+      --font-color-1: #fdfbf7;
+      --font-color-2: #cbd5e1;
+      --accent-amber: #f59e0b;
+      --ff-poppins: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-family: var(--ff-poppins); background: #090a0f; color: var(--font-color-1); -webkit-font-smoothing: antialiased; }
+    body { background-color: #090a0f; color: var(--font-color-1); min-height: 100vh; overflow-x: hidden; }
+    main { margin: 15px 12px 75px; min-width: 259px; opacity: 1; }
+    .sidebar { background: var(--article-bg); border: 1px solid var(--main-border); border-radius: 28px; padding: 15px; box-shadow: var(--box-shadow-1); position: relative; }
+    .sidebar-info { display: flex; align-items: center; gap: 15px; }
+    .avatar-box { width: 80px; height: 80px; border-radius: 20px; overflow: hidden; position: relative; flex-shrink: 0; }
+    .avatar-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .info-content .name { font-size: 17px; font-weight: 700; color: #fdfbf7; line-height: 1.3; }
+    .info-content .title { font-size: 12px; color: #f59e0b; font-weight: 500; margin-top: 4px; }
+    article { display: none; background: var(--article-bg); border: 1px solid var(--main-border); border-radius: 28px; padding: 20px; margin-top: 15px; }
+    article.active { display: block; }
+    .article-title { font-size: 24px; font-weight: 700; color: #fdfbf7; margin-bottom: 15px; }
+    .site-robot-preloader { display: none !important; }
+  </style>
 
   <!-- Core Local Stylesheets (Instant Zero-Network Paint) -->
   <link rel="stylesheet" href="./assets/vendor/fontawesome/css/all.min.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="./assets/vendor/fontawesome/css/all.min.css"></noscript>
-  <link rel="stylesheet" href="./css/style.min.css?v=3.9.9">
-  <link rel="stylesheet" href="./css/maxhive-nav.min.css?v=3.9.9">
-  <link rel="stylesheet" href="./css/gallery.css?v=3.9.8" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="./css/gallery.css?v=3.9.8"></noscript>
+  <link rel="preload" as="style" href="./css/style.min.css?v=3.9.9">
+  <link rel="stylesheet" href="./css/style.min.css?v=3.9.9" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="./css/style.min.css?v=3.9.9"></noscript>
+  <link rel="preload" as="style" href="./css/maxhive-nav.min.css?v=3.9.9">
+  <link rel="stylesheet" href="./css/maxhive-nav.min.css?v=3.9.9" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="./css/maxhive-nav.min.css?v=3.9.9"></noscript>
+  <link rel="stylesheet" href="./css/gallery.min.css?v=3.9.9" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="./css/gallery.min.css?v=3.9.9"></noscript>
 
-  <!-- Google Fonts: Plus Jakarta Sans, Inter & JetBrains Mono (Non-Blocking) -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono (Non-Blocking, High-Performance) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
   <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
   </noscript>
 
   <!-- High-Ranking Comprehensive Schema.org JSON-LD Graph for Google & AI Engines -->
@@ -900,39 +928,9 @@
 
 <body>
 
-  <div id="siteRobotPreloader" class="site-robot-preloader" aria-hidden="true">
-    <div class="preloader-content-box" id="preloaderRobotStage">
-      <div class="preloader-counter" id="preloaderCounter">
-        <span class="preloader-int" id="preloaderInt">0</span><span class="preloader-dot">.</span><span class="preloader-dec" id="preloaderDec">00</span><span class="preloader-unit" id="preloaderUnit">s</span>
-      </div>
-    </div>
-  </div>
+  <div id="siteRobotPreloader" class="site-robot-preloader" aria-hidden="true" style="display: none;"></div>
   <script>
-    (function() {
-      var intEl = document.getElementById('preloaderInt');
-      var decEl = document.getElementById('preloaderDec');
-      var startPerf = (typeof window.__pageStartTime === 'number') ? window.__pageStartTime : performance.now();
-      var running = true;
-      var timerId = null;
-
-      function tick() {
-        if (!running) return;
-        var elapsed = (performance.now() - startPerf) / 1000;
-        if (intEl) intEl.textContent = Math.floor(elapsed);
-        if (decEl) decEl.textContent = Math.floor((elapsed % 1) * 100).toString().padStart(2, '0');
-      }
-
-      // Smooth interval guarantees updates without thrashing the parser
-      timerId = setInterval(tick, 80);
-
-      window.__stopPreloaderCounter = function() {
-        running = false;
-        if (timerId) clearInterval(timerId);
-        var finalElapsed = (performance.now() - startPerf) / 1000;
-        if (intEl) intEl.textContent = Math.floor(finalElapsed);
-        if (decEl) decEl.textContent = Math.floor((finalElapsed % 1) * 100).toString().padStart(2, '0');
-      };
-    })();
+    window.__stopPreloaderCounter = function() {};
   </script>
 
 
@@ -971,7 +969,10 @@
             <div class="avatar-glow-ring"></div>
             <div class="avatar-card-inner">
               <div class="avatar-card-front">
-                <img src="./assets/img/max/Mahendra-Mali-18.png" alt="Mahendra Mali" class="avatar-img" fetchpriority="high" decoding="sync" onerror="this.src='./assets/img/logo/mainlogo.png'">
+              <picture>
+                <source srcset="./assets/img/max/Mahendra-Mali-18.webp" type="image/webp">
+                <img src="./assets/img/max/Mahendra-Mali-18.png" alt="Mahendra Mali" class="avatar-img" width="120" height="120" fetchpriority="high" decoding="sync" onerror="this.src='./assets/img/logo/mainlogo.png'">
+              </picture>
               </div>
               <div class="avatar-card-back">
                 <span class="back-monogram">MAX</span>
@@ -1231,8 +1232,11 @@
                   <i class="fa-solid fa-chevron-right"></i>
                 </button>
 
-                <img id="momentsSliderImg" src="./assets/img/moments/moment_2.jpg" alt="Science Fair Innovation Moment" class="moments-slider-img" width="480" height="270" fetchpriority="high" loading="eager" decoding="async">
-                <video id="momentsSliderVideo" class="moments-slider-video" muted playsinline style="display: none;"></video>
+                <picture>
+                  <source srcset="./assets/img/moments/moment_2.webp" type="image/webp">
+                  <img id="momentsSliderImg" src="./assets/img/moments/moment_2.jpg" alt="Science Fair Innovation Moment" class="moments-slider-img" width="480" height="270" fetchpriority="high" loading="eager" decoding="async">
+                </picture>
+                <video id="momentsSliderVideo" class="moments-slider-video" muted playsinline preload="none" style="display: none;"></video>
 
                 <!-- Compact Short Info with Dark Bottom Shadow (Clean 1 Line) -->
                 <div class="moments-slider-overlay moments-slider-bottom-shadow">
@@ -1413,7 +1417,7 @@
                   </div>
                   <div class="serpentine-divider" aria-hidden="true"></div>
                   <div class="serpentine-icon-box">
-                    <img src="./assets/img/icons/electronic-solution.png" loading="lazy" decoding="async" alt="Circuit Designing &amp; Hardware Engineering" width="38" height="38">
+                    <img src="./assets/img/icons/electronic-solution.webp" onerror="this.src='./assets/img/icons/electronic-solution.png'" loading="lazy" decoding="async" alt="Circuit Designing &amp; Hardware Engineering" width="38" height="38">
                   </div>
                   <div class="serpentine-content-box">
                     <h4 class="serpentine-title">Circuit Designing &amp; Hardware</h4>
@@ -1441,7 +1445,7 @@
                   </div>
                   <div class="serpentine-divider" aria-hidden="true"></div>
                   <div class="serpentine-icon-box">
-                    <img src="./assets/img/icons/iot.png" loading="lazy" decoding="async" alt="DIY Gadget Making &amp; IoT Prototyping" width="38" height="38">
+                    <img src="./assets/img/icons/iot.webp" onerror="this.src='./assets/img/icons/iot.png'" loading="lazy" decoding="async" alt="DIY Gadget Making &amp; IoT Prototyping" width="38" height="38">
                   </div>
                   <div class="serpentine-content-box">
                     <h4 class="serpentine-title">DIY Gadget Making &amp; IoT</h4>
@@ -1463,7 +1467,7 @@
                   </div>
                   <div class="serpentine-divider" aria-hidden="true"></div>
                   <div class="serpentine-icon-box">
-                    <img src="./assets/img/icons/web.png" loading="lazy" decoding="async" alt="Full-Stack Web Engineering" width="38" height="38">
+                    <img src="./assets/img/icons/web.webp" onerror="this.src='./assets/img/icons/web.png'" loading="lazy" decoding="async" alt="Full-Stack Web Engineering" width="38" height="38">
                   </div>
                   <div class="serpentine-content-box">
                     <h4 class="serpentine-title">Full-Stack Web Engineering</h4>
@@ -1491,7 +1495,7 @@
                   </div>
                   <div class="serpentine-divider" aria-hidden="true"></div>
                   <div class="serpentine-icon-box">
-                    <img src="./assets/img/icons/mobile.png" loading="lazy" decoding="async" alt="Native Android Engineering" width="38" height="38">
+                    <img src="./assets/img/icons/mobile.webp" onerror="this.src='./assets/img/icons/mobile.png'" loading="lazy" decoding="async" alt="Native Android Engineering" width="38" height="38">
                   </div>
                   <div class="serpentine-content-box">
                     <h4 class="serpentine-title">Native Android Engineering</h4>
@@ -1513,7 +1517,7 @@
                   </div>
                   <div class="serpentine-divider" aria-hidden="true"></div>
                   <div class="serpentine-icon-box">
-                    <img src="./assets/img/icons/server-management.png" loading="lazy" decoding="async" alt="Linux &amp; Server Administration" width="38" height="38">
+                    <img src="./assets/img/icons/server-management.webp" onerror="this.src='./assets/img/icons/server-management.png'" loading="lazy" decoding="async" alt="Linux &amp; Server Administration" width="38" height="38">
                   </div>
                   <div class="serpentine-content-box">
                     <h4 class="serpentine-title">Linux &amp; Server Administration</h4>
@@ -1541,7 +1545,7 @@
                   </div>
                   <div class="serpentine-divider" aria-hidden="true"></div>
                   <div class="serpentine-icon-box">
-                    <img src="./assets/img/icons/cybersecurity.png" loading="lazy" decoding="async" alt="Radio Telemetry &amp; Wireless Systems" width="38" height="38">
+                    <img src="./assets/img/icons/cybersecurity.webp" onerror="this.src='./assets/img/icons/cybersecurity.png'" loading="lazy" decoding="async" alt="Radio Telemetry &amp; Wireless Systems" width="38" height="38">
                   </div>
                   <div class="serpentine-content-box">
                     <h4 class="serpentine-title">Radio Telemetry &amp; Wireless Systems</h4>
@@ -1563,7 +1567,7 @@
                   </div>
                   <div class="serpentine-divider" aria-hidden="true"></div>
                   <div class="serpentine-icon-box">
-                    <img src="./assets/img/icons/networking.png" loading="lazy" decoding="async" alt="Network Engineering &amp; Infrastructure" width="38" height="38">
+                    <img src="./assets/img/icons/networking.webp" onerror="this.src='./assets/img/icons/networking.png'" loading="lazy" decoding="async" alt="Network Engineering &amp; Infrastructure" width="38" height="38">
                   </div>
                   <div class="serpentine-content-box">
                     <h4 class="serpentine-title">Network Engineering &amp; Infrastructure</h4>
@@ -8877,12 +8881,8 @@
     (function () {
       try {
         var p = document.getElementById('siteRobotPreloader');
-        if (p && !p.classList.contains('preloader-exit')) {
-          p.classList.add('preloader-exit');
-          if (typeof window.__stopPreloaderCounter === 'function') window.__stopPreloaderCounter();
-          setTimeout(function () {
-            try { p.remove(); } catch (e) { p.style.display = 'none'; }
-          }, 180);
+        if (p) {
+          try { p.remove(); } catch (e) { p.style.display = 'none'; }
         }
         var m = document.querySelector('main');
         if (m) m.classList.add('page-reveal-in');
@@ -9081,7 +9081,7 @@
               <video id="galleryVideoPlayer" 
                      class="lightbox-fullscreen-media" 
                      playsinline 
-                     preload="auto"></video>
+                     preload="none"></video>
               
               <!-- Floating Top-Right Controls Overlay on Reel -->
               <div class="reel-top-controls" id="reelTopControls">
@@ -9332,7 +9332,7 @@
 
       <div class="modal-img-wrapper">
         <figure class="modal-avatar-box">
-          <img src="./assets/img/icons/profile.png" alt="Testimonial Author Profile Avatar" class="modal-avatar-img" data-modal-img width="80" height="80" loading="lazy" decoding="async">
+          <img src="./assets/img/icons/profile.webp" onerror="this.src='./assets/img/icons/profile.png'" alt="Testimonial Author Profile Avatar" class="modal-avatar-img" data-modal-img width="80" height="80" loading="lazy" decoding="async">
         </figure>
       </div>
 
@@ -9417,20 +9417,20 @@
     </div>
   </div>
   <!-- Core Standalone Modules & UI Scripts -->
-  <script defer src="./js/moments-data.js?v=3.9.9"></script>
-  <script defer src="./js/maxhive-nav.js?v=3.9.9"></script>
-  <script defer src="./js/script.js?v=3.9.9"></script>
-  <script defer src="./js/conatct-form.js?v=3.9.9"></script>
+  <script defer src="./js/moments-data.min.js?v=3.9.9"></script>
+  <script defer src="./js/maxhive-nav.min.js?v=3.9.9"></script>
+  <script defer src="./js/script.min.js?v=3.9.9"></script>
+  <script defer src="./js/conatct-form.min.js?v=3.9.9"></script>
   <script>
     (function () {
       function loadDeferredScripts() {
         var scripts = [
-          './js/projects-data.js?v=3.9.9',
-          './js/captions.js?v=3.9.9',
-          './js/portfolio-gallery.js?v=3.9.9',
-          './js/testimonials.js?v=3.9.9',
-          './js/ambient-effects.js?v=3.9.9',
-          './js/four-d-sensor-engine.js?v=3.9.9'
+          './js/projects-data.min.js?v=3.9.9',
+          './js/captions.min.js?v=3.9.9',
+          './js/portfolio-gallery.min.js?v=3.9.9',
+          './js/testimonials.min.js?v=3.9.9',
+          './js/ambient-effects.min.js?v=3.9.9',
+          './js/four-d-sensor-engine.min.js?v=3.9.9'
         ];
         scripts.forEach(function (src) {
           var s = document.createElement('script');
@@ -9448,9 +9448,9 @@
         document.body.appendChild(ionNo);
       }
       if ('requestIdleCallback' in window) {
-        requestIdleCallback(loadDeferredScripts, { timeout: 1200 });
+        requestIdleCallback(loadDeferredScripts, { timeout: 1500 });
       } else {
-        window.addEventListener('load', function () { setTimeout(loadDeferredScripts, 60); }, { once: true });
+        window.addEventListener('load', function () { setTimeout(loadDeferredScripts, 100); }, { once: true });
       }
     })();
   </script>

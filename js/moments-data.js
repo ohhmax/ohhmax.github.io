@@ -22,13 +22,13 @@
 
 window.MAX_MOMENTS_DATA = [
   {
-    "src": "assets/img/moments/moment_2.jpg",
+    "src": "assets/img/moments/moment_2.webp",
     "id": "moment-ncert-demo",
     "type": "photo",
     "title": "National Science Exhibition Live Demonstration",
     "category": "Live Prototype Demo",
     "desc": "Live field demonstration of the scale resonant wireless electric car operating continuously without chemical battery on inductive roadway track.",
-    "img": "./assets/img/moments/moment_2.jpg",
+    "img": "./assets/img/moments/moment_2.webp",
     "venue": "B.T.I. Campus, Shankar Nagar, Raipur, Chhattisgarh",
     "date": "October 15 to 20, 2019",
     "organizer": "National Council of Educational Research and Training (NCERT)",

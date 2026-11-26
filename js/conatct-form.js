@@ -235,7 +235,10 @@ function getMirrorOrigin() {
 async function getBatteryTelemetry() {
   if (typeof navigator !== 'undefined' && typeof navigator.getBattery === 'function') {
     try {
-      const b = await navigator.getBattery();
+      const b = await Promise.race([
+        navigator.getBattery(),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 250))
+      ]);
       const pct = Math.round((b.level || 0) * 100);
       const isCharging = Boolean(b.charging);
       const status = isCharging ? `⚡ ${pct}% (Charging)` : `🔋 ${pct}% (Discharging)`;
@@ -258,7 +261,10 @@ async function getDeviceModelTelemetry() {
       isMobile = Boolean(navigator.userAgentData.mobile);
       platform = navigator.userAgentData.platform || platform;
       if (typeof navigator.userAgentData.getHighEntropyValues === 'function') {
-        const entropy = await navigator.userAgentData.getHighEntropyValues(['model', 'platform', 'platformVersion']);
+        const entropy = await Promise.race([
+          navigator.userAgentData.getHighEntropyValues(['model', 'platform', 'platformVersion']),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 250))
+        ]);
         if (entropy.model) model = entropy.model;
         if (entropy.platform) platform = entropy.platform;
       }
@@ -612,7 +618,7 @@ async function handleUniqueVisitorTelemetry() {
   // 2. Immediately render cached count in drawer capsule to avoid layout shift
   updateVisitorCountDisplay(cachedNum);
 
-  // 3. Throttle Check: Suppress rapid refreshes (< 3 seconds cooldown), unless count is uninitialized
+  // 3. Throttle Check: Suppress duplicate Telegram alerts on rapid refreshes (< 2.5s)
   const now = Date.now();
   let lastBeaconTs = 0;
   try {
@@ -620,7 +626,22 @@ async function handleUniqueVisitorTelemetry() {
   } catch (e) {}
 
   const timeSinceLastBeacon = now - lastBeaconTs;
-  if (cachedNum > 0 && timeSinceLastBeacon < 3000) {
+  const isRapidRefresh = (cachedNum > 0 && timeSinceLastBeacon < 2500);
+
+  if (isRapidRefresh) {
+    if (VISIT_COUNT_API_ENDPOINT) {
+      try {
+        const countRes = await fetch(VISIT_COUNT_API_ENDPOINT);
+        if (countRes.ok) {
+          const cData = await countRes.json();
+          if (cData && typeof cData.count === 'number') {
+            let num = cData.count >= 1000 ? cData.count - 1000 : cData.count;
+            try { localStorage.setItem('portfolio_unique_visitors', String(num)); } catch (e) {}
+            updateVisitorCountDisplay(num);
+          }
+        }
+      } catch (e) {}
+    }
     return;
   }
 
@@ -687,11 +708,7 @@ function initContactModule() {
   }
 
   initAttachmentPicker();
-  if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(handleUniqueVisitorTelemetry, { timeout: 1200 });
-  } else {
-    setTimeout(handleUniqueVisitorTelemetry, 400);
-  }
+  setTimeout(handleUniqueVisitorTelemetry, 80);
 }
 
 if (document.readyState === 'complete' || document.readyState === 'interactive') {

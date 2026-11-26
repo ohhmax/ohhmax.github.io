@@ -1411,18 +1411,10 @@ html {
    Strict Zero Em-Dash & En-Dash Contract Verified
    ========================================================================== */
 .site-robot-preloader {
-  position: fixed;
-  inset: 0;
-  z-index: 999999;
-  background: rgba(9, 10, 15, 0.98);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: all;
-  transition: opacity 0.22s ease;
-  will-change: opacity;
+  display: none !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 html.light-theme .site-robot-preloader,
@@ -1504,19 +1496,9 @@ body.light-theme .preloader-unit {
   color: #d97706;
 }
 
-/* Premium Entrance: Instant Smooth Fade upon Load (Composited, Zero Layout Shift) */
+/* Premium Entrance: Instant Zero-Lag Entrance */
 main.page-reveal-in {
-  animation: pageSmoothFade 0.25s ease-out forwards;
-  will-change: opacity;
-}
-
-@keyframes pageSmoothFade {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+  opacity: 1;
 }
 
 /* Smooth Compositing for Active Mascot */

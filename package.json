@@ -20,5 +20,9 @@
     "systems-engineering"
   ],
   "author": "Mahendra Mali <ohmaxgit@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "clean-css-cli": "^5.6.3",
+    "terser": "^5.51.4"
+  }
 }
